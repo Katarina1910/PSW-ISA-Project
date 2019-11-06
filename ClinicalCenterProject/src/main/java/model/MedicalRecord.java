@@ -9,19 +9,21 @@ public class MedicalRecord {
 	private ArrayList<Operation> operations;
 	private ArrayList<Recipe> recipes;
 	private HashMap<String, String> diagnosis;
+	private ArrayList<Personnel> beenTo;
 	
 	public MedicalRecord() {
 		super();
 	}
 
 	public MedicalRecord(String historyDesease, ArrayList<Consult> visitsToDoctor, ArrayList<Operation> operations,
-			ArrayList<Recipe> recipes, HashMap<String, String> diagnosis) {
+			ArrayList<Recipe> recipes, HashMap<String, String> diagnosis,ArrayList<Personnel> beenTo) {
 		super();
 		this.historyDesease = historyDesease;
 		this.visitsToDoctor = visitsToDoctor;
 		this.operations = operations;
 		this.recipes = recipes;
 		this.diagnosis = diagnosis;
+		this.setBeenTo(beenTo);
 	}
 
 	public String getHistoryDesease() {
@@ -62,6 +64,14 @@ public class MedicalRecord {
 
 	public void setDiagnosis(HashMap<String, String> diagnosis) {
 		this.diagnosis = diagnosis;
+	}
+
+	public ArrayList<Personnel> getBeenTo() {
+		return beenTo;
+	}
+
+	public void setBeenTo(ArrayList<Personnel> beenTo) {
+		this.beenTo = beenTo;
 	}
 	
 	
