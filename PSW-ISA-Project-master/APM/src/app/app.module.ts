@@ -4,12 +4,16 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
+import { RequestForConsultComponent } from './requestForConsult/requestForConsult.component';
+import { ConsultTermComponent } from './consultTerm/consultTerm.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    RequestForConsultComponent,
+    ConsultTermComponent
   ],
   imports: [
     BrowserModule
