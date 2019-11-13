@@ -6,6 +6,9 @@ import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { RequestForConsultComponent } from './requestForConsult/requestForConsult.component';
 import { ConsultTermComponent } from './consultTerm/consultTerm.component';
+import { HttpClientModule } from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -13,10 +16,17 @@ import { ConsultTermComponent } from './consultTerm/consultTerm.component';
     RegistrationComponent,
     LoginComponent,
     RequestForConsultComponent,
-    ConsultTermComponent
+    ConsultTermComponent,
+   
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot([
+      {path: 'consultTerm', component: ConsultTermComponent},
+      {path:'requestForConsult', component: RequestForConsultComponent}
+    ])
   ],
   bootstrap: [AppComponent]
 })

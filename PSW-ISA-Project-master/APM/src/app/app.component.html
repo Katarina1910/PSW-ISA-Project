@@ -7,7 +7,12 @@
 <div >
  <div class="float-left" > <cc-registration> </cc-registration></div>
  <div class="float-right" > <cc-login></cc-login></div>
-<div><button onclick="requestForConsult">Requst for consult</button>
-<button onclick="newConsultTerm">New consult term</button></div>
+<div>
+  <a [routerLink]="['/consultTerm']">New Consult Term</a>
+  <a [routerLink]="['/requestForConsult']">New Request for consult</a>
 </div>
+
+<div>
+<router-outlet> </router-outlet>
+  </div>
 

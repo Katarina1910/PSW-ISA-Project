@@ -1,20 +1,20 @@
-<form>
+<form #userForm="ngForm" (ngSubmit)="onSubmit()">
     <fieldset>
       <legend>Login</legend>
- 
+      {{loginModel | json}}
       <div class="form-group" >
         <label class="col-form-label" for="inputDefault">User name:</label>
-        <input type="text" class="form-control" id="userName">
+        <input type="text" [(ngModel)]="loginModel.userName" name="userName" class="form-control" id="userName">
       </div>
 
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <input type="password" [(ngModel)]="loginModel.password"  name="password"  class="form-control" id="exampleInputPassword1">
       </div>
 
       <div class="form-group">
         <label for="exampleInputPassword1">Please, repeat your password:</label>
-        <input type="password" class="form-control" id="exampleInputPassword2">
+        <input type="password" [(ngModel)]="loginModel.password1"  name="password1" class="form-control" id="exampleInputPassword2">
       </div>
       
       <button type="submit" class="btn btn-primary">Login</button>
