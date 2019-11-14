@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-//@Entity
+@Entity
 @Getter
 @Setter
 public class Diagnosis {
@@ -20,11 +20,10 @@ public class Diagnosis {
     @Column
     private String code;
 
-   // @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-   // private DiagnosisCodebook diagnosisCodebook;
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private DiagnosisCodebook diagnosisCodebook;
 
-   // @ManyToMany
-   // @JoinTable(name = "diagAtMedRec", joinColumns = @JoinColumn(name = "diagnosis_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "medRec_id", referencedColumnName = "id"))
+
   //  private Set<MedicalRecord> medicalRecords;
 
     public Diagnosis() {

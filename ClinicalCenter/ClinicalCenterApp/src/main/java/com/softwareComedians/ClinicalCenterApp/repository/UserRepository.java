@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface UserRepository extends JpaRepository<User,Long> {
   //  User findOneByUCIDN(String ucidn);
-    Page<User> findAll(Pageable pageable);
-    User findOneById(Long id);
+   // Page<User> findAll(Pageable pageable);
+   // User findOneById(Long id);
 
 }

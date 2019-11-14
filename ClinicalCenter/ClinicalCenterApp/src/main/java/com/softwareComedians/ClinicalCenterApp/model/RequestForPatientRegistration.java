@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 import static javax.persistence.InheritanceType.JOINED;
 
-//@Entity
+@Entity
 @Inheritance(strategy=JOINED)
 @Getter
 @Setter
@@ -16,6 +16,9 @@ public class RequestForPatientRegistration {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "userData_id", referencedColumnName = "id")
 	private User userData;
 
 	@Column
@@ -24,8 +27,8 @@ public class RequestForPatientRegistration {
 	@Column
 	private String reasonOfRejection;
 
-//	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-//	private ClinicCenterAdministrator clinicCenterAdministrator;
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	private ClinicCenterAdministrator clinicCenterAdministrator;
 
 	public RequestForPatientRegistration() {
 		super();

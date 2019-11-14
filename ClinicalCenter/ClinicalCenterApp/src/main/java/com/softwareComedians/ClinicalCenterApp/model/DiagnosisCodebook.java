@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-//@Entity
+@Entity
 @Getter
 @Setter
 public class DiagnosisCodebook {
@@ -14,10 +14,10 @@ public class DiagnosisCodebook {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-  //  @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL,mappedBy = "diagnosisCodebook")
-   // private Set<Diagnosis> diagnoses;
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "diagnosisCodebook")
+    private Set<Diagnosis> diagnoses;
 
-    @Column
+    @OneToOne(mappedBy = "diagnosisCodebook")
     private ClinicalCenter clinicalCenter;
 
     public DiagnosisCodebook() {

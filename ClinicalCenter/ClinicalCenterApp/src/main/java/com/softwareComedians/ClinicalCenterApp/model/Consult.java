@@ -5,15 +5,15 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-//@Entity
+@Entity
 @Getter
 @Setter
 public class Consult extends ConsultTerm {
 	@Column
 	private String report;
 
-	//@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	//private MedicalRecord medicalRecord;
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private MedicalRecord medicalRecord;
 
 	public Consult(String report) {
 		super();

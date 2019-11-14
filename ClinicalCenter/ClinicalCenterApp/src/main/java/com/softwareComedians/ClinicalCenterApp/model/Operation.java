@@ -6,18 +6,19 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-//@Entity
+@Entity
 @Getter
 @Setter
 public class Operation extends RequstForOperation {
 //	@ManyToMany(mappedBy = "DocOp")
 //	private Set<Doctor> doctors;
 
-	@Column
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "room_id", referencedColumnName = "id")
 	private Room room;
 
-//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	//private MedicalRecord medicalRecord;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private MedicalRecord medicalRecord;
 	
 	public Operation() {
 		super();

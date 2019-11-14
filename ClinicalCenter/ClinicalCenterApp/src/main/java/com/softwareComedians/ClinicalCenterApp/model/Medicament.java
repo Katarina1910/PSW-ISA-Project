@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-//@Entity
+@Entity
 @Getter
 @Setter
 public class Medicament {
@@ -23,6 +23,9 @@ public class Medicament {
 
     @Column
     private String code;
+
+    @OneToOne(mappedBy = "medicament")
+    private  Recipe recipe;
 
    // @ManyToMany
     //@JoinTable(name = "MedPatient", joinColumns = @JoinColumn(name = "med_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "medRec_id", referencedColumnName = "id"))
