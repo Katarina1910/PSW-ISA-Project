@@ -37,6 +37,8 @@ import { WelcomeComponent } from './home/welcome.component'
       { path: '', component: WelcomeComponent, pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
       { path: 'HomepageCCA/arrivedReq', component: arrivedRequest }, //ovo ne radi
+      { path: 'loginform', component: LoginComponent },
+      { path: 'signupform', component: RegistrationComponent },
     ], {useHash: true})
   ], 
   bootstrap: [AppComponent]
