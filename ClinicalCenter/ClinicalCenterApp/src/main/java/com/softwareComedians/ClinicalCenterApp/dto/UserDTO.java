@@ -2,7 +2,7 @@ package com.softwareComedians.ClinicalCenterApp.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-
+import com.softwareComedians.ClinicalCenterApp.model.User;
 @Setter
 @Getter
 public class UserDTO {
