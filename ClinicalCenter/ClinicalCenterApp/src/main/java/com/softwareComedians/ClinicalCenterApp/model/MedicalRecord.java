@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-//@Entity
+@Entity
 @Getter
 @Setter
 public class MedicalRecord {
@@ -17,23 +17,26 @@ public class MedicalRecord {
 	@Column
 	private String historyDesease;
 
-/*	//@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "medicalRecord")
+	@OneToOne(mappedBy = "medicalRecord")
+	private Patient patient;
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "medicalRecord")
 	private Set<Consult> visitsToDoctor;
 
-	//@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "medicalRecord")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "medicalRecord")
 	private Set<Operation> operations;
 
-	//@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "medicalRecord")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "medicalRecord")
 	private Set<Recipe> recipes;
 
-	//@ManyToMany(mappedBy = "diagAtMedRec")
+	/*//@ManyToMany(mappedBy = "diagAtMedRec")
 	private Set<Diagnosis> diagnosis;
 
 	//@ManyToMany(mappedBy = "MedPatient")
-	private Set<Medicament> prescribedMedicaments;
+	private Set<Medicament> prescribedMedicaments;*/
 
-	//@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	private ClinicalCenter clinicalCenter;*/
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private ClinicalCenter clinicalCenter;
 	
 	public MedicalRecord() {
 		super();

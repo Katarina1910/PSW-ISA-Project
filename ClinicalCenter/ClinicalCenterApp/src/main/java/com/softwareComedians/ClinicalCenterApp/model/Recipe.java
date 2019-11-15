@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-//@Entity
+@Entity
 @Getter
 @Setter
 public class Recipe {
@@ -14,17 +14,18 @@ public class Recipe {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-//	@Column
-//	private Nurse nurse;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Nurse nurse;
 
-	//@Column
-	//private Medicament medicament;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "medicament_id", referencedColumnName = "id")
+	private Medicament medicament;
 
 	@Column
 	private boolean isValidated;
 
-	//@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//	private MedicalRecord medicalRecord;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private MedicalRecord medicalRecord;
 	
 	public Recipe() {
 		super();

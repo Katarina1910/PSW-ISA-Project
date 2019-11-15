@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-//@Entity
+@Entity
 @Getter
 @Setter
 public class ClinicalCenter {
@@ -17,20 +17,22 @@ public class ClinicalCenter {
 	@Column(nullable = false)
 	private String name;
 
-	/*//@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "clinicalCenter")
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "clinicalCenter")
 	private Set<Clinic> clinics;
 
-	//f@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "clinicalCenter")
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "clinicalCenter")
 	private Set<ClinicCenterAdministrator> admins;
 
-	//@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "clinicalCenter")
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "clinicalCenter")
 	private Set<MedicalRecord> medicalRecords;
 
-	//@OneToOne(mappedBy = "clinicalCenter")
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "clinicalcenter_id", referencedColumnName = "id")
 	private DiagnosisCodebook diagnosisCodebook;
 
-	//@OneToOne(mappedBy = "clinicalCenter")
-	private MedicamentCodeBook medicamentCodebook;*/
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "clinicalcenter_idd", referencedColumnName = "id")
+	private MedicamentCodeBook medicamentCodebook;
 
 	public ClinicalCenter() {
 		super();

@@ -50,11 +50,11 @@ public class User {
 	@Column
 	private boolean isActivated;
 
-//	@OneToMany(mappedBy = "applicant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//	private Set<RequstForConsult> requstForConsults;
+	@OneToMany(mappedBy = "applicant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<RequstForConsult> requstForConsults;
 
-	//@OneToOne(mappedBy = "userData")
-	//private RequestForPatientRegistration requestForPatientRegistration;
+	@OneToOne(mappedBy = "userData")
+	private RequestForPatientRegistration requestForPatientRegistration;
 	
 	
 	public User() {

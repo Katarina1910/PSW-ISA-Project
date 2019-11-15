@@ -6,7 +6,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-//@Entity
+@Entity
+@Table(name = "priceList")
 @Getter
 @Setter
 public class PriceList {
@@ -14,10 +15,10 @@ public class PriceList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-  //  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "priceList")
- //   private Set<PriceListItem>  priceList;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "priceList")
+    private Set<PriceListItem>  priceList;
 
-    @Column
+    @OneToOne(mappedBy = "priceList")
     private Clinic clinic;
 
 

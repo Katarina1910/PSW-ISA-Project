@@ -8,7 +8,7 @@ import java.sql.Date;
 
 import static javax.persistence.InheritanceType.JOINED;
 
-//@Entity
+@Entity
 @Inheritance(strategy=JOINED)
 @Getter
 @Setter
@@ -17,8 +17,8 @@ public class RequstForOperation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	//@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	//private Doctor applicant;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Doctor applicant;
 
 	@Column
 	private Date dateAndTime;

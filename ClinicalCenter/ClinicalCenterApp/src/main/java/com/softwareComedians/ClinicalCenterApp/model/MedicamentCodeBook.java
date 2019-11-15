@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
-//@Entity
+@Entity
 @Getter
 @Setter
 public class MedicamentCodeBook {
@@ -16,7 +16,8 @@ public class MedicamentCodeBook {
    // @ManyToMany(mappedBy = "MedCd")
   //  private Set<Medicament> medicamentCodeBook;
 
-  //  private ClinicalCenter clinicalCenter;
+    @OneToOne(mappedBy = "medicamentCodebook")
+    private ClinicalCenter clinicalCenter;
 
     public MedicamentCodeBook() {
     }

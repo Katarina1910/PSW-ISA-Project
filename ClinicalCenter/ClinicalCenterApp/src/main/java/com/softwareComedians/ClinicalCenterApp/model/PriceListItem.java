@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-//@Entity
+@Entity
 @Getter
 @Setter
 public class PriceListItem {
@@ -20,8 +20,8 @@ public class PriceListItem {
     @Column
     private double price;
 
-   // @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-  //  private PriceList priceList;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private PriceList priceList;
 
     public PriceListItem(String name, double price) {
         this.name = name;

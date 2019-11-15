@@ -5,8 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
-//@Entity
+@Entity
 @Getter
 @Setter
 public class ConsultTerm extends RequstForConsult {
@@ -17,25 +18,22 @@ public class ConsultTerm extends RequstForConsult {
 	private int duration;
 
 	@Column
-	private Doctor doctor;
-
-	@Column
-	private Nurse nurse;
-
-	@Column
 	private String price;
 
 	@Column
 	private String discount;
 
-	@Column
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "consultTerm")
+	private Set<Personnel> personnels;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Room room;
 
-	//@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//	private Clinic clinic;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Clinic clinic;
 
-	//@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	//private Patient patient;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Patient patient;
 
 	
 	public ConsultTerm() {

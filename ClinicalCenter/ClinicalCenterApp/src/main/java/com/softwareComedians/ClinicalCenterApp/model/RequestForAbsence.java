@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-//@Entity
+@Entity
 @Getter
 @Setter
 public class RequestForAbsence {
@@ -13,8 +13,8 @@ public class RequestForAbsence {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	//@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	//private Personnel applicant;
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private Personnel applicant;
 
 	@Column
 	private boolean isAccepted;
@@ -22,8 +22,8 @@ public class RequestForAbsence {
 	@Column
 	private String resaonOfRejection;
 
-	//@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-//	private ClinicAdministrator clinicAdministrator;
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private ClinicAdministrator clinicAdministrator;
 	
 	public RequestForAbsence() {
 		super();

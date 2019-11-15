@@ -1,10 +1,11 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 enum Type {examination, operation}
 
-//@Entity
+@Entity
 public class Room {
 
 	@Id
@@ -20,8 +21,14 @@ public class Room {
 	@Column
 	private String name;
 
-	//@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Clinic clinic;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "room")
+	private Set<ConsultTerm> consultTerms;
+
+	@OneToOne(mappedBy = "room")
+	private Operation operation;
 	
 	public Room() {
 		super();
