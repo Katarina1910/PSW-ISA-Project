@@ -14,30 +14,36 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/users")
+@CrossOrigin
 public class UserController {
-  //  @Autowired
-   // private UserService userService;
 
-  /*  @GetMapping(value = "/all")
-    public ResponseEntity<List<UserDTO>> getAllUsers(){
-        List<User> users = userService.findAll();
+    @Autowired
+    private UserService userService;
 
-        List<UserDTO> userDTO = new ArrayList<>();
-        for (User u : users) {
-           // userDTO.add(new UserDTO());
-        }
+    @PostMapping()
+	public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
 
-        return new ResponseEntity<>(userDTO, HttpStatus.OK);
-    }
 
-    @PostMapping(consumes = "application/json")
-    public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDTO) {
+		/*if (userDTO.getRole().equals("Doctor")) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}*/
 
-        User user = new User();
-       //setere napravi
+		User user = new User();
+		user.setId(userDTO.getId());
+		user.setName(userDTO.getName());
+		user.setSurname(userDTO.getSurname());
+		user.setUcidn(userDTO.getUcidn());
+		user.setAddress(userDTO.getAddress());
+		user.setCity(userDTO.getCity());
+		user.setCountry(userDTO.getCountry());
+		user.setEmail(userDTO.getEmail());
+		user.setPhone(userDTO.getPhone());
+		user.setRole(userDTO.getRole());
+		user.setUserName(userDTO.getUserName());
+		user.setPassword(userDTO.getPassword());
 
-        user = userService.save(user);
-        //user u konstruktor dto
-        return new ResponseEntity<>(new UserDTO(), HttpStatus.CREATED);
-    }*/
+		user = userService.save(user);
+		return new ResponseEntity<>(new UserDTO(user), HttpStatus.CREATED);
+	}
+
 }
