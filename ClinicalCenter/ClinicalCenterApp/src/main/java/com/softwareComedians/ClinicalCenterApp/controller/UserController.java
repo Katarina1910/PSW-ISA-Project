@@ -1,16 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
-import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
-import com.softwareComedians.ClinicalCenterApp.model.User;
-import com.softwareComedians.ClinicalCenterApp.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.jws.soap.SOAPBinding;
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/users")
