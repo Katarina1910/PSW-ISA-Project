@@ -7,14 +7,15 @@ import { UserService } from './user.service';
     templateUrl : './registration.component.html'
 })
 export class RegistrationComponent{
-    userModel = new User("hi"," "," "," "," "," "," "," "," "," "," ");
+    userModel = new User(""," "," "," "," "," "," "," "," "," ");
     
     constructor(private _userService: UserService) {}
 
     onSubmit(){
         this._userService.enroll(this.userModel)
         .subscribe(
-            data=> console.log('Success!', data),
+            data=>{ console.log('Success!', data);
+                 alert("Registration request has been sent!")},
             error=> console.error('Error!',error)
         )
     }

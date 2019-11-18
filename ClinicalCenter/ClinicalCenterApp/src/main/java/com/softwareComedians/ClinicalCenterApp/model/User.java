@@ -47,8 +47,8 @@ public class User {
 	@Column
 	private String password;
 
-	@Column
-	private boolean isActivated;
+    @Column
+    private boolean isActivated;
 
 	@Column
     private  String role;

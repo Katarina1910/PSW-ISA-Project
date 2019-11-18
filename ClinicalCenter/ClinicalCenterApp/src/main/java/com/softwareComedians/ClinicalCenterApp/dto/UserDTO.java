@@ -1,5 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.dto;
 
+import com.softwareComedians.ClinicalCenterApp.model.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,12 +19,11 @@ public class UserDTO {
     private String userName;
     private String password;
     private boolean isActivated;
-    private String role;
 
     public UserDTO() {
     }
 
-    public UserDTO(Long id, String name, String surname, String ucidn, String address, String role, String city, String country, String email, String phone, String userName, String password, boolean isActivated) {
+    public UserDTO(Long id, String name, String surname, String ucidn, String address,String city, String country, String email, String phone, String userName, String password, boolean isActivated) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -36,16 +36,8 @@ public class UserDTO {
         this.userName = userName;
         this.password = password;
         this.isActivated = isActivated;
-        this.role=role;
 
-    }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public UserDTO(User u){
@@ -61,7 +53,6 @@ public class UserDTO {
         userName=u.getUserName();
         password=u.getPassword();
         isActivated=u.isActivated();
-        role=u.getRole();
     }
 
     public Long getId() {

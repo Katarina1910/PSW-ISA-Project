@@ -7,10 +7,10 @@ import { User } from '../registration/user';
     providedIn: 'root'
 })
 export class LoginService{
-    _url = 'http://localhost:8080/api/';
+    _url = 'http://localhost:8080/api/users/login';
     constructor(private _http: HttpClient){ }
 
     login(login: Login){
-        return this._http.get<User>(this._url);
+        return this._http.post<any>(this._url,login);
     }
 }

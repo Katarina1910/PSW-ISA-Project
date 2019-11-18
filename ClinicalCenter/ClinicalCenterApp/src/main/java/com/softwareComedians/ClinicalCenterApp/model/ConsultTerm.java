@@ -27,6 +27,9 @@ public class ConsultTerm {
 	@Column
 	private String discount;
 
+	@OneToOne(mappedBy = "consultTerm")
+	private RequestForConsult requestForConsult;
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "consultTerm")
 	private Set<Personnel> personnels;
 

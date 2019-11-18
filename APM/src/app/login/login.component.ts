@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Login } from './login';
 import { LoginService } from './login.service';
+import { User } from '../registration/user';
 
 @Component({
     selector : 'cc-login',
@@ -15,8 +16,15 @@ export class LoginComponent{
     onSubmit(){
         this._loginService.login(this.loginModel)
        .subscribe(
-        data => console.log('Success!', data),
-        error=> console.error('Error!',error)
+        data => {
+            alert("Loged in!");
+            sessionStorage.setItem("user",data);
+            data = data as User;
+            alert("Wellcome!");
+            
+            console.log(data);
+        },
+        error=> alert("Wrong password or username")
         );
     }
 }
