@@ -1,15 +1,32 @@
-<head>
-        <meta charset=utf-8>
-        <title>Clinical Center App</title>
-</head>
-<body>
-    <h1 align="center">List of arrived request</h1>
+
+    <h1>List of arrived request</h1>
     <p>&nbsp;</p>        
-    <div style="width: 200px;">
-            <button type="button" class="btn btn-outline-primary">Accept</button>
-            <button type="button" class="btn btn-outline-primary">Reject</button>
+    <div class='table-responsive' onload="onLoad()">
+        <table class='table'>
+        <thead>
+                <tr>
+                   <th><button class='btn btn-outline-primary'>Name</button> </th>
+                   <th><button class='btn btn-outline-primary'>Email</button> </th>
+                   <th><button class='btn btn-outline-primary'>UCIDN</button></th>
+                   <th></th>
+                   <th></th>
+                   <th></th>
+                 </tr>
+        </thead>
+        <tbody>
+                <tr *ngFor = 'let arrReq of arrivedRequest'>
+                   <td>{{arrReq.userData.name}}</td>
+                   <td>{{arrReq.userData.Email}}</td>
+                   <td>{{arrReq.userData.ucidn}}</td>
+                   <td><input type="text" value="Reason of rejection..." hidden="true"/> </td>
+                   <td><button type="button" class="btn btn-outline-primary">Accept</button></td>
+                   <td><button type="button" class="btn btn-outline-primary">Reject</button></td>
+                </tr>
+        </tbody> 
+            
+        </table>
     </div>
-</body>
+
       
       
       

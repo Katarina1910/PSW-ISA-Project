@@ -18,7 +18,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RegisterNewClinicalCenterAdministrator,
     createMedicamentCodeBook,
     createDiagnosisCodeBook,
-    WelcomeComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +42,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       {path: 'login', component: LoginComponent},
       {path: 'welcome', component: WelcomeComponent},
       {path: 'HomepageCCA', component: ClinicalCenterAdministratorCompoment},
+      {path: 'HomepageCCA/arrivedReq', component : arrivedRequest},
       {path: 'consultTerm', component: ConsultTermComponent},
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
