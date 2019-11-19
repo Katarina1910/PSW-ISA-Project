@@ -17,6 +17,9 @@ import { WelcomeComponent } from './home/welcome.component'
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import {DoctorComponent } from './doctorHomePage/doctor.component'
 
 @NgModule({
   declarations: [
@@ -31,25 +34,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RegisterNewClinicalCenterAdministrator,
     createMedicamentCodeBook,
     createDiagnosisCodeBook,
-    WelcomeComponent
+    WelcomeComponent,
+    DoctorComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
       {path: 'welcome', component: WelcomeComponent},
-      {path: 'HomepageCCA', component: ClinicalCenterAdministratorCompoment},
-      {path: 'HomepageCCA/arrivedReq', component : arrivedRequest},
-      {path: 'consultTerm', component: ConsultTermComponent},
-      {path: 'requestConsult', component: RequestForConsultComponent},
-      {path: '', component: WelcomeComponent, pathMatch: 'full'},
-      {path: '**', redirectTo: 'welcome', pathMatch: 'full'},
+      { path: 'HomepageCCA', component: ClinicalCenterAdministratorCompoment },
+      {path: 'HomepageDoctor', component: DoctorComponent},
+      { path: 'addConsultTerm', component: ConsultTermComponent},
+      { path: '', component: WelcomeComponent, pathMatch: 'full' },
+      { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
+      { path: 'HomepageCCA/arrivedReq', component: arrivedRequest }, //ovo ne radi
     ], {useHash: true}),
     BrowserAnimationsModule
-  ], 
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

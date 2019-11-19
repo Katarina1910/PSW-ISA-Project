@@ -1,3 +1,4 @@
+
     import { Component } from '@angular/core';
     import { arrivedRequestService } from './arrivedRequest.service';
 
@@ -22,3 +23,4 @@
             )
         }
     }
+
