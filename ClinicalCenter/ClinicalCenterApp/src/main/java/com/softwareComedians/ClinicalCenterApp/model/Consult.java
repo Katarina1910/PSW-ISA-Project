@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class Consult extends ConsultTerm {
+
 	@Column
 	private String report;
 

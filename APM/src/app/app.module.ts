@@ -14,6 +14,12 @@ import { RegisterNewClinicalCenterAdministrator } from './registerNewClinCenAdmi
 import { createMedicamentCodeBook } from './createMedicamentCodeBook/createMedicamentCodeBookcomponent';
 import { createDiagnosisCodeBook } from './createDiagCodeBook/createDiagCodeBook.component';
 import { WelcomeComponent } from './home/welcome.component'
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+//import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule } from  '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -28,18 +34,28 @@ import { WelcomeComponent } from './home/welcome.component'
     RegisterNewClinicalCenterAdministrator,
     createMedicamentCodeBook,
     createDiagnosisCodeBook,
-    WelcomeComponent
+    WelcomeComponent,
+    //MatToolbarModule,
+    //MatIconModule,
+    //MatSidenavModule,
+    //MatListModule,
+    //MatButtonModule
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
+      {path: 'registration', component: RegistrationComponent},
+      {path: 'login', component: LoginComponent},
+      {path: 'welcome', component: WelcomeComponent},
       { path: 'HomepageCCA', component: ClinicalCenterAdministratorCompoment },
       { path: '', component: WelcomeComponent, pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
       { path: 'HomepageCCA/arrivedReq', component: arrivedRequest }, //ovo ne radi
-      { path: 'loginform', component: LoginComponent },
-      { path: 'signupform', component: RegistrationComponent },
-    ], {useHash: true})
+    ], {useHash: true}),
+    BrowserAnimationsModule
   ], 
   bootstrap: [AppComponent]
 })

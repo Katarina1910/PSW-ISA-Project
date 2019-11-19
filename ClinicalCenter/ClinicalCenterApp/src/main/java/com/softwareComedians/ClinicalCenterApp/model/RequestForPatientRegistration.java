@@ -1,4 +1,3 @@
-
 package com.softwareComedians.ClinicalCenterApp.model;
 
 import lombok.Getter;
@@ -34,5 +33,5 @@ public class RequestForPatientRegistration {
 	public RequestForPatientRegistration() {
 		super();
 	}
-
+	
 }
