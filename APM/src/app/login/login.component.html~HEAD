@@ -1,0 +1,23 @@
+<form #userForm="ngForm" (ngSubmit)="onSubmit()" class="d-flex p-2 justify-content-center">
+    <p>&nbsp;</p>        
+    <fieldset>
+      <legend>Login</legend>
+      <p>&nbsp;</p>        
+      <div class="form-group" >
+        <label class="col-form-label" for="inputDefault">User name:</label>
+        <input type="text" class="form-control" id="userName" name="userName"  [(ngModel)]="loginModel.userName">
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" name="password" [(ngModel)]="loginModel.password">
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputPassword1">Please, repeat your password:</label>
+        <input type="password" class="form-control" id="exampleInputPassword2">
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Login</button>
+    </fieldset>
+  </form>
