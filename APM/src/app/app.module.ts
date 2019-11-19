@@ -14,6 +14,10 @@ import { RegisterNewClinicalCenterAdministrator } from './registerNewClinCenAdmi
 import { createMedicamentCodeBook } from './createMedicamentCodeBook/createMedicamentCodeBookcomponent';
 import { createDiagnosisCodeBook } from './createDiagCodeBook/createDiagCodeBook.component';
 import { WelcomeComponent } from './home/welcome.component'
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -28,16 +32,23 @@ import { WelcomeComponent } from './home/welcome.component'
     RegisterNewClinicalCenterAdministrator,
     createMedicamentCodeBook,
     createDiagnosisCodeBook,
-    WelcomeComponent
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
-      { path: 'HomepageCCA', component: ClinicalCenterAdministratorCompoment },
-      { path: '', component: WelcomeComponent, pathMatch: 'full' },
-      { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
-      { path: 'HomepageCCA/arrivedReq', component: arrivedRequest }, //ovo ne radi
-    ], {useHash: true})
+      {path: 'registration', component: RegistrationComponent},
+      {path: 'login', component: LoginComponent},
+      {path: 'welcome', component: WelcomeComponent},
+      {path: 'HomepageCCA', component: ClinicalCenterAdministratorCompoment},
+      {path: 'consultTerm', component: ConsultTermComponent},
+      {path: 'requestConsult', component: RequestForConsultComponent},
+      {path: '', component: WelcomeComponent, pathMatch: 'full'},
+      {path: '**', redirectTo: 'welcome', pathMatch: 'full'},
+    ], {useHash: true}),
+    BrowserAnimationsModule
   ], 
   bootstrap: [AppComponent]
 })

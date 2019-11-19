@@ -1,62 +1,74 @@
-<form>
+<form #userForm="ngForm" (ngSubmit)="onSubmit()" class="d-flex p-2 justify-content-center">
+    <p>&nbsp;</p>        
     <fieldset>
       <legend>Register</legend>
- 
-      <div class="form-group" >
-        <label class="col-form-label" for="inputDefault">Name:</label>
-        <input type="text" class="form-control" id="name">
+      <p>&nbsp;</p>        
+      <div class="form-group">
+        <label class="col-form-label" for="inputDefault" style="size:30%, max-width: 60%;">Name:</label>
+        <input type="text" class="form-control" id="name" name="name" [(ngModel)]="userModel.name" required>
       </div>
 
       <div class="form-group">
         <label class="col-form-label" for="inputDefault">Surname:</label>
-        <input type="text" class="form-control" id="surename" >
+        <input type="text" class="form-control" id="surename" name="surname" [(ngModel)]="userModel.surname" required>
       </div>
 
       <div class="form-group">
         <label class="col-form-label" for="inputDefault">UCIDN:</label>
-        <input type="text" class="form-control" id="ucidn">
+        <input type="text" class="form-control" name="ucidn" id="ucidn" [(ngModel)]="userModel.ucidn" required>
       </div>
 
       
       <div class="form-group">
         <label class="col-form-label" for="inputDefault">Address:</label>
-        <input type="text" class="form-control" id="address">
+        <input type="text" class="form-control" id="address" name="address" [(ngModel)]="userModel.address" required>
       </div>
 
       
       <div class="form-group">
         <label class="col-form-label" for="inputDefault">City::</label>
-        <input type="text" class="form-control" >
+        <input type="text" class="form-control" name="city" [(ngModel)]="userModel.city" required >
       </div>
 
       
       <div class="form-group">
         <label class="col-form-label" for="inputDefault">Country:</label>
-        <input type="text" class="form-control" >
+        <input type="text" class="form-control" name="country" [(ngModel)]="userModel.country" required>
       </div>
 
 
       <div class="form-group">
         <label for="exampleInputEmail1">Email address:</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <input type="email" class="form-control" id="email" [(ngModel)]="userModel.email" name="email" aria-describedby="emailHelp" required>
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
 
       
       <div class="form-group">
         <label class="col-form-label" for="inputDefault">Phone:</label>
-        <input type="text" class="form-control" >
+        <input type="text" name="phone" [(ngModel)]="userModel.phone" class="form-control" required >
       </div>
+
+      <div class="form-group">
+          <label for="exampleSelect1">Role:</label>
+          <select class="form-control" id="role" name="role" [(ngModel)]="userModel.role"  aria-selected=" " required>
+            <option>Doctor</option>
+            <option>Nurse</option>
+            <option>Patient</option>
+            <option>Clinic administrator</option>
+            <option>Clinical Centre administrator</option>
+          </select>
+        </div>
 
       
       <div class="form-group">
         <label class="col-form-label" for="inputDefault">Username:</label>
-        <input type="text" class="form-control" >
+        <input type="text" class="form-control" [(ngModel)]="userModel.userName" name="username" required >
       </div>
 
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <input type="password" [(ngModel)]="userModel.password" name="password" class="form-control" id="exampleInputPassword1" required="true">
       </div>
       
       <button type="submit" class="btn btn-primary">Submit</button>
