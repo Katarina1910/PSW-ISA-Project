@@ -7,6 +7,8 @@ import com.softwareComedians.ClinicalCenterApp.repository.RequestForPatientRegis
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RequestForPatientRegistrationService {
 
@@ -15,6 +17,10 @@ public class RequestForPatientRegistrationService {
 
     public RequestForPatientRegistration save(RequestForPatientRegistration rq) {
         return requestForPatientRegistrationRepository.save(rq);
+    }
+
+    public List<RequestForPatientRegistration> getAll(){
+        return  requestForPatientRegistrationRepository.findAll();
     }
 
     public void remove(Long id){

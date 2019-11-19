@@ -16,6 +16,7 @@ import { createDiagnosisCodeBook } from './createDiagCodeBook/createDiagCodeBook
 import { WelcomeComponent } from './home/welcome.component'
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {DoctorComponent } from './doctorHomePage/doctor.component'
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     RegisterNewClinicalCenterAdministrator,
     createMedicamentCodeBook,
     createDiagnosisCodeBook,
-    WelcomeComponent
+    WelcomeComponent,
+    DoctorComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'HomepageCCA', component: ClinicalCenterAdministratorCompoment },
+      {path: 'HomepageDoctor', component: DoctorComponent},
+      { path: 'addConsultTerm', component: ConsultTermComponent},
       { path: '', component: WelcomeComponent, pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
       { path: 'HomepageCCA/arrivedReq', component: arrivedRequest }, //ovo ne radi

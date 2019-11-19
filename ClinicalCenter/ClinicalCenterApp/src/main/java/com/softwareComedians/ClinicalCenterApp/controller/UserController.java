@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping(value = "api/users")
 @CrossOrigin
@@ -58,15 +60,26 @@ public class UserController {
 
 	@PostMapping()
 	@RequestMapping(value = "/login")
-	public  ResponseEntity<?> login(@RequestBody UserDTO u){
+	public  ResponseEntity<?> login(@RequestBody UserDTO u, HttpServletRequest request){
     	User user = new User();
     	user = userService.findByUserName(u.getUserName());
     	if (user!=null){
 			if(user.getPassword().equals(u.getPassword())) {
+				if(request.getSession().getAttribute("user") != null)
+					request.getSession().invalidate();
+
+				request.getSession().setAttribute("user", user);
 				return new ResponseEntity<>(new UserDTO(user), HttpStatus.OK);
 			}
 		}
 		return  new ResponseEntity<>("Wrong username or password", HttpStatus.OK);
+	}
+
+	@GetMapping()
+	@RequestMapping(value = "/logout")
+	public  ResponseEntity<?> logout (HttpServletRequest request){
+		request.getSession().invalidate();
+		return new ResponseEntity<>("Logged out!", HttpStatus.OK);
 	}
 
 }
