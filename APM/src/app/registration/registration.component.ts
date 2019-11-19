@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     templateUrl : './registration.component.html'
 })
 export class RegistrationComponent{
-    userModel = new User("hi"," "," "," "," "," "," "," "," "," "," ");
+    userModel = new User("","","","","","","","","","","");
     
     
     registerForm: FormGroup;
