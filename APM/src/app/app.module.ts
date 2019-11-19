@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import {DoctorComponent } from './doctorHomePage/doctor.component'
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     //MatSidenavModule,
     //MatListModule,
     //MatButtonModule
+    DoctorComponent
   ],
   imports: [
     BrowserModule,
@@ -51,12 +53,14 @@ import { ReactiveFormsModule } from '@angular/forms';
       {path: 'login', component: LoginComponent},
       {path: 'welcome', component: WelcomeComponent},
       { path: 'HomepageCCA', component: ClinicalCenterAdministratorCompoment },
+      {path: 'HomepageDoctor', component: DoctorComponent},
+      { path: 'addConsultTerm', component: ConsultTermComponent},
       { path: '', component: WelcomeComponent, pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
       { path: 'HomepageCCA/arrivedReq', component: arrivedRequest }, //ovo ne radi
     ], {useHash: true}),
     BrowserAnimationsModule
-  ], 
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

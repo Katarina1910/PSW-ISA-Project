@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-public class Patient extends RequestForPatientRegistration {
+public class Patient extends User {
 	//preuzmi user data iz requesta
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "medicalRecord", referencedColumnName = "id")

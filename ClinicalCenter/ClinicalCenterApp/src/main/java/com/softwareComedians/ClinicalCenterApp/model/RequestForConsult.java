@@ -25,6 +25,10 @@ public class RequestForConsult {
 	@Column
 	private  String type;
 
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "consultTerm_id", referencedColumnName = "id")
+	private  ConsultTerm consultTerm;
+
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private User applicant;
