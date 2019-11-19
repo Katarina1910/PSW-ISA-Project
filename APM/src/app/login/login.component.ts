@@ -9,6 +9,7 @@ import { User } from '../registration/user';
     templateUrl : './login.component.html'
 })
 export class LoginComponent{
+
     loginModel = new Login('','');
 
     loginForm: FormGroup;
@@ -29,7 +30,7 @@ export class LoginComponent{
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 
-    //ovo nije dobro
+    
     onSubmit(){
         this._loginService.login(this.loginModel)
        .subscribe(
@@ -45,5 +46,6 @@ export class LoginComponent{
         error=> alert("Wrong password or username")
         );
         this.submitted = true;
+
     }
 }

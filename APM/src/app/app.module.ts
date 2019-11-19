@@ -16,7 +16,6 @@ import { createDiagnosisCodeBook } from './createDiagCodeBook/createDiagCodeBook
 import { WelcomeComponent } from './home/welcome.component'
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-//import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule } from  '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -36,11 +35,6 @@ import {DoctorComponent } from './doctorHomePage/doctor.component'
     createMedicamentCodeBook,
     createDiagnosisCodeBook,
     WelcomeComponent,
-    //MatToolbarModule,
-    //MatIconModule,
-    //MatSidenavModule,
-    //MatListModule,
-    //MatButtonModule
     DoctorComponent
   ],
   imports: [

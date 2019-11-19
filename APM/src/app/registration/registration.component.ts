@@ -3,6 +3,7 @@ import { User } from './user';
 import { UserService } from './user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+
 @Component({
     selector : 'cc-registration',
     templateUrl : './registration.component.html'
@@ -33,14 +34,14 @@ export class RegistrationComponent{
 
     // convenience getter for easy access to form fields
     get f() { return this.registerForm.controls; }
-
     onSubmit(){
         this._userService.enroll(this.userModel)
         .subscribe(
             data=> console.log('Success!', data),
             error=> console.error('Error!',error)
         )
-        
+    }
+
         //validacija
         this.submitted = true;
 

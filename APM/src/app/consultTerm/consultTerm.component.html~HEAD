@@ -1,7 +1,4 @@
-
-<div class="d-flex p-2 justify-contetnt-center">
 <form #userForm="ngForm" (ngSubmit)="onSubmit()" class="d-flex p-2 justify-content-center">
-
     <fieldset>
       <legend>Consult Term</legend>
  
@@ -31,6 +28,4 @@
       
       <button type="submit" class="btn btn-primary">Send</button>
     </fieldset>
-
   </form>
-</div>
