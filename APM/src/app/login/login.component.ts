@@ -9,16 +9,17 @@ import { User } from '../registration/user';
 })
 export class LoginComponent{
     loginModel = new Login(' ',' ');
+    u:User = null;
 
     constructor(private _loginService: LoginService){ }
 
-    //ovo nije dobro
     onSubmit(){
         this._loginService.login(this.loginModel)
        .subscribe(
         data => {
             alert("Loged in!");
-            sessionStorage.setItem("user",data);
+            this.u = data as User;
+            sessionStorage.setItem("user",JSON.stringify(this.u));
             data = data as User;
             alert("Wellcome!");
             

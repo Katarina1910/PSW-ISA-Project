@@ -7,7 +7,7 @@ import { UserService } from './user.service';
     templateUrl : './registration.component.html'
 })
 export class RegistrationComponent{
-    userModel = new User(""," "," "," "," "," "," "," "," "," ");
+    userModel = new User(""," "," "," "," "," "," "," "," "," ","");
     
     constructor(private _userService: UserService) {}
 
