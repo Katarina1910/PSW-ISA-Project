@@ -8,16 +8,8 @@ export class User {
         private  country: string,
         private  email: string,
         private  phone: string,
+        private role: string,
         private  userName: string,
-        private  password: string,
-        private role:string
+        private  password: string
     ){}
-
-    public getUserName(){
-        return this.userName;
-    }
-
-    public getRole(){
-        return this.role;
-    }
 }

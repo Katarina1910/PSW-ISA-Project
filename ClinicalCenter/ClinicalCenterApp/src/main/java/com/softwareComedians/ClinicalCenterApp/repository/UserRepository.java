@@ -7,8 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
-  //  User findOneByUCIDN(String ucidn);
-   // Page<User> findAll(Pageable pageable);
-   // User findOneById(Long id);
 
 }

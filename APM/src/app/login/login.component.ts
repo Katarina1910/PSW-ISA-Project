@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Login } from './login';
 import { LoginService } from './login.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../registration/user';
 
 @Component({
@@ -8,11 +9,27 @@ import { User } from '../registration/user';
     templateUrl : './login.component.html'
 })
 export class LoginComponent{
-    loginModel = new Login(' ',' ');
+    loginModel = new Login('','');
+
+    loginForm: FormGroup;
+    submitted = false;
+
     u:User = null;
 
-    constructor(private _loginService: LoginService){ }
+    constructor(private _loginService: LoginService, private formBuilder: FormBuilder){ }
 
+    ngOnInit() {
+        this.loginForm = this.formBuilder.group({
+            username: ['', Validators.required],
+            password: ['', [Validators.required, Validators.minLength(6)]],
+            password2: ['', [Validators.required, Validators.minLength(6)]]
+        });
+    }
+
+    // convenience getter for easy access to form fields
+    get f() { return this.loginForm.controls; }
+
+    //ovo nije dobro
     onSubmit(){
         this._loginService.login(this.loginModel)
        .subscribe(
@@ -27,5 +44,6 @@ export class LoginComponent{
         },
         error=> alert("Wrong password or username")
         );
+        this.submitted = true;
     }
 }
