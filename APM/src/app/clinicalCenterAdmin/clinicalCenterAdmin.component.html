@@ -1,17 +1,11 @@
-
-    <h1 align="center">Welcome to your homepage</h1>
-
+    <h1>Welcome to your homepage</h1>
     <p>&nbsp;</p>
-    <h4>Here is what you can do:</h4>
+    <h4 class="d-flex p-2 justify-content-center">Here is what you can do:</h4>
     
-    <div class="list-group" style="width: 360px;">
+    <div class="list-group">
         <a [routerLink]="['/HomepageCCA/arrivedReq']" class="list-group-item list-group-item-action active">1. List of arrived request</a>
-        <a class="list-group-item list-group-item-action active">2. Register new Clinical Center Administrator</a>
-        <a class="list-group-item list-group-item-action active">3. Add/remove clinic</a>
-        <a class="list-group-item list-group-item-action active">4. Create medicament Codebook</a>
-        <a class="list-group-item list-group-item-action active">5. Create diagnosis Codebook</a>
+        <a [routerLink]="['/HomepageCCA/registerNewClinCenAdmin']" class="list-group-item list-group-item-action active">2. Register new Clinical Center Administrator</a>
+        <a [routerLink]="['/HomepageCCA/addNewClinic']" class="list-group-item list-group-item-action active">3. Add/remove clinic</a>
+        <a [routerLink]="['/HomepageCCA/createMedCod']" class="list-group-item list-group-item-action active">4. Create medicament Codebook</a>
+        <a [routerLink]="['/HomepageCCA/createDiagCod']" class="list-group-item list-group-item-action active">5. Create diagnosis Codebook</a>
     </div>
-
-  
-  
-  
