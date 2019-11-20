@@ -63,16 +63,18 @@ public class UserController {
 	public  ResponseEntity<?> login(@RequestBody UserDTO u, HttpServletRequest request){
     	User user = new User();
     	user = userService.findByUserName(u.getUserName());
+		System.out.println(u.getUserName());
     	if (user!=null){
 			if(user.getPassword().equals(u.getPassword())) {
 				if(request.getSession().getAttribute("user") != null)
 					request.getSession().invalidate();
 
+
 				request.getSession().setAttribute("user", user);
 				return new ResponseEntity<>(new UserDTO(user), HttpStatus.OK);
 			}
 		}
-		return  new ResponseEntity<>("Wrong username or password", HttpStatus.OK);
+		return  new ResponseEntity<>("Wrong username or password", HttpStatus.BAD_REQUEST);
 	}
 
 	@GetMapping()

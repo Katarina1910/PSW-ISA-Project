@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from './user';
 import { UserService } from './user.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector : 'cc-registration',
@@ -9,7 +10,26 @@ import { UserService } from './user.service';
 export class RegistrationComponent{
     userModel = new User("hi"," "," "," "," "," "," "," "," "," "," ");
     
-    constructor(private _userService: UserService) {}
+    registerForm: FormGroup;
+    submitted = false;
+    
+    constructor(private _userService: UserService, private formBuilder: FormBuilder) {}
+
+    ngOnInit() {
+        this.registerForm = this.formBuilder.group({
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            ucidn: ['', Validators.required],
+            address: ['', Validators.required],
+            city: ['', Validators.required],
+            country: ['', Validators.required],
+            phoneNumber: ['', Validators.required],
+            username: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(6)]]
+        });
+    }
+    get f() { return this.registerForm.controls; }
 
     onSubmit(){
         this._userService.enroll(this.userModel)
@@ -17,6 +37,13 @@ export class RegistrationComponent{
             data=> console.log('Success!', data),
             error=> console.error('Error!',error)
         )
+        this.submitted = true;
+        if (this.registerForm.invalid) {
+            return;
+        }
+
+        alert('Registered')
     }
+    
 }
 
