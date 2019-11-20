@@ -21,6 +21,7 @@
     "@angular/router": "~8.1.2",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
+    "minty": "^0.5.10",
     "ngx-bootstrap": "^5.2.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
