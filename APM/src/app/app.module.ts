@@ -17,6 +17,7 @@ import { WelcomeComponent } from './home/welcome.component'
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DoctorComponent } from './doctorHomePage/doctor.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RegisterNewClinicalCenterAdministrator,
     createMedicamentCodeBook,
     createDiagnosisCodeBook,
-    WelcomeComponent
+    WelcomeComponent,
+    DoctorComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       {path: 'login', component: LoginComponent},
       {path: 'welcome', component: WelcomeComponent},
       {path: 'HomepageCCA', component: ClinicalCenterAdministratorCompoment},
+      {path: 'HomepageDoctor', component: DoctorComponent},
       {path: 'HomepageCCA/arrivedReq', component : arrivedRequest},
       {path: 'HomepageCCA/registerNewClinCenAdmin', component: RegisterNewClinicalCenterAdministrator},
       {path: 'HomepageCCA/addNewClinic', component: AddNewClinic},
