@@ -29,13 +29,13 @@ public class UserController {
 	public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
 		User user = new User();
 		if(userService.findByEmail(userDTO.getEmail())!=null){
-			return new ResponseEntity<>(new UserDTO(user), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new UserDTO(user), HttpStatus.CREATED);
 		}
 		if(userService.findByUICDN(userDTO.getUcidn())!=null){
-			return new ResponseEntity<>(new UserDTO(user), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new UserDTO(user), HttpStatus.CREATED);
 		}
 		if(userService.findByUserName(userDTO.getUserName())!=null){
-			return new ResponseEntity<>(new UserDTO(user), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new UserDTO(user), HttpStatus.CREATED);
 		}
 
 		user.setId(userDTO.getId());

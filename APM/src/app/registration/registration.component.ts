@@ -24,7 +24,7 @@ export class RegistrationComponent{
             city: ['', Validators.required],
             country: ['', Validators.required],
             phoneNumber: ['', Validators.required],
-            username: ['', Validators.required],
+            userName: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
