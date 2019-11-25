@@ -32,7 +32,7 @@ public class RequestForPatientRegistrationController {
         rq = requestForPatientRegistrationService.save(rq);
         return new ResponseEntity<>(new RequestForPatientRegistrationDTO(rq), HttpStatus.CREATED);
     }
-    @GetMapping("/getAll")
+    @GetMapping(value = "/getAll")
     public ResponseEntity<List<RequestForPatientRegistrationDTO>> getAll() {
 
         List<RequestForPatientRegistration> rqs = requestForPatientRegistrationService.getAll();
@@ -42,5 +42,21 @@ public class RequestForPatientRegistrationController {
         }
 
         return new ResponseEntity<>(rqsDTO, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> remove(@PathVariable Long id){
+
+        RequestForPatientRegistration requestForPatientRegistration = requestForPatientRegistrationService.findOne(id);
+
+        if(requestForPatientRegistration == null){
+            return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else{
+            requestForPatientRegistrationService.remove(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+
+
+
     }
 }

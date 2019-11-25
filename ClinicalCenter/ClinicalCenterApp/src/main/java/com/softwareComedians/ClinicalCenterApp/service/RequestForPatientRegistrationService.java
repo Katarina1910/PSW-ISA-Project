@@ -26,4 +26,8 @@ public class RequestForPatientRegistrationService {
     public void remove(Long id){
         requestForPatientRegistrationRepository.deleteById(id);
     }
+
+    public RequestForPatientRegistration findOne(Long id){
+        return requestForPatientRegistrationRepository.findById(id).orElseGet(null);
+    }
 }
