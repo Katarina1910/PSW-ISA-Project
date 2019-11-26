@@ -17,8 +17,6 @@ public class DiagnosisCodebook {
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "diagnosisCodebook")
     private Set<Diagnosis> diagnoses;
 
-    @OneToOne(mappedBy = "diagnosisCodebook")
-    private ClinicalCenter clinicalCenter;
 
     public DiagnosisCodebook() {
     }

@@ -25,8 +25,6 @@ public class RequestForPatientRegistration {
 	@Column
 	private String reasonOfRejection;
 
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	private ClinicCenterAdministrator clinicCenterAdministrator;
 
 	public RequestForPatientRegistration() {
 		super();
@@ -69,11 +67,4 @@ public class RequestForPatientRegistration {
 		this.reasonOfRejection = reasonOfRejection;
 	}
 
-	public ClinicCenterAdministrator getClinicCenterAdministrator() {
-		return clinicCenterAdministrator;
-	}
-
-	public void setClinicCenterAdministrator(ClinicCenterAdministrator clinicCenterAdministrator) {
-		this.clinicCenterAdministrator = clinicCenterAdministrator;
-	}
 }
