@@ -1,30 +1,35 @@
 package com.softwareComedians.ClinicalCenterApp.mail;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-@Component
+@Service
 public class SmtpMailSender {
 
     @Autowired
     private JavaMailSender javaMailSender;
 
+    @Autowired
+    private Environment env;
+
     public void send (String to, String subject, String body) throws MessagingException {
 
-        MimeMessage message = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper;
+        SimpleMailMessage mail = new SimpleMailMessage();
 
-        helper = new MimeMessageHelper(message,true);
-        helper.setSubject(subject);
-        helper.setTo(to);
-        helper.setText(body);
+       mail.setTo(to);
+       mail.setFrom(env.getProperty("spring.mail.username"));
+       mail.setSubject(subject);
+       mail.setText(body);
 
-        javaMailSender.send(message);
+
+        javaMailSender.send(mail);
     }
 
 }

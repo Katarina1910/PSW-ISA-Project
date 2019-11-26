@@ -16,15 +16,15 @@ public class MailController {
     @Autowired
     private SmtpMailSender smtpMailSender;
 
+    //u frontednu ovo pozovi za accept
     @GetMapping (value = "/accept/{mail}/{id}")
     public void accept(@PathVariable String mail, @PathVariable String id) throws MessagingException {
-        smtpMailSender.send(mail,"Registration", "Text");
-
+        smtpMailSender.send(mail,"Registration", " Please, confirm registration clicking on the following link <a href='http://localhost:8080/api/patient/add/"+id+"'>klikni</a>");
     }
 
+    //u front endu ovo pozovi za reject
     @GetMapping (value = "/reject/{mail}/{description}")
     public void reject(@PathVariable String mail, @PathVariable String description) throws MessagingException {
         smtpMailSender.send(mail,"Registration", description);
-
     }
 }

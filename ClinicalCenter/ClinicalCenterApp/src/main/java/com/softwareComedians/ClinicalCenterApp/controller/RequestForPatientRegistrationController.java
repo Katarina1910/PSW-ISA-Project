@@ -17,8 +17,13 @@ import java.util.List;
 public class RequestForPatientRegistrationController {
 
 
-    @Autowired
+
     private RequestForPatientRegistrationService requestForPatientRegistrationService;
+
+    @Autowired
+    public RequestForPatientRegistrationController(RequestForPatientRegistrationService requestForPatientRegistrationService) {
+        this.requestForPatientRegistrationService = requestForPatientRegistrationService;
+    }
 
     @PostMapping()
     public ResponseEntity<RequestForPatientRegistrationDTO> createRqForPatientReg(@RequestBody RequestForPatientRegistrationDTO rqDTO) {
@@ -32,6 +37,7 @@ public class RequestForPatientRegistrationController {
         rq = requestForPatientRegistrationService.save(rq);
         return new ResponseEntity<>(new RequestForPatientRegistrationDTO(rq), HttpStatus.CREATED);
     }
+
     @GetMapping(value = "/getAll")
     public ResponseEntity<List<RequestForPatientRegistrationDTO>> getAll() {
 
@@ -44,6 +50,7 @@ public class RequestForPatientRegistrationController {
         return new ResponseEntity<>(rqsDTO, HttpStatus.OK);
     }
 
+    //u frontednu ovo pozovi za reject
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> remove(@PathVariable Long id){
 
@@ -59,4 +66,21 @@ public class RequestForPatientRegistrationController {
 
 
     }
+
+    //u frontednu ovo pozovi za accept
+    @PutMapping(value = "/accept/{id}")
+    public ResponseEntity<Void> setActivate(@PathVariable Long id){
+        RequestForPatientRegistration regForPatientReq = requestForPatientRegistrationService.findOne(id);
+
+        regForPatientReq.setAccepted(true);
+
+        requestForPatientRegistrationService.setAccepted(regForPatientReq);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+
+
+
+
 }
