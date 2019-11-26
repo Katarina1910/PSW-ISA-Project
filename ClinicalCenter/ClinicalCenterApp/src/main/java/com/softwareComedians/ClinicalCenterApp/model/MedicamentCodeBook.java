@@ -16,8 +16,6 @@ public class MedicamentCodeBook {
    // @ManyToMany(mappedBy = "MedCd")
   //  private Set<Medicament> medicamentCodeBook;
 
-    @OneToOne(mappedBy = "medicamentCodebook")
-    private ClinicalCenter clinicalCenter;
 
     public MedicamentCodeBook() {
     }

@@ -35,8 +35,6 @@ public class MedicalRecord {
 	//@ManyToMany(mappedBy = "MedPatient")
 	private Set<Medicament> prescribedMedicaments;*/
 
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private ClinicalCenter clinicalCenter;
 	
 	public MedicalRecord() {
 		super();

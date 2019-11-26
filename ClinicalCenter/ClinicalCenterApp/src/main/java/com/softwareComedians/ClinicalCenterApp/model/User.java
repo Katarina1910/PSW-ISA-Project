@@ -1,8 +1,10 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 import static javax.persistence.InheritanceType.JOINED;
@@ -11,7 +13,7 @@ import static javax.persistence.InheritanceType.JOINED;
 @Inheritance(strategy=JOINED)
 @Getter
 @Setter
-public class User {
+public class User implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +44,7 @@ public class User {
 	private String phone;
 
 	@Column
-	private String userName;
+	private String username;
 
 	@Column
 	private String password;
@@ -52,6 +54,12 @@ public class User {
 
 	@Column
     private  String role;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_authority",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
+    private Set<Authority> authorities = new HashSet<>();
 
     public String getRole() {
         return role;
@@ -144,12 +152,32 @@ public class User {
         this.phone = phone;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -166,6 +194,14 @@ public class User {
 
     public void setActivated(boolean activated) {
         isActivated = activated;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
+
+    public Set<Authority> getUsersAuthorities() {
+        return this.authorities;
     }
 
     public Set<RequestForConsult> getRequestForConsults() {
