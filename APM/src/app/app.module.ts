@@ -19,6 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DoctorComponent } from './doctorHomePage/doctor.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ClinicAdminHomePageComponent } from './clinicAdminHomePage/clinicAdminHomePage.component';
+
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     createMedicamentCodeBook,
     createDiagnosisCodeBook,
     WelcomeComponent,
-    DoctorComponent
+    DoctorComponent,
+    ClinicAdminHomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { ReactiveFormsModule } from '@angular/forms';
       {path: 'login', component: LoginComponent},
       {path: 'welcome', component: WelcomeComponent},
       {path: 'HomepageCCA', component: ClinicalCenterAdministratorCompoment},
+      {path: 'HomepageCA' , component: ClinicAdminHomePageComponent},
       {path: 'HomepageDoctor', component: DoctorComponent},
       {path: 'HomepageCCA/arrivedReq', component : arrivedRequest},
       {path: 'HomepageCCA/registerNewClinCenAdmin', component: RegisterNewClinicalCenterAdministrator},
