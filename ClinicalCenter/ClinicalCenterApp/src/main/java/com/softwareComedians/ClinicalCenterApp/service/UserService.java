@@ -25,12 +25,11 @@ public class UserService {
     }
 
     public User findByEmail(String email){
-        for(User u : userRepository.findAll()){
-            if(u.getEmail().equals(email)){
-                return u;
-            }
-        }
-        return null;
+
+        User user = userRepository.findByEmail(email);
+
+        return user;
+
     }
 
     public User findByUserName(String userName){

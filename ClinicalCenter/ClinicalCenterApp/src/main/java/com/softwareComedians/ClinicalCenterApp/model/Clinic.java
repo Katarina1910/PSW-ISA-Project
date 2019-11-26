@@ -51,8 +51,6 @@ public class Clinic {
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "clinic")
     private Set<ClinicAdministrator> clinicAdministrators;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private ClinicalCenter clinicalCenter;
 
     public Clinic() {
 

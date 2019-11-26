@@ -12,11 +12,15 @@ import java.util.List;
 @Service
 public class RequestForPatientRegistrationService {
 
-    @Autowired
     private RequestForPatientRegistrationRepository requestForPatientRegistrationRepository;
 
-    public RequestForPatientRegistration save(RequestForPatientRegistration rq) {
-        return requestForPatientRegistrationRepository.save(rq);
+    @Autowired
+    public RequestForPatientRegistrationService(RequestForPatientRegistrationRepository requestForPatientRegistrationRepository) {
+        this.requestForPatientRegistrationRepository = requestForPatientRegistrationRepository;
+    }
+
+    public RequestForPatientRegistration save(RequestForPatientRegistration requestForPatientRegistration) {
+        return requestForPatientRegistrationRepository.save(requestForPatientRegistration);
     }
 
     public List<RequestForPatientRegistration> getAll(){
@@ -25,5 +29,14 @@ public class RequestForPatientRegistrationService {
 
     public void remove(Long id){
         requestForPatientRegistrationRepository.deleteById(id);
+    }
+
+    public RequestForPatientRegistration findOne(Long id){
+        return requestForPatientRegistrationRepository.findById(id).orElseGet(null);
+    }
+
+    public void setAccepted(RequestForPatientRegistration regForPatientReq) {
+        requestForPatientRegistrationRepository.save(regForPatientReq);
+
     }
 }

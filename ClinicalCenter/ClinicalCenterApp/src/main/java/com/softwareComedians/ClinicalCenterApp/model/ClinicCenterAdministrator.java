@@ -7,13 +7,12 @@ import java.util.Set;
 @Entity
 public class ClinicCenterAdministrator extends User {
 
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private ClinicalCenter clinicalCenter;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "clinicCenterAdministrator")
-	private Set<RequestForPatientRegistration> requestedPatientsReg;
 
-	
+
 	public ClinicCenterAdministrator() {
 		super();
 	}
