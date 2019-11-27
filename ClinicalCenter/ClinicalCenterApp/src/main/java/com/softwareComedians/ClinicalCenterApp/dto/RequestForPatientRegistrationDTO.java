@@ -5,7 +5,7 @@ import com.softwareComedians.ClinicalCenterApp.model.RequestForPatientRegistrati
 import com.softwareComedians.ClinicalCenterApp.model.User;
 
 public class RequestForPatientRegistrationDTO {
-    private User userData;
+    private UserDTO userData;
     private Long id;
     private boolean isAccepted;
     private String reasonOfRejection;
@@ -13,7 +13,7 @@ public class RequestForPatientRegistrationDTO {
     public RequestForPatientRegistrationDTO() {
     }
 
-    public RequestForPatientRegistrationDTO(User userData, Long id, boolean isAccepted, String reasonOfRejection) {
+    public RequestForPatientRegistrationDTO(UserDTO userData, Long id, boolean isAccepted, String reasonOfRejection) {
         this.userData = userData;
         this.id = id;
         this.isAccepted = isAccepted;
@@ -21,16 +21,16 @@ public class RequestForPatientRegistrationDTO {
     }
     public RequestForPatientRegistrationDTO(RequestForPatientRegistration rq){
         this.id=rq.getId();
-        this.userData= rq.getUserData();
+        this.userData= new UserDTO(rq.getUserData());
         this.isAccepted = rq.isAccepted();
         this.reasonOfRejection = rq.getReasonOfRejection();
     }
 
-    public User getUserData() {
+    public UserDTO getUserData() {
         return userData;
     }
 
-    public void setUserData(User userData) {
+    public void setUserData(UserDTO userData) {
         this.userData = userData;
     }
 

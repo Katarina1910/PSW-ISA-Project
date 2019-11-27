@@ -19,7 +19,7 @@ public class MailController {
     //u frontednu ovo pozovi za accept
     @GetMapping (value = "/accept/{mail}/{id}")
     public void accept(@PathVariable String mail, @PathVariable String id) throws MessagingException {
-        smtpMailSender.send(mail,"Registration", " Please, confirm registration clicking on the following link <a href='http://localhost:8080/api/patient/add/"+id+"'>klikni</a>");
+        smtpMailSender.send(mail,"Registration", " Please, confirm registration clicking on the following link http://localhost:8080/api/patient/add/"+id);
     }
 
     //u front endu ovo pozovi za reject

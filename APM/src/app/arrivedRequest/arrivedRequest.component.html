@@ -1,7 +1,7 @@
 
     <h1>List of arrived request</h1>
     <p>&nbsp;</p>        
-    <div class='table-responsive' onload="onLoad()" class="d-flex p-2 justify-content-center">
+    <div class='table-responsive' class="d-flex p-2 justify-content-center">
         <table class='table'>
         <thead>
                 <tr>
@@ -14,16 +14,13 @@
                  </tr>
         </thead>
         <tbody>
-                <tr *ngFor = 'let arrReq of arrivedRequest'>
-                   <td>{{arrReq.Name}}</td>
-                   <td>{{arrReq.Email}}</td>
-                   <td>{{arrReq.UCIDN}}</td>
+                <tr *ngFor = 'let ar of arrReq'>
+                   <td>{{ar.userData.name}}</td>
+                   <td>{{ar.userData.email}}</td>
+                   <td>{{ar.userData.ucidn}} jksdn</td>
                    <td><input type="text" value="Reason of rejection..." hidden="true"/> </td>
-                   <td><button type="button" class="btn btn-outline-primary">Accept</button></td>
+                   <td><button type="button" class="btn btn-outline-primary" (click)="onClick()">Accept</button></td>
                    <td><button type="button" class="btn btn-outline-primary">Reject</button></td>
-                </tr> 
-                <tr *ngIf = "arrivedRequest || arrivedRequest.length==0">
-                    <td>No request to show!</td>
                 </tr>
         </tbody> 
             

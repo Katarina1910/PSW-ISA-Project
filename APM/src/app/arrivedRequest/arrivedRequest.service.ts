@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../registration/user';
 import { arrivedRequest } from './arrivedRequest.component';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +12,7 @@ export class arrivedRequestService{
 
     constructor(private _http: HttpClient) { }
 
-    getArrivedRequests(){
+    getArrivedRequests():Observable<any>{
         return this._http.get<arrivedRequest[]>(this._url);
     }
 }

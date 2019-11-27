@@ -1,4 +1,4 @@
-    import { Component } from '@angular/core';
+    import { Component, OnInit } from '@angular/core';
     import { arrivedRequestService } from './arrivedRequest.service';
 
     @Component({
@@ -6,19 +6,21 @@
         templateUrl: './arrivedRequest.component.html'
     })
 
-    export class arrivedRequest{
+    export class arrivedRequest implements OnInit{
 
         public arrReq : arrivedRequest[];
         constructor(private _arrivedRequestService: arrivedRequestService) {}
 
-        onLoad(){
+        ngOnInit(){
             this._arrivedRequestService.getArrivedRequests().subscribe(
-            data=> 
-            {
-                this.arrReq = data;
-                console.log('Success!', data)
-            },
-                error=> console.error('Error!',error)
+                data=>{
+                    this.arrReq = data;
+                },
+                error=>console.error('Error!',error)
             )
+        }
+
+        onClick(){
+            console.log("Katarina");
         }
     }

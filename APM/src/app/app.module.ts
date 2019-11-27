@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -47,8 +47,8 @@ import { listOfAllPat } from './ListOfAllPatients/listOfAllPat.component';
     UserProfiles,
     nurseWorkCal,
     RequestForAbsence,    
-    RecipeValidation    
-  ],
+    RecipeValidation
+    ],
   imports: [
     BrowserModule,
     FormsModule,
