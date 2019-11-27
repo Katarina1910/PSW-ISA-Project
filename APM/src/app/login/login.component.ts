@@ -3,7 +3,6 @@ import { Login } from './login';
 import { LoginService } from './login.service';
 import { User } from '../registration/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
     selector : 'cc-login',
@@ -16,7 +15,7 @@ export class LoginComponent{
     submitted = false;
 
 
-    constructor(private _loginService: LoginService, private formBuilder: FormBuilder, private router: Router){ }
+    constructor(private _loginService: LoginService, private formBuilder: FormBuilder){ }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
@@ -26,7 +25,7 @@ export class LoginComponent{
         });
     }
     get f() { return this.loginForm.controls; }
-    
+    //ovo nije dobro
     onSubmit(){
         this._loginService.login(this.loginModel)
        .subscribe(
@@ -35,9 +34,9 @@ export class LoginComponent{
             this.u = data as User;
             sessionStorage.setItem("user",JSON.stringify(this.u));
             data = data as User;
-            alert("Wellcome!");           
+            alert("Wellcome!");
+            
             console.log(data);
-            this.router.navigate(['/welcome']);
         },
         error=> alert("Wrong password or username")
         );
