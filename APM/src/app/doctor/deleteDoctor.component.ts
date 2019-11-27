@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../registration/user';
 import { DeleteDoctorService } from './deleteDoctor.service';
+import { Login } from '../login/login';
+import { Router } from '@angular/router';
 
 
 
@@ -10,9 +12,9 @@ import { DeleteDoctorService } from './deleteDoctor.service';
 })
 
 export class DeleteDoctorComponent implements OnInit {
-    //doctorModel = new User('','','','','','','','','','','','');
     public doctors: User[];
-    constructor(private _deleteDoctorService: DeleteDoctorService) {}
+    
+    constructor(private _deleteDoctorService: DeleteDoctorService,private router: Router) {}
 
     ngOnInit() { 
         this._deleteDoctorService.getDoctors().subscribe(
@@ -27,17 +29,16 @@ export class DeleteDoctorComponent implements OnInit {
         error=> console.error('Error!', error)
     ) }
 
-
-
-  /*   deleteDoctor(){
-        this._deleteDoctorService.deleteDoctor(this.doctorModel)
-       .subscribe(
-           data=>{
-            console.log('Success!', JSON.stringify(data))
-            alert('Doctor added!')
-           } ,
-            error=> console.error('Error!',error)
+    deleteDoctor(email:string): void{
+        this._deleteDoctorService.deleteDoctor(email).subscribe(
+            data=>{
+                alert('Doctor deleted!');
+                this.router.navigate(['/welcome']);
+            },
+            error=> console.error('Error!', error)
         )
-    } */
+       
+    }
+ 
 
 }

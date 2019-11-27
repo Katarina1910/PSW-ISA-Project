@@ -10,11 +10,11 @@ export class DeleteDoctorService{
     _url = 'http://localhost:8080/api/doctors/del';
     _url2 = 'http://localhost:8080/api/doctors/getAll';
 
-
+    
     constructor(private _http: HttpClient) { }
 
-    deleteDoctor(doctor: User): Observable<void> {
-       return  this._http.delete<void>(`${this._url}/${doctor.getId()}`);
+    deleteDoctor(email: string): Observable<void> {
+       return  this._http.delete<void>(`${this._url}/${email}`);
     }
 
     getDoctors():Observable<any> {

@@ -72,4 +72,12 @@ public class DoctorController {
         return new ResponseEntity<>(new DoctorDTO(doctor), HttpStatus.CREATED);
     }
 
+    @DeleteMapping(value = "/del/{email}")
+    public ResponseEntity<String> deletePost(@PathVariable String email) {
+
+        doctorService.remove(email);
+        return new ResponseEntity<>(email, HttpStatus.OK);
+    }
+
+
 }

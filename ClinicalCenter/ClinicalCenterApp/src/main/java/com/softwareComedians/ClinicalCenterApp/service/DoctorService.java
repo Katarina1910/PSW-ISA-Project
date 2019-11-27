@@ -1,13 +1,10 @@
 package com.softwareComedians.ClinicalCenterApp.service;
 
 import com.softwareComedians.ClinicalCenterApp.model.Doctor;
-import com.softwareComedians.ClinicalCenterApp.model.User;
 import com.softwareComedians.ClinicalCenterApp.repository.DoctorRepository;
-import com.softwareComedians.ClinicalCenterApp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.print.Doc;
 import java.util.List;
 
 @Service
@@ -60,4 +57,10 @@ public class DoctorService {
         doctorRepository.deleteById(id);
     }
 
+    public void remove(String email) {
+      Doctor d =  doctorRepository.findByEmail(email);
+      if(d!=null){
+          doctorRepository.delete(d);
+      }
+    }
 }
