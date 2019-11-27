@@ -6,7 +6,7 @@ import { User } from '../registration/user';
     providedIn: 'root'
 })
 export class AddDoctorService{
-    _url = 'http://localhost:8080/api/..';
+    _url = 'http://localhost:8080/api/doctors';
 
     constructor(private _http: HttpClient) { }
 
