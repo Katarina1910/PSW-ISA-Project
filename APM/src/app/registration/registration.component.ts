@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { User } from './user';
 import { UserService } from './user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector : 'cc-registration',
@@ -12,8 +13,9 @@ export class RegistrationComponent{
     
     registerForm: FormGroup;
     submitted = false;
+    done:boolean = false;
     
-    constructor(private _userService: UserService, private formBuilder: FormBuilder) {}
+    constructor(private _userService: UserService, private formBuilder: FormBuilder, private router: Router) {}
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
@@ -34,7 +36,13 @@ export class RegistrationComponent{
     onSubmit(){
         this._userService.enroll(this.userModel)
         .subscribe(
-            data=> console.log('Success!', data),
+            data=> {
+                alert('Request has been sent!')
+                this.done=true;
+                this.router.navigate(['/welcome']);
+            
+                console.log('Success!', JSON.stringify(data))
+            },
             error=> console.error('Error!',error)
         )
         this.submitted = true;
