@@ -35,7 +35,7 @@ public class PatientController {
         patient.setName(request.getUserData().getName());
         patient.setSurname(request.getUserData().getSurname());
         patient.setUcidn(request.getUserData().getUcidn());
-        patient.setUserName(request.getUserData().getUserName());
+        patient.setUsername(request.getUserData().getUsername());
         patient.setEmail(request.getUserData().getEmail());
         patient.setPassword(request.getUserData().getPassword());
         patient.setAddress(request.getUserData().getAddress());
