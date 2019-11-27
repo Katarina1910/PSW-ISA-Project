@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
     templateUrl : './registration.component.html'
 })
 export class RegistrationComponent{
-    userModel = new User("hi"," "," "," "," "," "," "," "," "," "," ");
+    userModel = new User("hi"," "," "," "," "," "," "," "," "," "," ","");
     
     registerForm: FormGroup;
     submitted = false;

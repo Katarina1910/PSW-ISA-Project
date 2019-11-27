@@ -19,6 +19,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DoctorComponent } from './doctorHomePage/doctor.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ClinicAdminHomePageComponent } from './clinicAdminHomePage/clinicAdminHomePage.component';
+import { AddDoctorComponent } from './doctor/addDoctor.component';
+import { DeleteDoctorComponent } from './doctor/deleteDoctor.component';
+
 import { NurseComponent } from './nurseHomePage/nurse.component';
 import { RecipeValidation } from './recipeValidation/recipeVal.component';
 import { RequestForAbsence } from './requestForAbsence/requestForAbsence';
@@ -42,6 +46,9 @@ import { listOfAllPat } from './ListOfAllPatients/listOfAllPat.component';
     createDiagnosisCodeBook,
     WelcomeComponent,
     DoctorComponent,
+    ClinicAdminHomePageComponent,
+    AddDoctorComponent,
+    DeleteDoctorComponent,
     NurseComponent,
     listOfAllPat,
     UserProfiles,
@@ -59,6 +66,7 @@ import { listOfAllPat } from './ListOfAllPatients/listOfAllPat.component';
       {path: 'login', component: LoginComponent},
       {path: 'welcome', component: WelcomeComponent},
       {path: 'HomepageCCA', component: ClinicalCenterAdministratorCompoment},
+      {path: 'HomepageCA' , component: ClinicAdminHomePageComponent},
       {path: 'HomepageDoctor', component: DoctorComponent},
       {path: 'HomepageNurse', component: NurseComponent},
       {path: 'HomepageNurse/listOfAllPat', component: listOfAllPat},
@@ -71,6 +79,8 @@ import { listOfAllPat } from './ListOfAllPatients/listOfAllPat.component';
       {path: 'HomepageCCA/addNewClinic', component: AddNewClinic},
       {path: 'HomepageCCA/createMedCod', component: createMedicamentCodeBook},
       {path: 'HomepageCCA/createDiagCod', component: createDiagnosisCodeBook}, 
+      {path: 'HomepageCA/addDoctor', component: AddDoctorComponent},
+      {path: 'HomepageCA/allDoctors', component:DeleteDoctorComponent},
       {path: 'consultTerm', component: ConsultTermComponent},
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
