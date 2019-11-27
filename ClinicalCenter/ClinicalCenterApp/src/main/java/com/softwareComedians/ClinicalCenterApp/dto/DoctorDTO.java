@@ -21,7 +21,7 @@ public class DoctorDTO extends UserDTO {
 
     public DoctorDTO(Doctor d){
         super(d.getId(),d.getName(),d.getSurname(), d.getUcidn(),d.getAddress(),d.getCity(),d.getCountry(),d.getEmail(),
-                d.getPhone(),d.getUserName(),d.getPassword(),d.isActivated());
+                d.getPhone(),d.getUsername(),d.getPassword(),d.isActivated());
         this.grade = d.getGrade();
     }
 

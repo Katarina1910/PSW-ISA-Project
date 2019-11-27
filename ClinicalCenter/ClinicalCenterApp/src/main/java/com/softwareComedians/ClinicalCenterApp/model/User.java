@@ -61,11 +61,6 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private Set<Authority> authorities = new HashSet<>();
 
-    public String getRole() {
-        return role;
-    }
-
-
     @OneToMany(mappedBy = "applicant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<RequestForConsult> requestForConsults;
 

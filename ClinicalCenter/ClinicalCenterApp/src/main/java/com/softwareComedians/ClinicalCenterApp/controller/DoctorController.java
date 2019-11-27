@@ -61,7 +61,7 @@ public class DoctorController {
         doctor.setCountry(doctorDTO.getCountry());
         doctor.setEmail(doctorDTO.getEmail());
         doctor.setPhone(doctorDTO.getPhone());
-        doctor.setUserName(doctorDTO.getUserName());
+        doctor.setUsername(doctorDTO.getUsername());
         doctor.setPassword(doctorDTO.getPassword());
         doctor.setGrade((double) 0);
         doctor.setRole("DOCTOR");
