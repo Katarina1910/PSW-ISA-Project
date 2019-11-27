@@ -23,6 +23,12 @@ import { ClinicAdminHomePageComponent } from './clinicAdminHomePage/clinicAdminH
 import { AddDoctorComponent } from './doctor/addDoctor.component';
 import { DeleteDoctorComponent } from './doctor/deleteDoctor.component';
 
+import { NurseComponent } from './nurseHomePage/nurse.component';
+import { RecipeValidation } from './recipeValidation/recipeVal.component';
+import { RequestForAbsence } from './requestForAbsence/requestForAbsence';
+import { UserProfiles } from './UserProfiles/userProfiles.component';
+import { nurseWorkCal } from './nurseWorkingCalendar/nurseWorkCal.component';
+import { listOfAllPat } from './ListOfAllPatients/listOfAllPat.component';
 
 
 @NgModule({
@@ -42,7 +48,13 @@ import { DeleteDoctorComponent } from './doctor/deleteDoctor.component';
     DoctorComponent,
     ClinicAdminHomePageComponent,
     AddDoctorComponent,
-    DeleteDoctorComponent
+    DeleteDoctorComponent,
+    NurseComponent,
+    listOfAllPat,
+    UserProfiles,
+    nurseWorkCal,
+    RequestForAbsence,    
+    RecipeValidation    
   ],
   imports: [
     BrowserModule,
@@ -56,6 +68,12 @@ import { DeleteDoctorComponent } from './doctor/deleteDoctor.component';
       {path: 'HomepageCCA', component: ClinicalCenterAdministratorCompoment},
       {path: 'HomepageCA' , component: ClinicAdminHomePageComponent},
       {path: 'HomepageDoctor', component: DoctorComponent},
+      {path: 'HomepageNurse', component: NurseComponent},
+      {path: 'HomepageNurse/listOfAllPat', component: listOfAllPat},
+      {path: 'HomepageNurse/UserProfiles', component: UserProfiles},
+      {path: 'HomepageNurse/nurseWorkCal', component: nurseWorkCal},
+      {path: 'HomepageNurse/RequestForAbsence', component: RequestForAbsence},
+      {path: 'HomepageNurse/RecipeValidation', component:RecipeValidation},
       {path: 'HomepageCCA/arrivedReq', component : arrivedRequest},
       {path: 'HomepageCCA/registerNewClinCenAdmin', component: RegisterNewClinicalCenterAdministrator},
       {path: 'HomepageCCA/addNewClinic', component: AddNewClinic},

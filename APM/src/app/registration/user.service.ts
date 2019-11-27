@@ -6,7 +6,7 @@ import { User } from './user';
     providedIn: 'root'
 })
 export class UserService{
-    _url = 'http://localhost:8080/api/users';
+    _url = 'http://localhost:8080/api/users/public/add-user';
     constructor(private _http: HttpClient) { }
 
     enroll(user: User) {

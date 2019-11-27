@@ -1,8 +1,13 @@
 package com.softwareComedians.ClinicalCenterApp.dto;
 
+import com.softwareComedians.ClinicalCenterApp.model.Authority;
 import com.softwareComedians.ClinicalCenterApp.model.User;
+import com.softwareComedians.ClinicalCenterApp.model.UserTokenState;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Setter
 @Getter
@@ -16,14 +21,16 @@ public class UserDTO {
     private String country;
     private String email;
     private String phone;
-    private String userName;
+    private String username;
     private String password;
     private boolean isActivated;
+    private UserTokenState token;
+    private List<String> authorities;
 
     public UserDTO() {
     }
 
-    public UserDTO(Long id, String name, String surname, String ucidn, String address,String city, String country, String email, String phone, String userName, String password, boolean isActivated) {
+    public UserDTO(Long id, String name, String surname, String ucidn, String address,String city, String country, String email, String phone, String username, String password, boolean isActivated) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -33,11 +40,10 @@ public class UserDTO {
         this.country = country;
         this.email = email;
         this.phone = phone;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
         this.isActivated = isActivated;
-
-
+        this.token = null;
     }
 
     public UserDTO(User u){
@@ -50,9 +56,11 @@ public class UserDTO {
         country=u.getCountry();
         email=u.getEmail();
         phone=u.getPhone();
-        userName=u.getUserName();
+        username=u.getUsername();
         password=u.getPassword();
         isActivated=u.isActivated();
+        authorities = u.getAuthorities().stream()
+                .map(authority -> ((Authority) authority).getName()).collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -127,12 +135,12 @@ public class UserDTO {
         this.phone = phone;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

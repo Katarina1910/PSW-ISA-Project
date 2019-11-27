@@ -19,8 +19,8 @@ export class RegistrationComponent{
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
+            name: ['', Validators.required],
+            surname: ['', Validators.required],
             ucidn: ['', Validators.required],
             address: ['', Validators.required],
             city: ['', Validators.required],
@@ -34,6 +34,7 @@ export class RegistrationComponent{
     get f() { return this.registerForm.controls; }
 
     onSubmit(){
+        console.log('Print: ', this.userModel)
         this._userService.enroll(this.userModel)
         .subscribe(
             data=> {
