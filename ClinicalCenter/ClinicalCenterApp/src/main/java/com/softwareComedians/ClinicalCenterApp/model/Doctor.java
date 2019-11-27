@@ -23,4 +23,11 @@ public class Doctor extends Personnel {
     public Doctor() {
     }
 
+    public Double getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Double grade) {
+        this.grade = grade;
+    }
 }
