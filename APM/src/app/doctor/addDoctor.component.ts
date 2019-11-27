@@ -9,7 +9,7 @@ import { AddDoctorService } from './addDoctor.service';
 })
 
 export class AddDoctorComponent{
-    doctorModel = new User('','','','','','','','','','','');
+    doctorModel = new User('','','','','','','','','','','','');
     
     constructor(private _addDoctorService: AddDoctorService) {}
 

@@ -1,5 +1,6 @@
 export class User {
     constructor(
+        private id: string,
         private  name: string,
         private  surname: string,
         private  ucidn: string,
@@ -12,4 +13,8 @@ export class User {
         private  userName: string,
         private  password: string
     ){}
+
+    public getId(){
+        return this.id;
+    }
 }

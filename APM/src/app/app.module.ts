@@ -20,7 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DoctorComponent } from './doctorHomePage/doctor.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClinicAdminHomePageComponent } from './clinicAdminHomePage/clinicAdminHomePage.component';
-import { AddDoctorComponent } from './addDoctor/addDoctor.component';
+import { AddDoctorComponent } from './doctor/addDoctor.component';
+import { DeleteDoctorComponent } from './doctor/deleteDoctor.component';
 
 
 
@@ -40,7 +41,8 @@ import { AddDoctorComponent } from './addDoctor/addDoctor.component';
     WelcomeComponent,
     DoctorComponent,
     ClinicAdminHomePageComponent,
-    AddDoctorComponent
+    AddDoctorComponent,
+    DeleteDoctorComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,7 @@ import { AddDoctorComponent } from './addDoctor/addDoctor.component';
       {path: 'HomepageCCA/createMedCod', component: createMedicamentCodeBook},
       {path: 'HomepageCCA/createDiagCod', component: createDiagnosisCodeBook}, 
       {path: 'HomepageCA/addDoctor', component: AddDoctorComponent},
+      {path: 'HomepageCA/allDoctors', component:DeleteDoctorComponent},
       {path: 'consultTerm', component: ConsultTermComponent},
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
