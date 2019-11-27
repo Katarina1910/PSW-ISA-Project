@@ -15,13 +15,16 @@
         </thead>
         <tbody>
                 <tr *ngFor = 'let arrReq of arrivedRequest'>
-                   <td>{{arrReq.userData.name}}</td>
-                   <td>{{arrReq.userData.Email}}</td>
-                   <td>{{arrReq.userData.ucidn}}</td>
+                   <td>{{arrReq.Name}}</td>
+                   <td>{{arrReq.Email}}</td>
+                   <td>{{arrReq.UCIDN}}</td>
                    <td><input type="text" value="Reason of rejection..." hidden="true"/> </td>
                    <td><button type="button" class="btn btn-outline-primary">Accept</button></td>
                    <td><button type="button" class="btn btn-outline-primary">Reject</button></td>
                 </tr> 
+                <tr *ngIf = "arrivedRequest || arrivedRequest.length==0">
+                    <td>No request to show!</td>
+                </tr>
         </tbody> 
             
         </table>

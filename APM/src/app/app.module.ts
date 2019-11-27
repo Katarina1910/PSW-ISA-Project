@@ -19,6 +19,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DoctorComponent } from './doctorHomePage/doctor.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NurseComponent } from './nurseHomePage/nurse.component';
+import { RecipeValidation } from './recipeValidation/recipeVal.component';
+import { RequestForAbsence } from './requestForAbsence/requestForAbsence';
+import { UserProfiles } from './UserProfiles/userProfiles.component';
+import { nurseWorkCal } from './nurseWorkingCalendar/nurseWorkCal.component';
+import { listOfAllPat } from './ListOfAllPatients/listOfAllPat.component';
 
 
 @NgModule({
@@ -35,7 +41,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     createMedicamentCodeBook,
     createDiagnosisCodeBook,
     WelcomeComponent,
-    DoctorComponent
+    DoctorComponent,
+    NurseComponent,
+    listOfAllPat,
+    UserProfiles,
+    nurseWorkCal,
+    RequestForAbsence,    
+    RecipeValidation    
   ],
   imports: [
     BrowserModule,
@@ -48,6 +60,12 @@ import { ReactiveFormsModule } from '@angular/forms';
       {path: 'welcome', component: WelcomeComponent},
       {path: 'HomepageCCA', component: ClinicalCenterAdministratorCompoment},
       {path: 'HomepageDoctor', component: DoctorComponent},
+      {path: 'HomepageNurse', component: NurseComponent},
+      {path: 'HomepageNurse/listOfAllPat', component: listOfAllPat},
+      {path: 'HomepageNurse/UserProfiles', component: UserProfiles},
+      {path: 'HomepageNurse/nurseWorkCal', component: nurseWorkCal},
+      {path: 'HomepageNurse/RequestForAbsence', component: RequestForAbsence},
+      {path: 'HomepageNurse/RecipeValidation', component:RecipeValidation},
       {path: 'HomepageCCA/arrivedReq', component : arrivedRequest},
       {path: 'HomepageCCA/registerNewClinCenAdmin', component: RegisterNewClinicalCenterAdministrator},
       {path: 'HomepageCCA/addNewClinic', component: AddNewClinic},
