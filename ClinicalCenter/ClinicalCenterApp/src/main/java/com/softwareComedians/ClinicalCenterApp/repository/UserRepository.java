@@ -9,8 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User,Long> {
 
     User findByEmail(String email);
-<<<<<<< HEAD
     User findByUsername(String username);
-=======
->>>>>>> master
 }

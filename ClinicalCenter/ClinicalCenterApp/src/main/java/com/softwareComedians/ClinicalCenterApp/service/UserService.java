@@ -6,7 +6,6 @@ import com.softwareComedians.ClinicalCenterApp.model.User;
 
 import java.util.List;
 
-<<<<<<< HEAD
 public interface UserService {
 
     User findById(Long id);
@@ -18,7 +17,7 @@ public interface UserService {
     User editUser(UserDTO user);
     //void setProfileImage(String imagePath);
     void verifyUserAccount(String token);
-=======
+    /*
 @Service
 public class UserService {
 
@@ -68,8 +67,7 @@ public class UserService {
     public void remove(Long id){
         userRepository.deleteById(id);
     }
+*/
 
-
->>>>>>> master
 }
 
