@@ -115,7 +115,7 @@ public class UserServiceImpl implements UserService {
         user.setName(userInfo.getName());
         user.setSurname(userInfo.getSurname());
         user.setEmail(userInfo.getEmail());
-        user.setActivated(false);
+        user.setActivated(true);
         //user.setLastPasswordResetDate(timeProvider.nowTimestamp());
         //user.setProfileImagePath(defaultProfileImage);
 

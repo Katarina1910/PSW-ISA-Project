@@ -75,6 +75,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDTO login(JwtAuthenticationRequest authenticationRequest) {
 
         Authentication authentication;
+        System.out.println("Username1: " + authenticationRequest.getUsername());
+        System.out.println("Password1: " + authenticationRequest.getPassword());
         try {
             authentication = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(
@@ -83,6 +85,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         } catch (BadCredentialsException e) {
             throw new ApiRequestException("Credentials are not valid!");
         }
+
+        System.out.println("Username1: " + authenticationRequest.getUsername());
+        System.out.println("Password1: " + authenticationRequest.getPassword());
 
         // Insert username and password into context
         SecurityContextHolder.getContext().setAuthentication(authentication);
