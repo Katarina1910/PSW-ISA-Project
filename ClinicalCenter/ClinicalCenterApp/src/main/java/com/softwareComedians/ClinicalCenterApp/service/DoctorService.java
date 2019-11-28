@@ -32,7 +32,7 @@ public class DoctorService {
 
     public Doctor findByUserName(String userName){
         for(Doctor u : doctorRepository.findAll()){
-            if(u.getUserName().equals(userName)){
+            if(u.getUsername().equals(userName)){
                 return u;
             }
         }
