@@ -6,7 +6,7 @@ import { Room } from './room';
     providedIn: 'root'
 })
 export class AddRoomService{
-    _url = 'http://localhost:8080/api/';
+    _url = 'http://localhost:8080/api/rooms';
 
     constructor(private _http: HttpClient) { }
 

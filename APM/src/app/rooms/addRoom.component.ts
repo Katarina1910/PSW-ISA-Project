@@ -16,7 +16,7 @@ export class AddRoomComponent{
 
     onSubmit(){
         console.log(JSON.stringify(this.roomModel));
-     /*   this._addRoomService.addRoom(this.roomModel)
+        this._addRoomService.addRoom(this.roomModel)
        .subscribe(
            data=>{
             console.log('Success!', JSON.stringify(data))
@@ -24,7 +24,7 @@ export class AddRoomComponent{
             this.router.navigate(['/welcome']);
            } ,
             error=> console.error('Error!',error)
-        )*/
+        )
     }
 
 }
