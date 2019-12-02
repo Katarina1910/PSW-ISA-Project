@@ -30,6 +30,7 @@ import { UserProfiles } from './UserProfiles/userProfiles.component';
 import { nurseWorkCal } from './nurseWorkingCalendar/nurseWorkCal.component';
 import { listOfAllPat } from './ListOfAllPatients/listOfAllPat.component';
 import { AddRoomComponent } from './rooms/addRoom.component';
+import { DeleteRoomComponent } from './rooms/deleteRoom.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { AddRoomComponent } from './rooms/addRoom.component';
     nurseWorkCal,
     RequestForAbsence,    
     RecipeValidation,
-    AddRoomComponent
+    AddRoomComponent,
+    DeleteRoomComponent,
     ],
   imports: [
     BrowserModule,
@@ -84,6 +86,7 @@ import { AddRoomComponent } from './rooms/addRoom.component';
       {path: 'HomepageCA/addDoctor', component: AddDoctorComponent},
       {path: 'HomepageCA/allDoctors', component:DeleteDoctorComponent},
       {path: 'HomepageCA/addRoom', component: AddRoomComponent},
+      {path: 'HomepageCA/allRooms', component: DeleteRoomComponent},
       {path: 'consultTerm', component: ConsultTermComponent},
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},

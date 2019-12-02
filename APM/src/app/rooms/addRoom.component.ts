@@ -10,7 +10,7 @@ import { AddRoomService } from './rooms.service';
 })
 
 export class AddRoomComponent{
-    roomModel = new Room(null,null,null,'');
+    roomModel = new Room(null,null,null,'','');
     
     constructor(private _addRoomService: AddRoomService,  private router: Router) {}
 
@@ -21,7 +21,7 @@ export class AddRoomComponent{
            data=>{
             console.log('Success!', JSON.stringify(data))
             alert('Room added!');
-            this.router.navigate(['/welcome']);
+            this.router.navigate(['/HomepageCA']);
            } ,
             error=> console.error('Error!',error)
         )
