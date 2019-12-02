@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "api/rooms")
 @CrossOrigin
@@ -20,6 +23,18 @@ public class RoomController {
         this.roomService=roomService;
     }
 
+    @GetMapping(value = "/getAll")
+    public ResponseEntity<List<RoomDTO>> getAll() {
+
+        List<Room> rooms = roomService.findAll();
+        List<RoomDTO> roomsDTO = new ArrayList<>();
+        for (Room d : rooms) {
+            roomsDTO.add(new RoomDTO(d));
+        }
+
+        return new ResponseEntity<>(roomsDTO, HttpStatus.OK);
+    }
+
 
     @PostMapping()
     public ResponseEntity<RoomDTO> addRooms(@RequestBody RoomDTO roomDTO) {
@@ -29,9 +44,16 @@ public class RoomController {
         room.setFree(true);
         room.setType(roomDTO.getType());
         room = roomService.save(room);
-     
+
 
         return new ResponseEntity<>(new RoomDTO(room), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value = "/del/{id}")
+    public ResponseEntity<Long> deleteRoom(@PathVariable Long id) {
+
+        roomService.remove(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
 }
