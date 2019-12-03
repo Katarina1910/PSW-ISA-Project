@@ -56,4 +56,13 @@ public class RoomController {
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
+    @PutMapping(value = "/edit")
+    public ResponseEntity<RoomDTO> editRoom (@RequestBody RoomDTO roomDTO) {
+        Room room = roomService.findOne(roomDTO.getId());
+        room.setName(roomDTO.getName());
+        room.setType(roomDTO.getType());
+        room = roomService.save(room);
+
+        return new ResponseEntity<>(new RoomDTO(room), HttpStatus.OK);
+    }
 }
