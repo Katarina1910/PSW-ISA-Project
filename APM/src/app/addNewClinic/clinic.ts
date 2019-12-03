@@ -3,8 +3,13 @@ export class Clinic{
         private name: string,
         private address: string,
         private description: string,
-        private grade: number
+        private grade: number,
+        private id: number
     ){}
+
+    public getId(){
+        return this.id;
+    }
 
     public getName(){
         return this.name;

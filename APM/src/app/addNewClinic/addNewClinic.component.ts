@@ -11,7 +11,7 @@ import { AddNewClinicService } from './addNewClinic.service';
 
 export class AddNewClinic{
 
-    clinicModel = new Clinic('','','', 0.0);
+    clinicModel = new Clinic('','','', 0.0, 0);
 
     constructor(private _addNewClinicService: AddNewClinicService, private router: Router){}
 
@@ -22,7 +22,7 @@ export class AddNewClinic{
             data => {
                 console.log('Success!', JSON.stringify(data))
                 alert('Clinic added!');
-                this.router.navigate(['/welcome']);
+                this.router.navigate(['/HomepageCCA']);
             },
             error => console.error('Error!', error)
         )
