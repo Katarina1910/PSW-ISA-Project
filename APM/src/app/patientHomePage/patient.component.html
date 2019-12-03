@@ -1,0 +1,15 @@
+<h1>Welcome to your homepage</h1>
+<h4 class="d-flex p-2 justify-content-center">Here is what you can do:</h4>
+<div class="list-group">
+    <a class="list-group-item list-group-item-action active" [routerLink]="['/HomepagePatient/listOfClinics']">List of all clinics</a>
+    <a class="list-group-item list-group-item-action active" [routerLink]="['/requestConsult']">Request Consult</a>
+    <a class="list-group-item list-group-item-action active">History of examinations</a>
+    <a class="list-group-item list-group-item-action active">History of operations</a>
+    <a class="list-group-item list-group-item-action active">Medical record</a>
+    <a class="list-group-item list-group-item-action active">My profile</a>
+
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+    
+</div>
