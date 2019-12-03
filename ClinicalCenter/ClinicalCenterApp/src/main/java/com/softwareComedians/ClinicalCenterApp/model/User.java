@@ -66,8 +66,8 @@ public class User implements UserDetails {
 
 	@OneToOne(mappedBy = "userData")
 	private RequestForPatientRegistration requestForPatientRegistration;
-	
-	
+
+
 	public User() {
 
 	}
