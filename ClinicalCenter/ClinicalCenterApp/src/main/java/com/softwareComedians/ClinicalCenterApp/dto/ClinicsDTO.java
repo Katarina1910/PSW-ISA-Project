@@ -7,9 +7,18 @@ public class ClinicsDTO {
     private String address;
     private String description;
     private double grade;
+    private Long id;
 
     public ClinicsDTO(){
 
+    }
+
+    public ClinicsDTO(String name, String address, String description, double grade, long id){
+        this.name = name;
+        this.address = address;
+        this.description = description;
+        this.grade = grade;
+        this.id = id;
     }
 
     public ClinicsDTO(String name, String address, String description, double grade){
@@ -17,6 +26,7 @@ public class ClinicsDTO {
         this.address = address;
         this.description = description;
         this.grade = grade;
+
     }
 
     public ClinicsDTO(Clinic c){
@@ -25,7 +35,11 @@ public class ClinicsDTO {
         address = c.getAddress();
         description = c.getDescription();
         grade = c.getGrade();
+        id = c.getId();
     }
+
+    public Long getId(){return id;}
+    public void setId(Long id){this.id = id;}
 
     public String getName(){ return name;}
     public void setName(String name){this.name = name;}

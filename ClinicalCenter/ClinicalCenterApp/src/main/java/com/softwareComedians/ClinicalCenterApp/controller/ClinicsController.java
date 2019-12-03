@@ -50,10 +50,10 @@ public class ClinicsController {
         return new ResponseEntity<>(new ClinicsDTO(clinic), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/del/{name}")
-    public ResponseEntity<String> deletePost(@PathVariable String name){
+    @DeleteMapping(value = "/del/{id}")
+    public ResponseEntity<Long> deletePost(@PathVariable Long id){
 
-        clinicsService.remove(name);
-        return new ResponseEntity<>(name, HttpStatus.OK);
+        clinicsService.remove(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }

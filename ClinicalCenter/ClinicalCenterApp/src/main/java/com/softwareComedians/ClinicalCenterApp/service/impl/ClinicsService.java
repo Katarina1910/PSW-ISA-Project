@@ -44,10 +44,8 @@ public class ClinicsService {
 
     public Clinic save(Clinic c){ return clinicsRepository.save(c);}
 
-    public void remove(Long id){clinicsRepository.deleteById(id);}
-
-    public void remove(String name){
-        Clinic c = clinicsRepository.findByName(name);
+    public void remove(Long id){
+        Clinic c = clinicsRepository.findById(id).orElseGet(null);
         if(c!=null){
             clinicsRepository.delete(c);
         }

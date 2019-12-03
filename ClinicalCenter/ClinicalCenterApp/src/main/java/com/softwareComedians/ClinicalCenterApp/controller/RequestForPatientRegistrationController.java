@@ -16,8 +16,6 @@ import java.util.List;
 @CrossOrigin
 public class RequestForPatientRegistrationController {
 
-
-
     private RequestForPatientRegistrationService requestForPatientRegistrationService;
 
     @Autowired
@@ -62,8 +60,6 @@ public class RequestForPatientRegistrationController {
             requestForPatientRegistrationService.remove(id);
             return new ResponseEntity<>(HttpStatus.OK);
         }
-
-
 
     }
 
