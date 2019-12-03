@@ -9,6 +9,7 @@ import { Room } from './room';
 export class DeleteRoomService{
     _url = 'http://localhost:8080/api/rooms/del';
     _url2 = 'http://localhost:8080/api/rooms/getAll';
+    _url3 = 'http://localhost:8080/api/rooms/edit';
 
     
     constructor(private _http: HttpClient) { }
@@ -20,4 +21,8 @@ export class DeleteRoomService{
     getRooms():Observable<any> {
         return this._http.get<Room[]>(this._url2);
     }
+
+    editRooms(room: Room) : Observable<Room> {
+        return  this._http.put<Room>(this._url3, room);
+     }
 }

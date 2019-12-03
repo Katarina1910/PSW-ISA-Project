@@ -99,6 +99,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(HttpMethod.POST, "/api/rooms");
         web.ignoring().antMatchers(HttpMethod.GET, "/api/rooms/getAll");
         web.ignoring().antMatchers(HttpMethod.DELETE, "/api/rooms/del/{id}");
+        web.ignoring().antMatchers(HttpMethod.PUT, "/api/rooms/edit");
 
 
         // TokenAuthenticationFilter will ignore all paths that have 'public' in them

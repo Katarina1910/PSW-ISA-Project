@@ -12,6 +12,9 @@ import { DeleteRoomService } from './deleteRoom.servce';
 
 export class DeleteRoomComponent implements OnInit {
     public rooms: Room[];
+    editModel = new Room(null,null,null,null);
+    edit : boolean = false;
+    public editedRoom:Room;
     
     constructor(private _deleteRoomService: DeleteRoomService,private router: Router) {}
 
@@ -22,11 +25,11 @@ export class DeleteRoomComponent implements OnInit {
           
             this.rooms = data;
             for(var d of this.rooms){
-                if(d.getIsFree){
-                    d.setFree("Da");
+               /* if(d.isFree){
+                    d.free = "Da";
                 }else{
-                    d.setFree("Ne");
-                }
+                    d.free="Ne";
+                }*/
                 console.log(JSON.stringify(d));
             }
 
@@ -43,6 +46,26 @@ export class DeleteRoomComponent implements OnInit {
             error=> console.error('Error!', error)
         )
        
+    }
+
+    editRoom(d:Room):void{   
+        this.edit = true;
+       this.editModel.name = d.name;
+       this.editModel.type = d.type;
+       this.editModel.id = d.id;
+    }
+
+    onSubmit(){
+        this._deleteRoomService.editRooms(this.editModel).subscribe(
+            data=>{
+                alert('Room edited!');
+                this.editedRoom = data as Room;
+                
+                this.router.navigate(['/HomepageCA/allRooms']);
+            },
+            error=> console.error('Error!', error)
+        )
+        this.edit = false; 
     }
  
 
