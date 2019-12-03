@@ -13,14 +13,13 @@
              </tr>
     </thead>
     <tbody>
-            <tr *ngFor = 'let c of listClin'>
-               <td>{{c.name}}</td>
-               <td>{{c.address}}</td>
-               <td>{{c.description}}</td>
-               <td>{{c.grade}}</td>
-               <td><button type="button" class="btn btn-outline-primary">Delete</button></td>
+        <tr *ngFor = 'let c of clinics ' > 
+             <td>{{c.name}}</td>
+             <td>{{c.address}}</td>
+             <td>{{c.description}}</td>
+             <td>{{c.grade}}</td>
+             <td><button   type="button" class="btn btn-outline-primary" (click)='deleteClinics(c.id)'>Delete</button></td>
             </tr>
-    </tbody> 
-        
+        </tbody>
     </table>
 </div>

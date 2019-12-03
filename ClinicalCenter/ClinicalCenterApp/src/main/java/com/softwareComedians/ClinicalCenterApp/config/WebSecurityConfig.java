@@ -81,8 +81,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("**/public/**").permitAll()
             .antMatchers("/auth/**").permitAll()
+                .antMatchers("/api/**").permitAll()
 
-            // All other requests must be authorized
+                // All other requests must be authorized
             .anyRequest().authenticated().and()
 
             // Intercept every request with filter
@@ -100,6 +101,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(HttpMethod.GET, "/api/rooms/getAll");
         web.ignoring().antMatchers(HttpMethod.DELETE, "/api/rooms/del/{id}");
         web.ignoring().antMatchers(HttpMethod.PUT, "/api/rooms/edit");
+        web.ignoring().antMatchers(HttpMethod.POST, "/api/clinics");
+        web.ignoring().antMatchers(HttpMethod.POST, "/api/RqForPatientReg");
 
 
         // TokenAuthenticationFilter will ignore all paths that have 'public' in them
@@ -107,5 +110,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(HttpMethod.POST, "/**/public/**");
         web.ignoring().antMatchers(HttpMethod.PUT, "/**/public/**");
         web.ignoring().antMatchers(HttpMethod.DELETE, "/**/public/**");
+
+        web.ignoring().antMatchers(HttpMethod.GET, "/**/api/**");
+        web.ignoring().antMatchers(HttpMethod.POST, "/**/api/**");
+        web.ignoring().antMatchers(HttpMethod.PUT, "/**/api/**");
+        web.ignoring().antMatchers(HttpMethod.DELETE, "/**/api/**");
+
+
     }
 }
