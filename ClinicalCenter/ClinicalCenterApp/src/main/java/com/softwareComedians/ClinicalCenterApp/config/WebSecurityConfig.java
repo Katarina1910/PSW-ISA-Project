@@ -82,9 +82,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("**/public/**").permitAll()
             .antMatchers("**/api/**").permitAll()
             .antMatchers("/auth/**").permitAll()
-                .antMatchers("/api/**").permitAll()
 
-                // All other requests must be authorized
+            // All other requests must be authorized
             .anyRequest().authenticated().and()
 
             // Intercept every request with filter
@@ -98,13 +97,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // TokenAuthenticationFilter will ignore all URLs below
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js");
         web.ignoring().antMatchers(HttpMethod.POST, "/auth/login");
-        web.ignoring().antMatchers(HttpMethod.POST, "/api/rooms");
-        web.ignoring().antMatchers(HttpMethod.GET, "/api/rooms/getAll");
-        web.ignoring().antMatchers(HttpMethod.DELETE, "/api/rooms/del/{id}");
-        web.ignoring().antMatchers(HttpMethod.PUT, "/api/rooms/edit");
-        web.ignoring().antMatchers(HttpMethod.POST, "/api/clinics");
-        web.ignoring().antMatchers(HttpMethod.POST, "/api/RqForPatientReg");
-
 
         // TokenAuthenticationFilter will ignore all paths that have 'api' in them
         web.ignoring().antMatchers(HttpMethod.GET, "/**/api/**");
@@ -117,12 +109,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(HttpMethod.POST, "/**/public/**");
         web.ignoring().antMatchers(HttpMethod.PUT, "/**/public/**");
         web.ignoring().antMatchers(HttpMethod.DELETE, "/**/public/**");
-
-        web.ignoring().antMatchers(HttpMethod.GET, "/**/api/**");
-        web.ignoring().antMatchers(HttpMethod.POST, "/**/api/**");
-        web.ignoring().antMatchers(HttpMethod.PUT, "/**/api/**");
-        web.ignoring().antMatchers(HttpMethod.DELETE, "/**/api/**");
-
-
     }
 }

@@ -72,10 +72,6 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
-    @Override
-    public User save(User u) {
-        return userRepository.save(u);
-    }
 
     @Override
     public List<User> findAll() throws AccessDeniedException {

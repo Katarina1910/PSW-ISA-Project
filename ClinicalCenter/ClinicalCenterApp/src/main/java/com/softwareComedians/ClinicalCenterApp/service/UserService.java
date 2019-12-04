@@ -17,8 +17,6 @@ public interface UserService {
     User editUser(UserDTO user);
     //void setProfileImage(String imagePath);
     void verifyUserAccount(String token);
-
-    User save(User u);
     /*
 @Service
 public class UserService {

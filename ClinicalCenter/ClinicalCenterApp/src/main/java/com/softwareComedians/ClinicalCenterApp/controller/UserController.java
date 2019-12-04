@@ -1,6 +1,5 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
-import com.softwareComedians.ClinicalCenterApp.dto.RequestForPatientRegistrationDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.UserRegistrationDTO;
 import com.softwareComedians.ClinicalCenterApp.mappers.UserMapper;
@@ -45,34 +44,10 @@ public class UserController {
 		return new ResponseEntity<>(UserMapper.toListDto(users), HttpStatus.OK);
 	}
 
-	/*@PostMapping("/public/add-user")
+	@PostMapping("/public/add-user")
 	public ResponseEntity<UserDTO> addRegularUser(@Valid @RequestBody UserRegistrationDTO userInfo) {
 		User user = userService.addRegularUser(userInfo);
 		return new ResponseEntity<>(UserMapper.toDto(user), HttpStatus.OK);
-	}*/
-
-
-	@PostMapping("/public/add-user")
-    public ResponseEntity<RequestForPatientRegistrationDTO> createRqForPatientReg(@RequestBody RequestForPatientRegistrationDTO rqDTO) {
-		User user = new User();
-		user.setId(rqDTO.getUserData().getId());
-		user.setName(rqDTO.getUserData().getName());
-		user.setSurname(rqDTO.getUserData().getSurname());
-		user.setUcidn(rqDTO.getUserData().getUcidn());
-		user.setAddress(rqDTO.getUserData().getAddress());
-		user.setCity(rqDTO.getUserData().getCity());
-		user.setCountry(rqDTO.getUserData().getCountry());
-		user.setEmail(rqDTO.getUserData().getEmail());
-		user.setPhone(rqDTO.getUserData().getPhone());
-		user.setUsername(rqDTO.getUserData().getUsername());
-		user.setPassword(rqDTO.getUserData().getPassword());
-
-		user = userService.save(user);
-
-		RequestForPatientRegistration req = new RequestForPatientRegistration(user);
-		requestForPatientRegistrationService.save(req);
-
-		return new ResponseEntity<>(new RequestForPatientRegistrationDTO(req), HttpStatus.CREATED);
 	}
 
 	@PutMapping

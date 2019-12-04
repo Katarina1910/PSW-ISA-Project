@@ -1,7 +1,11 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
 import com.softwareComedians.ClinicalCenterApp.dto.DoctorDTO;
+import com.softwareComedians.ClinicalCenterApp.dto.RequestForPatientRegistrationDTO;
+import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
 import com.softwareComedians.ClinicalCenterApp.model.Doctor;
+import com.softwareComedians.ClinicalCenterApp.model.RequestForPatientRegistration;
+import com.softwareComedians.ClinicalCenterApp.model.User;
 import com.softwareComedians.ClinicalCenterApp.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

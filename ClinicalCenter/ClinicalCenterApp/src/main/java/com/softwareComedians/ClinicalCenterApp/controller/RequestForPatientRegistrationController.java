@@ -62,6 +62,8 @@ public class RequestForPatientRegistrationController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
 
+
+
     }
 
     //u frontednu ovo pozovi za accept
