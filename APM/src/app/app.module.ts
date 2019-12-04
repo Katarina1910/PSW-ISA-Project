@@ -32,6 +32,7 @@ import { listOfAllPat } from './ListOfAllPatients/listOfAllPat.component';
 import { PatientComponent } from './patientHomePage/patient.component';
 import { ListOfClinics } from './listOfClinics/listOfClinics.component';
 import { DeleteClinicsComponent } from './addNewClinic/deleteClinics.component';
+import { ListOfPatClinics } from './patientHomePage/listOfClinicsPat.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { DeleteClinicsComponent } from './addNewClinic/deleteClinics.component';
     RecipeValidation,
     PatientComponent,
     ListOfClinics,
-    DeleteClinicsComponent
+    DeleteClinicsComponent,
+    ListOfPatClinics
     ],
   imports: [
     BrowserModule,
@@ -84,13 +86,13 @@ import { DeleteClinicsComponent } from './addNewClinic/deleteClinics.component';
       {path: 'HomepageCCA/registerNewClinCenAdmin', component: RegisterNewClinicalCenterAdministrator},
       {path: 'HomepageCCA/addNewClinic', component: AddNewClinic},
       {path: 'HomepageCCA/ListOfClinics', component: ListOfClinics},
+      {path: 'HomepagePatient/ListOfPatClinics', component: ListOfPatClinics},
       {path: 'HomepageCCA/createMedCod', component: createMedicamentCodeBook},
       {path: 'HomepageCCA/createDiagCod', component: createDiagnosisCodeBook}, 
       {path: 'HomepageCA/addDoctor', component: AddDoctorComponent},
       {path: 'HomepageCA/allDoctors', component:DeleteDoctorComponent},
       {path: 'HomepageCCA/allClinics', component: DeleteClinicsComponent}, 
       {path: 'HomepagePatient', component:PatientComponent},
-      {path: 'HomepagePatient/listOfClinics', component:ListOfClinics},
       {path: 'consultTerm', component: ConsultTermComponent},
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
