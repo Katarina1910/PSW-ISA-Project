@@ -1,0 +1,25 @@
+<h1  class="d-flex p-2 justify-content-center">List of Clinics</h1>
+<p>&nbsp;</p>        
+
+<div class='table-responsive' class="d-flex p-2 justify-content-center">
+    <table class='table'>
+    <thead>
+            <tr>
+               <th>Name</th>
+               <th>Address </th>
+               <th>Description </th>
+               <th>Grade</th>
+               <th></th>
+             </tr>
+    </thead>
+    <tbody>
+            <tr *ngFor = 'let c of listClin'>
+               <td>{{c.name}}</td>
+               <td>{{c.address}}</td>
+               <td>{{c.description}}</td>
+               <td>{{c.grade}}</td>
+            </tr>
+    </tbody> 
+        
+    </table>
+</div>
