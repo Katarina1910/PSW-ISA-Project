@@ -80,6 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             // Allow auth
             .authorizeRequests()
             .antMatchers("**/public/**").permitAll()
+            .antMatchers("**/api/**").permitAll()
             .antMatchers("/auth/**").permitAll()
 
             // All other requests must be authorized
@@ -96,6 +97,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // TokenAuthenticationFilter will ignore all URLs below
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js");
         web.ignoring().antMatchers(HttpMethod.POST, "/auth/login");
+
+        // TokenAuthenticationFilter will ignore all paths that have 'api' in them
+        web.ignoring().antMatchers(HttpMethod.GET, "/**/api/**");
+        web.ignoring().antMatchers(HttpMethod.POST, "/**/api/**");
+        web.ignoring().antMatchers(HttpMethod.PUT, "/**/api/**");
+        web.ignoring().antMatchers(HttpMethod.DELETE, "/**/api/**");
 
         // TokenAuthenticationFilter will ignore all paths that have 'public' in them
         web.ignoring().antMatchers(HttpMethod.GET, "/**/public/**");
