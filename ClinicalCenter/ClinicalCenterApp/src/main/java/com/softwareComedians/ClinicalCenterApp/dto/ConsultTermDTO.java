@@ -3,38 +3,51 @@ package com.softwareComedians.ClinicalCenterApp.dto;
 import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
 
 import java.sql.Date;
+import java.sql.Time;
 
 public class ConsultTermDTO {
-    private  String type;
+    private  ConsultTypeDTO type;
     private Long id;
-    private  String duration;
-    private  String price;
-    private  String discount;
+    private Date date;
+    private Time time;
+    private  Double duration;
+    private  Double price;
+    private  Double discount;
+    private  DoctorDTO doctor;
+    private  RoomDTO room;
 
     public ConsultTermDTO() {
     }
 
-    public ConsultTermDTO(String type, Long id, String duration, String price, String discount) {
+    public ConsultTermDTO(ConsultTypeDTO type, Long id, Date date, Time time, Double duration, Double price, Double discount, DoctorDTO doctor, RoomDTO room) {
         this.type = type;
         this.id = id;
+        this.date = date;
+        this.time = time;
         this.duration = duration;
         this.price = price;
         this.discount = discount;
+        this.doctor = doctor;
+        this.room = room;
     }
 
     public ConsultTermDTO(ConsultTerm c){
         id=c.getId();
-        type=c.getType();
+        type=new ConsultTypeDTO(c.getType());
+        date = c.getDate();
+        time = c.getTime();
         duration=c.getDuration();
         price=c.getPrice();
         discount=c.getDiscount();
+        doctor = new DoctorDTO(c.getDoctor());
+        room = new RoomDTO(c.getRoom());
     }
 
-    public String getType() {
+    public ConsultTypeDTO getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ConsultTypeDTO type) {
         this.type = type;
     }
 
@@ -46,27 +59,59 @@ public class ConsultTermDTO {
         this.id = id;
     }
 
-    public String getDuration() {
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
+
+    public Double getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(Double duration) {
         this.duration = duration;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public String getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(String discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
+    }
+
+    public DoctorDTO getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(DoctorDTO doctor) {
+        this.doctor = doctor;
+    }
+
+    public RoomDTO getRoom() {
+        return room;
+    }
+
+    public void setRoom(RoomDTO room) {
+        this.room = room;
     }
 }
