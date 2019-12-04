@@ -3,15 +3,15 @@ package com.softwareComedians.ClinicalCenterApp.service.impl;
 import com.softwareComedians.ClinicalCenterApp.common.TimeProvider;
 import com.softwareComedians.ClinicalCenterApp.common.UserHelper;
 import com.softwareComedians.ClinicalCenterApp.common.consts.UserRoles;
+import com.softwareComedians.ClinicalCenterApp.dto.RequestForPatientRegistrationDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.UserRegistrationDTO;
 import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
 import com.softwareComedians.ClinicalCenterApp.exception.ResourceNotFoundException;
-import com.softwareComedians.ClinicalCenterApp.model.Authority;
-import com.softwareComedians.ClinicalCenterApp.model.ConfirmationToken;
-import com.softwareComedians.ClinicalCenterApp.model.User;
+import com.softwareComedians.ClinicalCenterApp.model.*;
 import com.softwareComedians.ClinicalCenterApp.repository.AuthorityRepository;
 import com.softwareComedians.ClinicalCenterApp.repository.ConfirmationTokenRepository;
+import com.softwareComedians.ClinicalCenterApp.repository.RequestForPatientRegistrationRepository;
 import com.softwareComedians.ClinicalCenterApp.repository.UserRepository;
 import com.softwareComedians.ClinicalCenterApp.service.UserService;
 import com.softwareComedians.ClinicalCenterApp.service.email.MailSenderService;
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         ConfirmationToken token = this.createConfirmationToken(user);
-        //mailSenderService.sendMailForRegistration(user, token);
+        mailSenderService.sendMailForRegistration(user, token);
 
         return user;
     }
@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         ConfirmationToken token = this.createConfirmationToken(user);
-        //mailSenderService.sendMailForRegistration(user, token);
+        mailSenderService.sendMailForRegistration(user, token);
 
         return user;
     }
@@ -115,7 +115,13 @@ public class UserServiceImpl implements UserService {
         user.setName(userInfo.getName());
         user.setSurname(userInfo.getSurname());
         user.setEmail(userInfo.getEmail());
-        user.setActivated(true);
+        user.setEnabled(false);
+        user.setAddress(userInfo.getAddress());
+        user.setCity(userInfo.getCity());
+        user.setCountry(userInfo.getCountry());
+        user.setPhone(userInfo.getPhone());
+        user.setUcidn(userInfo.getUcidn());
+        user.setRole(userInfo.getRole());
         //user.setLastPasswordResetDate(timeProvider.nowTimestamp());
         //user.setProfileImagePath(defaultProfileImage);
 
@@ -139,19 +145,21 @@ public class UserServiceImpl implements UserService {
         long timeDifferenceMinutes = timeDifference / (60 * 1000);
 
         if (timeDifferenceMinutes < 15) {
-            user.setActivated(true);
+            user.setEnabled(true);
             userRepository.save(user);
         } else {
             confirmationTokenRepository.delete(confirmationToken);
             userRepository.delete(user);
             throw new ApiRequestException("Confirmation token timed out.");
         }
+
+
     }
 
     @Override
     public void changeUserEnabledStatus(Long id, boolean status) {
         User user = this.findById(id);
-        user.setActivated(status);
+        user.setEnabled(status);
         userRepository.save(user);
     }
 

@@ -9,8 +9,8 @@ public class DoctorDTO extends UserDTO {
     public DoctorDTO() {
     }
 
-    public DoctorDTO(Long id, String name, String surname, String ucidn, String address, String city, String country, String email, String phone, String userName, String password, boolean isActivated, Double grade) {
-        super(id, name, surname, ucidn, address, city, country, email, phone, userName, password, isActivated);
+    public DoctorDTO(Long id, String name, String surname, String ucidn, String address, String city, String country, String email, String phone, String userName, String password, boolean isEnabled, Double grade) {
+        super(id, name, surname, ucidn, address, city, country, email, phone, userName, password, isEnabled);
         this.grade = grade;
     }
 
@@ -21,7 +21,7 @@ public class DoctorDTO extends UserDTO {
 
     public DoctorDTO(Doctor d){
         super(d.getId(),d.getName(),d.getSurname(), d.getUcidn(),d.getAddress(),d.getCity(),d.getCountry(),d.getEmail(),
-                d.getPhone(),d.getUsername(),d.getPassword(),d.isActivated());
+                d.getPhone(),d.getUsername(),d.getPassword(),d.isEnabled());
         this.grade = d.getGrade();
     }
 

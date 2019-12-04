@@ -23,14 +23,14 @@ public class UserDTO {
     private String phone;
     private String username;
     private String password;
-    private boolean isActivated;
+    private boolean isEnabled;
     private UserTokenState token;
     private List<String> authorities;
 
     public UserDTO() {
     }
 
-    public UserDTO(Long id, String name, String surname, String ucidn, String address,String city, String country, String email, String phone, String username, String password, boolean isActivated) {
+    public UserDTO(Long id, String name, String surname, String ucidn, String address,String city, String country, String email, String phone, String username, String password, boolean isEnabled) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -42,7 +42,7 @@ public class UserDTO {
         this.phone = phone;
         this.username = username;
         this.password = password;
-        this.isActivated = isActivated;
+        this.isEnabled = isEnabled;
         this.token = null;
     }
 
@@ -58,7 +58,7 @@ public class UserDTO {
         phone=u.getPhone();
         username=u.getUsername();
         password=u.getPassword();
-        isActivated=u.isActivated();
+        isEnabled=u.isEnabled();
         authorities = u.getAuthorities().stream()
                 .map(authority -> ((Authority) authority).getName()).collect(Collectors.toList());
     }
@@ -151,11 +151,11 @@ public class UserDTO {
         this.password = password;
     }
 
-    public boolean isActivated() {
-        return isActivated;
+    public boolean isEnabled() {
+        return isEnabled;
     }
 
-    public void setActivated(boolean activated) {
-        isActivated = activated;
+    public void isEnabled(boolean enable) {
+        isEnabled = enable;
     }
 }

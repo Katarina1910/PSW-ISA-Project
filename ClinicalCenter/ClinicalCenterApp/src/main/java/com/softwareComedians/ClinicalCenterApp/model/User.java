@@ -50,7 +50,7 @@ public class User implements UserDetails {
 	private String password;
 
     @Column
-    private boolean isActivated;
+    private boolean isEnabled;
 
 	@Column
     private  String role;
@@ -175,7 +175,11 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isEnabled;
+    }
+
+    public void isEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 
     public void setUsername(String username) {
@@ -188,14 +192,6 @@ public class User implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isActivated() {
-        return isActivated;
-    }
-
-    public void setActivated(boolean activated) {
-        isActivated = activated;
     }
 
     public void setAuthorities(Set<Authority> authorities) {

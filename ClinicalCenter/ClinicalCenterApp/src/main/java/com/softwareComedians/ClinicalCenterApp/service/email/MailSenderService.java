@@ -19,10 +19,10 @@ public class MailSenderService {
         SimpleMailMessage message = new SimpleMailMessage();
 
         message.setTo(user.getEmail());
-        message.setFrom("OnYourMind");
-        message.setSubject("OnYourMind - Account activation");
+        message.setFrom("ClinicalCenter");
+        message.setSubject("ClinicalCenter - Account activation");
         message.setText("Dear " + user.getName() + " " + user.getSurname() +
-                ", go to this address to activate your account " +
+                "Please, confirm registration clicking on the following link  " +
                 "http://localhost:8080/account-verification.html?token=" + token.getToken());
 
         mailSender.send(message);
