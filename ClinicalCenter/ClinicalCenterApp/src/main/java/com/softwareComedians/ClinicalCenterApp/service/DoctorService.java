@@ -18,6 +18,10 @@ public class DoctorService {
         return doctorRepository.findById(id).orElseGet(null);
     }
 
+    public Doctor findByName(String name){
+        return doctorRepository.findByName(name);
+    }
+
     public List<Doctor> findAll(){
         return doctorRepository .findAll();
     }
