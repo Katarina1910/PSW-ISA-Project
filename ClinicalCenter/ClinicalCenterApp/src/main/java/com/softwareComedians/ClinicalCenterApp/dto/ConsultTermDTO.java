@@ -1,29 +1,28 @@
 package com.softwareComedians.ClinicalCenterApp.dto;
 
 import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
 
 public class ConsultTermDTO {
     private  ConsultTypeDTO type;
     private Long id;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
-    private Time time;
     private  Double duration;
     private  Double price;
     private  Double discount;
-    private  DoctorDTO doctor;
-    private  RoomDTO room;
+    private  String doctor;
+    private  String room;
 
     public ConsultTermDTO() {
     }
 
-    public ConsultTermDTO(ConsultTypeDTO type, Long id, Date date, Time time, Double duration, Double price, Double discount, DoctorDTO doctor, RoomDTO room) {
+    public ConsultTermDTO(ConsultTypeDTO type, Long id, Date date, Double duration, Double price, Double discount, String doctor, String room) {
         this.type = type;
         this.id = id;
         this.date = date;
-        this.time = time;
         this.duration = duration;
         this.price = price;
         this.discount = discount;
@@ -35,12 +34,11 @@ public class ConsultTermDTO {
         id=c.getId();
         type=new ConsultTypeDTO(c.getType());
         date = c.getDate();
-        time = c.getTime();
         duration=c.getDuration();
         price=c.getPrice();
         discount=c.getDiscount();
-        doctor = new DoctorDTO(c.getDoctor());
-        room = new RoomDTO(c.getRoom());
+        doctor = c.getDoctor().getName();
+        room = c.getRoom().getName();
     }
 
     public ConsultTypeDTO getType() {
@@ -67,14 +65,6 @@ public class ConsultTermDTO {
         this.date = date;
     }
 
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
-    }
-
     public Double getDuration() {
         return duration;
     }
@@ -99,19 +89,19 @@ public class ConsultTermDTO {
         this.discount = discount;
     }
 
-    public DoctorDTO getDoctor() {
+    public String getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(DoctorDTO doctor) {
+    public void setDoctor(String doctor) {
         this.doctor = doctor;
     }
 
-    public RoomDTO getRoom() {
+    public String getRoom() {
         return room;
     }
 
-    public void setRoom(RoomDTO room) {
+    public void setRoom(String room) {
         this.room = room;
     }
 }

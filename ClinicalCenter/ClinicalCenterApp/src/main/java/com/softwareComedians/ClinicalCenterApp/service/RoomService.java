@@ -28,4 +28,8 @@ public class RoomService {
     public void remove(Long id){
         roomRepository.deleteById(id);
     }
+
+    public Room findByName(String s) {
+        return roomRepository.findByName(s);
+    }
 }

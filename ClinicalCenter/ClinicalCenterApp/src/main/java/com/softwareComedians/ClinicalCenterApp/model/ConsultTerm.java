@@ -3,10 +3,10 @@ package com.softwareComedians.ClinicalCenterApp.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -18,10 +18,9 @@ public class ConsultTerm {
 	private Long id;
 
 	@Column
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 
-	@Column
-	private Time time;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private ConsultType type;
@@ -139,13 +138,6 @@ public class ConsultTerm {
 		this.date = date;
 	}
 
-	public Time getTime() {
-		return time;
-	}
-
-	public void setTime(Time time) {
-		this.time = time;
-	}
 
 	public ConsultType getType() {
 		return type;
