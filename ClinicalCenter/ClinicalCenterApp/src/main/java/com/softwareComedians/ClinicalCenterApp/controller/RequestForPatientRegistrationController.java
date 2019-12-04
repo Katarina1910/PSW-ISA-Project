@@ -29,7 +29,7 @@ public class RequestForPatientRegistrationController {
         RequestForPatientRegistration rq = new RequestForPatientRegistration();
         rq.setId(rqDTO.getId());
         rq.setAccepted(rqDTO.isAccepted());
-        rq.setReasonOfRejection(rq.getReasonOfRejection());
+        rq.setReasonOfRejection(rqDTO.getReasonOfRejection());
         rq.setUserData(rq.getUserData());
 
         rq = requestForPatientRegistrationService.save(rq);

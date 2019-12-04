@@ -1,11 +1,9 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
 import com.softwareComedians.ClinicalCenterApp.dto.ConsultTermDTO;
-import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
 import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
-import com.softwareComedians.ClinicalCenterApp.model.RequestForConsult;
+import com.softwareComedians.ClinicalCenterApp.model.ConsultType;
 import com.softwareComedians.ClinicalCenterApp.service.ConsultTermService;
-import com.softwareComedians.ClinicalCenterApp.service.RequestForConsultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +22,7 @@ public class ConsultTermController {
 
         ConsultTerm ct = new ConsultTerm();
         ct.setId(consultTermDTO.getId());
-        ct.setType(consultTermDTO.getType());
+        ct.setType(new ConsultType(consultTermDTO.getType().getId(), consultTermDTO.getType().getName()));
         ct.setDuration(consultTermDTO.getDuration());
         ct.setDiscount(consultTermDTO.getDiscount());
         ct.setPrice(consultTermDTO.getPrice());
