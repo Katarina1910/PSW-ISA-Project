@@ -1,9 +1,11 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -66,15 +68,11 @@ public class User implements UserDetails {
 
 	@OneToOne(mappedBy = "userData")
 	private RequestForPatientRegistration requestForPatientRegistration;
-	
-	
+
+
 	public User() {
 
 	}
-
-    public String getRole() {
-        return role;
-    }
 
     public void setRole(String role) {
         this.role = role;
@@ -184,6 +182,11 @@ public class User implements UserDetails {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     public String getPassword() {

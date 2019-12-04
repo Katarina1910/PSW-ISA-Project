@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
@@ -22,17 +21,19 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ClinicAdminHomePageComponent } from './clinicAdminHomePage/clinicAdminHomePage.component';
 import { AddDoctorComponent } from './doctor/addDoctor.component';
 import { DeleteDoctorComponent } from './doctor/deleteDoctor.component';
-
 import { NurseComponent } from './nurseHomePage/nurse.component';
 import { RecipeValidation } from './recipeValidation/recipeVal.component';
 import { RequestForAbsence } from './requestForAbsence/requestForAbsence';
 import { UserProfiles } from './UserProfiles/userProfiles.component';
 import { nurseWorkCal } from './nurseWorkingCalendar/nurseWorkCal.component';
 import { listOfAllPat } from './ListOfAllPatients/listOfAllPat.component';
+import { AddRoomComponent } from './rooms/addRoom.component';
+import { DeleteRoomComponent } from './rooms/deleteRoom.component';
 import { PatientComponent } from './patientHomePage/patient.component';
 import { ListOfClinics } from './listOfClinics/listOfClinics.component';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { DeleteClinicsComponent } from './addNewClinic/deleteClinics.component';
 
 
 @NgModule({
@@ -59,8 +60,11 @@ import { ToastrModule } from 'ngx-toastr';
     nurseWorkCal,
     RequestForAbsence,    
     RecipeValidation,
+    AddRoomComponent,
+    DeleteRoomComponent,
     PatientComponent,
     ListOfClinics,
+    DeleteClinicsComponent
     ],
   imports: [
     BrowserModule,
@@ -86,10 +90,14 @@ import { ToastrModule } from 'ngx-toastr';
       {path: 'HomepageCCA/arrivedReq', component : arrivedRequest},
       {path: 'HomepageCCA/registerNewClinCenAdmin', component: RegisterNewClinicalCenterAdministrator},
       {path: 'HomepageCCA/addNewClinic', component: AddNewClinic},
+      {path: 'HomepageCCA/ListOfClinics', component: ListOfClinics},
       {path: 'HomepageCCA/createMedCod', component: createMedicamentCodeBook},
       {path: 'HomepageCCA/createDiagCod', component: createDiagnosisCodeBook}, 
       {path: 'HomepageCA/addDoctor', component: AddDoctorComponent},
       {path: 'HomepageCA/allDoctors', component:DeleteDoctorComponent},
+      {path: 'HomepageCA/addRoom', component: AddRoomComponent},
+      {path: 'HomepageCA/allRooms', component: DeleteRoomComponent},
+      {path: 'HomepageCCA/allClinics', component: DeleteClinicsComponent}, 
       {path: 'HomepagePatient', component:PatientComponent},
       {path: 'HomepagePatient/listOfClinics', component:ListOfClinics},
       {path: 'consultTerm', component: ConsultTermComponent},

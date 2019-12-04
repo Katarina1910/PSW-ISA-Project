@@ -3,13 +3,15 @@ import { User } from './user';
 import { UserService } from './user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RequestForPatReg } from './requestForPatReg';
 
 @Component({
     selector : 'cc-registration',
     templateUrl : './registration.component.html'
 })
 export class RegistrationComponent{
-    userModel = new User("","","","","","","","","","","","");
+    userModel = new User(" "," "," "," "," "," "," "," "," "," "," ");
+    reqModel = new RequestForPatReg(this.userModel, null ,false, "");
     
     registerForm: FormGroup;
     submitted = false;
@@ -36,8 +38,9 @@ export class RegistrationComponent{
     get f() { return this.registerForm.controls; }
 
     onSubmit(){
-        console.log('Print: ', this.userModel)
-        this._userService.enroll(this.userModel).subscribe(
+        console.log('Print: ', this.reqModel)
+        this._userService.enroll(this.reqModel)
+        .subscribe(
             data=> {
                 alert('Request has been sent!')
                 this.done=true;
