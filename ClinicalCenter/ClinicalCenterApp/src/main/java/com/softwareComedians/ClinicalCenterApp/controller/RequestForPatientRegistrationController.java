@@ -16,8 +16,6 @@ import java.util.List;
 @CrossOrigin
 public class RequestForPatientRegistrationController {
 
-
-
     private RequestForPatientRegistrationService requestForPatientRegistrationService;
 
     @Autowired
@@ -35,6 +33,7 @@ public class RequestForPatientRegistrationController {
         rq.setUserData(rq.getUserData());
 
         rq = requestForPatientRegistrationService.save(rq);
+        System.out.println("From RequestForPatientRegistrationController");
         return new ResponseEntity<>(new RequestForPatientRegistrationDTO(rq), HttpStatus.CREATED);
     }
 

@@ -11,7 +11,8 @@ import javax.mail.MessagingException;
 
 @RestController
 @RequestMapping( value = "api/mail")
-public class MailController {
+public class
+MailController {
 
     @Autowired
     private SmtpMailSender smtpMailSender;

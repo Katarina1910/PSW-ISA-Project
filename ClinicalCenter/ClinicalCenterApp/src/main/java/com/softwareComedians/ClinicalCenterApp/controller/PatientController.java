@@ -42,7 +42,7 @@ public class PatientController {
         patient.setCity(request.getUserData().getCity());
         patient.setCountry(request.getUserData().getCountry());
         patient.setPhone(request.getUserData().getPhone());
-        patient.setActivated(request.getUserData().isActivated());
+        patient.setEnabled(request.getUserData().isEnabled());
 
         patient = patientService.save(patient);
 
