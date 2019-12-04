@@ -7,12 +7,11 @@ export class ConsultTerm {
     constructor(
         private id:number,
         private date: Date,
-        private time:Time,
         private  type: ConsultType,
         private  duration: number,
         private  price: number,
         private  discount: number,
-        private room: Room,
-        private doctor: User
+        private room: string,
+        private doctor: string
     ){}
 }
