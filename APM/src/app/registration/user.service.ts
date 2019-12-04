@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RequestForPatReg } from './requestForPatReg';
+import { User } from './user';
 
 @Injectable({
     providedIn: 'root'
@@ -11,8 +11,8 @@ export class UserService{
 
     constructor(private _http: HttpClient) { }
 
-    enroll(requestForPatReg: RequestForPatReg) {
-       return  this._http.post<any>(this._url, requestForPatReg);
+    enroll(user: User) {
+       return  this._http.post<any>(this._url, user);
     }
 
     addPatientRequest(patient: User) {

@@ -9,6 +9,7 @@ export class User {
         private  country: string,
         private  email: string,
         private  phone: string,
+        private  role: string,
         private  username: string,
         private  password: string
     ){}
