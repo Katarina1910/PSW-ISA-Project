@@ -10,6 +10,7 @@ import { ConsultType } from 'src/consultType/consultType';
 export class DeleteConsultTypeService{
     _url = 'http://localhost:8080/api/ConsultType/del';
     _url2 = 'http://localhost:8080/api/ConsultType/getAll';
+    _url3 = 'http://localhost:8080/api/ConsultType/edit';
 
     
     constructor(private _http: HttpClient) { }
@@ -21,5 +22,8 @@ export class DeleteConsultTypeService{
     getConsultTypes():Observable<any> {
         return this._http.get<ConsultType[]>(this._url2);
     }
+    editCOnsutType(type: ConsultType) : Observable<ConsultType> {
+        return  this._http.put<ConsultType>(this._url3, type);
+     }
 
 }
