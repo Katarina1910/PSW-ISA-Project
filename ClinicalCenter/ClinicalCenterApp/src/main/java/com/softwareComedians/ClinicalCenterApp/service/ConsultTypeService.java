@@ -16,6 +16,8 @@ public class ConsultTypeService {
         return consultTypeRepository.findById(id).orElseGet(null);
     }
 
+    public ConsultType findByName(String name) { return  consultTypeRepository.findByName(name); }
+
     public List<ConsultType> findAll(){
         return consultTypeRepository.findAll();
     }
