@@ -11,12 +11,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor = 'let d of rooms ' >
+                <tr *ngFor = 'let d of types ' >
                 
                     <td>{{d.name}}</td>
                     <td>{{d.description}}</td>
-                    <td><button  *ngIf = 'd.free' type="button" class="btn btn-outline-primary" (click)='deleteRoom(d.id)'>Delete</button></td>
-                    <td><button   type="button" *ngIf = 'd.free'  class="btn btn-outline-primary" (click)='editRoom(d)'>Edit</button></td>    
+                    <td><button  type="button" class="btn btn-outline-primary" (click)='deleteRoom(d.id)'>Delete</button></td>
+                    <td><button   type="button"  class="btn btn-outline-primary" (click)='editRoom(d)'>Edit</button></td>    
                 </tr>
             
             </tbody>
