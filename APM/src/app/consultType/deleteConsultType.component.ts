@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConsultType } from 'src/consultType/consultType';
 import { DeleteConsultTypeService } from './deleteConsultType.service';
+import { ConsultType } from 'src/consultType/consultType';
 
 
 
@@ -13,6 +13,9 @@ import { DeleteConsultTypeService } from './deleteConsultType.service';
 
 export class DeleteConsultTypeComponent implements OnInit {
     public types: ConsultType[];
+   editModel = new ConsultType(null,null);
+    edit : boolean = false;
+    public editedType:ConsultType;
    
     
     constructor(private _deleteConsultTypeService: DeleteConsultTypeService,private router: Router) {}
@@ -41,6 +44,26 @@ export class DeleteConsultTypeComponent implements OnInit {
             error=> console.error('Error!', error)
         )
        
+    }
+
+    editConsultType(d:ConsultType):void{   
+        this.edit = true;
+        this.editModel.name = d.name;
+        this.editModel.description = d.description;
+        this.editModel.id = d.id;
+    }
+
+    onSubmit(){
+        this._deleteConsultTypeService.editCOnsutType(this.editModel).subscribe(
+            data=>{
+                alert('Room edited!');
+                this.editedType = data as ConsultType;
+                
+                this.router.navigate(['/HomepageCA/allRooms']);
+            },
+            error=> console.error('Error!', error)
+        )
+        this.edit = false; 
     }
 
 }
