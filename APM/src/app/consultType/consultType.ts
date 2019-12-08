@@ -1,7 +1,8 @@
 export class ConsultType{
     constructor(
-        private id:number,
-        private name: string,
-        private description:string
+       public id :number,
+       public name : string,
+       public description : string
     ) {}
+
 }
