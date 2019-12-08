@@ -41,4 +41,11 @@ public class ConsultTypeController {
         return new ResponseEntity<>(new ConsultTypeDTO(ct), HttpStatus.CREATED);
     }
 
+    @DeleteMapping(value = "/del/{id}")
+    public ResponseEntity<Long> deleteConsultType(@PathVariable Long id) {
+
+        consultTypeService.remove(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
 }
