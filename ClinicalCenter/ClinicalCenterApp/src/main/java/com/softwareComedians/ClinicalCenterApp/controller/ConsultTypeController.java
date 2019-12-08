@@ -48,4 +48,14 @@ public class ConsultTypeController {
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
+    @PutMapping(value = "/edit")
+    public ResponseEntity<ConsultTypeDTO> editConsultType (@RequestBody ConsultTypeDTO consultTypeDTO) {
+        ConsultType ct = consultTypeService.findOne(consultTypeDTO.getId());
+        ct.setName(consultTypeDTO.getName());
+        ct.setDescription(consultTypeDTO.getDescription());
+        ct = consultTypeService.save(ct);
+
+        return new ResponseEntity<>(new ConsultTypeDTO(ct), HttpStatus.OK);
+    }
+
 }
