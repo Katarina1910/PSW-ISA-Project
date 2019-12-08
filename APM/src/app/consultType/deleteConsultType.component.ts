@@ -31,11 +31,12 @@ export class DeleteConsultTypeComponent implements OnInit {
         error=> console.error('Error!', error)
     ) }
 
+    
     deleteConsultType(id:number): void{
         this._deleteConsultTypeService.deleteConsultType(id).subscribe(
             data=>{
                 alert('Consult type deleted!');
-                this.router.navigate(['/HomepageCCA']);
+                this.router.navigate(['/HomepageCA']);
             },
             error=> console.error('Error!', error)
         )
