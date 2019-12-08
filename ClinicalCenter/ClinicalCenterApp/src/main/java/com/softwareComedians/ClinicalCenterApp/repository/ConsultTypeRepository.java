@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ConsultTypeRepository  extends JpaRepository<ConsultType,Long> {
+    ConsultType findByName(String name);
 }
