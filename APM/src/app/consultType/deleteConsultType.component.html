@@ -1,0 +1,25 @@
+
+<div style="text-align:left">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = 'let d of rooms ' >
+                
+                    <td>{{d.name}}</td>
+                    <td>{{d.description}}</td>
+                    <td><button  *ngIf = 'd.free' type="button" class="btn btn-outline-primary" (click)='deleteRoom(d.id)'>Delete</button></td>
+                    <td><button   type="button" *ngIf = 'd.free'  class="btn btn-outline-primary" (click)='editRoom(d)'>Edit</button></td>    
+                </tr>
+            
+            </tbody>
+        </table>
+    </div>
+</div>
