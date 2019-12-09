@@ -1,0 +1,56 @@
+<div class="container">
+
+    <div class="user-info-container">
+        <div class="user-info-container-row">
+            
+                <input matInput type="text" placeholder="First name" disabled [(ngModel)]="user.name" />
+            
+
+            
+                <input matInput type="text" placeholder="Last name" disabled [(ngModel)]="user.surname" />
+            
+        </div>
+        
+        <div class="user-info-container-row ">
+            
+                <input matInput type="text" placeholder="Username" disabled [(ngModel)]="user.username" />
+            
+    
+            
+                <input matInput type="email" placeholder="E-mail" disabled [(ngModel)]="user.email" />
+            
+        </div>
+
+        <div class="user-info-container-row">
+            
+                <input matInput type="password" placeholder="Password" disabled [(ngModel)]="password" />
+            
+    
+            
+                <input matInput type="password" placeholder="Repeat password" disabled [(ngModel)]="repeatPassword" />
+            
+        </div>
+
+        <div class="user-info-container-row">
+            <button 
+                color="primary"
+            >
+                Edit
+            </button>
+    
+            <br />
+    
+            <button 
+            >
+                Cancel
+            </button>
+    
+            <button 
+            >
+                Save
+            </button>
+        </div>
+
+    </div>
+
+</div>
