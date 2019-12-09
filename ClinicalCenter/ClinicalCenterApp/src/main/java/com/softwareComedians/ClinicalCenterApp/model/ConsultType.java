@@ -1,5 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 
+import com.softwareComedians.ClinicalCenterApp.dto.ConsultTypeDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,15 +19,40 @@ public class ConsultType {
     private String name;
 
     @Column
+    private String description;
+
+    @Column
     @OneToMany(mappedBy = "type", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<ConsultTerm> consultTerms;
 
     public ConsultType() {
     }
 
-    public ConsultType(Long id, String name) {
+    public ConsultType(Long id, String name, String description) {
         this.id = id;
         this.name = name;
+        this.description = description;
+    }
+
+    public  ConsultType(ConsultTypeDTO c){
+        this.name = c.getName();
+        this.description = c.getDescription();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<ConsultTerm> getConsultTerms() {
+        return consultTerms;
+    }
+
+    public void setConsultTerms(List<ConsultTerm> consultTerms) {
+        this.consultTerms = consultTerms;
     }
 
     public Long getId() {

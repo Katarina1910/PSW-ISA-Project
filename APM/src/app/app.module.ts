@@ -33,6 +33,8 @@ import { PatientComponent } from './patientHomePage/patient.component';
 import { ListOfClinics } from './listOfClinics/listOfClinics.component';
 import { DeleteClinicsComponent } from './addNewClinic/deleteClinics.component';
 import { ListOfPatClinics } from './patientHomePage/listOfClinicsPat.component';
+import { ConsultTypeComponent } from './consultType/consultType.component';
+import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.component';
 
 
 @NgModule({
@@ -64,7 +66,9 @@ import { ListOfPatClinics } from './patientHomePage/listOfClinicsPat.component';
     PatientComponent,
     ListOfClinics,
     DeleteClinicsComponent,
-    ListOfPatClinics
+    ListOfPatClinics,
+    ConsultTypeComponent,
+    DeleteConsultTypeComponent
     ],
   imports: [
     BrowserModule,
@@ -95,6 +99,8 @@ import { ListOfPatClinics } from './patientHomePage/listOfClinicsPat.component';
       {path: 'HomepageCA/allDoctors', component:DeleteDoctorComponent},
       {path: 'HomepageCA/addRoom', component: AddRoomComponent},
       {path: 'HomepageCA/allRooms', component: DeleteRoomComponent},
+      {path: 'HomepageCA/addConsultType', component: ConsultTypeComponent},
+      {path: 'HomepageCA/ConsultTypes', component: DeleteConsultTypeComponent},
       {path: 'HomepageCA/consultTerm', component: ConsultTermComponent},
       {path: 'HomepageCCA/allClinics', component: DeleteClinicsComponent}, 
       {path: 'HomepagePatient', component:PatientComponent},
