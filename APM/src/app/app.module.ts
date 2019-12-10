@@ -34,6 +34,7 @@ import { ListOfClinics } from './listOfClinics/listOfClinics.component';
 import { DeleteClinicsComponent } from './addNewClinic/deleteClinics.component';
 import { ListOfPatClinics } from './patientHomePage/listOfClinicsPat.component';
 import { PatientProfileSettingsComponent } from './patientProfileSettings/patientProfileSettings.component';
+import { MaterialModule } from './material';
 
 
 
@@ -74,6 +75,7 @@ import { PatientProfileSettingsComponent } from './patientProfileSettings/patien
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MaterialModule,
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
