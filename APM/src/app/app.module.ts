@@ -39,6 +39,7 @@ import { ConsultTypeComponent } from './consultType/consultType.component';
 import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
