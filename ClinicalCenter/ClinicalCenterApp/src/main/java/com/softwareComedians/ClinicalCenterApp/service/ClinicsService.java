@@ -1,4 +1,4 @@
-package com.softwareComedians.ClinicalCenterApp.service.impl;
+package com.softwareComedians.ClinicalCenterApp.service;
 
 import com.softwareComedians.ClinicalCenterApp.model.Clinic;
 import com.softwareComedians.ClinicalCenterApp.repository.ClinicsRepository;

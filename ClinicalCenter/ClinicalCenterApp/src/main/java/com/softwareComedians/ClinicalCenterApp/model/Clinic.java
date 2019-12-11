@@ -1,6 +1,7 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 
 
+import com.softwareComedians.ClinicalCenterApp.dto.ClinicsDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -52,6 +53,14 @@ public class Clinic {
 
     public Clinic() {
 
+    }
+
+    public Clinic(ClinicsDTO c){
+        this.id = c.getId();
+        this.name = c.getName();
+        this.address = c.getAddress();
+        this.description = c.getDescription();
+        this.grade = c.getGrade();
     }
 
     public Long getId(){return id;}

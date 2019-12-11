@@ -10,7 +10,7 @@ import { ClinicalCenterAdministratorCompoment } from './clinicalCenterAdmin/clin
 import { arrivedRequest } from './arrivedRequest/arrivedRequest.component';
 import { AddNewClinic } from './addNewClinic/addNewClinic.component';
 import { RegisterNewClinicalCenterAdministrator } from './registerNewClinCenAdmin/registerNewClinCenAdmin.component';
-import { createMedicamentCodeBook } from './createMedicamentCodeBook/createMedicamentCodeBookcomponent';
+import { createMedicamentCodeBook } from './createMedicamentCodeBook/createMedicamentCodeBook.component';
 import { createDiagnosisCodeBook } from './createDiagCodeBook/createDiagCodeBook.component';
 import { WelcomeComponent } from './home/welcome.component'
 import { FormsModule } from '@angular/forms';
@@ -33,8 +33,13 @@ import { PatientComponent } from './patientHomePage/patient.component';
 import { ListOfClinics } from './listOfClinics/listOfClinics.component';
 import { DeleteClinicsComponent } from './addNewClinic/deleteClinics.component';
 import { ListOfPatClinics } from './patientHomePage/listOfClinicsPat.component';
+
+import { ListOfMedicament } from './listOfMedicaments/listOfMedicament.component';
+import { DeleteMedicamentComponent } from './createMedicamentCodeBook/deleteMedicament.component';
+
 import { ConsultTypeComponent } from './consultType/consultType.component';
 import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.component';
+
 
 
 @NgModule({
@@ -67,8 +72,13 @@ import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.comp
     ListOfClinics,
     DeleteClinicsComponent,
     ListOfPatClinics,
+
+    ListOfMedicament,
+    DeleteMedicamentComponent,
+
     ConsultTypeComponent,
     DeleteConsultTypeComponent
+
     ],
   imports: [
     BrowserModule,
@@ -92,6 +102,7 @@ import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.comp
       {path: 'HomepageCCA/registerNewClinCenAdmin', component: RegisterNewClinicalCenterAdministrator},
       {path: 'HomepageCCA/addNewClinic', component: AddNewClinic},
       {path: 'HomepageCCA/ListOfClinics', component: ListOfClinics},
+      {path: 'HomepageCCA/allMedicaments', component: ListOfMedicament},
       {path: 'HomepagePatient/ListOfPatClinics', component: ListOfPatClinics},
       {path: 'HomepageCCA/createMedCod', component: createMedicamentCodeBook},
       {path: 'HomepageCCA/createDiagCod', component: createDiagnosisCodeBook}, 
@@ -103,6 +114,7 @@ import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.comp
       {path: 'HomepageCA/ConsultTypes', component: DeleteConsultTypeComponent},
       {path: 'HomepageCA/consultTerm', component: ConsultTermComponent},
       {path: 'HomepageCCA/allClinics', component: DeleteClinicsComponent}, 
+      {path: 'HomepageCCA/allMedicaments', component: DeleteMedicamentComponent},
       {path: 'HomepagePatient', component:PatientComponent},
       {path: 'HomepagePatient/listOfClinics', component:ListOfClinics},
       {path: 'requestConsult', component: RequestForConsultComponent},
