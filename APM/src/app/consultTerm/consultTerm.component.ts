@@ -6,6 +6,8 @@ import { Room } from '../rooms/room';
 import { DeleteRoomService } from '../rooms/deleteRoom.servce';
 import { User } from '../registration/user';
 import { DeleteDoctorService } from '../doctor/deleteDoctor.service';
+import { ConsultType } from 'src/consultType/consultType';
+import { DeleteConsultTypeService } from '../consultType/deleteConsultType.service';
 
 @Component({
     selector : 'cc-consultTerm',
@@ -14,6 +16,7 @@ import { DeleteDoctorService } from '../doctor/deleteDoctor.service';
 export class ConsultTermComponent implements OnInit {
     public rooms: Room[];
     public doctors: User[];
+    public types: ConsultType[];
 
     ngOnInit(): void {
         this._deleteRoomService.getRooms().subscribe(
@@ -28,11 +31,17 @@ export class ConsultTermComponent implements OnInit {
             error=> console.error('Error!', error)
             
         )
+
+        this._deleteConsultTypeService.getConsultTypes().subscribe(
+            data=>this.types = data,
+            error=> console.error('Error!', error)
+        )
     }
     consultTermModel = new ConsultTerm(null,null,null,null,null,null,null,null);
     
     constructor(private _consultTermService: ConsultTermService, private router:Router,
-        private _deleteRoomService: DeleteRoomService, private _delDOoctorService: DeleteDoctorService) {}
+        private _deleteRoomService: DeleteRoomService, private _delDOoctorService: DeleteDoctorService, 
+        private _deleteConsultTypeService: DeleteConsultTypeService) {}
 
     onSubmit(){
         this._consultTermService.addConsultTerm(this.consultTermModel)

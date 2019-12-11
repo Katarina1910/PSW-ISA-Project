@@ -2,9 +2,11 @@ package com.softwareComedians.ClinicalCenterApp.controller;
 
 import com.softwareComedians.ClinicalCenterApp.dto.ConsultTermDTO;
 import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
+import com.softwareComedians.ClinicalCenterApp.model.ConsultType;
 import com.softwareComedians.ClinicalCenterApp.model.Doctor;
 import com.softwareComedians.ClinicalCenterApp.model.Room;
 import com.softwareComedians.ClinicalCenterApp.service.ConsultTermService;
+import com.softwareComedians.ClinicalCenterApp.service.ConsultTypeService;
 import com.softwareComedians.ClinicalCenterApp.service.DoctorService;
 import com.softwareComedians.ClinicalCenterApp.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class ConsultTermController {
     @Autowired
     private RoomService roomService;
 
+    @Autowired
+    private ConsultTypeService consultTypeService;
+
     @PostMapping()
     public ResponseEntity<ConsultTermDTO> createConsultTerm(@RequestBody ConsultTermDTO consultTermDTO) {
 
@@ -46,6 +51,9 @@ public class ConsultTermController {
         Room r = roomService.findByName(consultTermDTO.getRoom());
       //  System.out.println(r.getName());
         ct.setRoom(r);
+
+        ConsultType consultType = consultTypeService.findByName(consultTermDTO.getType());
+        ct.setType(consultType);
 
         ct = consultTermService.save(ct);
         return new ResponseEntity<>(new ConsultTermDTO(ct), HttpStatus.CREATED);

@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 public class ConsultTermDTO {
-    private  ConsultTypeDTO type;
+    private  String type;
     private Long id;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
@@ -19,7 +19,7 @@ public class ConsultTermDTO {
     public ConsultTermDTO() {
     }
 
-    public ConsultTermDTO(ConsultTypeDTO type, Long id, Date date, Double duration, Double price, Double discount, String doctor, String room) {
+    public ConsultTermDTO(String type, Long id, Date date, Double duration, Double price, Double discount, String doctor, String room) {
         this.type = type;
         this.id = id;
         this.date = date;
@@ -32,7 +32,7 @@ public class ConsultTermDTO {
 
     public ConsultTermDTO(ConsultTerm c){
         id=c.getId();
-        type=new ConsultTypeDTO(c.getType());
+        type=c.getType().getName();
         date = c.getDate();
         duration=c.getDuration();
         price=c.getPrice();
@@ -41,11 +41,11 @@ public class ConsultTermDTO {
         room = c.getRoom().getName();
     }
 
-    public ConsultTypeDTO getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(ConsultTypeDTO type) {
+    public void setType(String type) {
         this.type = type;
     }
 
