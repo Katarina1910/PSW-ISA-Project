@@ -96,7 +96,6 @@ import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.comp
       {path: 'HomepageCCA/registerNewClinCenAdmin', component: RegisterNewClinicalCenterAdministrator},
       {path: 'HomepageCCA/addNewClinic', component: AddNewClinic},
       {path: 'HomepageCCA/ListOfClinics', component: ListOfClinics},
-      {path: 'HomepageCCA/allMedicaments', component: ListOfMedicament},
       {path: 'HomepagePatient/ListOfPatClinics', component: ListOfPatClinics},
       {path: 'HomepageCCA/createMedCod', component: createMedicamentCodeBook},
       {path: 'HomepageCCA/createDiagCod', component: createDiagnosisCodeBook}, 
