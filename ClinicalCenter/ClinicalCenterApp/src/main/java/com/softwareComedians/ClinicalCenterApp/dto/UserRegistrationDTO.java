@@ -28,4 +28,21 @@ public class UserRegistrationDTO {
     @Email
     private String email;
 
+    @NotNull(message = "UCIDN must be provided")
+    private String ucidn;
+
+    @NotNull(message = "Address must be provided")
+    private String address;
+
+    @NotNull(message = "Phone must be provided")
+    private String phone;
+
+    @NotNull(message = "City must be provided")
+    private String city;
+
+    @NotNull(message = "Country must be provided")
+    private String country;
+
+    @NotNull(message = "Role must be provided")
+    private String role;
 }

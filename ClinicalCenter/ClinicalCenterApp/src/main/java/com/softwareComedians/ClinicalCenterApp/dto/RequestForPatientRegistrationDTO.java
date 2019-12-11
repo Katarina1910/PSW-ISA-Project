@@ -1,8 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.dto;
 
-import com.softwareComedians.ClinicalCenterApp.model.RequestForConsult;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForPatientRegistration;
-import com.softwareComedians.ClinicalCenterApp.model.User;
 
 public class RequestForPatientRegistrationDTO {
     private UserDTO userData;

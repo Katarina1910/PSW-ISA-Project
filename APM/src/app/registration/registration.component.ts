@@ -11,7 +11,7 @@ import { RequestForPatReg } from './requestForPatReg';
 })
 export class RegistrationComponent{
     userModel = new User(" "," "," "," "," "," "," "," "," "," "," ");
-    reqModel = new RequestForPatReg(this.userModel, null ,false, "");
+    reqModel = new RequestForPatReg(this.userModel, null, false, "");
     
     registerForm: FormGroup;
     submitted = false;
@@ -30,7 +30,7 @@ export class RegistrationComponent{
             phoneNumber: ['', Validators.required],
             username: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(6)]]
+            password: ['', [Validators.required, Validators.minLength(3)]]
         });
     }
     get f() { return this.registerForm.controls; }
@@ -48,6 +48,7 @@ export class RegistrationComponent{
             },
             error=> console.error('Error!',error)
         )
+
         this.submitted = true;
         if (this.registerForm.invalid) {
             return;

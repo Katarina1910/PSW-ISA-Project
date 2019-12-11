@@ -11,5 +11,4 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface RequestForPatientRegistrationRepository extends JpaRepository<RequestForPatientRegistration,Long> {
 
-
 }
