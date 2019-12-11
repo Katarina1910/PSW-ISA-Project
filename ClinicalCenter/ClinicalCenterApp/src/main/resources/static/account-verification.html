@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clinical Center - Account verification</title>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script>
+        function getParamFromUrl(name){
+            const results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            return results[1] || 0;
+        }
+
+        function verifyAccount(token) {
+            $.get(`/api/users/public/verify/${token}`, function(data, status) {
+                $('#verification-status').text('Your account is activated.');
+            }).fail(function() {
+                $('#verification-status').text('There was an error while activating your account');
+            });
+        }
+
+        $(document).ready(function() {
+            const token = getParamFromUrl('token');
+            verifyAccount(token);
+        });
+
+    </script>
+
+</head>
+<body>
+
+    <h1>Clinical Center - Account Verification</h1>
+
+    <h2 id="verification-status"></h2>
+
+    <a href="http://localhost:4200/">Clinical Center web application</a>
+
+</body>
+</html>

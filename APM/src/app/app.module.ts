@@ -33,6 +33,8 @@ import { PatientComponent } from './patientHomePage/patient.component';
 import { ListOfClinics } from './listOfClinics/listOfClinics.component';
 import { DeleteClinicsComponent } from './addNewClinic/deleteClinics.component';
 import { ListOfPatClinics } from './patientHomePage/listOfClinicsPat.component';
+import { PatientProfileSettingsComponent } from './patientProfileSettings/patientProfileSettings.component';
+import { MaterialModule } from './material';
 import { ListOfMedicament } from './listOfMedicaments/listOfMedicament.component';
 import { DeleteMedicamentComponent } from './createMedicamentCodeBook/deleteMedicament.component';
 import { ConsultTypeComponent } from './consultType/consultType.component';
@@ -70,6 +72,7 @@ import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.comp
     ListOfClinics,
     DeleteClinicsComponent,
     ListOfPatClinics,
+    PatientProfileSettingsComponent,
     ListOfMedicament,
     DeleteMedicamentComponent,
     ConsultTypeComponent,
@@ -80,6 +83,7 @@ import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.comp
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MaterialModule,
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
@@ -97,7 +101,6 @@ import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.comp
       {path: 'HomepageCCA/registerNewClinCenAdmin', component: RegisterNewClinicalCenterAdministrator},
       {path: 'HomepageCCA/addNewClinic', component: AddNewClinic},
       {path: 'HomepageCCA/ListOfClinics', component: ListOfClinics},
-      {path: 'HomepagePatient/ListOfPatClinics', component: ListOfPatClinics},
       {path: 'HomepageCCA/createMedCod', component: createMedicamentCodeBook},
       {path: 'HomepageCCA/createDiagCod', component: createDiagnosisCodeBook}, 
       {path: 'HomepageCA/addDoctor', component: AddDoctorComponent},
@@ -111,6 +114,8 @@ import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.comp
       {path: 'HomepageCCA/allMedicaments', component: DeleteMedicamentComponent},
       {path: 'HomepagePatient', component:PatientComponent},
       {path: 'HomepagePatient/listOfClinics', component:ListOfClinics},
+      {path: 'HomepagePatient/ListOfPatClinics', component: ListOfPatClinics},
+      {path: 'HomepagePatient/PatientProfileSettings', component: PatientProfileSettingsComponent},
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'},

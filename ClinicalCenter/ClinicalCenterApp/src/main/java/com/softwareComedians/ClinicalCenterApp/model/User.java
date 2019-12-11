@@ -173,7 +173,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isActivated;
     }
 
     public void setUsername(String username) {
@@ -199,6 +199,10 @@ public class User implements UserDetails {
 
     public void setActivated(boolean activated) {
         isActivated = activated;
+    }
+
+    public boolean getAccepted() {
+	    return isActivated;
     }
 
     public void setAuthorities(Set<Authority> authorities) {

@@ -16,7 +16,7 @@ import java.util.Date;
 @Component
 public class TokenUtils {
 
-    @Value("OnYourMind")
+    @Value("ClinicalCenter")
     private String APP_NAME;
 
     @Value("super-secret-code-value")

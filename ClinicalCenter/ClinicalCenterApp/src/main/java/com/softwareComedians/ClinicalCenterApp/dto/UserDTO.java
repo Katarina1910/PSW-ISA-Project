@@ -59,8 +59,8 @@ public class UserDTO {
         username=u.getUsername();
         password=u.getPassword();
         isActivated=u.isActivated();
-        authorities = u.getAuthorities().stream()
-                .map(authority -> ((Authority) authority).getName()).collect(Collectors.toList());
+        /*authorities = u.getAuthorities().stream()
+                .map(authority -> ((Authority) authority).getName()).collect(Collectors.toList());*/
     }
 
     public Long getId() {

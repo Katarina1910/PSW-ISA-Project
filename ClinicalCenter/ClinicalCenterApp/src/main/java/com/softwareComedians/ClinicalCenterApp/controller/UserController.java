@@ -4,6 +4,7 @@ import com.softwareComedians.ClinicalCenterApp.dto.RequestForPatientRegistration
 import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.UserRegistrationDTO;
 import com.softwareComedians.ClinicalCenterApp.mappers.UserMapper;
+import com.softwareComedians.ClinicalCenterApp.model.ConfirmationToken;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForPatientRegistration;
 import com.softwareComedians.ClinicalCenterApp.model.User;
 import com.softwareComedians.ClinicalCenterApp.service.RequestForPatientRegistrationService;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -31,6 +33,9 @@ public class UserController {
 
     @Autowired
 	private RequestForPatientRegistrationService requestForPatientRegistrationService;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@GetMapping("/public/{id}")
 	public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
@@ -65,20 +70,38 @@ public class UserController {
 		user.setEmail(rqDTO.getUserData().getEmail());
 		user.setPhone(rqDTO.getUserData().getPhone());
 		user.setUsername(rqDTO.getUserData().getUsername());
-		user.setPassword(rqDTO.getUserData().getPassword());
+		user.setPassword(passwordEncoder.encode(rqDTO.getUserData().getPassword()));
+		user.setRole("PATIENT");
 
 		user = userService.save(user);
 
 		RequestForPatientRegistration req = new RequestForPatientRegistration(user);
-		requestForPatientRegistrationService.save(req);
+		req = requestForPatientRegistrationService.save(req);
 
 		return new ResponseEntity<>(new RequestForPatientRegistrationDTO(req), HttpStatus.CREATED);
 	}
 
-	@PutMapping
-	public ResponseEntity<UserDTO> editUser(@RequestBody UserDTO user) {
-		User newUserInfo = userService.editUser(user);
-		return new ResponseEntity<>(UserMapper.toDto(newUserInfo), HttpStatus.OK);
+	@PutMapping(value = "/edit")
+	public ResponseEntity<UserDTO> editUser(@RequestBody UserDTO userDTO) {
+		//User newUserInfo = userService.editUser(user);
+		//newUserInfo = userService.save(newUserInfo);
+
+		User userInfo = userService.findById(userDTO.getId());
+		userInfo.setName(userDTO.getName());
+		userInfo.setSurname(userDTO.getSurname());
+		userInfo.setPhone(userDTO.getPhone());
+		userInfo.setUsername(userDTO.getUsername());
+		userInfo.setPassword(userDTO.getPassword());
+		userInfo.setActivated(userDTO.isActivated());
+		userInfo.setCountry(userDTO.getCountry());
+		userInfo.setCity(userDTO.getCity());
+		//userInfo.setId(userDTO.getId());
+		userInfo.setAddress(userDTO.getAddress());
+		userInfo.setUcidn(userDTO.getUcidn());
+
+		userInfo = userService.save(userInfo);
+
+		return new ResponseEntity<>(UserMapper.toDto(userInfo), HttpStatus.OK);
 	}
 
 	@PostMapping("/add-admin")

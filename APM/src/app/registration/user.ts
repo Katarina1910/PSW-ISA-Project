@@ -1,19 +1,39 @@
 export class User {
     constructor(
-        private id: string,
-        private  name: string,
-        private  surname: string,
-        private  ucidn: string,
-        private  address: string,
-        private  city: string,
-        private  country: string,
-        private  email: string,
-        private  phone: string,
-        private  username: string,
-        private  password: string
+        public id: string,
+        public  name: string,
+        public  surname: string,
+        public  ucidn: string,
+        public  address: string,
+        public  city: string,
+        public  country: string,
+        public  email: string,
+        public  phone: string,
+        public  username: string,
+        public  password: string
     ){}
 
     public getId(){
         return this.id;
     }
+
+    public getName(){
+        return this.name;
+    }
+
+    public getSurnname(){
+        return this.surname;
+    }
+
+    public getPhone(){
+        return this.phone;
+    }
+
+    public getEmail(){
+        return this.email;
+    }
+
+    public getUcidn(){
+        return this.ucidn;
+    }z
 }
