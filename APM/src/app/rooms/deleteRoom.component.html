@@ -1,0 +1,46 @@
+
+<div style="text-align:left">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Free</th>
+                    <th></th>
+                    <th></th>
+                
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = 'let d of rooms ' >
+                
+                    <td>{{d.name}}</td>
+                    <td>{{d.type}}</td>
+                    <td>{{d.free}}</td>
+                    <td><button  *ngIf = 'd.free' type="button" class="btn btn-outline-primary" (click)='deleteRoom(d.id)'>Delete</button></td>
+                    <td><button   type="button" *ngIf = 'd.free'  class="btn btn-outline-primary" (click)='editRoom(d)'>Edit</button></td>
+                    
+                </tr>
+            
+            </tbody>
+        </table>
+    </div>
+    <div  class="col-md-3 offset-md-9" *ngIf = 'edit' >
+        <form #userForm="ngForm" (ngSubmit)="onSubmit()" >
+        <fieldset>
+            Edit room:  
+            <br/>
+            <label>Name:</label>
+            <input type="text"  class="form-control" id="e" name="e"  [(ngModel)]="editModel.name" />
+            <label>Type:  </label>
+            <select  class="form-control" id="type" name="type"  [(ngModel)]="editModel.type" >
+            <option>examination</option>
+                <option>operation</option>
+            </select>
+            
+        <button  class="btn btn-primary">Edit</button>
+        </fieldset>
+        </form>
+    </div>
+</div>

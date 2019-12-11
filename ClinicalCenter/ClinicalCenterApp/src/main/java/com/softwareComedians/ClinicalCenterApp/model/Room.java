@@ -3,8 +3,6 @@ package com.softwareComedians.ClinicalCenterApp.model;
 import javax.persistence.*;
 import java.util.Set;
 
-enum Type {examination, operation}
-
 @Entity
 public class Room {
 
@@ -29,7 +27,9 @@ public class Room {
 
 	@OneToOne(mappedBy = "room")
 	private Operation operation;
-	
+
+
+
 	public Room() {
 		super();
 	}
@@ -63,6 +63,37 @@ public class Room {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Clinic getClinic() {
+		return clinic;
+	}
+
+	public void setClinic(Clinic clinic) {
+		this.clinic = clinic;
+	}
+
+	public Set<ConsultTerm> getConsultTerms() {
+		return consultTerms;
+	}
+
+	public void setConsultTerms(Set<ConsultTerm> consultTerms) {
+		this.consultTerms = consultTerms;
+	}
+
+	public Operation getOperation() {
+		return operation;
+	}
+
+	public void setOperation(Operation operation) {
+		this.operation = operation;
 	}
 	
 	
