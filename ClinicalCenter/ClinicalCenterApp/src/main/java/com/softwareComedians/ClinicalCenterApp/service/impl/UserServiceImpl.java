@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
         User user = this.createNewUserObject(userInfo, UserRoles.ROLE_USER);
         userRepository.save(user);
 
-        ConfirmationToken token = this.createConfirmationToken(user);
+        //ConfirmationToken token = this.createConfirmationToken(user);
         //mailSenderService.sendMailForRegistration(user, token);
 
         return user;
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
         User user = this.createNewUserObject(userInfo, UserRoles.ROLE_ADMIN);
         userRepository.save(user);
 
-        ConfirmationToken token = this.createConfirmationToken(user);
+        //ConfirmationToken token = this.createConfirmationToken(user);
         //mailSenderService.sendMailForRegistration(user, token);
 
         return user;
@@ -119,7 +119,13 @@ public class UserServiceImpl implements UserService {
         user.setName(userInfo.getName());
         user.setSurname(userInfo.getSurname());
         user.setEmail(userInfo.getEmail());
-        user.setActivated(true);
+        user.setActivated(false);
+        user.setAddress(userInfo.getAddress());
+        user.setCity(userInfo.getCity());
+        user.setCountry(userInfo.getCountry());
+        user.setPhone(userInfo.getPhone());
+        user.setUcidn(userInfo.getUcidn());
+        user.setRole(userInfo.getRole());
         //user.setLastPasswordResetDate(timeProvider.nowTimestamp());
         //user.setProfileImagePath(defaultProfileImage);
 
@@ -161,11 +167,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User editUser(UserDTO user) {
-        User userInfo = userHelper.getCurrentUser();
+        //User userInfo = userHelper.getCurrentUser();
+        User userInfo = new User();
 
         userInfo.setName(user.getName());
         userInfo.setSurname(user.getSurname());
-        userInfo.setEmail(user.getEmail());
+        userInfo.setPhone(user.getPhone());
+        userInfo.setUsername(user.getUsername());
+        userInfo.setPassword(user.getPassword());
+        userInfo.setActivated(user.isActivated());
+        userInfo.setCountry(user.getCountry());
+        userInfo.setCity(user.getCity());
+        userInfo.setCountry(user.getCountry());
+        userInfo.setId(user.getId());
+        userInfo.setAddress(user.getAddress());
+        userInfo.setUcidn(user.getUcidn());
 
         return userInfo;
     }
