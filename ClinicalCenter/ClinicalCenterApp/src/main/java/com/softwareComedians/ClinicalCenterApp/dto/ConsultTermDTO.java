@@ -1,33 +1,44 @@
 package com.softwareComedians.ClinicalCenterApp.dto;
 
 import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class ConsultTermDTO {
     private  String type;
     private Long id;
-    private  String duration;
-    private  String price;
-    private  String discount;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date;
+    private  Double duration;
+    private  Double price;
+    private  Double discount;
+    private  String doctor;
+    private  String room;
 
     public ConsultTermDTO() {
     }
 
-    public ConsultTermDTO(String type, Long id, String duration, String price, String discount) {
+    public ConsultTermDTO(String type, Long id, Date date, Double duration, Double price, Double discount, String doctor, String room) {
         this.type = type;
         this.id = id;
+        this.date = date;
         this.duration = duration;
         this.price = price;
         this.discount = discount;
+        this.doctor = doctor;
+        this.room = room;
     }
 
     public ConsultTermDTO(ConsultTerm c){
         id=c.getId();
-        type=c.getType();
+        type=c.getType().getName();
+        date = c.getDate();
         duration=c.getDuration();
         price=c.getPrice();
         discount=c.getDiscount();
+        doctor = c.getDoctor().getName();
+        room = c.getRoom().getName();
     }
 
     public String getType() {
@@ -46,27 +57,51 @@ public class ConsultTermDTO {
         this.id = id;
     }
 
-    public String getDuration() {
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Double getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(Double duration) {
         this.duration = duration;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public String getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(String discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
+    }
+
+    public String getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(String doctor) {
+        this.doctor = doctor;
+    }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
     }
 }

@@ -3,8 +3,10 @@ package com.softwareComedians.ClinicalCenterApp.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -16,16 +18,27 @@ public class ConsultTerm {
 	private Long id;
 
 	@Column
-	private String type;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date date;
+
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private ConsultType type;
 
 	@Column
-	private String duration;
+	private Double duration;
 
 	@Column
-	private String price;
+	private Double price;
 
 	@Column
-	private String discount;
+	private Double discount;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Room room;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Doctor doctor;
 
 	@OneToOne(mappedBy = "consultTerm")
 	private RequestForConsult requestForConsult;
@@ -33,8 +46,6 @@ public class ConsultTerm {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "consultTerm")
 	private Set<Personnel> personnels;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Room room;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Clinic clinic;
@@ -55,36 +66,36 @@ public class ConsultTerm {
 		this.id = id;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getDuration() {
+	public Double getDuration() {
 		return duration;
 	}
 
-	public void setDuration(String duration) {
+	public void setDuration(Double duration) {
 		this.duration = duration;
 	}
 
-	public String getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public String getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(String discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
+	}
+
+	public Doctor getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
 	}
 
 	public Set<Personnel> getPersonnels() {
@@ -117,5 +128,30 @@ public class ConsultTerm {
 
 	public void setPatient(Patient patient) {
 		this.patient = patient;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+
+	public ConsultType getType() {
+		return type;
+	}
+
+	public void setType(ConsultType type) {
+		this.type = type;
+	}
+
+	public RequestForConsult getRequestForConsult() {
+		return requestForConsult;
+	}
+
+	public void setRequestForConsult(RequestForConsult requestForConsult) {
+		this.requestForConsult = requestForConsult;
 	}
 }

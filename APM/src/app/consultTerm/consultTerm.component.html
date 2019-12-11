@@ -1,28 +1,48 @@
 <form #userForm="ngForm" (ngSubmit)="onSubmit()" class="d-flex p-2 justify-content-center">
     <fieldset>
       <legend>Consult Term</legend>
+
+      <div class="form-group">
+        <label for="exampleSelect1">Date:</label>
+        <input type="datetime" class="form-control" id="date"  [(ngModel)]="consultTermModel.date" name="date">
+      </div>
  
       <div class="form-group">
-        <label for="exampleSelect1">Type:</label>
-        <select class="form-control" id="exampleSelect1"  [(ngModel)]="consultTermModel.type" name="type">
+          <label for="exampleSelect1">Type:</label>
+        <select class="form-control" id="tyoe"  [(ngModel)]="consultTermModel.type" name="type">
+          <option [ngValue]="null">Select Category</option>
+          <option *ngFor = 'let t of types' name="type">{{t.name}}</option>
         </select>
       </div>
 
       <div class="form-group" >
         <label class="col-form-label" for="inputDefault"> Duration:</label>
-        <input type="text" class="form-control" id="duration"  [(ngModel)]="consultTermModel.duration" name="duration">
+        <input type="number" class="form-control" id="duration"  [(ngModel)]="consultTermModel.duration" name="duration">
       </div>
 
-  
+      <div class="form-group" >
+        <label class="col-form-label" for="inputDefault"> Price:</label>
+        <input type="number" class="form-control" id="price"  [(ngModel)]="consultTermModel.price" name="price">
+      </div>
 
       <div class="form-group" >
         <label class="col-form-label" for="inputDefault"> Discount:</label>
-        <input type="text" class="form-control" id="discount"  [(ngModel)]="consultTermModel.discount" name="discount">
+        <input type="number" class="form-control" id="discount"  [(ngModel)]="consultTermModel.discount" name="discount">
       </div>
 
       <div class="form-group">
         <label for="exampleSelect1">Room:</label>
-        <select class="form-control" id="room"  [(ngModel)]="consultTermModel.room" name="room">
+        <select class="form-control" id="room"  [(ngModel)]="consultTermModel.room" name="room" >
+          <option [ngValue]="null">Select Category</option>
+          <option *ngFor = 'let d of rooms' name="room" >{{d.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleSelect1">Doctor:</label>
+        <select class="form-control" id="doctor"  [(ngModel)]="consultTermModel.doctor" name="doctor">
+          <option [ngValue]="null">Select Category</option>
+          <option  *ngFor = 'let o of doctors' name = "doc" >{{o.name}}</option>
         </select>
       </div>
       
