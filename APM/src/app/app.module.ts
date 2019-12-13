@@ -39,6 +39,7 @@ import { DeleteMedicamentComponent } from './createMedicamentCodeBook/deleteMedi
 
 import { ConsultTypeComponent } from './consultType/consultType.component';
 import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.component';
+import { AddClinicAdminComponent } from './addNewClinicAdministrator/addNewClinicAdministrator.component';
 
 
 
@@ -77,8 +78,13 @@ import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.comp
     DeleteMedicamentComponent,
 
     ConsultTypeComponent,
+<<<<<<< Updated upstream
     DeleteConsultTypeComponent
 
+=======
+    DeleteConsultTypeComponent,
+    AddClinicAdminComponent
+>>>>>>> Stashed changes
     ],
   imports: [
     BrowserModule,
@@ -100,6 +106,7 @@ import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.comp
       {path: 'HomepageNurse/RecipeValidation', component:RecipeValidation},
       {path: 'HomepageCCA/arrivedReq', component : arrivedRequest},
       {path: 'HomepageCCA/registerNewClinCenAdmin', component: RegisterNewClinicalCenterAdministrator},
+      {path: 'HomepageCCA/registerNewClinAdmin', component: AddClinicAdminComponent},
       {path: 'HomepageCCA/addNewClinic', component: AddNewClinic},
       {path: 'HomepageCCA/ListOfClinics', component: ListOfClinics},
       {path: 'HomepageCCA/allMedicaments', component: ListOfMedicament},
