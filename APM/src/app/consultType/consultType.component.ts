@@ -19,8 +19,9 @@ export class ConsultTypeComponent{
        .subscribe(
            data=> {
                alert('Success!');
+               this.router.navigate(['/HomepageCA']);
                console.log('Success!', JSON.stringify(data));
-               this.router.navigate(['/welcome']);
+               
            },
             error=> console.error('Error!',error)
         )

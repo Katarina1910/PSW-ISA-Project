@@ -49,7 +49,7 @@ export class ConsultTermComponent implements OnInit {
            data=> {
                alert('Success!');
                console.log('Success!', JSON.stringify(data));
-               this.router.navigate(['/welcome']);
+               this.router.navigate(['/HomepageCA']);
            },
             error=> console.error('Error!',error)
         )

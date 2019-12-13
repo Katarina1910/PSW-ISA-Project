@@ -33,6 +33,7 @@ public class RequestForPatientRegistration {
 	public RequestForPatientRegistration(User user) {
 		this.userData = user;
 		this.isAccepted=false;
+		this.reasonOfRejection="Razlog za odbijanje zahteva: ";
 	}
 
 	public Long getId() {
@@ -58,6 +59,8 @@ public class RequestForPatientRegistration {
 	public void setAccepted(boolean accepted) {
 		isAccepted = accepted;
 	}
+
+	public boolean getAccepted() { return isAccepted; }
 
 	public String getReasonOfRejection() {
 		return reasonOfRejection;

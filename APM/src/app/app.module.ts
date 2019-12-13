@@ -33,10 +33,10 @@ import { PatientComponent } from './patientHomePage/patient.component';
 import { ListOfClinics } from './listOfClinics/listOfClinics.component';
 import { DeleteClinicsComponent } from './addNewClinic/deleteClinics.component';
 import { ListOfPatClinics } from './patientHomePage/listOfClinicsPat.component';
-
+import { PatientProfileSettingsComponent } from './patientProfileSettings/patientProfileSettings.component';
+import { MaterialModule } from './material';
 import { ListOfMedicament } from './listOfMedicaments/listOfMedicament.component';
 import { DeleteMedicamentComponent } from './createMedicamentCodeBook/deleteMedicament.component';
-
 import { ConsultTypeComponent } from './consultType/consultType.component';
 import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.component';
 import { AddClinicAdminComponent } from './addNewClinicAdministrator/addNewClinicAdministrator.component';
@@ -73,24 +73,19 @@ import { AddClinicAdminComponent } from './addNewClinicAdministrator/addNewClini
     ListOfClinics,
     DeleteClinicsComponent,
     ListOfPatClinics,
-
+    PatientProfileSettingsComponent,
     ListOfMedicament,
     DeleteMedicamentComponent,
-
     ConsultTypeComponent,
-<<<<<<< Updated upstream
-    DeleteConsultTypeComponent
-
-=======
     DeleteConsultTypeComponent,
     AddClinicAdminComponent
->>>>>>> Stashed changes
     ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MaterialModule,
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
@@ -109,8 +104,6 @@ import { AddClinicAdminComponent } from './addNewClinicAdministrator/addNewClini
       {path: 'HomepageCCA/registerNewClinAdmin', component: AddClinicAdminComponent},
       {path: 'HomepageCCA/addNewClinic', component: AddNewClinic},
       {path: 'HomepageCCA/ListOfClinics', component: ListOfClinics},
-      {path: 'HomepageCCA/allMedicaments', component: ListOfMedicament},
-      {path: 'HomepagePatient/ListOfPatClinics', component: ListOfPatClinics},
       {path: 'HomepageCCA/createMedCod', component: createMedicamentCodeBook},
       {path: 'HomepageCCA/createDiagCod', component: createDiagnosisCodeBook}, 
       {path: 'HomepageCA/addDoctor', component: AddDoctorComponent},
@@ -124,6 +117,8 @@ import { AddClinicAdminComponent } from './addNewClinicAdministrator/addNewClini
       {path: 'HomepageCCA/allMedicaments', component: DeleteMedicamentComponent},
       {path: 'HomepagePatient', component:PatientComponent},
       {path: 'HomepagePatient/listOfClinics', component:ListOfClinics},
+      {path: 'HomepagePatient/ListOfPatClinics', component: ListOfPatClinics},
+      {path: 'HomepagePatient/PatientProfileSettings', component: PatientProfileSettingsComponent},
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'},

@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 export class DeleteMedicamentComponent implements OnInit{
 
     public medicaments: Medicament[];
+    public editModel = new Medicament(null,null,null, null);
+    edit : boolean = false;
+    public editedMed:Medicament;
 
     constructor(private _deleteMedicamentService: DeleteMedicamentService, private router: Router) {}
 
@@ -30,9 +33,31 @@ export class DeleteMedicamentComponent implements OnInit{
            this._deleteMedicamentService.deleteMedicaments(id).subscribe(
                 data=>{
                     alert('Medicament deleted!');
-                    this.router.navigate(['/HomepageCCA']);
+                    this.router.navigate(['/HomepageCCA/allMedicaments']);
                 },
                 error => console.error('Error!',error)
             )
         }
+
+        editMedicament(m:Medicament):void{   
+            this.edit = true;
+            this.editModel.name = m.name;
+            this.editModel.description = m.description;
+            this.editModel.id = m.id;
+            this.editModel.code = m.code;
+        }
+
+        onSubmit(){
+            this._deleteMedicamentService.editMedicament(this.editModel).subscribe(
+                data=>{
+                    alert('Medicament edited!');
+                    this.editedMed = data as Medicament;
+                    
+                    this.router.navigate(['/HomepageCCA']);
+                },
+                error=> console.error('Error!', error)
+            )
+            this.edit = false; 
+        }
+
     }

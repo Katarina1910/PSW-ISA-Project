@@ -59,7 +59,7 @@ export class DeleteConsultTypeComponent implements OnInit {
                 alert('Consult type edited!');
                 this.editedType = data as ConsultType;
                 
-                this.router.navigate(['/HomepageCA/allRooms']);
+                this.router.navigate(['/HomepageCA']);
             },
             error=> console.error('Error!', error)
         )
