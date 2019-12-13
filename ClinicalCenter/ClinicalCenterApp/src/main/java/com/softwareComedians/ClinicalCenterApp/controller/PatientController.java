@@ -25,13 +25,14 @@ public class PatientController {
     }
 
     //u front endu ovo pozovi za accept(gadja ga link)
-    @GetMapping(value = "add/{id}")
+    @PostMapping(value = "add/{id}")
     public ResponseEntity<Void> addPatient(@PathVariable Long id){
 
         RequestForPatientRegistration request = requestForPatientRegistrationService.findOne(id);
         requestForPatientRegistrationService.remove(id);
 
         Patient patient = new Patient();
+        //patient.setId(request.getUserData().getId());
         patient.setName(request.getUserData().getName());
         patient.setSurname(request.getUserData().getSurname());
         patient.setUcidn(request.getUserData().getUcidn());
@@ -43,6 +44,7 @@ public class PatientController {
         patient.setCountry(request.getUserData().getCountry());
         patient.setPhone(request.getUserData().getPhone());
         patient.setActivated(request.getUserData().isActivated());
+        patient.setRole(request.getUserData().getRole());
 
         patient = patientService.save(patient);
 

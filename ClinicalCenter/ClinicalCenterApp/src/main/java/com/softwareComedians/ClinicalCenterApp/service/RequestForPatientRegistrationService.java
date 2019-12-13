@@ -2,8 +2,10 @@ package com.softwareComedians.ClinicalCenterApp.service;
 
 import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForPatientRegistration;
+import com.softwareComedians.ClinicalCenterApp.model.User;
 import com.softwareComedians.ClinicalCenterApp.repository.ConsultTermRepository;
 import com.softwareComedians.ClinicalCenterApp.repository.RequestForPatientRegistrationRepository;
+import com.softwareComedians.ClinicalCenterApp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ public class RequestForPatientRegistrationService {
 
     private RequestForPatientRegistrationRepository requestForPatientRegistrationRepository;
 
+    private UserRepository userRepository;
+
     @Autowired
     public RequestForPatientRegistrationService(RequestForPatientRegistrationRepository requestForPatientRegistrationRepository) {
         this.requestForPatientRegistrationRepository = requestForPatientRegistrationRepository;
@@ -23,7 +27,7 @@ public class RequestForPatientRegistrationService {
         return requestForPatientRegistrationRepository.save(requestForPatientRegistration);
     }
 
-    public List<RequestForPatientRegistration> getAll(){
+    public List<RequestForPatientRegistration> findAll() {
         return  requestForPatientRegistrationRepository.findAll();
     }
 
@@ -39,4 +43,5 @@ public class RequestForPatientRegistrationService {
         requestForPatientRegistrationRepository.save(regForPatientReq);
 
     }
+
 }

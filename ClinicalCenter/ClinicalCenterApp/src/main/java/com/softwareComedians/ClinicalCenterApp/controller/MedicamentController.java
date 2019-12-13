@@ -47,4 +47,15 @@ public class MedicamentController {
         medicamentService.remove(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
+
+    @PutMapping(value = "/edit")
+    public ResponseEntity<MedicamentDTO> editConsultType (@RequestBody MedicamentDTO medicamentDTO) {
+        Medicament m = medicamentService.findOne(medicamentDTO.getId());
+        m.setName(medicamentDTO.getName());
+        m.setCode(medicamentDTO.getCode());
+        m.setDescription((medicamentDTO.getDescription()));
+        m = medicamentService.save(m);
+
+        return new ResponseEntity<>(new MedicamentDTO(m), HttpStatus.OK);
+    }
 }

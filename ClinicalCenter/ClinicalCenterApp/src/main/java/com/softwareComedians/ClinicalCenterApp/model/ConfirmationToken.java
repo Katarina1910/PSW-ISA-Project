@@ -23,6 +23,9 @@ public class ConfirmationToken {
     @OneToOne
     private User user;
 
+    @OneToOne
+    private RequestForPatientRegistration rq;
+
     public ConfirmationToken() {
     }
 
@@ -30,6 +33,12 @@ public class ConfirmationToken {
         this.token = UUID.randomUUID().toString();
         this.createdDatetime = new Date();
         this.user = user;
+    }
+
+    public ConfirmationToken(RequestForPatientRegistration rq) {
+        this.token = UUID.randomUUID().toString();
+        this.createdDatetime = new Date();
+        this.rq = rq;
     }
 
     public Long getId() {
