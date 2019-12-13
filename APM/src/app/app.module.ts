@@ -39,6 +39,7 @@ import { ListOfMedicament } from './listOfMedicaments/listOfMedicament.component
 import { DeleteMedicamentComponent } from './createMedicamentCodeBook/deleteMedicament.component';
 import { ConsultTypeComponent } from './consultType/consultType.component';
 import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.component';
+import { AddClinicAdminComponent } from './addNewClinicAdministrator/addNewClinicAdministrator.component';
 
 
 
@@ -76,7 +77,8 @@ import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.comp
     ListOfMedicament,
     DeleteMedicamentComponent,
     ConsultTypeComponent,
-    DeleteConsultTypeComponent
+    DeleteConsultTypeComponent,
+    AddClinicAdminComponent
     ],
   imports: [
     BrowserModule,
@@ -99,6 +101,7 @@ import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.comp
       {path: 'HomepageNurse/RecipeValidation', component:RecipeValidation},
       {path: 'HomepageCCA/arrivedReq', component : arrivedRequest},
       {path: 'HomepageCCA/registerNewClinCenAdmin', component: RegisterNewClinicalCenterAdministrator},
+      {path: 'HomepageCCA/registerNewClinAdmin', component: AddClinicAdminComponent},
       {path: 'HomepageCCA/addNewClinic', component: AddNewClinic},
       {path: 'HomepageCCA/ListOfClinics', component: ListOfClinics},
       {path: 'HomepageCCA/createMedCod', component: createMedicamentCodeBook},

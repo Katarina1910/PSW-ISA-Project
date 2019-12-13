@@ -1,5 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 
+import com.softwareComedians.ClinicalCenterApp.dto.ClinicAdminDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,10 +18,31 @@ public class ClinicAdministrator extends User {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Clinic clinic;
 
-	public ClinicAdministrator() {
+	public ClinicAdministrator(ClinicAdminDTO ca){
+		this.setId(ca.getId());
+		this.setName(ca.getName());
+		this.setSurname((ca.getSurname()));
+		this.setUcidn(ca.getUcidn());
+		this.setEmail(ca.getEmail());
+		this.setPassword(ca.getPassword());
+		this.setUsername(ca.getUsername());
+		this.setPhone(ca.getPhone());
+		this.setAddress(ca.getAddress());
+		this.setCity(ca.getCity());
+		this.setCountry(ca.getCountry());
+		this.setActivated(ca.isActivated());
 
+	}
+
+	public ClinicAdministrator() {
 		super();
 	}
 
-	
+	public Clinic getClinic() {
+		return clinic;
+	}
+
+	public void setClinic(Clinic clinic) {
+		this.clinic = clinic;
+	}
 }

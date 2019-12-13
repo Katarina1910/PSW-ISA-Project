@@ -8,6 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface ClinicsRepository extends JpaRepository<Clinic,Long> {
 
         Clinic findByName(String name);
-
-         void deleteByName(String name);
+        void deleteById(Long id);
 }

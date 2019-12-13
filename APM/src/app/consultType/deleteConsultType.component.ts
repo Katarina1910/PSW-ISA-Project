@@ -56,7 +56,7 @@ export class DeleteConsultTypeComponent implements OnInit {
     onSubmit(){
         this._deleteConsultTypeService.editCOnsutType(this.editModel).subscribe(
             data=>{
-                alert('Room edited!');
+                alert('Consult type edited!');
                 this.editedType = data as ConsultType;
                 
                 this.router.navigate(['/HomepageCA']);
