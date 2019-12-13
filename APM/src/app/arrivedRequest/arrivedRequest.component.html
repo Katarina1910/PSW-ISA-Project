@@ -20,8 +20,8 @@
                    <td>{{ar.userData.ucidn}}</td>
                    <td>{{ar.userData.id}}</td>
                    <td><input type="text" value="Reason of rejection..." hidden="true"/> </td>
-                   <td><button type="button" class="btn btn-outline-primary" (click)="onClick(ar.userData.id)">Accept</button></td>
-                   <td><button type="button" class="btn btn-primary" (click)="onClickReject(ar.userData.id)" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Reject</button>
+                   <td><button type="button" class="btn btn-outline-primary" (click)="onClick(ar.userData.id,ar.userData.email)">Accept</button></td>
+                   <td><button type="button" class="btn btn-primary" (click)="onClickReject(ar.userData.id,ar.userData.email)" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Reject</button>
                    </td>
                 </tr>
         </tbody> 
@@ -39,14 +39,13 @@
                   <form>
                     <div class="form-group">
                       <label for="message-text" class="col-form-label">Message:</label>
-                      <textarea class="form-control" id="message-text"></textarea>
+                      <textarea class="form-control" id="message-text"   [(ngModel)]="reason"></textarea>
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onClickSendMessage()">Send message</button>
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Reject</button>
                 </div>
               </div>
             </div>

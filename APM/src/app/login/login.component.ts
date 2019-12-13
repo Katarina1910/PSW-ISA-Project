@@ -40,6 +40,7 @@ export class LoginComponent{
             //localStorage.setItem(USER_ROLE_KEY, data.authorities[0]);
             localStorage.setItem(USERNAME_KEY, data.username);
             localStorage.setItem(USER_TOKEN_KEY, data.token.accessToken);
+            localStorage.setItem(USER_ROLE_KEY, data.role)
             
             alert("Loged in!");
             this.router.navigate(['/welcome']);

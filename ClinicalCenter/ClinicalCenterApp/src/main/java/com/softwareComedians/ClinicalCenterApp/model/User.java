@@ -74,6 +74,21 @@ public class User implements UserDetails {
 
 	}
 
+    public User(Long id, String name, String surname, String ucidn, String address, String city, String country, String email, String phone, String username, String password, boolean isActivated) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.ucidn = ucidn;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.email = email;
+        this.phone = phone;
+        this.username = username;
+        this.password = password;
+        this.isActivated = isActivated;
+    }
+
     public void setRole(String role) {
         this.role = role;
     }

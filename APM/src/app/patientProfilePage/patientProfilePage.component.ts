@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class PatientProfilePageComponent implements OnInit {
 
-  user: User = new User("","","","","","","","","","","");
+  user: User = new User("","","","","","","","","","","","");
   
   private userId: number;
   http: any;
