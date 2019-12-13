@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RequestForPatReg } from './requestForPatReg';
 import { Observable } from 'rxjs';
-import { USER_ID_KEY } from '../config/local-storage-keys';
+import { USER_ID_KEY, USER_ROLE_KEY } from '../config/local-storage-keys';
 import { API_GET_USER } from '../config/api-paths';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService{
+
+   role:String= localStorage.getItem(USER_ROLE_KEY);
+ 
     
     _url = 'http://localhost:8080/api/users/public/add-user';
     _url1 = 'http://localhost:8080/api/users/public';
@@ -24,7 +27,7 @@ export class UserService{
     }
 
     isUserLoggedIn(): boolean {
-        return localStorage.getItem(USER_ID_KEY) != null;
+        return (localStorage.getItem(USER_ID_KEY) != null);
     }
 
     public getUserInfo(): Observable<any> {

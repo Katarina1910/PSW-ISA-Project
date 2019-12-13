@@ -25,27 +25,15 @@ public class PatientController {
     }
 
     //u front endu ovo pozovi za accept(gadja ga link)
-    @PostMapping(value = "add/{id}")
+    @GetMapping(value = "add/{id}")
     public ResponseEntity<Void> addPatient(@PathVariable Long id){
 
         RequestForPatientRegistration request = requestForPatientRegistrationService.findOne(id);
         requestForPatientRegistrationService.remove(id);
 
-        Patient patient = new Patient();
-        //patient.setId(request.getUserData().getId());
-        patient.setName(request.getUserData().getName());
-        patient.setSurname(request.getUserData().getSurname());
-        patient.setUcidn(request.getUserData().getUcidn());
-        patient.setUsername(request.getUserData().getUsername());
-        patient.setEmail(request.getUserData().getEmail());
-        patient.setPassword(request.getUserData().getPassword());
-        patient.setAddress(request.getUserData().getAddress());
-        patient.setCity(request.getUserData().getCity());
-        patient.setCountry(request.getUserData().getCountry());
-        patient.setPhone(request.getUserData().getPhone());
-        patient.setActivated(request.getUserData().isActivated());
-        patient.setRole(request.getUserData().getRole());
-
+        Patient patient = new Patient(request.getUserData());
+        patient.setActivated(true);
+        patient.setRole("PATIENT");
         patient = patientService.save(patient);
 
         if(patient!=null)

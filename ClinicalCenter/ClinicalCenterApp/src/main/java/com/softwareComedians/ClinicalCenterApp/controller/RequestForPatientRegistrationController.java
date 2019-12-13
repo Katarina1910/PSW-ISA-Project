@@ -2,8 +2,10 @@ package com.softwareComedians.ClinicalCenterApp.controller;
 
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForPatientRegistrationDTO;
 import com.softwareComedians.ClinicalCenterApp.model.ConfirmationToken;
+import com.softwareComedians.ClinicalCenterApp.model.Patient;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForPatientRegistration;
 import com.softwareComedians.ClinicalCenterApp.repository.ConfirmationTokenRepository;
+import com.softwareComedians.ClinicalCenterApp.service.PatientService;
 import com.softwareComedians.ClinicalCenterApp.service.RequestForPatientRegistrationService;
 import com.softwareComedians.ClinicalCenterApp.service.email.MailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +90,7 @@ public class RequestForPatientRegistrationController {
 
         ConfirmationToken token = this.createConfirmationToken(regForPatientReq);
         mailSenderService.sendMailForRegistration(regForPatientReq, token);
+
 
         return new ResponseEntity<>(HttpStatus.OK);
 

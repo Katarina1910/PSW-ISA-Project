@@ -10,6 +10,8 @@
 
         public arrReq : arrivedRequest[];
         public pomocnaId: any;
+        public email:any;
+        public reason:string;
         constructor(private _arrivedRequestService: arrivedRequestService) {}
 
         ngOnInit(){
@@ -22,8 +24,8 @@
             )
         }
         
-        onClick(id:any): void{
-            this._arrivedRequestService.sendActivationEmail(id, this.arrReq).subscribe(
+        onClick(id:any,email:any): void{
+            this._arrivedRequestService.sendActivationEmail(id,email, this.arrReq).subscribe(
             data=> {
                 alert('Request has been sent!')
                 console.log('Success!', JSON.stringify(data))
@@ -41,12 +43,13 @@
 */
         }
 
-        onClickReject(id:any): void{
+        onClickReject(id:any,email:any): void{
             this.pomocnaId = id;
+            this.email = email;
         }
 
         onClickSendMessage(): void{
-            this._arrivedRequestService.sendRejectEmail(this.pomocnaId).subscribe(
+            this._arrivedRequestService.sendRejectEmail(this.email,this.reason).subscribe(
             data=> {
                 alert('Reject has been sent!')
                 console.log('Success!', JSON.stringify(data))

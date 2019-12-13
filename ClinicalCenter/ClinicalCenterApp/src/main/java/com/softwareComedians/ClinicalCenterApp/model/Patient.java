@@ -29,5 +29,10 @@ public class Patient extends User {
 		super();
 	}
 
+	public Patient(User u){
+		super(u.getId(),u.getName(),u.getSurname(),u.getUcidn(),u.getAddress(), u.getCity(),
+				u.getCountry(), u.getEmail(), u.getPhone(), u.getUsername(), u.getPassword(), u.isActivated());
+	}
+
 	
 }

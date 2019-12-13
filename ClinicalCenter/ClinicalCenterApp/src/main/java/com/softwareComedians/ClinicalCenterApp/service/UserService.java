@@ -19,6 +19,10 @@ public interface UserService {
     void verifyUserAccount(String token);
 
     User save(User u);
+
+    User findByEmail(String mail);
+
+    void remove(User u);
     /*
 @Service
 public class UserService {
