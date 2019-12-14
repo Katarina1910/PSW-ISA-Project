@@ -4,17 +4,17 @@
 
       <div class="form-group" >
         <label class="col-form-label" for="inputDefault"> Name:</label>
-        <input type="text" class="form-control" id="name"  name="name" [(ngModel)] = "medicamentModel.name"/>
+        <input type="text" class="form-control" id="name"  name="name" [(ngModel)] = "diagModel.name"/>
       </div>
 
       <div class="form-group" >
         <label class="col-form-label" for="inputDefault"> Code:</label>
-        <input type="text" class="form-control" id="code"  name="code" [(ngModel)] = "medicamentModel.code">
+        <input type="text" class="form-control" id="code"  name="code" [(ngModel)] = "diagModel.code">
       </div>
       
       <div class="form-group">
         <label for="exampleTextarea">Description: </label>
-        <textarea class="form-control" id="description" name="description" rows="3" [(ngModel)] = "medicamentModel.description"></textarea>
+        <textarea class="form-control" id="description" name="description" rows="3" [(ngModel)] = "diagModel.description"></textarea>
       </div>
 
       <button type="submit" class="btn btn-primary">Add</button>

@@ -12,22 +12,22 @@
                <th></th>
              </tr>
     </thead>
-    <!-- <tbody>
-        <tr *ngFor = 'let m of medicaments' > 
-             <td>{{m.name}}</td>
-             <td>{{m.code}}</td>
-             <td>{{m.description}}</td>
-             <td><button type="button" class="btn btn-outline-primary" (click)='deleteMedicaments(m.id)'>Delete</button></td>
-             <td><button type="button"  class="btn btn-outline-primary" (click)='editMedicament(m)'>Edit</button></td>    
+    <tbody>
+        <tr *ngFor = 'let d of diagnosis' > 
+             <td>{{d.name}}</td>
+             <td>{{d.code}}</td>
+             <td>{{d.description}}</td>
+             <td><button type="button" class="btn btn-outline-primary" (click)='deleteDiagnosis(d.id)'>Delete</button></td>
+             <td><button type="button"  class="btn btn-outline-primary" (click)='editDiagnosis(d)'>Edit</button></td>    
             </tr>
-        </tbody> -->
+        </tbody>
     </table>
 </div>
-<!-- 
+
 <div  class="col-md-3 offset-md-9" *ngIf = 'edit' >
     <form #userForm="ngForm" (ngSubmit)="onSubmit()" >
     <fieldset>
-        Edit consult type:  
+        Edit diagnosis:  
         <br/>
         <label>Name:</label>
         <input type="text"  class="form-control" id="e" name="e"  [(ngModel)]="editModel.name" />
@@ -38,4 +38,4 @@
     <button  class="btn btn-primary">Edit</button>
     </fieldset>
     </form>
-</div> -->
+</div>
