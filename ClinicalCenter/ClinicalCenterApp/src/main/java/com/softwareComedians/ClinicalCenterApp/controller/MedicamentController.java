@@ -34,7 +34,7 @@ public class MedicamentController {
     }
 
     @PostMapping()
-    public  ResponseEntity<MedicamentDTO> addClinics(@RequestBody MedicamentDTO medicamentDTO){
+    public  ResponseEntity<MedicamentDTO> addMedicament(@RequestBody MedicamentDTO medicamentDTO){
         Medicament medicament = new Medicament(medicamentDTO);
         medicament = medicamentService.save(medicament);
 
@@ -49,7 +49,7 @@ public class MedicamentController {
     }
 
     @PutMapping(value = "/edit")
-    public ResponseEntity<MedicamentDTO> editConsultType (@RequestBody MedicamentDTO medicamentDTO) {
+    public ResponseEntity<MedicamentDTO> editMedicament (@RequestBody MedicamentDTO medicamentDTO) {
         Medicament m = medicamentService.findOne(medicamentDTO.getId());
         m.setName(medicamentDTO.getName());
         m.setCode(medicamentDTO.getCode());

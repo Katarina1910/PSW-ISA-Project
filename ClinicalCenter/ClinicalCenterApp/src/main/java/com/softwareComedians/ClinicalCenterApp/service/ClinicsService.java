@@ -19,8 +19,8 @@ public class ClinicsService {
 
     public List<Clinic> findAll(){return  clinicsRepository.findAll();}
 
-    public Clinic findById(String id){
-        Clinic clinic = clinicsRepository.findByName(id);
+    public Clinic findById(Long id){
+        Clinic clinic = clinicsRepository.findById(id).orElseGet(null);
         return clinic;
     }
 

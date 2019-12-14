@@ -1,0 +1,26 @@
+<h1  class="d-flex p-2 justify-content-center">Diagnosis Codebook</h1>
+<p>&nbsp;</p>        
+
+<div class='table-responsive' class="d-flex p-2 justify-content-center">
+    <table class='table'>
+    <thead>
+            <tr>
+               <th>Name</th>
+               <th>Code </th>
+               <th>Description </th>
+               <th></th>
+               <th></th>
+             </tr>
+    </thead>
+    <tbody>
+            <tr *ngFor = 'let m of listMed'>
+               <td>{{m.name}}</td>
+               <td>{{m.code}}</td>
+               <td>{{m.description}}</td>
+               <td><button type="button" class="btn btn-outline-primary">Delete</button></td>
+               <td><button type="button" class="btn btn-outline-primary">Edit</button></td>
+            </tr>
+    </tbody> 
+        
+    </table>
+</div>
