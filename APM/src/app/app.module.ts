@@ -41,6 +41,7 @@ import { ConsultTypeComponent } from './consultType/consultType.component';
 import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.component';
 import { AddClinicAdminComponent } from './addNewClinicAdministrator/addNewClinicAdministrator.component';
 import { DeleteDiagnosisComponent } from './createDiagCodeBook/deleteDiagnosis.component';
+import { RequestExamination } from './patientRequestExamination/requestExamination.component';
 // import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
 
 
@@ -82,6 +83,7 @@ import { DeleteDiagnosisComponent } from './createDiagCodeBook/deleteDiagnosis.c
     DeleteConsultTypeComponent,
     AddClinicAdminComponent,
     DeleteDiagnosisComponent,
+    RequestExamination,
     //ListOfDiagnosis
     ],
   imports: [
@@ -124,6 +126,7 @@ import { DeleteDiagnosisComponent } from './createDiagCodeBook/deleteDiagnosis.c
       {path: 'HomepagePatient/listOfClinics', component:ListOfClinics},
       {path: 'HomepagePatient/ListOfPatClinics', component: ListOfPatClinics},
       {path: 'HomepagePatient/PatientProfileSettings', component: PatientProfileSettingsComponent},
+      {path: 'HomepagePatient/requestExamination', component: RequestExamination},
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'},
