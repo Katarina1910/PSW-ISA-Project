@@ -4,6 +4,8 @@ import com.softwareComedians.ClinicalCenterApp.repository.ConsultTermRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ConsultTermService {
     @Autowired
@@ -15,5 +17,9 @@ public class ConsultTermService {
 
     public void remove(Long id){
         consultTermRepository.deleteById(id);
+    }
+
+    public List<ConsultTerm> findAll() {
+        return consultTermRepository.findAll();
     }
 }
