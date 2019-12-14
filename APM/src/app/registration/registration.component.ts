@@ -10,7 +10,7 @@ import { RequestForPatReg } from './requestForPatReg';
     templateUrl : './registration.component.html'
 })
 export class RegistrationComponent{
-    userModel = new User(" "," "," "," "," "," "," "," "," "," "," ");
+    userModel = new User(" "," "," "," "," "," "," "," "," "," "," ","");
     reqModel = new RequestForPatReg(this.userModel, null, false, "");
     
     registerForm: FormGroup;
