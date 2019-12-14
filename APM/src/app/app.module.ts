@@ -40,6 +40,8 @@ import { DeleteMedicamentComponent } from './createMedicamentCodeBook/deleteMedi
 import { ConsultTypeComponent } from './consultType/consultType.component';
 import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.component';
 import { AddClinicAdminComponent } from './addNewClinicAdministrator/addNewClinicAdministrator.component';
+import { DeleteDiagnosisComponent } from './createDiagCodeBook/deleteDiagnosis.component';
+// import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
 
 
 
@@ -78,7 +80,9 @@ import { AddClinicAdminComponent } from './addNewClinicAdministrator/addNewClini
     DeleteMedicamentComponent,
     ConsultTypeComponent,
     DeleteConsultTypeComponent,
-    AddClinicAdminComponent
+    AddClinicAdminComponent,
+    DeleteDiagnosisComponent,
+    //ListOfDiagnosis
     ],
   imports: [
     BrowserModule,
@@ -115,6 +119,7 @@ import { AddClinicAdminComponent } from './addNewClinicAdministrator/addNewClini
       {path: 'HomepageCA/consultTerm', component: ConsultTermComponent},
       {path: 'HomepageCCA/allClinics', component: DeleteClinicsComponent}, 
       {path: 'HomepageCCA/allMedicaments', component: DeleteMedicamentComponent},
+      {path: 'HomepageCCA/allDiagnosis', component: DeleteDiagnosisComponent},
       {path: 'HomepagePatient', component:PatientComponent},
       {path: 'HomepagePatient/listOfClinics', component:ListOfClinics},
       {path: 'HomepagePatient/ListOfPatClinics', component: ListOfPatClinics},

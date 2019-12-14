@@ -3,9 +3,6 @@ import { Router } from '@angular/router';
 import { DeleteConsultTypeService } from './deleteConsultType.service';
 import { ConsultType } from 'src/consultType/consultType';
 
-
-
-
 @Component({
     selector: 'ca-delCosultType',
     templateUrl: './deleteConsultType.component.html'

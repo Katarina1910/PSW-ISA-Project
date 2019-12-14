@@ -5,7 +5,7 @@ import com.softwareComedians.ClinicalCenterApp.dto.ClinicAdminDTO;
 import com.softwareComedians.ClinicalCenterApp.model.Clinic;
 import com.softwareComedians.ClinicalCenterApp.model.ClinicAdministrator;
 import com.softwareComedians.ClinicalCenterApp.service.ClinicsService;
-import com.softwareComedians.ClinicalCenterApp.service.impl.ClinicAdminService;
+import com.softwareComedians.ClinicalCenterApp.service.ClinicAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
