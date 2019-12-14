@@ -21,4 +21,19 @@ public class DiagnosisCodebook {
     public DiagnosisCodebook() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public Set<Diagnosis> getDiagnoses() {
+        return diagnoses;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setDiagnoses(Set<Diagnosis> diagnoses) {
+        this.diagnoses = diagnoses;
+    }
 }
