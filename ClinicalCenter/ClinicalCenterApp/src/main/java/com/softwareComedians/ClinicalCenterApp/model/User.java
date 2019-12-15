@@ -243,4 +243,8 @@ public class User implements UserDetails {
     public void setRequestForPatientRegistration(RequestForPatientRegistration requestForPatientRegistration) {
         this.requestForPatientRegistration = requestForPatientRegistration;
     }
+
+    public String getRole() {
+	    return role;
+    }
 }

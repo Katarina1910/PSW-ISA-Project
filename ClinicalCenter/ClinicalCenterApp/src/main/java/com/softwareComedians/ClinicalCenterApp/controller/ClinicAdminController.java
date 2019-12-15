@@ -1,14 +1,18 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
 
+import com.softwareComedians.ClinicalCenterApp.common.consts.UserRoles;
 import com.softwareComedians.ClinicalCenterApp.dto.ClinicAdminDTO;
+import com.softwareComedians.ClinicalCenterApp.model.Authority;
 import com.softwareComedians.ClinicalCenterApp.model.Clinic;
 import com.softwareComedians.ClinicalCenterApp.model.ClinicAdministrator;
-import com.softwareComedians.ClinicalCenterApp.service.ClinicsService;
+import com.softwareComedians.ClinicalCenterApp.repository.AuthorityRepository;
 import com.softwareComedians.ClinicalCenterApp.service.ClinicAdminService;
+import com.softwareComedians.ClinicalCenterApp.service.ClinicsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -23,7 +27,13 @@ public class ClinicAdminController {
     ClinicAdminService clinicAdminService;
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     ClinicsService clinicsService;
+
+    @Autowired
+    private AuthorityRepository authorityRepository;
 
     @Autowired
     public ClinicAdminController(ClinicAdminService clinicAdminService){this.clinicAdminService = clinicAdminService;}
@@ -43,7 +53,23 @@ public class ClinicAdminController {
     @PostMapping()
     public  ResponseEntity<ClinicAdminDTO> addClinicAdmin(@RequestBody ClinicAdminDTO clinicAdminDTO){
 
-        ClinicAdministrator clinicAdministrator = new ClinicAdministrator(clinicAdminDTO);
+        ClinicAdministrator clinicAdministrator = new ClinicAdministrator();
+
+        clinicAdministrator.setId(clinicAdminDTO.getId());
+        clinicAdministrator.setName(clinicAdminDTO.getName());
+        clinicAdministrator.setSurname(clinicAdminDTO.getSurname());
+        clinicAdministrator.setUcidn(clinicAdminDTO.getUcidn());
+        clinicAdministrator.setAddress(clinicAdminDTO.getAddress());
+        clinicAdministrator.setCity(clinicAdminDTO.getCity());
+        clinicAdministrator.setCountry(clinicAdminDTO.getCountry());
+        clinicAdministrator.setEmail(clinicAdminDTO.getEmail());
+        clinicAdministrator.setPassword(passwordEncoder.encode(clinicAdminDTO.getPassword()));
+
+        clinicAdministrator.setRole("CA");
+        clinicAdministrator.setActivated(true);
+        Authority caAutority = authorityRepository.findByName(UserRoles.ROLE_CA);
+        clinicAdministrator.getUsersAuthorities().add(caAutority);
+
         Clinic c = clinicsService.findByName(clinicAdminDTO.getClinic());
         clinicAdministrator.setClinic(c);
         clinicAdministrator = clinicAdminService.save(clinicAdministrator);

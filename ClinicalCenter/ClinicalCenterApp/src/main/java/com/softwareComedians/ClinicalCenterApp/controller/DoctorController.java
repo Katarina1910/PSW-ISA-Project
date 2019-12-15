@@ -1,11 +1,15 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
+import com.softwareComedians.ClinicalCenterApp.common.consts.UserRoles;
 import com.softwareComedians.ClinicalCenterApp.dto.DoctorDTO;
+import com.softwareComedians.ClinicalCenterApp.model.Authority;
 import com.softwareComedians.ClinicalCenterApp.model.Doctor;
+import com.softwareComedians.ClinicalCenterApp.repository.AuthorityRepository;
 import com.softwareComedians.ClinicalCenterApp.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,6 +21,12 @@ import java.util.List;
 public class DoctorController {
 
     DoctorService doctorService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AuthorityRepository authorityRepository;
 
     @Autowired
     public DoctorController(DoctorService doctorService){
@@ -58,10 +68,12 @@ public class DoctorController {
         doctor.setEmail(doctorDTO.getEmail());
         doctor.setPhone(doctorDTO.getPhone());
         doctor.setUsername(doctorDTO.getUsername());
-        doctor.setPassword(doctorDTO.getPassword());
+        doctor.setPassword(passwordEncoder.encode(doctorDTO.getPassword()));
         doctor.setGrade((double) 0);
         doctor.setRole("DOCTOR");
-
+        doctor.setActivated(true);
+        Authority doctorAutority = authorityRepository.findByName(UserRoles.ROLE_DOCTOR);
+        doctor.getUsersAuthorities().add(doctorAutority);
         doctor = doctorService.save(doctor);
 
 

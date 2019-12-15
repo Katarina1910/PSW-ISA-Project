@@ -4,23 +4,17 @@ import com.softwareComedians.ClinicalCenterApp.dto.RequestForPatientRegistration
 import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.UserRegistrationDTO;
 import com.softwareComedians.ClinicalCenterApp.mappers.UserMapper;
-import com.softwareComedians.ClinicalCenterApp.model.ConfirmationToken;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForPatientRegistration;
 import com.softwareComedians.ClinicalCenterApp.model.User;
 import com.softwareComedians.ClinicalCenterApp.service.RequestForPatientRegistrationService;
-import com.softwareComedians.ClinicalCenterApp.service.UserService;
 import com.softwareComedians.ClinicalCenterApp.service.impl.UserServiceImpl;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.List;
 
 //@CrossOrigin
@@ -40,7 +34,7 @@ public class UserController {
 	@GetMapping("/public/{id}")
 	public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
 		User user = userService.findById(id);
-		return new ResponseEntity<>(UserMapper.toDto(user), HttpStatus.OK);
+		return new ResponseEntity<>(new UserDTO(user), HttpStatus.OK);
 	}
 
 	@GetMapping
@@ -49,13 +43,6 @@ public class UserController {
 		List<User> users = userService.findAll();
 		return new ResponseEntity<>(UserMapper.toListDto(users), HttpStatus.OK);
 	}
-
-	/*@PostMapping("/public/add-user")
-	public ResponseEntity<UserDTO> addRegularUser(@Valid @RequestBody UserRegistrationDTO userInfo) {
-		User user = userService.addRegularUser(userInfo);
-		return new ResponseEntity<>(UserMapper.toDto(user), HttpStatus.OK);
-	}*/
-
 
 	@PostMapping("/public/add-user")
     public ResponseEntity<RequestForPatientRegistrationDTO> createRqForPatientReg(@RequestBody RequestForPatientRegistrationDTO rqDTO) {

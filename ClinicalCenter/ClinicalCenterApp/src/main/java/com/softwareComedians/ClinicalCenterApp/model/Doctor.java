@@ -1,7 +1,10 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 
+import com.softwareComedians.ClinicalCenterApp.dto.DoctorDTO;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -10,6 +13,11 @@ import java.util.Set;
 @Getter
 @Setter
 public class Doctor extends Personnel {
+
+    @Autowired
+    @Transient
+    private PasswordEncoder passwordEncoder;
+
     @Column
     private Double grade;
 
@@ -32,5 +40,23 @@ public class Doctor extends Personnel {
 
     public void setGrade(Double grade) {
         this.grade = grade;
+    }
+
+    public Doctor(DoctorDTO d){
+        this.setId(d.getId());
+        this.setName(d.getName());
+        this.setSurname((d.getSurname()));
+        this.setUcidn(d.getUcidn());
+        this.setEmail(d.getEmail());
+        this.setPassword(passwordEncoder.encode(d.getPassword()));
+        this.setUsername(d.getUsername());
+        this.setPhone(d.getPhone());
+        this.setAddress(d.getAddress());
+        this.setCity(d.getCity());
+        this.setCountry(d.getCountry());
+        this.setActivated(d.isActivated());
+        this.grade = 0.0;
+        this.setRole("DOCTOR");
+
     }
 }
