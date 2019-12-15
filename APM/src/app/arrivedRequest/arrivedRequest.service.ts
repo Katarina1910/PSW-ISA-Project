@@ -13,6 +13,7 @@ export class arrivedRequestService{
     _url2 = 'http://localhost:8080/api/mail/accept';
     _url3 = 'http://localhost:8080/api/mail/reject';
     _url4 = 'http://localhost:8080/api/patient/add';
+    _url5 = 'http://localhost:8080/api/RqForPatientReg/reject'
 
     constructor(private _http: HttpClient) { }
 
@@ -30,6 +31,10 @@ export class arrivedRequestService{
 
     addPatient(id: any, arrReq: arrivedRequest[]) {
         return  this._http.post<arrivedRequest[]>(`${this._url4}/${id}`, arrReq);
+     }
+
+     removeArrivedRequest(id: any) {
+        return  this._http.delete<arrivedRequest[]>(`${this._url5}/${id}`);
      }
 
 }

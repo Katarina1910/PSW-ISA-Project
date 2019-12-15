@@ -22,15 +22,17 @@ public class SmtpMailSender {
 
     public void send (String to, String subject, String body) throws MessagingException {
 
-        SimpleMailMessage mail = new SimpleMailMessage();
-
-       mail.setTo(to);
-       mail.setFrom(env.getProperty("spring.mail.username"));
-       mail.setSubject(subject);
-       mail.setText(body);
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper;
 
 
-        javaMailSender.send(mail);
+        helper = new MimeMessageHelper(message, "utf-8");
+        helper.setTo(to);
+       helper.setSubject(subject);
+       helper.setText(body, true);
+
+
+        javaMailSender.send(message);
     }
 
 }
