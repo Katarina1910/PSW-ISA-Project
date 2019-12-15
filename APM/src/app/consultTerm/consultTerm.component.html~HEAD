@@ -1,0 +1,31 @@
+<form #userForm="ngForm" (ngSubmit)="onSubmit()" class="d-flex p-2 justify-content-center">
+    <fieldset>
+      <legend>Consult Term</legend>
+ 
+      <div class="form-group">
+        <label for="exampleSelect1">Type:</label>
+        <select class="form-control" id="exampleSelect1"  [(ngModel)]="consultTermModel.type" name="type">
+        </select>
+      </div>
+
+      <div class="form-group" >
+        <label class="col-form-label" for="inputDefault"> Duration:</label>
+        <input type="text" class="form-control" id="duration"  [(ngModel)]="consultTermModel.duration" name="duration">
+      </div>
+
+  
+
+      <div class="form-group" >
+        <label class="col-form-label" for="inputDefault"> Discount:</label>
+        <input type="text" class="form-control" id="discount"  [(ngModel)]="consultTermModel.discount" name="discount">
+      </div>
+
+      <div class="form-group">
+        <label for="exampleSelect1">Room:</label>
+        <select class="form-control" id="room"  [(ngModel)]="consultTermModel.room" name="room">
+        </select>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Send</button>
+    </fieldset>
+  </form>

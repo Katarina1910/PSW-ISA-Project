@@ -17,8 +17,8 @@ public class MedicamentService {
 
     public List<Medicament> findAll(){return  medicamentRepository.findAll();}
 
-    public Medicament findById(String id){
-        Medicament medicament = medicamentRepository.findById(id);
+    public Medicament findById(Long id){
+        Medicament medicament = medicamentRepository.findById(id).orElseGet(null);
         return medicament;
     }
 

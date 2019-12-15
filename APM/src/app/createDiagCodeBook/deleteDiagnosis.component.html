@@ -1,0 +1,41 @@
+<h1  class="d-flex p-2 justify-content-center">Diagnosis Codebook</h1>
+<p>&nbsp;</p>        
+
+<div class='table-responsive' class="d-flex p-2 justify-content-center">
+    <table class='table'>
+    <thead>
+            <tr>
+               <th>Name</th>
+               <th>Code </th>
+               <th>Description</th>
+               <th></th>
+               <th></th>
+             </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = 'let d of diagnosis' > 
+             <td>{{d.name}}</td>
+             <td>{{d.code}}</td>
+             <td>{{d.description}}</td>
+             <td><button type="button" class="btn btn-outline-primary" (click)='deleteDiagnosis(d.id)'>Delete</button></td>
+             <td><button type="button"  class="btn btn-outline-primary" (click)='editDiagnosis(d)'>Edit</button></td>    
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div  class="col-md-3 offset-md-9" *ngIf = 'edit' >
+    <form #userForm="ngForm" (ngSubmit)="onSubmit()" >
+    <fieldset>
+        Edit diagnosis:  
+        <br/>
+        <label>Name:</label>
+        <input type="text"  class="form-control" id="e" name="e"  [(ngModel)]="editModel.name" />
+        <label>Code:  </label>
+        <input type="text"  class="form-control" id="code" name="code"  [(ngModel)]="editModel.code" />    
+        <label>Description:  </label>
+        <input type="text"  class="form-control" id="desc" name="description"  [(ngModel)]="editModel.description" />  
+    <button  class="btn btn-primary">Edit</button>
+    </fieldset>
+    </form>
+</div>

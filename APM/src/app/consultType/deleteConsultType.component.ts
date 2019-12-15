@@ -3,9 +3,6 @@ import { Router } from '@angular/router';
 import { DeleteConsultTypeService } from './deleteConsultType.service';
 import { ConsultType } from './consultType';
 
-
-
-
 @Component({
     selector: 'ca-delCosultType',
     templateUrl: './deleteConsultType.component.html'
@@ -56,7 +53,7 @@ export class DeleteConsultTypeComponent implements OnInit {
     onSubmit(){
         this._deleteConsultTypeService.editCOnsutType(this.editModel).subscribe(
             data=>{
-                alert('Room edited!');
+                alert('Consult type edited!');
                 this.editedType = data as ConsultType;
                 
                 this.router.navigate(['/HomepageCA']);

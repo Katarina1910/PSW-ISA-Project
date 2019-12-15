@@ -11,7 +11,7 @@ import { PatientProfileSettingsService } from './patientProfileSettings.service'
 })
 export class PatientProfileSettingsComponent implements OnInit {
 
-  user: User = new User("","","","","","","","","","","");
+  user: User = new User("","","","","","","","","","","","");
 
   password: string = '';
   repeatPassword: string = '';

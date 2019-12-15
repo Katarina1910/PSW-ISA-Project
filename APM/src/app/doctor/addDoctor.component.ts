@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 
 export class AddDoctorComponent{
-    doctorModel = new User('','','','','','','','','','','');
+    doctorModel = new User('','','','','','','','','','','','');
     
     constructor(private _addDoctorService: AddDoctorService,  private router: Router) {}
 

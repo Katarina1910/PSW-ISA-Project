@@ -1,0 +1,32 @@
+<h1>Request Examination</h1>
+<div style="text-align:left">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Discount</th>
+                    <th>Duration</th>
+                    <th>Price</th>
+                    <th>Doctor</th>
+                    <th>Room</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = 'let c of consultTerms ' >
+                
+                    <td>{{c.date}}</td>
+                    <td>{{c.discount}}</td>
+                    <td>{{c.duration}}</td>
+                    <td>{{c.price}}</td>
+                    <td>{{c.doctor}}</td>
+                    <td>{{c.room}}</td>
+                    <td>{{c.type}}</td>
+                    <td><button  type="button" class="btn btn-outline-primary" (click)='scheduleExamination(c.id)'>Schedule</button></td>
+                </tr>
+            
+            </tbody>
+        </table>
+    </div>
+</div>

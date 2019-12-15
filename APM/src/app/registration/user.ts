@@ -10,7 +10,8 @@ export class User {
         public  email: string,
         public  phone: string,
         public  username: string,
-        public  password: string
+        public  password: string,
+        public role:string,
     ){}
 
     public getId(){

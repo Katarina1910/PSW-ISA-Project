@@ -78,6 +78,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByEmail(String mail) {
+        try {
+            User user = userRepository.findByEmail(mail);
+            return user;
+        } catch (NoSuchElementException e) {
+            throw new ResourceNotFoundException("User with mail " + mail + " doesn't exist");
+        }
+    }
+
+    @Override
+    public void remove(User u) {
+        userRepository.delete(u);
+    }
+
+    @Override
     public List<User> findAll() throws AccessDeniedException {
         return userRepository.findAll();
     }
