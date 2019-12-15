@@ -1,18 +1,20 @@
-<div class="d-flex p-2 justify-contetnt-center">
-    <form (ngSubmit)="onSubmit()">
-     Add new room:
+    <form (ngSubmit)="onSubmit()" class="d-flex p-2 justify-content-center">
+        <fieldset>
+        <legend>Add new room</legend>
    
-     
-      <br/>
-      <label>Name:</label>
-      <input type="text"  class="form-control" id="name" name="name" [(ngModel)]="roomModel.name"/>
-                                           
-     <label>Type:  </label>
-     <select  class="form-control" id="type" name="type" [(ngModel)]="roomModel.type">
-        <option>examination</option>
-        <option>operation</option>
-     </select>
+        <div class="form-group" >
+            <label class="col-form-label" for="inputDefault"> Name:</label>
+            <input type="text" class="form-control" id="name"  name="name" [(ngModel)] = "roomModel.name"/>
+          </div>
 
-     <button  class="btn btn-primary">Add</button>                
+     <div class="form-group">
+         <label for="inputDefault">Type:</label>
+        <select  class="form-control" id="type" name="type" [(ngModel)]="roomModel.type">
+            <option>examination</option>
+            <option>operation</option>
+        </select>
+     </div>
+
+     <button type="submit" class="btn btn-primary">Add</button>
+    </fieldset>              
     </form>
-</div>
