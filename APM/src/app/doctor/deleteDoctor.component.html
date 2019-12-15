@@ -1,5 +1,8 @@
-<div>
-    <table>
+<h1  class="d-flex p-2 justify-content-center">List of Doctors</h1>
+<p>&nbsp;</p>        
+
+<div class='table-responsive' class="d-flex p-2 justify-content-center">
+    <table class='table'>
         <thead>
             <tr>
                 <th>Name</th>
@@ -12,15 +15,12 @@
         </thead>
         <tbody>
             <tr *ngFor = 'let d of doctors ' >
-               
                 <td>{{d.name}}</td>
                 <td>{{d.surname}}</td>
                 <td>{{d.email}}</td>
                 <td>{{d.ucidn}}</td>
-                <td><button   type="button" class="btn btn-outline-primary" (click)='deleteDoctor(d.email)'>Delete</button></td>
-                
+                <td><button   type="button" class="btn btn-outline-primary"  (click)='deleteDoctor(d.email)'>Delete</button></td>
             </tr>
-          
         </tbody>
     </table>
 </div>

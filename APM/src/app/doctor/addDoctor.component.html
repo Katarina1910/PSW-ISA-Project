@@ -1,27 +1,39 @@
-<div class="d-flex p-2 justify-contetnt-center">
-  <form (ngSubmit)="onSubmit()">
-   Add new doctor:
-   
-    <br/>
-    <label>First Name</label>
-    <input type="text"  class="form-control" id="name" name="name" [(ngModel)]="doctorModel.name"/>
-                                         
-   <label>Last Name</label>
-   <input type="text" class="form-control" id="surename" name="surname" [(ngModel)]="doctorModel.surname"/>
-                       
-    <label>UCIDN</label>
-    <input type="text" class="form-control" name="ucidn" id="ucidn" [(ngModel)]="doctorModel.ucidn"/>
+<form (ngSubmit)="onSubmit()" class="d-flex p-2 justify-content-center">
+  <fieldset>
+   <legend>Add new doctor</legend>
 
-    <label>Address</label>
+   <div>
+    <label class="col-form-label" for="inputDefault"> First Name:</label>
+    <input type="text" class="form-control" id="name"  name="name"  [(ngModel)]="doctorModel.name"/>
+  </div>
+
+  <div>
+    <label class="col-form-label" for="inputDefault"> Last Name:</label>
+    <input type="text" class="form-control" id="surename" name="surname" [(ngModel)]="doctorModel.surname"/>
+  </div>
+
+  <div>
+    <label class="col-form-label" for="inputDefault"> UCIDN:</label>
+    <input type="text" class="form-control" name="ucidn" id="ucidn" [(ngModel)]="doctorModel.ucidn"/>
+  </div>
+
+  <div>
+    <label  class="col-form-label" for="inputDefault">Address</label>
     <input type="text"  class="form-control" id="address" name="address" [(ngModel)]="doctorModel.address"/>
-                        
-    <label>City</label>
+  </div>
+  
+  <div>
+    <label  class="col-form-label" for="inputDefault">City</label>
     <input type="text" class="form-control"  name="city" [(ngModel)]="doctorModel.city"/>
-                    
-    <label>Country</label>
+  </div>
+  
+  <div>
+    <label  class="col-form-label" for="inputDefault">Country</label>
     <input type="text"  class="form-control" name="country" [(ngModel)]="doctorModel.country"/>
-                      
-    <label>Phone number</label>
+  </div>
+
+  <div>
+    <label class="col-form-label" for="inputDefault">Phone number</label>
     <input type="text"  class="form-control" name="phone" [(ngModel)]="doctorModel.phone"/>
                
     <label>Username</label>
@@ -30,11 +42,18 @@
     <label>Email</label>
     <input type="text"  class="form-control" id="email" [(ngModel)]="doctorModel.email" name="email" aria-describedby="emailHelp"/>
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                         
-    <label>Password</label>
+  </div>
+
+  <div>
+    <label class="col-form-label" for="inputDefault">Password</label>
     <input type="password"  class="form-control"  [(ngModel)]="doctorModel.password" name="password" id="exampleInputPassword1"/>
-                         
-    <button  class="btn btn-primary">Add</button>
-                  
-   </form>
-</div>
+  </div>
+
+  <div>
+    <label class="col-form-label" for="inputDefault">Username</label>
+    <input type="text"  class="form-control"/>
+  </div>
+
+    <button type="submit" class="btn btn-primary">Add</button>
+  </fieldset>          
+</form>
