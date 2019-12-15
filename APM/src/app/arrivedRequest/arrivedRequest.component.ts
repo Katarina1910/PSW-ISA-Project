@@ -32,15 +32,6 @@
             },
             error=> console.error('Error!',error)
             )
-/*
-            this._arrivedRequestService.addPatient(id, this.arrReq).subscribe(
-                data=> {
-                    alert('Patient added!')
-                    console.log('Success!', JSON.stringify(data))
-                },
-                error=> console.error('Error!',error)
-            )
-*/
         }
 
         onClickReject(id:any,email:any): void{
@@ -49,19 +40,20 @@
         }
 
         onClickSendMessage(): void{
-            this._arrivedRequestService.sendRejectEmail(this.email,this.reason).subscribe(
+            this._arrivedRequestService.sendRejectEmail(this.email,this.reason,this.pomocnaId).subscribe(
             data=> {
-                alert('Reject has been sent!')
+                alert('Reject email has been sent!')
                 console.log('Success!', JSON.stringify(data))
             },
             error=> console.error('Error!',error))
-
+/*
             this._arrivedRequestService.removeArrivedRequest(this.pomocnaId).subscribe(
                 data=> {
                     alert('Request has been removed')
                     console.log('Success!', JSON.stringify(data))
                 },
                 error=> console.error('Error!',error))
+*/
         }
 
     }

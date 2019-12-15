@@ -28,12 +28,13 @@ public class MailController {
     }
 
     //u front endu ovo pozovi za reject
-    @GetMapping (value = "/reject/{mail}/{description}")
-    public void reject(@PathVariable String mail, @PathVariable String description) throws MessagingException {
+    @GetMapping (value = "/reject/{mail}/{description}/{id}")
+    public void reject(@PathVariable String mail, @PathVariable String description, @PathVariable String id) throws MessagingException {
+        long num = Long.parseLong(id);
         smtpMailSender.send(mail,"Registration", description);
         User u = userService.findByEmail(mail);
         userService.remove(u);
-        RequestForPatientRegistration r = rq.findOne(u.getId());
+        RequestForPatientRegistration r = rq.findOne(num);
         rq.remove(r.getId());
 
     }
