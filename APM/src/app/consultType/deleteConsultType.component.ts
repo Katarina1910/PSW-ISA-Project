@@ -10,7 +10,7 @@ import { ConsultType } from 'src/consultType/consultType';
 
 export class DeleteConsultTypeComponent implements OnInit {
     public types: ConsultType[];
-   editModel = new ConsultType(null,null);
+    editModel = new ConsultType(null,null);
     edit : boolean = false;
     public editedType:ConsultType;
    

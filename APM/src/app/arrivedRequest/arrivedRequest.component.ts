@@ -54,8 +54,14 @@
                 alert('Reject has been sent!')
                 console.log('Success!', JSON.stringify(data))
             },
-            error=> console.error('Error!',error)
-        )
+            error=> console.error('Error!',error))
+
+            this._arrivedRequestService.removeArrivedRequest(this.pomocnaId).subscribe(
+                data=> {
+                    alert('Request has been removed')
+                    console.log('Success!', JSON.stringify(data))
+                },
+                error=> console.error('Error!',error))
         }
 
     }
