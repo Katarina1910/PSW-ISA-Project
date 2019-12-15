@@ -58,7 +58,7 @@ public class RequestForPatientRegistrationController {
 
         return new ResponseEntity<>(rqsDTO, HttpStatus.OK);
     }
-
+/*
     //u frontednu ovo pozovi za reject
     @DeleteMapping(value = "/reject/{id}")
     public ResponseEntity<Void> remove(@PathVariable Long id){
@@ -71,7 +71,7 @@ public class RequestForPatientRegistrationController {
             requestForPatientRegistrationService.remove(id);
 
             ConfirmationToken token = this.createConfirmationToken(requestForPatientRegistration);
-            mailSenderService.sendMailForRegistration(requestForPatientRegistration, token);
+            //mailSenderService.sendMailForRegistration(requestForPatientRegistration, token);
 
             return new ResponseEntity<>(HttpStatus.OK);
         }
@@ -95,7 +95,7 @@ public class RequestForPatientRegistrationController {
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
-
+*/
     private ConfirmationToken createConfirmationToken(RequestForPatientRegistration user) {
         ConfirmationToken confirmationToken = new ConfirmationToken(user);
         return confirmationTokenRepository.save(confirmationToken);
