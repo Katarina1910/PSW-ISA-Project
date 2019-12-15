@@ -3,6 +3,8 @@ package com.softwareComedians.ClinicalCenterApp.model;
 import com.softwareComedians.ClinicalCenterApp.dto.ClinicAdminDTO;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -11,6 +13,10 @@ import java.util.Set;
 @Getter
 @Setter
 public class ClinicAdministrator extends User {
+
+	@Autowired
+	@Transient
+	private PasswordEncoder passwordEncoder;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "clinicAdministrator")
 	private Set<RequestForAbsence> requests;
@@ -24,7 +30,7 @@ public class ClinicAdministrator extends User {
 		this.setSurname((ca.getSurname()));
 		this.setUcidn(ca.getUcidn());
 		this.setEmail(ca.getEmail());
-		this.setPassword(ca.getPassword());
+		this.setPassword(passwordEncoder.encode(ca.getPassword()));
 		this.setUsername(ca.getUsername());
 		this.setPhone(ca.getPhone());
 		this.setAddress(ca.getAddress());
