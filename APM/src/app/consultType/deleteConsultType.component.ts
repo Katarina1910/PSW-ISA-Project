@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeleteConsultTypeService } from './deleteConsultType.service';
-import { ConsultType } from 'src/consultType/consultType';
+import { ConsultType } from './consultType';
 
 @Component({
     selector: 'ca-delCosultType',
@@ -10,7 +10,7 @@ import { ConsultType } from 'src/consultType/consultType';
 
 export class DeleteConsultTypeComponent implements OnInit {
     public types: ConsultType[];
-    editModel = new ConsultType(null,null);
+    editModel = new ConsultType(null,null,null);
     edit : boolean = false;
     public editedType:ConsultType;
    

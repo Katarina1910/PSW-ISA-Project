@@ -1,6 +1,5 @@
 package com.softwareComedians.ClinicalCenterApp.dto;
 
-import com.softwareComedians.ClinicalCenterApp.model.Clinic;
 import com.softwareComedians.ClinicalCenterApp.model.ClinicAdministrator;
 import com.softwareComedians.ClinicalCenterApp.model.User;
 
@@ -12,8 +11,8 @@ public class ClinicAdminDTO extends UserDTO {
 
     }
 
-    public ClinicAdminDTO(Long id, String name, String surname, String ucidn, String address, String city, String country, String email, String phone, String username, String password, boolean isActivated, String clinic) {
-        super(id, name, surname, ucidn, address, city, country, email, phone, username, password, isActivated);
+    public ClinicAdminDTO(Long id, String name, String surname, String ucidn, String address, String city, String country, String email, String phone, String username, String password,String role, boolean isActivated, String clinic) {
+        super(id, name, surname, ucidn, address, city, country, email, phone, username, password,role, isActivated);
         this.clinic = clinic;
     }
 
@@ -24,7 +23,7 @@ public class ClinicAdminDTO extends UserDTO {
 
     public ClinicAdminDTO(ClinicAdministrator ca){
         super(ca.getId(), ca.getName(), ca.getSurname(), ca.getUcidn(), ca.getAddress(),
-                ca.getCity(), ca.getCountry(), ca.getEmail(), ca.getPhone(), ca.getUsername(),ca.getPassword(), ca.isActivated());
+                ca.getCity(), ca.getCountry(), ca.getEmail(), ca.getPhone(), ca.getUsername(),ca.getPassword(), ca.getRole(),ca.isActivated());
        // this.clinic = new ClinicsDTO(ca.getClinic());
     }
 
