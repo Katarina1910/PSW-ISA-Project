@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ConsultType } from 'src/consultType/consultType';
+import { ConsultType } from './consultType';
 
 
 @Injectable({

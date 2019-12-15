@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConsultType } from 'src/consultType/consultType';
+import { ConsultType } from './consultType';
 import { ConsultTypeService } from './consultType.service';
 
 
@@ -10,7 +10,7 @@ import { ConsultTypeService } from './consultType.service';
 })
 export class ConsultTypeComponent{
 
-    consultTypeModel = new ConsultType(null,null);
+    consultTypeModel = new ConsultType(null,null,null);
     
     constructor(private _consultTypeService: ConsultTypeService, private router:Router) {}
 
