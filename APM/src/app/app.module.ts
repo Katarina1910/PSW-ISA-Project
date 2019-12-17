@@ -42,6 +42,8 @@ import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.comp
 import { AddClinicAdminComponent } from './addNewClinicAdministrator/addNewClinicAdministrator.component';
 import { DeleteDiagnosisComponent } from './createDiagCodeBook/deleteDiagnosis.component';
 import { RequestExamination } from './patientRequestExamination/requestExamination.component';
+import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
 // import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
 
 
@@ -92,6 +94,9 @@ import { RequestExamination } from './patientRequestExamination/requestExaminati
     ReactiveFormsModule,
     HttpClientModule,
     MaterialModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
