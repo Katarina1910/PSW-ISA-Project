@@ -43,7 +43,7 @@ export class LoginComponent{
             localStorage.setItem(USER_ROLE_KEY, data.role)
             
             alert("Loged in!");
-            this.router.navigate(['/welcome']);
+            this.router.navigate(['/wellcome']);
         },
         error=> alert("Wrong password or username")
         );
