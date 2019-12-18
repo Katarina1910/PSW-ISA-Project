@@ -18,10 +18,10 @@
                    <td>{{ar.userData.name}}</td>
                    <td>{{ar.userData.email}}</td>
                    <td>{{ar.userData.ucidn}}</td>
-                   <td>{{ar.userData.id}}</td>
+                   <td>{{ar.id}}</td>
                    <td><input type="text" value="Reason of rejection..." hidden="true"/> </td>
-                   <td><button type="button" class="btn btn-outline-primary" (click)="onClick(ar.userData.id,ar.userData.email)">Accept</button></td>
-                   <td><button type="button" class="btn btn-primary" (click)="onClickReject(ar.userData.id,ar.userData.email)" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Reject</button>
+                   <td><button type="button" class="btn btn-outline-primary" (click)="onClick(ar.id,ar.userData.email)">Accept</button></td>
+                   <td><button type="button" class="btn btn-primary" (click)="onClickReject(ar.id,ar.userData.email)" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Reject</button>
                    </td>
                 </tr>
         </tbody> 

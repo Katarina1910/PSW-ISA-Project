@@ -1,27 +1,27 @@
+<h1  class="d-flex p-2 justify-content-center">List of Consult Types</h1>
+<p>&nbsp;</p>        
 
-<div style="text-align:left">
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor = 'let d of types ' >
-                
-                    <td>{{d.name}}</td>
-                    <td>{{d.description}}</td>
-                    <td><button  type="button" class="btn btn-outline-primary" (click)=' deleteConsultType(d.id)'>Delete</button></td>
-                    <td><button   type="button"  class="btn btn-outline-primary" (click)=' editConsultType(d)'>Edit</button></td>    
-                </tr>
-            
-            </tbody>
-        </table>
-    </div>
+<div class='table-responsive' class="d-flex p-2 justify-content-center">
+    <table class='table'>
+    <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th></th>
+                <th></th>
+            </tr>
+    </thead>
+    <tbody>
+            <tr *ngFor = 'let d of types' >
+                <td>{{d.name}}</td>
+                <td>{{d.description}}</td>
+                <td><button  type="button" class="btn btn-outline-primary" (click)=' deleteConsultType(d.id)'>Delete</button></td>
+                <td><button   type="button"  class="btn btn-outline-primary" (click)=' editConsultType(d)'>Edit</button></td>    
+            </tr>
+    </tbody>
+    </table>
+</div>
+
     <div  class="col-md-3 offset-md-9" *ngIf = 'edit' >
         <form #userForm="ngForm" (ngSubmit)="onSubmit()" >
         <fieldset>
@@ -36,4 +36,3 @@
         </fieldset>
         </form>
     </div>
-</div>
