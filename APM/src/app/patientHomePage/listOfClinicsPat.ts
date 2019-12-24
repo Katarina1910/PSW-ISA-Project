@@ -1,9 +1,9 @@
 
 export class listOfClinicsPat {
     constructor(
-        private  name: string,
-        private  address: string,
-        private  description: string,
-        private  grade: number
+        public name: string,
+        public address: string,
+        public description: string,
+        public grade: number
     ){}
 }
