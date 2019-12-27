@@ -64,11 +64,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsername(String username) throws ApiRequestException {
-        User user = userRepository.findByUsername(username);
+    public User findByUsername(String mail) throws ApiRequestException {
+        User user = userRepository.findByEmail(mail);
 
         if (user == null)
-            throw new ApiRequestException("User with username '" + username + "' doesn't exist.");
+            throw new ApiRequestException("User with email '" + mail + "' doesn't exist.");
 
         return user;
     }
@@ -125,8 +125,8 @@ public class UserServiceImpl implements UserService {
     }
 
     private User createNewUserObject(UserRegistrationDTO userInfo, String roleName) throws ApiRequestException {
-        if (userRepository.findByUsername(userInfo.getUsername()) != null)
-            throw new ApiRequestException("Username '" + userInfo.getUsername() + "' is taken.");
+        if (userRepository.findByEmail(userInfo.getEmail()) != null)
+            throw new ApiRequestException("Email '" + userInfo.getEmail() + "' is taken.");
 
         User user = new User();
         user.setUsername(userInfo.getUsername());

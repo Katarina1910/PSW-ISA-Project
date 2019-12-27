@@ -43,10 +43,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     /* Return User from database */
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        //User user = userRepository.findByUsername(username);
+        User user = userRepository.findByEmail(email);
         if (user == null) {
-            throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
+            throw new UsernameNotFoundException(String.format("No user found with email '%s'.", email));
         } else {
             return user;
         }
@@ -55,19 +56,19 @@ public class CustomUserDetailsService implements UserDetailsService {
     /* Change User's password */
     public void changePassword(String oldPassword, String newPassword) {
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
-        String username = currentUser.getName();
+        String mail = currentUser.getName();
 
         if (authenticationManager != null) {
-            LOGGER.debug("Re-authenticating user '" + username + "' for password change request.");
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, oldPassword));
+            LOGGER.debug("Re-authenticating user '" + mail + "' for password change request.");
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(mail, oldPassword));
         } else {
             LOGGER.debug("No authentication manager set. can't change Password!");
             return;
         }
 
-        LOGGER.debug("Changing password for user '" + username + "'");
+        LOGGER.debug("Changing password for user '" + mail + "'");
 
-        User user = (User) loadUserByUsername(username);
+        User user = (User) loadUserByUsername(mail);
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
     }
@@ -79,7 +80,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         try {
             authentication = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(
-                            authenticationRequest.getUsername(),
+                            authenticationRequest.getEmail(),
                             authenticationRequest.getPassword()));
         } catch (BadCredentialsException e) {
             throw new ApiRequestException("Credentials are not valid!");
@@ -90,7 +91,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         // Create token
         User user = (User) authentication.getPrincipal();
-        String jwt = tokenUtils.generateToken(user.getUsername());
+        String jwt = tokenUtils.generateToken(user.getEmail());
         int expiresIn = tokenUtils.getExpiredIn();
 
         UserDTO userDto = new UserDTO(user);
