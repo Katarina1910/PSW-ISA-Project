@@ -44,9 +44,7 @@ import { DeleteDiagnosisComponent } from './createDiagCodeBook/deleteDiagnosis.c
 import { RequestExamination } from './patientRequestExamination/requestExamination.component';
 import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
-// import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
-
-
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -97,6 +95,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
+    MatSortModule,
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},

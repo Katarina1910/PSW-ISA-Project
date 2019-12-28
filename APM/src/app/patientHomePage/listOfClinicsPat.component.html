@@ -34,18 +34,18 @@
                 </div>
         </div>
         <div class='table-responsive' class="d-flex p-2 justify-content-center">
-        <table class='table' *ngIf='filteredClinics'>
+        <table class='table table-striped' *ngIf='filteredClinics || listClin' matSort (matSortChange)="sortData($event)">
         <thead>
                 <tr>
-                <th>Name</th>
-                <th>Address </th>
-                <th>Description </th>
-                <th>Grade</th>
+                <th text-align:center mat-sort-header="name">Name</th>
+                <th mat-sort-header="address">Address </th>
+                <th mat-sort-header="description">Description </th>
+                <th mat-sort-header="grade">Grade</th>
                 <th></th>
                 </tr>
         </thead>
         <tbody>
-                <tr *ngFor = 'let c of filteredClinics'>
+                <tr *ngFor = 'let c of filteredClinics || listClin || sortedClinics'>
                 <td>{{c.name}}</td>
                 <td>{{c.address}}</td>
                 <td>{{c.description}}</td>
