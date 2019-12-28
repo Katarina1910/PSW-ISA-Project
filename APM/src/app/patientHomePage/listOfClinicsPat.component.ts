@@ -95,7 +95,7 @@ export class ListOfPatClinics implements OnInit{
     }
 
     sortData(sort: Sort) {
-        const data = this.listClin;
+        const data = this.filteredClinics;
         if (!sort.active || sort.direction === '') {
           this.sortedClinics = data;
           return;
