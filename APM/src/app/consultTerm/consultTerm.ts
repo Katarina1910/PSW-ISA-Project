@@ -7,7 +7,7 @@ export class ConsultTerm {
     constructor(
         private id:number,
         public date: Date,
-        private  type: ConsultType,
+        public  type: ConsultType,
         private  duration: number,
         private  price: number,
         private  discount: number,

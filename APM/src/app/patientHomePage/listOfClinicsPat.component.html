@@ -19,8 +19,8 @@
                 </div>
                 <div class='col'>
                       <select id="type" name="type" [(ngModel)]="selectedType">
-                        <option [ngValue]="null">Select Category</option>
-                        <option *ngFor = 'let t of types' name="type">{{t.name}}</option>
+                        <!--<option [ngValue]="null">Select Category</option>-->
+                        <option *ngFor = 'let t of types' name="type" [ngValue]="t">{{t.name}}</option>
                       </select>
                 </div>
                 <div class='col'>
@@ -38,8 +38,8 @@
         <thead>
                 <tr>
                 <th mat-sort-header="name">Name</th>
-                <th mat-sort-header="address">Address </th>
-                <th mat-sort-header="description">Description </th>
+                <th mat-sort-header="address">Address</th>
+                <th mat-sort-header="description">Description</th>
                 <th mat-sort-header="grade">Grade</th>
                 <th></th>
                 </tr>
@@ -50,9 +50,60 @@
                 <td>{{c.address}}</td>
                 <td>{{c.description}}</td>
                 <td>{{c.grade}}</td>
+                <td><button class="btn btn-info" (click)='listOfDoctors(c)'>See doctors</button></td>
                 </tr>
         </tbody> 
                 
         </table>
+        </div>
+
+        <div class='table-responsive' *ngIf='seeDoctors'>
+                <button (click)='hideAllDoctors()'>Hide</button>
+                <h3>All doctors of selected clinic: {{selectedClinic.name}} and selected type: {{selectedType.name}}</h3>
+                
+                <div class='row'>
+                        <div class='col'>Name:</div>
+                        <div class='col'>Surname:</div>
+                        <div class='col'>Grade:</div>
+                        <div class='col'></div>
+                    </div>
+                    <div class='row'>
+                            <div class='col'>
+                                    <input type="text" [(ngModel)]='doctorName'>
+                            </div>
+                            <div class='col'>
+                                    <input type="text" [(ngModel)]='doctorSurname'>
+                            </div>
+                            <div class='col'>
+                                    <input type='number' [(ngModel)]='doctorGrade'>
+                            </div>
+                            <div class='col'>
+                                    <button (click)="buttonSearchDoctors()">Search</button>
+                            </div>
+                    </div>
+
+                <div class='table-responsive' class="d-flex p-2 justify-content-center">
+                        <table class='table table-striped' matSort (matSortChange)="sortData2($event)">
+                        <thead>
+                                <tr>
+                                <th mat-sort-header="name">Name</th>
+                                <th mat-sort-header="surname">Surname</th>
+                                <th mat-sort-header="grade">Average grade</th>
+                                <th mat-sort-header="avalible">Avalibe appointments</th>
+                                <th></th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr *ngFor = 'let d of doctors'>
+                                <td>{{d.name}}</td>
+                                <td>{{d.surname}}</td>
+                                <td>{{d.grade}}</td>
+                                <td>{{d.date}}</td>
+                                <td><button class="btn btn-info" (click)='schedule()'>Schedule</button></td>
+                                </tr>
+                        </tbody> 
+                                
+                        </table>
+                        </div>
         </div>
 </div>

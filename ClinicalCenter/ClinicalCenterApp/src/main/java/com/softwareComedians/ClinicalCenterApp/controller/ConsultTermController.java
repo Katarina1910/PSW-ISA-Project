@@ -14,6 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "api/ConsultTerm")
 @CrossOrigin
@@ -57,5 +60,17 @@ public class ConsultTermController {
 
         ct = consultTermService.save(ct);
         return new ResponseEntity<>(new ConsultTermDTO(ct), HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = "/getTermsByTypeId/{id}")
+    public ResponseEntity<List<ConsultTermDTO>> getDoctorsByTypeId(@PathVariable String typeName) {
+
+        List<ConsultTerm> term = consultTermService.findByTypeName(typeName);
+        List<ConsultTermDTO> termsDTO = new ArrayList<>();
+        for (ConsultTerm ct : term) {
+            termsDTO.add(new ConsultTermDTO(ct));
+        }
+
+        return new ResponseEntity<>(termsDTO, HttpStatus.OK);
     }
 }

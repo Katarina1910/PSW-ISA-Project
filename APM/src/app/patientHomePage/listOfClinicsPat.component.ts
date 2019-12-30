@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { listOfClinicsPatService } from './listOfClinicsPat.service';
 import { listOfClinicsPat } from './listOfClinicsPat';
 import { DeleteConsultTypeService } from '../consultType/deleteConsultType.service';
-import { ConsultType } from 'src/consultType/consultType';
+import { ConsultType } from '../consultType/consultType';
 import { ConsultTerm } from '../consultTerm/consultTerm';
 import { ConsultTermService } from '../consultTerm/consultTerm.service';
 import * as moment from 'moment';
 import {Sort} from '@angular/material/sort';
+import { DeleteDoctorService } from '../doctor/deleteDoctor.service';
+import { Clinic } from '../addNewClinic/clinic';
+import { User } from '../registration/user';
+import { Doctor } from '../doctor/doctor';
 
 @Component({
     selector: 'pat-listOfClinics',
@@ -25,12 +29,23 @@ export class ListOfPatClinics implements OnInit{
     public _clinicRating: any;
     public selectedDate: Date;
     public consultTerms: ConsultTerm[];
+    public consultTerms2: ConsultTerm[];
 
     public sortedClinics: listOfClinicsPat[];
+    
+    public sortedDoctors: Doctor[];
+    private seeDoctors: boolean;
+    public selectedClinic: Clinic;
+    public doctors: Doctor[] = [];
+    public doctors2: Doctor[] = [];
 
     constructor(private _listOfClinicsService: listOfClinicsPatService, 
                 private _getConsultTypes: DeleteConsultTypeService,
-                private _consultTermService: ConsultTermService) {}
+                private _consultTermService: ConsultTermService,
+                private _getAllDoctors: DeleteDoctorService) {
+        
+        this.selectedType = new ConsultType(null,null,null);
+    }
 
     get clinicAddress():string{
         return this._clinicAdress;
@@ -92,6 +107,43 @@ export class ListOfPatClinics implements OnInit{
                 console.log("Error in getting consult term data!")
             });
 
+        console.log('ime tipa je: ', this.selectedType.name);
+    }
+
+    listOfDoctors(clinic: Clinic): void {
+        this.selectedClinic = clinic;
+        this.doctors = [];
+        if(this.selectedType.id != null) {
+            this.seeDoctors = true;
+            this._consultTermService.getConsultTermsInfo().subscribe(
+                data=> {
+                    this.consultTerms2 = data;
+                    this.consultTerms2.forEach( (value) => {
+                        if(JSON.stringify(value.type) == JSON.stringify(this.selectedType.name)) {
+                            this._getAllDoctors.getDoctors().subscribe(
+                                data=> {
+                                    this.doctors2 = data;
+                                    this.doctors2.forEach( (value) => {
+                                        if(JSON.stringify(this.selectedType.id) == JSON.stringify(value.typeId)) {
+                                            this.doctors.push(value);
+                                        } else {
+                                            console.log("Izabrani tip pregleda se ne poklapa sa tipom iz baze")
+                                        }
+                                    })
+                                }
+                            
+                            )
+                        } else {
+                            console.log("Imena tipova pregleda nisu jednaka")
+                        }
+                    });
+                }, error => {
+                    console.log("Error in getting consult term2 data!")
+                });
+                
+        } else {
+            alert("Type or date is not selected!");
+        }
     }
 
     sortData(sort: Sort) {
@@ -112,7 +164,29 @@ export class ListOfPatClinics implements OnInit{
           }
         });
     }
+
+    sortData2(sort: Sort) {
+        const data = this.doctors;
+        if (!sort.active || sort.direction === '') {
+          this.sortedDoctors = data;
+          return;
+        }
     
+        this.sortedDoctors = data.sort((a, b) => {
+          const isAsc = sort.direction === 'asc';
+          switch (sort.active) {
+            case 'name': return compare(a.name, b.name, isAsc);
+            case 'surname': return compare(a.surname, b.surname, isAsc);
+            case 'grade': return compare(a.grade, b.grade, isAsc);
+            default: return 0;
+          }
+        });
+    }
+    
+    hideAllDoctors(): void{
+        this.seeDoctors = false;
+    }
+
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {
