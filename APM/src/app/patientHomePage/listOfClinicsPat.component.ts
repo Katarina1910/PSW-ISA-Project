@@ -9,7 +9,6 @@ import * as moment from 'moment';
 import {Sort} from '@angular/material/sort';
 import { DeleteDoctorService } from '../doctor/deleteDoctor.service';
 import { Clinic } from '../addNewClinic/clinic';
-import { User } from '../registration/user';
 import { Doctor } from '../doctor/doctor';
 
 @Component({
@@ -23,9 +22,13 @@ export class ListOfPatClinics implements OnInit{
     public listClin : listOfClinicsPat[];
     public pListClin: listOfClinicsPat[] = [];
     public types: ConsultType[];
-    public _clinicAdress: string;
+    public _clinicAddress: string;
+    public _doctorName: string;
+    public _doctorSurname: string;
+    public _doctorGrade: any;
     public filteredClinics: listOfClinicsPat[];
     public selectedType: ConsultType;
+    public filteredDoctors: Doctor[];
     public _clinicRating: any;
     public selectedDate: Date;
     public consultTerms: ConsultTerm[];
@@ -48,11 +51,11 @@ export class ListOfPatClinics implements OnInit{
     }
 
     get clinicAddress():string{
-        return this._clinicAdress;
+        return this._clinicAddress;
     }
 
     set clinicAddress(value:string){
-        this._clinicAdress=value;
+        this._clinicAddress=value;
         this.filteredClinics = this.clinicAddress ? this.filter(this.clinicAddress):this.listClin;
     }
 
@@ -75,18 +78,68 @@ export class ListOfPatClinics implements OnInit{
         return this.listClin.filter((clinic:listOfClinicsPat)=>clinic.grade.toString().indexOf(filterField)!=-1);
     }
 
+    //filtriranje za doktora po imenu, prezimenu i oceni
+    get doctorName():string{
+        return this._doctorName;
+    }
+
+    set doctorName(value:string){
+        this._doctorName=value;
+        this.filteredDoctors = this.doctorName ? this.filterDoctorName(this.doctorName):this.doctors;
+    }
+
+    filterDoctorName(filterField:string):Doctor[]{
+        filterField = filterField.toLocaleLowerCase();
+        return this.doctors.filter((doctor:Doctor)=>doctor.name.toLowerCase().indexOf(filterField)!=-1);
+    }
+
+    get doctorSurname():string{
+        return this._doctorSurname;
+    }
+
+    set doctorSurname(value:string){
+        this._doctorSurname=value;
+        this.filteredDoctors = this.doctorSurname ? this.filterDoctorSurname(this.doctorSurname):this.doctors;
+    }
+
+    filterDoctorSurname(filterField:string):Doctor[]{
+        filterField = filterField.toLocaleLowerCase();
+        return this.doctors.filter((doctor:Doctor)=>doctor.surname.toLowerCase().indexOf(filterField)!=-1);
+    }
+
+
+    get doctorGrade():string{
+        return this._doctorGrade;
+    }
+
+    set doctorGrade(value:string){
+        this._doctorGrade=value;
+        this.filteredDoctors = this.doctorGrade ? this.filterDoctorGrade(this.doctorGrade):this.doctors;
+    }
+
+    filterDoctorGrade(filterField:string):Doctor[]{
+        filterField = filterField.toLocaleLowerCase();
+        return this.doctors.filter((doctor:Doctor)=>doctor.grade.toString().indexOf(filterField)!=-1);
+    }
+
     ngOnInit(){
         this._listOfClinicsService.getListOfClinics().subscribe(
             data=>{
                 this.listClin = data;
+                this.filteredClinics = data;
             },
-            error=>console.error('Error!',error)
+            error=>console.error('Error list of clinics!',error)
         )
         this._getConsultTypes.getConsultTypes().subscribe(
             data=>this.types = data,
-            error=> console.error('Error!', error)
+            error=> console.error('Error consult types!', error)
         )
-        this.filteredClinics = this.listClin;
+        this._getAllDoctors.getDoctors().subscribe(
+            data=>{
+                this.doctors = data;
+            },
+            error=> console.error('Error doctors!', error)
+        );
     }
 
     buttonSearch(): void{
@@ -118,25 +171,24 @@ export class ListOfPatClinics implements OnInit{
             this._consultTermService.getConsultTermsInfo().subscribe(
                 data=> {
                     this.consultTerms2 = data;
-                    this.consultTerms2.forEach( (value) => {
-                        if(JSON.stringify(value.type) == JSON.stringify(this.selectedType.name)) {
+                    for(let ct of this.consultTerms2) {
+                        if(JSON.stringify(ct.type) == JSON.stringify(this.selectedType.name)) {
                             this._getAllDoctors.getDoctors().subscribe(
                                 data=> {
                                     this.doctors2 = data;
-                                    this.doctors2.forEach( (value) => {
-                                        if(JSON.stringify(this.selectedType.id) == JSON.stringify(value.typeId)) {
-                                            this.doctors.push(value);
+                                    for(let d of this.doctors2) {
+                                        if(JSON.stringify(this.selectedType.id) == JSON.stringify(d.typeId)) {
+                                            this.doctors.push(d);
                                         } else {
                                             console.log("Izabrani tip pregleda se ne poklapa sa tipom iz baze")
                                         }
-                                    })
-                                }
-                            
-                            )
+                                    }
+                                })
+                        break;  //da ne bi vise puta iste lekare ispisivao
                         } else {
                             console.log("Imena tipova pregleda nisu jednaka")
                         }
-                    });
+                    }
                 }, error => {
                     console.log("Error in getting consult term2 data!")
                 });
@@ -166,7 +218,7 @@ export class ListOfPatClinics implements OnInit{
     }
 
     sortData2(sort: Sort) {
-        const data = this.doctors;
+        const data = this.filteredDoctors;
         if (!sort.active || sort.direction === '') {
           this.sortedDoctors = data;
           return;
