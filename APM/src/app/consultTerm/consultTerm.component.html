@@ -3,8 +3,11 @@
       <legend>Consult Term</legend>
 
       <div class="form-group">
-        <label for="exampleSelect1">Date:</label>
-        <input type="datetime" class="form-control" id="date"  [(ngModel)]="consultTermModel.date" name="date">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" id="date" placeholder="Choose a date" type="datetime" name="date" [(ngModel)]="consultTermModel.date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
       </div>
  
       <div class="form-group">

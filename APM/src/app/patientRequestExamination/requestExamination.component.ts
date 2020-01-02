@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConsultTerm } from '../consultTerm/consultTerm';
 import { ConsultTermService } from '../consultTerm/consultTerm.service';
+import { listOfClinicsPat } from '../patientHomePage/listOfClinicsPat';
+import { listOfClinicsPatService } from '../patientHomePage/listOfClinicsPat.service';
 
 @Component({
     selector: 'requestExamination-hp',
@@ -12,7 +14,7 @@ export class RequestExamination implements OnInit{
     public consultTerms: ConsultTerm[];
     consultTermModel = new ConsultTerm(null,null,null,null,null,null,null,null);
 
-    constructor(private _consultTermService: ConsultTermService) {}
+    constructor(private _consultTermService: ConsultTermService, private _listOfClinicsService: listOfClinicsPatService) {}
 
     ngOnInit(): void {
         this._consultTermService.getConsultTermsInfo().subscribe(
@@ -24,8 +26,7 @@ export class RequestExamination implements OnInit{
             });
     }
 
-    scheduleExamination(id: any) {
-        
+    scheduleExamination(id: any): void {
+        alert("Examination has been scheduled!")
     }
-
 }

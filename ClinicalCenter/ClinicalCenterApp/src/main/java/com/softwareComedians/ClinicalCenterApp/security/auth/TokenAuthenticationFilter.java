@@ -27,14 +27,14 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-        String username;
+        String mail;
         String authToken = tokenUtils.getToken(request);
 
         if (authToken != null) {
-            username = tokenUtils.getUsernameFromToken(authToken);
+            mail = tokenUtils.getMailFromToken(authToken);
 
-            if (username != null) {
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            if (mail != null) {
+                UserDetails userDetails = userDetailsService.loadUserByUsername(mail);
 
                 // Is token valid
                 if (tokenUtils.validateToken(authToken, userDetails)) {

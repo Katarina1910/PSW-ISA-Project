@@ -6,7 +6,7 @@ import { User } from '../registration/user';
 export class ConsultTerm {
     constructor(
         private id:number,
-        private date: Date,
+        public date: Date,
         private  type: ConsultType,
         private  duration: number,
         private  price: number,
