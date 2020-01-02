@@ -87,10 +87,21 @@ public class TokenUtils {
 
     public Boolean validateToken(String token, UserDetails userDetails) {
         User user = (User) userDetails;
-        final String username = getUsernameFromToken(token);
+        final String mail = getMailFromToken(token);
         final Date created = getIssuedAtDateFromToken(token);
 
-        return (username != null && username.equals(userDetails.getUsername()) /*&& !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordResetDate())*/);
+        return (mail != null && mail.equals(userDetails.getUsername()) /*&& !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordResetDate())*/);
+    }
+
+    public String getMailFromToken(String token) {
+        String mail;
+        try {
+            final Claims claims = this.getAllClaimsFromToken(token);
+            mail = claims.getSubject();
+        } catch (Exception e) {
+            mail = null;
+        }
+        return mail;
     }
 
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
@@ -120,17 +131,6 @@ public class TokenUtils {
             claims = null;
         }
         return claims;
-    }
-
-    public String getUsernameFromToken(String token) {
-        String username;
-        try {
-            final Claims claims = this.getAllClaimsFromToken(token);
-            username = claims.getSubject();
-        } catch (Exception e) {
-            username = null;
-        }
-        return username;
     }
 
     public Date getIssuedAtDateFromToken(String token) {
@@ -186,4 +186,5 @@ public class TokenUtils {
     public String getAuthHeaderFromHeader(HttpServletRequest request) {
         return request.getHeader(AUTH_HEADER);
     }
+
 }

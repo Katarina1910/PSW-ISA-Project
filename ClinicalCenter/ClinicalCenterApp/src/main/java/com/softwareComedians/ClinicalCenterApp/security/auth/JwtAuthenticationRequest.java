@@ -2,24 +2,24 @@ package com.softwareComedians.ClinicalCenterApp.security.auth;
 
 public class JwtAuthenticationRequest {
 
-    private String username;
+    private String email;
     private String password;
 
     public JwtAuthenticationRequest() {
         super();
     }
 
-    public JwtAuthenticationRequest(String username, String password) {
-        this.username = username;
+    public JwtAuthenticationRequest(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
-    public String getUsername() {
-        return this.username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getEmail() {
+        return this.email;
     }
 
     public String getPassword() {

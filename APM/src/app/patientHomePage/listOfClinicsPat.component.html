@@ -5,20 +5,20 @@
         <div class='row'>
             <div class='col'>Date for examination:</div>
             <div class='col'>Type:</div>
-            <div class='col'>Clinic location:</div>
+            <div class='col'>Clinic's address:</div>
             <div class='col'>Clinic's rating:</div>
             <div class='col'></div>
         </div>
         <div class='row'>
                 <div class='col'>
                         <mat-form-field>
-                                <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                                <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="selectedDate">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
                 </div>
                 <div class='col'>
-                      <select id="type"  name="type">
+                      <select id="type" name="type" [(ngModel)]="selectedType">
                         <option [ngValue]="null">Select Category</option>
                         <option *ngFor = 'let t of types' name="type">{{t.name}}</option>
                       </select>
@@ -27,10 +27,10 @@
                         <input type="text" [(ngModel)]='clinicAddress'>
                 </div>
                 <div class='col'>
-                        <input type="number" id="rating" name="rating">
+                        <input type="text" [(ngModel)]='clinicRating'>
                 </div>
                 <div class='col'>
-                        <button>Search</button>
+                        <button (click)="buttonSearch()">Search</button>
                 </div>
         </div>
         <div class='table-responsive' class="d-flex p-2 justify-content-center">
