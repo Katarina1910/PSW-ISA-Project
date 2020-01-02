@@ -44,6 +44,7 @@ import { DeleteDiagnosisComponent } from './createDiagCodeBook/deleteDiagnosis.c
 import { RequestExamination } from './patientRequestExamination/requestExamination.component';
 import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicCenterAdmin.component';
 // import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
 
 
@@ -86,6 +87,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     AddClinicAdminComponent,
     DeleteDiagnosisComponent,
     RequestExamination,
+    addNewClinicCenterAdmin
     //ListOfDiagnosis
     ],
   imports: [
@@ -111,7 +113,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
       {path: 'HomepageNurse/RequestForAbsence', component: RequestForAbsence},
       {path: 'HomepageNurse/RecipeValidation', component:RecipeValidation},
       {path: 'HomepageCCA/arrivedReq', component : arrivedRequest},
-      {path: 'HomepageCCA/registerNewClinCenAdmin', component: RegisterNewClinicalCenterAdministrator},
+      {path: 'HomepageCCA/addNewClinicCenterAdmin', component: addNewClinicCenterAdmin},
       {path: 'HomepageCCA/registerNewClinAdmin', component: AddClinicAdminComponent},
       {path: 'HomepageCCA/addNewClinic', component: AddNewClinic},
       {path: 'HomepageCCA/ListOfClinics', component: ListOfClinics},
