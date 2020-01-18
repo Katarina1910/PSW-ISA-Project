@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { USER_ID_KEY, USER_ROLE_KEY, USERNAME_KEY, USER_TOKEN_KEY } from './config/local-storage-keys';
+import { UserService } from './registration/user.service';
 
 @Component({
   selector: 'pm-root',
@@ -9,12 +10,17 @@ import { USER_ID_KEY, USER_ROLE_KEY, USERNAME_KEY, USER_TOKEN_KEY } from './conf
 export class AppComponent {
   pageTitle: string = 'Clinical Center App';
 
+  constructor(private _userService: UserService) {}
+
   onClickLogout(): void {
     localStorage.removeItem(USER_ID_KEY);
-    //localStorage.removeItem(USER_ROLE_KEY);
+    localStorage.removeItem(USER_ROLE_KEY);
     localStorage.removeItem(USERNAME_KEY);
     localStorage.removeItem(USER_TOKEN_KEY);
     alert('Logged out!');
   }
- 
+  
+  isUserLoggedIn(): boolean {
+    return this._userService.isUserLoggedIn();
+  }
 }

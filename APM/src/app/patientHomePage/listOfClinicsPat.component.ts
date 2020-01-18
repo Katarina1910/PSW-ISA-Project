@@ -199,7 +199,7 @@ export class ListOfPatClinics implements OnInit{
     }
 
     sortData(sort: Sort) {
-        const data = this.filteredClinics;
+        const data = this.listClin;
         if (!sort.active || sort.direction === '') {
           this.sortedClinics = data;
           return;
@@ -218,7 +218,7 @@ export class ListOfPatClinics implements OnInit{
     }
 
     sortData2(sort: Sort) {
-        const data = this.filteredDoctors;
+        const data = this.doctors;
         if (!sort.active || sort.direction === '') {
           this.sortedDoctors = data;
           return;
