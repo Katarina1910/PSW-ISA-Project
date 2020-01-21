@@ -55,14 +55,14 @@
         </div>
 
         <div class="user-info-container-row">
-            <mat-form-field class="input-field" appearance="outline" matTooltip="Password">
+            <mat-form-field class="input-field" appearance="outline" matTooltip="Old password">
                 <mat-icon matPrefix class="icon">lock</mat-icon>
-                <input matInput type="password" placeholder="Password" enable [(ngModel)]="password" />
+                <input matInput type="password" placeholder="Old password" enable [(ngModel)]="oldPassword" />
             </mat-form-field>
     
-            <mat-form-field class="input-field" appearance="outline" matTooltip="Repeat password">
+            <mat-form-field class="input-field" appearance="outline" matTooltip="New password">
                 <mat-icon matPrefix class="icon">lock</mat-icon>
-                <input matInput type="password" placeholder="Repeat password" enable [(ngModel)]="repeatPassword" />
+                <input matInput type="password" placeholder="New password" enable [(ngModel)]="newPassword" />
             </mat-form-field>
         </div>
 

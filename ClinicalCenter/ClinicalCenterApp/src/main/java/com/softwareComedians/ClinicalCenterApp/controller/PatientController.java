@@ -1,6 +1,7 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
 
+import com.softwareComedians.ClinicalCenterApp.common.consts.UserRoles;
 import com.softwareComedians.ClinicalCenterApp.dto.ConsultTermDTO;
 import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
 import com.softwareComedians.ClinicalCenterApp.model.Patient;
@@ -45,7 +46,7 @@ public class PatientController {
 
         Patient patient = new Patient(request.getUserData());
         patient.setActivated(true);
-        patient.setRole("PATIENT");
+        patient.setRole(UserRoles.ROLE_PATIENT);
         patient = patientService.save(patient);
 
         if(patient!=null)
