@@ -7,13 +7,14 @@ import { PatientProfilePageComponent } from './patientProfilePage/patientProfile
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { PatientProfileSettingsComponent } from './patientProfileSettings/patientProfileSettings.component';
+import { GuestGuard } from 'src/guard';
 
 
 const routes: Routes = [
-  { path: LOGIN_PATH, component: LoginComponent },
-  { path: REGISTRATION_PATH, component: RegistrationComponent },
-  { path: MY_PROFILE_PATH, component: PatientProfileSettingsComponent },
-  { path: PROFILES_PATH_PARAMS, component: PatientProfilePageComponent },
+  { path: LOGIN_PATH, component: LoginComponent, canActivate: [GuestGuard] },
+  { path: REGISTRATION_PATH, component: RegistrationComponent, canActivate: [GuestGuard] },
+  { path: MY_PROFILE_PATH, component: PatientProfileSettingsComponent, canActivate: [GuestGuard] },
+  { path: PROFILES_PATH_PARAMS, component: PatientProfilePageComponent, canActivate: [GuestGuard] },
 ];
 
 @NgModule({

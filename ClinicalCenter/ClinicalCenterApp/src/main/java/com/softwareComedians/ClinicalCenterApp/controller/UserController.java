@@ -1,5 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
+import com.softwareComedians.ClinicalCenterApp.common.consts.UserRoles;
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForPatientRegistrationDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.UserRegistrationDTO;
@@ -32,13 +33,14 @@ public class UserController {
 	private PasswordEncoder passwordEncoder;
 
 	@GetMapping("/public/{id}")
+	//@PreAuthorize("hasRole('ROLE_CA')")
 	public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
 		User user = userService.findById(id);
 		return new ResponseEntity<>(new UserDTO(user), HttpStatus.OK);
 	}
 
 	@GetMapping
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	//@PreAuthorize("hasRole('ROLE_CA')")
 	public ResponseEntity<List<UserDTO>> getAllUsers() {
 		List<User> users = userService.findAll();
 		return new ResponseEntity<>(UserMapper.toListDto(users), HttpStatus.OK);
@@ -58,7 +60,7 @@ public class UserController {
 		user.setPhone(rqDTO.getUserData().getPhone());
 		user.setUsername(rqDTO.getUserData().getUsername());
 		user.setPassword(passwordEncoder.encode(rqDTO.getUserData().getPassword()));
-		user.setRole("PATIENT");
+		user.setRole(UserRoles.ROLE_PATIENT);
 
 		user = userService.save(user);
 
