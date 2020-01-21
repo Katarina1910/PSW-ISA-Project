@@ -49,6 +49,10 @@ import { ApiService, AuthService, ConfigService } from './service';
 import { LoginGuard, GuestGuard, AdminGuard } from 'src/guard';
 import { UserService } from './registration/user.service';
 import { TokenInterceptor } from './interceptor/TokenInterceptor';
+import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicCenterAdmin.component';
+// import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
+
+
 
 @NgModule({
   declarations: [
@@ -88,6 +92,7 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor';
     AddClinicAdminComponent,
     DeleteDiagnosisComponent,
     RequestExamination,
+    addNewClinicCenterAdmin
     //ListOfDiagnosis
     ],
   imports: [
@@ -114,7 +119,7 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor';
       {path: 'HomepageNurse/RequestForAbsence', component: RequestForAbsence},
       {path: 'HomepageNurse/RecipeValidation', component:RecipeValidation},
       {path: 'HomepageCCA/arrivedReq', component : arrivedRequest},
-      {path: 'HomepageCCA/registerNewClinCenAdmin', component: RegisterNewClinicalCenterAdministrator},
+      {path: 'HomepageCCA/addNewClinicCenterAdmin', component: addNewClinicCenterAdmin},
       {path: 'HomepageCCA/registerNewClinAdmin', component: AddClinicAdminComponent},
       {path: 'HomepageCCA/addNewClinic', component: AddNewClinic},
       {path: 'HomepageCCA/ListOfClinics', component: ListOfClinics},
