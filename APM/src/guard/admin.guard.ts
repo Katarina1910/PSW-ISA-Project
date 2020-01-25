@@ -10,7 +10,7 @@ export class AdminGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.userService.currentUser) {
-      if (JSON.stringify(this.userService.currentUser.authorities).search('ROLE_PATIENT') !== -1) {
+      if (JSON.stringify(this.userService.currentUser.authorities).search('ROLE_CA') !== -1) {
         return true;
       } else {
         this.router.navigate(['/403']);
@@ -18,7 +18,7 @@ export class AdminGuard implements CanActivate {
       }
 
     } else {
-      console.log('NOT AN PATIENT ROLE');
+      console.log('NOT AN ADMIN ROLE');
       this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
       return false;
     }

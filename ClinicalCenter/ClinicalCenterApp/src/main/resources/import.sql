@@ -35,6 +35,9 @@ INSERT INTO `consult_term` (dtype, id, date, discount, duration, price, report, 
 INSERT INTO `consult_term` (dtype, id, date, discount, duration, price, report, clinic_id, doctor_id, patient_id, room_id, type_id, medical_record_id) VALUES ('ConsultTerm', 3, '2019-12-29 00:00:00', '15', '12', '170', null, null, 5, null, 2, 2, null);
 INSERT INTO `consult_term` (dtype, id, date, discount, duration, price, report, clinic_id, doctor_id, patient_id, room_id, type_id, medical_record_id) VALUES ('ConsultTerm', 4, '2019-12-28 00:00:00', '20', '13', '90', null, null, 4, null, 1, 1, null);
 
+INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (2, null, null);
+INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (3, null, null);
+
 INSERT INTO `user_authority` (user_id, authority_id) VALUES (1, 1);
 INSERT INTO `user_authority` (user_id, authority_id) VALUES (2, 2);
 INSERT INTO `user_authority` (user_id, authority_id) VALUES (3, 2);

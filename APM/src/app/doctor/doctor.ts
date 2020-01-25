@@ -5,7 +5,8 @@ export class Doctor{
        public name :string,
        public surname :string,
        public grade :number,
-       public typeId: number
+       public typeId: number,
+       public clinicID: number
     ) {}
 
 }

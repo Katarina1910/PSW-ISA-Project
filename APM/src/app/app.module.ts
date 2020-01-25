@@ -50,8 +50,8 @@ import { LoginGuard, GuestGuard, AdminGuard } from 'src/guard';
 import { UserService } from './registration/user.service';
 import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicCenterAdmin.component';
+import { AppointedExaminationsService } from './patientHomePage/patientExaminations.service';
 // import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
-
 
 
 @NgModule({
@@ -160,6 +160,7 @@ import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicC
     UserService,
     ConfigService,
     MatIconRegistry,
+    AppointedExaminationsService
   ], 
   bootstrap: [AppComponent]
 })

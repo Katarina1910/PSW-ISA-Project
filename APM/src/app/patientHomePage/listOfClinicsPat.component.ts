@@ -10,6 +10,10 @@ import {Sort} from '@angular/material/sort';
 import { DeleteDoctorService } from '../doctor/deleteDoctor.service';
 import { Clinic } from '../addNewClinic/clinic';
 import { Doctor } from '../doctor/doctor';
+import { appointedExamination } from './appointedExamination';
+import { AppointedExaminationsService } from './patientExaminations.service';
+import { UserService } from '../registration/user.service';
+import { User } from '../registration/user';
 
 @Component({
     selector: 'pat-listOfClinics',
@@ -42,12 +46,69 @@ export class ListOfPatClinics implements OnInit{
     public doctors: Doctor[] = [];
     public doctors2: Doctor[] = [];
 
+    public appointedExamination: appointedExamination;
+    public user: User;
+
     constructor(private _listOfClinicsService: listOfClinicsPatService, 
                 private _getConsultTypes: DeleteConsultTypeService,
                 private _consultTermService: ConsultTermService,
-                private _getAllDoctors: DeleteDoctorService) {
+                private _getAllDoctors: DeleteDoctorService,
+                private _appointedExaminations: AppointedExaminationsService,
+                private _loginService: UserService) {
         
         this.selectedType = new ConsultType(null,null,null);
+        this.appointedExamination = new appointedExamination();
+    }
+
+    ngOnInit(){
+        this._listOfClinicsService.getListOfClinics().subscribe(
+            data=>{
+                this.listClin = data;
+                this.filteredClinics = data;
+            },
+            error=>console.error('Error list of clinics!',error)
+        )
+        this._getConsultTypes.getConsultTypes().subscribe(
+            data=>this.types = data,
+            error=> console.error('Error consult types!', error)
+        )
+        this._getAllDoctors.getDoctors().subscribe(
+            data=>{
+                this.doctors = data;
+            },
+            error=> console.error('Error doctors!', error)
+        );
+
+        this._loginService.getUserInfo().subscribe({next: user=>{
+            this.user=user;
+            console.log(user);}
+        })
+    }
+
+    schedule2(examination: appointedExamination) {
+        this.appointedExamination.clinicID = examination.clinicID;
+        this.appointedExamination.doctorID = examination.doctorID;
+        this.appointedExamination.roomID = examination.roomID;
+        this.appointedExamination.typeID = examination.typeID;
+        this.appointedExamination.dateTime = examination.dateTime;
+        this.appointedExamination.duration = examination.duration;
+        this.appointedExamination.price = examination.price;
+
+        this.appointedExamination.patientID = this.user.id;
+        this._appointedExaminations.save(this.appointedExamination).subscribe();
+        console.log(this.appointedExamination);
+        alert("Examination is appointed");
+    }
+
+    schedule(doc: Doctor) {
+        //this.appointedExamination.clinicID = doc.clinicID;
+        this.appointedExamination.doctorID = doc.id;
+        this.appointedExamination.typeID = doc.typeId;
+
+        this.appointedExamination.patientID = this.user.id;
+        this._appointedExaminations.save(this.appointedExamination).subscribe();
+        console.log(this.appointedExamination);
+        alert("Examination is appointed");
     }
 
     get clinicAddress():string{
@@ -120,26 +181,6 @@ export class ListOfPatClinics implements OnInit{
     filterDoctorGrade(filterField:string):Doctor[]{
         filterField = filterField.toLocaleLowerCase();
         return this.doctors.filter((doctor:Doctor)=>doctor.grade.toString().indexOf(filterField)!=-1);
-    }
-
-    ngOnInit(){
-        this._listOfClinicsService.getListOfClinics().subscribe(
-            data=>{
-                this.listClin = data;
-                this.filteredClinics = data;
-            },
-            error=>console.error('Error list of clinics!',error)
-        )
-        this._getConsultTypes.getConsultTypes().subscribe(
-            data=>this.types = data,
-            error=> console.error('Error consult types!', error)
-        )
-        this._getAllDoctors.getDoctors().subscribe(
-            data=>{
-                this.doctors = data;
-            },
-            error=> console.error('Error doctors!', error)
-        );
     }
 
     buttonSearch(): void{
