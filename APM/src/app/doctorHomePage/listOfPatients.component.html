@@ -1,0 +1,45 @@
+<h1  class="d-flex p-2 justify-content-center">List of Patients</h1>
+<p>&nbsp;</p>        
+
+<div class='container'>
+        <div class='row'>
+            <div class='col'>Name:</div>
+            <div class='col'>Surname:</div>
+            <div class='col'>UCIDN:</div>
+        </div>
+        <div class='row'>
+            <div class='col'>
+                <input type="text" [(ngModel)]='patientName'>
+            </div>
+            <div class='col'>
+                <input type="text" [(ngModel)]='patientSurname'>
+            </div>
+            <div class='col'>
+                <input type="text" [(ngModel)]='patientUCIDN'>
+            </div>
+                      
+        </div>
+        <div class='table-responsive' class="d-flex p-2 justify-content-center">
+        <table class='table'>
+        <thead>
+                <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>UCIDN</th>
+                <th>Email</th>
+                <th>Address </th>
+                <th></th>
+                </tr>
+        </thead>
+        <tbody>
+                <tr *ngFor = 'let c of filteredPatients'>
+                <td>{{c.name}}</td>
+                <td>{{c.surname}}</td>
+                <td>{{c.ucidn}}</td>
+                <td>{{c.email}}</td>
+                <td>{{c.address}}</td>
+                </tr>
+        </tbody>                 
+        </table>
+        </div>
+</div>
