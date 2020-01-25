@@ -5,6 +5,8 @@ import com.softwareComedians.ClinicalCenterApp.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PatientService {
 
@@ -23,4 +25,6 @@ public class PatientService {
     public Patient findById(Long id) {
         return patientRepository.findById(id).orElseGet(null);
     }
+
+    public List<Patient> findAll() { return patientRepository.findAll(); }
 }
