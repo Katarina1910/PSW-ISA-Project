@@ -33,6 +33,7 @@ import { PatientComponent } from './patientHomePage/patient.component';
 import { ListOfClinics } from './listOfClinics/listOfClinics.component';
 import { DeleteClinicsComponent } from './addNewClinic/deleteClinics.component';
 import { ListOfPatClinics } from './patientHomePage/listOfClinicsPat.component';
+import { listOfPatientsDoctor } from './doctorHomePage/listOfPatients.component';
 import { PatientProfileSettingsComponent } from './patientProfileSettings/patientProfileSettings.component';
 import { MaterialModule } from './material';
 import { ListOfMedicament } from './listOfMedicaments/listOfMedicament.component';
@@ -51,6 +52,7 @@ import { UserService } from './registration/user.service';
 import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicCenterAdmin.component';
 import { AppointedExaminationsService } from './patientHomePage/patientExaminations.service';
+import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDoc.component';
 // import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
 
 
@@ -82,6 +84,7 @@ import { AppointedExaminationsService } from './patientHomePage/patientExaminati
     DeleteRoomComponent,
     PatientComponent,
     ListOfClinics,
+    listOfPatientsDoctor,
     DeleteClinicsComponent,
     ListOfPatClinics,
     PatientProfileSettingsComponent,
@@ -92,7 +95,8 @@ import { AppointedExaminationsService } from './patientHomePage/patientExaminati
     AddClinicAdminComponent,
     DeleteDiagnosisComponent,
     RequestExamination,
-    addNewClinicCenterAdmin
+    addNewClinicCenterAdmin,
+    PatientProfileDocComponent,
     //ListOfDiagnosis
     ],
   imports: [
@@ -112,6 +116,8 @@ import { AppointedExaminationsService } from './patientHomePage/patientExaminati
       {path: 'HomepageCCA', component: ClinicalCenterAdministratorCompoment},
       {path: 'HomepageCA' , component: ClinicAdminHomePageComponent},
       {path: 'HomepageDoctor', component: DoctorComponent},
+      {path: 'HomepageDoctor/ListOfPatients', component: listOfPatientsDoctor},
+      {path: 'HomepageDoctor/ListOfPatients/Profile', component: PatientProfileDocComponent},
       {path: 'HomepageNurse', component: NurseComponent},
       {path: 'HomepageNurse/listOfAllPat', component: listOfAllPat},
       {path: 'HomepageNurse/UserProfiles', component: UserProfiles},

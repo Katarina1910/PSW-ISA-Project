@@ -48,16 +48,6 @@ public class DoctorController {
     @PostMapping()
     public ResponseEntity<DoctorDTO> addDoctor(@RequestBody DoctorDTO doctorDTO) {
         Doctor doctor = new Doctor();
-      /*  if(doctorService.findByEmail(doctorDTO.getEmail())!=null){
-            return new ResponseEntity<>(new DoctorDTO(doctor), HttpStatus.BAD_REQUEST);
-        }
-        if(doctorService.findByUICDN(doctorDTO.getUcidn())!=null){
-            return new ResponseEntity<>(new DoctorDTO(doctor), HttpStatus.BAD_REQUEST);
-        }
-        if(doctorService.findByUserName(doctorDTO.getUserName())!=null){
-            return new ResponseEntity<>(new DoctorDTO(doctor), HttpStatus.BAD_REQUEST);
-        }*/
-
         doctor.setId(doctorDTO.getId());
         doctor.setName(doctorDTO.getName());
         doctor.setSurname(doctorDTO.getSurname());
