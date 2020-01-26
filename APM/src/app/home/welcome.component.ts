@@ -18,10 +18,13 @@ isUserPatient(): boolean {
     return this.userService.isUserPatient();
 }
 
+isUserDoctor(): boolean {
+  return this.userService.isUserDoctor();
+}
 
-  isUserDoctor(): any {
-    return this.userService.isUserDoctor();
-  }
+isUserCA(): boolean {
+  return this.userService.isUserCA();
+}
 }
 
 

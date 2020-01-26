@@ -1,18 +1,24 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
 
+import com.softwareComedians.ClinicalCenterApp.common.consts.UserRoles;
 import com.softwareComedians.ClinicalCenterApp.dto.ConsultTermDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.PatientDTO;
+import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
+import com.softwareComedians.ClinicalCenterApp.mappers.UserMapper;
 import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
 import com.softwareComedians.ClinicalCenterApp.model.Patient;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForPatientRegistration;
+import com.softwareComedians.ClinicalCenterApp.model.User;
 import com.softwareComedians.ClinicalCenterApp.repository.AuthorityRepository;
 import com.softwareComedians.ClinicalCenterApp.service.ConsultTermService;
 import com.softwareComedians.ClinicalCenterApp.service.PatientService;
 import com.softwareComedians.ClinicalCenterApp.service.RequestForPatientRegistrationService;
+import com.softwareComedians.ClinicalCenterApp.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +43,9 @@ public class PatientController {
 
     @Autowired
     private ConsultTermService consultTermService;
+
+    @Autowired
+    private UserServiceImpl userService;
 
     @Autowired
     public PatientController(PatientService patientService, RequestForPatientRegistrationService requestForPatientRegistrationService) {
@@ -65,7 +74,7 @@ public class PatientController {
 
         Patient patient = new Patient(request.getUserData());
         patient.setActivated(true);
-        patient.setRole("PATIENT");
+        patient.setRole(UserRoles.ROLE_PATIENT);
         patient = patientService.save(patient);
 
         if(patient!=null)
@@ -86,5 +95,25 @@ public class PatientController {
         return new ResponseEntity<>(termsDTO, HttpStatus.OK);
     }
 
+    @PostMapping(value = "/edit")
+    @PreAuthorize("ROLE_PATIENT")
+    public ResponseEntity<UserDTO> editPatient(@RequestBody PatientDTO patientDTO) {
+
+        User userInfo = userService.findById(patientDTO.getId());
+        userInfo.setName(patientDTO.getName());
+        userInfo.setSurname(patientDTO.getSurname());
+        userInfo.setPhone(patientDTO.getPhone());
+        userInfo.setUsername(patientDTO.getUsername());
+        userInfo.setPassword(patientDTO.getPassword());
+        userInfo.setActivated(patientDTO.isActivated());
+        userInfo.setCountry(patientDTO.getCountry());
+        userInfo.setCity(patientDTO.getCity());
+        userInfo.setAddress(patientDTO.getAddress());
+        userInfo.setUcidn(patientDTO.getUcidn());
+
+        userInfo = userService.save(userInfo);
+
+        return new ResponseEntity<>(UserMapper.toDto(userInfo), HttpStatus.OK);
+    }
 
 }

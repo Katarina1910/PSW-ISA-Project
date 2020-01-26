@@ -14,7 +14,7 @@ import { createMedicamentCodeBook } from './createMedicamentCodeBook/createMedic
 import { createDiagnosisCodeBook } from './createDiagCodeBook/createDiagCodeBook.component';
 import { WelcomeComponent } from './home/welcome.component'
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DoctorComponent } from './doctorHomePage/doctor.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -43,12 +43,17 @@ import { DeleteConsultTypeComponent } from './consultType/deleteConsultType.comp
 import { AddClinicAdminComponent } from './addNewClinicAdministrator/addNewClinicAdministrator.component';
 import { DeleteDiagnosisComponent } from './createDiagCodeBook/deleteDiagnosis.component';
 import { RequestExamination } from './patientRequestExamination/requestExamination.component';
-import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatDatepickerModule, MatNativeDateModule, MatIconRegistry } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatSortModule} from '@angular/material/sort';
+import { ApiService, AuthService, ConfigService } from './service';
+import { LoginGuard, GuestGuard, AdminGuard } from 'src/guard';
+import { UserService } from './registration/user.service';
+import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicCenterAdmin.component';
+import { AppointedExaminationsService } from './patientHomePage/patientExaminations.service';
 import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDoc.component';
 // import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
-
 
 
 @NgModule({
@@ -103,6 +108,7 @@ import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDo
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
+    MatSortModule,
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
@@ -145,6 +151,22 @@ import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDo
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'},
     ], {useHash: true}),
     BrowserAnimationsModule
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    LoginGuard,
+    GuestGuard,
+    AdminGuard,
+    AuthService,
+    ApiService,
+    UserService,
+    ConfigService,
+    MatIconRegistry,
+    AppointedExaminationsService
   ], 
   bootstrap: [AppComponent]
 })

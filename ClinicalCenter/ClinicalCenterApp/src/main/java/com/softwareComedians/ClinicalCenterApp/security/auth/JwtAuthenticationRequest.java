@@ -10,8 +10,8 @@ public class JwtAuthenticationRequest {
     }
 
     public JwtAuthenticationRequest(String email, String password) {
-        this.email = email;
-        this.password = password;
+        this.setEmail(email);
+        this.setPassword(password);
     }
 
     public void setEmail(String email) {

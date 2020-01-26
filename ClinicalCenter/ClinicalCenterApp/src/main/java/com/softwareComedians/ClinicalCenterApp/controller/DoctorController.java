@@ -60,6 +60,7 @@ public class DoctorController {
         doctor.setUsername(doctorDTO.getUsername());
         doctor.setPassword(passwordEncoder.encode(doctorDTO.getPassword()));
         doctor.setGrade((double) 0);
+        doctor.setTypeId(null);
         doctor.setRole("DOCTOR");
         doctor.setActivated(true);
         Authority doctorAutority = authorityRepository.findByName(UserRoles.ROLE_DOCTOR);

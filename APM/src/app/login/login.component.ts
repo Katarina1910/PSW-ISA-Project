@@ -3,8 +3,12 @@ import { Login } from './login';
 import { LoginService } from './login.service';
 import { User } from '../registration/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { USER_ID_KEY, USER_ROLE_KEY, USERNAME_KEY, USER_TOKEN_KEY } from '../config/local-storage-keys';
+import { UserService } from '../registration/user.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { DisplayMessage } from '../shared/models/display-message';
 
 @Component({
     selector : 'cc-login',
@@ -15,19 +19,49 @@ export class LoginComponent{
     u:User = null;
     loginForm: FormGroup;
     submitted = false;
+    private user:User;
+    returnUrl: string;
+    private ngUnsubscribe: Subject<void> = new Subject<void>();
+    notification: DisplayMessage;
+    form: FormGroup;
 
-
-    constructor(private _loginService: LoginService, private formBuilder: FormBuilder, private router: Router){ }
+    constructor(private _loginService: LoginService, 
+                private formBuilder: FormBuilder, 
+                private router: Router,
+                private route: ActivatedRoute,
+                private _isUser: UserService){ }
 
     ngOnInit() {
+        this.route.params
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe((params: DisplayMessage) => {
+            this.notification = params;
+        });
+        // get return url from route parameters or default to '/'
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.form = this.formBuilder.group({
+        username: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(64)])],
+        password: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(32)])]
+        });
+
+        /**
         this.loginForm = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', [Validators.required, Validators.minLength(3)]],
         });
+        **/
     }
+
+    ngOnDestroy() {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
+    }
+
     get f() { return this.loginForm.controls; }
     
     onClickLogin(){
+        this.notification = undefined;
+        this.submitted = true;
         this._loginService.login(this.loginModel)
        .subscribe(
         data => {
@@ -37,16 +71,34 @@ export class LoginComponent{
             console.log(data);
             
             localStorage.setItem(USER_ID_KEY, data.id);
-            //localStorage.setItem(USER_ROLE_KEY, data.authorities[0]);
-            localStorage.setItem(USERNAME_KEY, data.username);
+            localStorage.setItem(USER_ROLE_KEY, data.authorities);
+            localStorage.setItem(USERNAME_KEY, data.email);
             localStorage.setItem(USER_TOKEN_KEY, data.token.accessToken);
             localStorage.setItem(USER_ROLE_KEY, data.role)
             
-            alert("Loged in!");
-            this.router.navigate(['/HomepagePatient']);
+            alert("Logged in!");
+
+            if(this._isUser.isUserLoggedIn()) {
+                this.user = JSON.parse(sessionStorage.getItem("user"));
+                if(this.user.role==="ROLE_PATIENT"){
+                    this.router.navigate(['/HomepagePatient']);
+                } else if(this.user.role==="ROLE_DOCTOR") {
+                    this.router.navigate(['/HomepageDoctor']);
+                } else if(this.user.role==="ROLE_CA") {
+                    this.router.navigate(['/HomepageCA'])
+                } else if(this.user.role==="ROLE_CCA") {
+                    this.router.navigate(['/HomepageCCA'])
+                } else {
+                    this.router.navigate(['']);
+                }
+            }
+            
+             
         },
-        error=> alert("Wrong password or username")
-        );
+        error=> { 
+            alert("Wrong password or username")
+            this.submitted = false;
+        });
         this.submitted = true;
     }
 }
