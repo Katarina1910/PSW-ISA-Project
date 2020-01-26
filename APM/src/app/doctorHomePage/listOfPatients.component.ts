@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { listOfPatients } from './listOfPatients';
 import { listOfPatientsService } from './listOfPatients.service';
+import { PatientProfileDocService } from '../patientProfileDoc/patientProfileDoc.service';
+import { User } from '../registration/user';
+import { Router } from '@angular/router';
 
 
 
@@ -17,9 +20,10 @@ export class listOfPatientsDoctor implements OnInit{
     public _patientUCIDN: string;
     public _patientName: string;
     public _patientSurname: string;
+    public user: User = new User("","","","","","","","","","","","");
 
-
-    constructor(private _listOfPatientsService: listOfPatientsService) {}
+  
+    constructor(private _listOfPatientsService: listOfPatientsService,  private router: Router,private patientProfileDoc: PatientProfileDocService) {}
 
     get patientName():string{
         return this._patientName;
@@ -60,6 +64,17 @@ export class listOfPatientsDoctor implements OnInit{
     filter2(filterField:string):listOfPatients[]{
         filterField = filterField.toLocaleLowerCase();
         return this.listPatients.filter((pat:listOfPatients)=>pat.surname.toLowerCase().indexOf(filterField)!=-1);
+    }
+
+    getProfile(id:number): void{
+        this.patientProfileDoc.getUserProfile(id).subscribe(
+            data=>{
+                this._listOfPatientsService.user = data;
+                this.router.navigate(['/HomepageDoctor/ListOfPatients/Profile']);
+            },
+            error=> console.error('Error!', error)
+        )
+       
     }
 
 
