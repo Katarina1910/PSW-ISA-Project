@@ -1,6 +1,7 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,45 +11,50 @@ public class AppointedExaminations {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "DateTime", nullable = false)
-    private LocalDateTime dateTime;
+    @Column(name = "DateTime", nullable = true)
+    private Date dateTime;
 
     @Column(name = "Duration", nullable = false)
-    private int duration; // u minutes
+    private int duration; // in minutes
 
     @Column(name = "TypeID", nullable = false)
-    private Long typeID;
+    private String type;
 
-    @Column(name = "RoomID", nullable = false)
-    private Long roomID;
+    @Column(name = "Room", nullable = false)
+    private String room;
 
-    @Column(name = "DoctorID", nullable = false)
-    private Long doctorID;
+    @Column(name = "Doctor", nullable = false)
+    private String doctor;
 
     @Column(name = "Price", nullable = false)
     private double price;
 
-    @Column(name = "ClinicID", nullable = false)
-    private Long clinicID;
+    //@Column(name = "ClinicID", nullable = false)
+    //private Long clinicID;
 
-    @Column(name = "PatientID", nullable = false)
-    private Long patientID;
+    //@Column(name = "PatientID", nullable = false)
+    //private Long patientID;
 
     @Column(name = "IsDone", nullable = false)
     private boolean isDone=false;
 
+    @Column(name = "Discount", nullable = false)
+    private Long discount;
 
-    public AppointedExaminations(Long id, LocalDateTime dateTime, int duration, Long typeID, Long roomID, Long doctorID, double price, Long clinicID, Long patientID) {
+
+    public AppointedExaminations(Long id, Date dateTime, int duration, String type, String room, String doctor,
+                                 double price, Long clinicID, Long patientID, Long discount) {
         this.id = id;
         this.dateTime = dateTime;
         this.duration = duration;
-        this.typeID = typeID;
-        this.roomID = roomID;
-        this.doctorID = doctorID;
+        this.type = type;
+        this.room = room;
+        this.doctor = doctor;
         this.price = price;
-        this.clinicID = clinicID;
-        this.patientID = patientID;
+        //this.clinicID = clinicID;
+        //this.patientID = patientID;
         this.isDone = false;
+        this.discount = discount;
     }
 
     public AppointedExaminations() {
@@ -58,20 +64,33 @@ public class AppointedExaminations {
     public void copyValues(AppointedExaminations examination) {
         this.dateTime = examination.getDateTime();
         this.duration = examination.getDuration();
-        this.typeID = examination.getTypeID();
-        this.roomID = examination.getRoomID();
-        this.doctorID = examination.getDoctorID();
+        this.type = examination.getType();
+        this.room = examination.getRoom();
+        this.doctor = examination.getDoctor();
         this.price = examination.getPrice();
-        this.clinicID = examination.getClinicID();
-        this.patientID = examination.getPatientID();
+        //this.clinicID = examination.getClinicID();
+        //this.patientID = examination.getPatientID();
         this.isDone = false;
+        this.discount = examination.getDiscount();
     }
 
     public Long getId() {
         return id;
     }
 
-    public LocalDateTime getDateTime() {
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
+    public Long getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Long discount) {
+        this.discount = discount;
+    }
+
+    public Date getDateTime() {
         return dateTime;
     }
 
@@ -79,22 +98,22 @@ public class AppointedExaminations {
         return duration;
     }
 
-    public Long getTypeID() {
-        return typeID;
+    public String getType() {
+        return type;
     }
 
-    public Long getRoomID() {
-        return roomID;
+    public String getRoom() {
+        return room;
     }
 
-    public Long getDoctorID() {
-        return doctorID;
+    public String getDoctor() {
+        return doctor;
     }
 
     public double getPrice() {
         return price;
     }
-
+/*
     public Long getClinicID() {
         return clinicID;
     }
@@ -110,8 +129,8 @@ public class AppointedExaminations {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public void setDateTime(LocalDateTime dateTime) {
+*/
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -119,22 +138,18 @@ public class AppointedExaminations {
         this.duration = duration;
     }
 
-    public void setTypeID(Long typeID) {
-        this.typeID = typeID;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public void setRoomID(Long roomID) {
-        this.roomID = roomID;
-    }
-
-    public void setDoctorID(Long doctorID) {
-        this.doctorID = doctorID;
+    public void setDoctor(String doctorID) {
+        this.doctor = doctorID;
     }
 
     public void setPrice(double price) {
         this.price = price;
     }
-
+/*
     public void setClinicID(Long clinicID) {
         this.clinicID = clinicID;
     }
@@ -142,7 +157,7 @@ public class AppointedExaminations {
     public void setPatientID(Long patientID) {
         this.patientID = patientID;
     }
-
+*/
     public void setDone(boolean done) {
         isDone = done;
     }

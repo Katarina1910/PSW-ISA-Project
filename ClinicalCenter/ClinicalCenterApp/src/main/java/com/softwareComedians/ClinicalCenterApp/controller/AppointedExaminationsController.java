@@ -1,6 +1,8 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
+import com.softwareComedians.ClinicalCenterApp.dto.AppointedExaminationsDTO;
 import com.softwareComedians.ClinicalCenterApp.model.AppointedExaminations;
+import com.softwareComedians.ClinicalCenterApp.model.Doctor;
 import com.softwareComedians.ClinicalCenterApp.service.impl.AppointedExaminationsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,34 +43,39 @@ public class AppointedExaminationsController {
     }
 */
     @PostMapping( value = "/add")
-    public ResponseEntity<?> addExamination(@RequestBody AppointedExaminations examination) throws Exception {
+    public ResponseEntity<?> addExamination(@RequestBody AppointedExaminationsDTO examinationDTO) throws Exception {
 
-        int duration = examination.getDuration();
-        LocalDateTime dateTime = examination.getDateTime();
-        double price = examination.getPrice();
-/*
-        if (duration < 1) {
+        AppointedExaminations appexm = new AppointedExaminations();
+
+        appexm.setDateTime(examinationDTO.getDateAndTime());
+        appexm.setDuration(examinationDTO.getDuration());
+        appexm.setDoctor(examinationDTO.getDoctor());
+        appexm.setType(examinationDTO.getType());
+        appexm.setRoom(examinationDTO.getRoom());
+        appexm.setPrice(examinationDTO.getPrice());
+        appexm.setDiscount(examinationDTO.getDiscount());
+
+
+
+        if (appexm.getDuration() < 1) {
             return new ResponseEntity<>("Error! Duration is smaller then 1!", HttpStatus.METHOD_NOT_ALLOWED);
         }
 
-        if (price < 0) {
+        if (appexm.getPrice() < 0) {
             return new ResponseEntity<>("Error! Price is smaller then 0!", HttpStatus.METHOD_NOT_ALLOWED);
         }
-
+/*
         LocalDateTime dateTimeNow = LocalDateTime.now();
 
-        int compareValue = examination.getDateTime().compareTo(dateTimeNow);
+        int compareValue = appexm.getDateTime().compareTo(dateTimeNow);
 
         if (compareValue < 0) {
             return new ResponseEntity<>("Error! Date is in the past!", HttpStatus.METHOD_NOT_ALLOWED);
         }
 */
-        AppointedExaminations examinationNew = this.appointedExaminationsService.create(examination);
+        appexm = appointedExaminationsService.save(appexm);
 
-
-        System.out.println("Date time to add: " + examinationNew.getDateTime());
-
-        return new ResponseEntity<>(examinationNew, HttpStatus.CREATED);
+        return new ResponseEntity<>(new AppointedExaminationsDTO(appexm), HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/delete/{id}")

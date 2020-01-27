@@ -50,11 +50,11 @@ public class AppointedExaminationsImpl implements AppointedExaminationsService {
         ret.setDateTime(examination.getDateTime());
         ret.setPrice(examination.getPrice());
         ret.setDuration(examination.getDuration());
-        ret.setClinicID(examination.getClinicID());
-        ret.setDoctorID(examination.getDoctorID());
-        ret.setTypeID(examination.getTypeID());
-        ret.setPatientID(examination.getPatientID());
-        ret.setRoomID(examination.getRoomID());
+        //ret.setClinicID(examination.getClinicID());
+        ret.setDoctor(examination.getDoctor());
+        ret.setType(examination.getType());
+        //ret.setPatientID(examination.getPatientID());
+        ret.setRoom(examination.getRoom());
 
         ret = this.appointedExaminationsRepository.save(ret);
         return ret;
@@ -63,5 +63,9 @@ public class AppointedExaminationsImpl implements AppointedExaminationsService {
     @Override
     public void delete(Long id) {
         appointedExaminationsRepository.deleteById(id);
+    }
+
+    public AppointedExaminations save(AppointedExaminations consultTerm) {
+        return appointedExaminationsRepository.save(consultTerm);
     }
 }

@@ -13,5 +13,4 @@ public interface AppointedExaminationsService {
         AppointedExaminations update(AppointedExaminations patient) throws Exception;
         AppointedExaminations create(AppointedExaminations examinations) throws Exception;
         void delete(Long id);
-
 }
