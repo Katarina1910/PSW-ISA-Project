@@ -5,24 +5,24 @@
             <thead>
                 <tr>
                     <th>Date</th>
-                    <th>Discount</th>
                     <th>Duration</th>
-                    <th>Price</th>
                     <th>Doctor</th>
-                    <th>Room</th>
                     <th>Type</th>
+                    <th>Room</th>
+                    <th>Price</th>
+                    <th>Discount</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor = 'let ct of consultTerms ' >
                 
                     <td>{{ct.date}}</td>
-                    <td>{{ct.discount}}</td>
                     <td>{{ct.duration}}</td>
-                    <td>{{ct.price}}</td>
                     <td>{{ct.doctor}}</td>
-                    <td>{{ct.room}}</td>
                     <td>{{ct.type}}</td>
+                    <td>{{ct.room}}</td>
+                    <td>{{ct.price}}$</td>
+                    <td>{{ct.discount}}%</td>
                     <td><button  type="button" class="btn btn-outline-primary" (click)='scheduleExamination(ct.id)'>Schedule</button></td>
                 </tr>
             

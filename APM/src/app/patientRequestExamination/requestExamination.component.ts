@@ -3,6 +3,7 @@ import { ConsultTerm } from '../consultTerm/consultTerm';
 import { ConsultTermService } from '../consultTerm/consultTerm.service';
 import { listOfClinicsPat } from '../patientHomePage/listOfClinicsPat';
 import { listOfClinicsPatService } from '../patientHomePage/listOfClinicsPat.service';
+import { requestExamination } from './requestExamination.service';
 
 @Component({
     selector: 'requestExamination-hp',
@@ -14,7 +15,8 @@ export class RequestExamination implements OnInit{
     public consultTerms: ConsultTerm[];
     consultTermModel = new ConsultTerm(null,null,null,null,null,null,null,null);
 
-    constructor(private _consultTermService: ConsultTermService, private _listOfClinicsService: listOfClinicsPatService) {}
+    constructor(private _consultTermService: ConsultTermService,
+                private _requestExaminationService: requestExamination) {}
 
     ngOnInit(): void {
         this._consultTermService.getConsultTermsInfo().subscribe(
@@ -27,6 +29,15 @@ export class RequestExamination implements OnInit{
     }
 
     scheduleExamination(id: any): void {
+        this.consultTermModel = this.consultTerms[id];
+        console.log(this.consultTermModel);
+        this._requestExaminationService.appointExamination(this.consultTermModel).subscribe(
+            data=> {
+                console.log('Success!', JSON.stringify(data));
+            }, error => {
+                console.log("Error in appointing examination");
+            }
+        )
         alert("Examination has been scheduled!")
     }
 }
