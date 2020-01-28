@@ -1,6 +1,7 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
+import com.softwareComedians.ClinicalCenterApp.mail.SmtpMailSender;
 import com.softwareComedians.ClinicalCenterApp.model.*;
 import com.softwareComedians.ClinicalCenterApp.service.*;
 import com.softwareComedians.ClinicalCenterApp.service.impl.UserServiceImpl;
@@ -28,6 +29,9 @@ public class ReqestForConsultController {
 
     @Autowired
     private ConsultTermService consultTermService;
+
+    @Autowired
+    private SmtpMailSender smtpMailSender;
 
     @PostMapping()
     public ResponseEntity<RequestForConsultDTO> createRequest(@RequestBody RequestForConsultDTO requestForConsultDTO) {
@@ -57,7 +61,7 @@ public class ReqestForConsultController {
         rfc.setType(requestForConsultDTO.getType());
         rfc.setAccepted(false);
         rfc.setApplicant(u);
-        //rfc.setConsultTerm(ct);
+        rfc.setConsultTerm(ct);
 
 /*
         if (rfc.getDuration() < 1) {
@@ -75,6 +79,14 @@ public class ReqestForConsultController {
             return new ResponseEntity<>("Error! Date is in the past!", HttpStatus.METHOD_NOT_ALLOWED);
         }
 */
+
+        //salje mejl adminu klinike
+        //TODO: preko pacijenotovog ID-a pronaci u kojoj je klinici i poslati mejl odgovarajucem administratoru te klinike
+        smtpMailSender.send("sansaduvic@gmail.com","Request for consult",
+                " You have a request for consult: type: "+ct.getType().getName()+ "\n"+
+                        "doctor's name: "+ct.getDoctor().getName()+ " "+ct.getDoctor().getSurname()+ "\n"+
+                        " <a href='http://localhost:8080/api/patient/addConsultTerm/"+ct.getId()+"'> Confirm </a>");
+
         rfc = requestForConsultService.save(rfc);
 
         return new ResponseEntity<>(new RequestForConsultDTO(rfc), HttpStatus.CREATED);

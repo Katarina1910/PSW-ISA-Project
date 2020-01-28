@@ -6,13 +6,11 @@ import com.softwareComedians.ClinicalCenterApp.dto.ConsultTermDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.PatientDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
 import com.softwareComedians.ClinicalCenterApp.mappers.UserMapper;
-import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
-import com.softwareComedians.ClinicalCenterApp.model.Patient;
-import com.softwareComedians.ClinicalCenterApp.model.RequestForPatientRegistration;
-import com.softwareComedians.ClinicalCenterApp.model.User;
+import com.softwareComedians.ClinicalCenterApp.model.*;
 import com.softwareComedians.ClinicalCenterApp.repository.AuthorityRepository;
 import com.softwareComedians.ClinicalCenterApp.service.ConsultTermService;
 import com.softwareComedians.ClinicalCenterApp.service.PatientService;
+import com.softwareComedians.ClinicalCenterApp.service.RequestForConsultService;
 import com.softwareComedians.ClinicalCenterApp.service.RequestForPatientRegistrationService;
 import com.softwareComedians.ClinicalCenterApp.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +44,9 @@ public class PatientController {
 
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private RequestForConsultService requestForConsultService;
 
     @Autowired
     public PatientController(PatientService patientService, RequestForPatientRegistrationService requestForPatientRegistrationService) {
@@ -114,6 +115,20 @@ public class PatientController {
         userInfo = userService.save(userInfo);
 
         return new ResponseEntity<>(UserMapper.toDto(userInfo), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "addConsultTerm/{id}")
+    public ResponseEntity<Void> addConsultTerm(@PathVariable Long id){
+
+        RequestForConsult request = requestForConsultService.findById(id);
+        request.setAccepted(true);
+
+        request = requestForConsultService.save(request);
+
+        if(request!=null)
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        else
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 }
