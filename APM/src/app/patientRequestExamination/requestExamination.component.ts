@@ -4,6 +4,8 @@ import { ConsultTermService } from '../consultTerm/consultTerm.service';
 import { listOfClinicsPat } from '../patientHomePage/listOfClinicsPat';
 import { listOfClinicsPatService } from '../patientHomePage/listOfClinicsPat.service';
 import { requestExamination } from './requestExamination.service';
+import { UserService } from '../registration/user.service';
+import { User } from '../registration/user';
 
 @Component({
     selector: 'requestExamination-hp',
@@ -14,11 +16,15 @@ export class RequestExamination implements OnInit{
 
     public consultTerms: ConsultTerm[];
     consultTermModel = new ConsultTerm(null,null,null,null,null,null,null,null);
+    user: User = new User("","","","","","","","","","","","");
+    private userId: number;
 
     constructor(private _consultTermService: ConsultTermService,
-                private _requestExaminationService: requestExamination) {}
+                private _requestExaminationService: requestExamination,
+                private userService: UserService) {}
 
     ngOnInit(): void {
+        this.getUserInfo();
         this._consultTermService.getConsultTermsInfo().subscribe(
             data=> {
                 this.consultTerms = data;
@@ -28,10 +34,9 @@ export class RequestExamination implements OnInit{
             });
     }
 
-    scheduleExamination(id: any): void {
-        this.consultTermModel = this.consultTerms[id];
-        console.log(this.consultTermModel);
-        this._requestExaminationService.appointExamination(this.consultTermModel).subscribe(
+    scheduleExamination(ct: ConsultTerm): void {
+        this.consultTermModel = ct;
+        this._requestExaminationService.appointExamination(this.consultTermModel, this.user.id).subscribe(
             data=> {
                 console.log('Success!', JSON.stringify(data));
             }, error => {
@@ -39,5 +44,13 @@ export class RequestExamination implements OnInit{
             }
         )
         alert("Examination has been scheduled!")
+    }
+
+    getUserInfo(): void {
+        this.userService.getUserInfo().subscribe(data => {
+          this.user = data;
+        }, error => {
+          console.log("Error in getting user data!")
+        });
     }
 }

@@ -1,6 +1,7 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -41,6 +42,7 @@ public class ConsultTerm {
 	private Doctor doctor;
 
 	@OneToOne(mappedBy = "consultTerm")
+	@JsonBackReference
 	private RequestForConsult requestForConsult;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "consultTerm")
