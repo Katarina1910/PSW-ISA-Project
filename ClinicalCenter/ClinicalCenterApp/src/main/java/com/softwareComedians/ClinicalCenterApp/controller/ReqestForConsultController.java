@@ -49,10 +49,7 @@ public class ReqestForConsultController {
     public ResponseEntity<?> addExamination(@RequestBody RequestForConsultDTO requestForConsultDTO,  @PathVariable Long userId) throws Exception {
 
         RequestForConsult rfc = new RequestForConsult();
-/*
-        Doctor d = doctorService.findByName(requestForConsultDTO.getConsultTerm().getDoctor().getName());
-        System.out.println("Ime doktora: "+d.getName());
-*/
+
         User u = userService.findById(userId);
         ConsultTerm ct = consultTermService.findById(requestForConsultDTO.getId());
 
@@ -79,15 +76,15 @@ public class ReqestForConsultController {
             return new ResponseEntity<>("Error! Date is in the past!", HttpStatus.METHOD_NOT_ALLOWED);
         }
 */
+        rfc = requestForConsultService.save(rfc);
 
         //salje mejl adminu klinike
         //TODO: preko pacijenotovog ID-a pronaci u kojoj je klinici i poslati mejl odgovarajucem administratoru te klinike
         smtpMailSender.send("sansaduvic@gmail.com","Request for consult",
-                " You have a request for consult: type: "+ct.getType().getName()+ "\n"+
-                        "doctor's name: "+ct.getDoctor().getName()+ " "+ct.getDoctor().getSurname()+ "\n"+
-                        " <a href='http://localhost:8080/api/patient/addConsultTerm/"+ct.getId()+"'> Confirm </a>");
-
-        rfc = requestForConsultService.save(rfc);
+                " You have a request for consult: type: "+ct.getType().getName()+ "\r\n"+
+                        "doctor's name: "+ct.getDoctor().getName()+ " "+ct.getDoctor().getSurname()+ "\r\n"+
+                        "patient's name: "+u.getName()+" "+u.getSurname()+"\r\n"+
+                        " <a href='http://localhost:8080/api/patient/requestConsultTerm/"+rfc.getId()+"'> Confirm </a>");
 
         return new ResponseEntity<>(new RequestForConsultDTO(rfc), HttpStatus.CREATED);
     }

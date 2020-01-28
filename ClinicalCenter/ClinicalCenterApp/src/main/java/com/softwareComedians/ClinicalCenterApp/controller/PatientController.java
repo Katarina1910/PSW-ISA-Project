@@ -5,6 +5,7 @@ import com.softwareComedians.ClinicalCenterApp.common.consts.UserRoles;
 import com.softwareComedians.ClinicalCenterApp.dto.ConsultTermDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.PatientDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
+import com.softwareComedians.ClinicalCenterApp.mail.SmtpMailSender;
 import com.softwareComedians.ClinicalCenterApp.mappers.UserMapper;
 import com.softwareComedians.ClinicalCenterApp.model.*;
 import com.softwareComedians.ClinicalCenterApp.repository.AuthorityRepository;
@@ -20,6 +21,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +49,9 @@ public class PatientController {
 
     @Autowired
     private RequestForConsultService requestForConsultService;
+
+    @Autowired
+    private SmtpMailSender smtpMailSender;
 
     @Autowired
     public PatientController(PatientService patientService, RequestForPatientRegistrationService requestForPatientRegistrationService) {
@@ -117,9 +122,23 @@ public class PatientController {
         return new ResponseEntity<>(UserMapper.toDto(userInfo), HttpStatus.OK);
     }
 
-    @GetMapping(value = "addConsultTerm/{id}")
-    public ResponseEntity<Void> addConsultTerm(@PathVariable Long id){
+    @GetMapping(value = "requestConsultTerm/{id}")
+    public ResponseEntity<Void> requestConsultTerm(@PathVariable Long id) throws MessagingException {
+        RequestForConsult request = requestForConsultService.findById(id);
 
+        smtpMailSender.send("sansaduvic@gmail.com","Consult term accepted",
+                " You can confirm or reject your request for consult: "+ "\r\n"+
+                        " <a href='http://localhost:8080/api/patient/acceptConsultTerm/"+request.getId()+"'> Confirm </a>"+ "\r\n"+
+                        " <a href='http://localhost:8080/api/patient/rejectConsultTerm/"+request.getId()+"'> Reject </a>");
+
+        if(request!=null)
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        else
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping(value = "acceptConsultTerm/{id}")
+    public ResponseEntity<Void> acceptConsultTerm(@PathVariable Long id) {
         RequestForConsult request = requestForConsultService.findById(id);
         request.setAccepted(true);
 
@@ -129,6 +148,14 @@ public class PatientController {
             return new ResponseEntity<>(HttpStatus.CREATED);
         else
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping(value = "rejectConsultTerm/{id}")
+    public ResponseEntity<Void> rejectConsultTerm(@PathVariable Long id) {
+        //TODO: ovo obrise nekoliko tabela!? a treba samo consult term sa prosledjenim ID-jem
+        requestForConsultService.remove(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
