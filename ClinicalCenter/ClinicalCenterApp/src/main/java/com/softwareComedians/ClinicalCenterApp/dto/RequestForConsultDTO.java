@@ -1,6 +1,8 @@
 package com.softwareComedians.ClinicalCenterApp.dto;
 
+import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForConsult;
+import com.softwareComedians.ClinicalCenterApp.model.User;
 
 import java.sql.Date;
 
@@ -9,15 +11,19 @@ public class RequestForConsultDTO {
     private boolean isAccepted;
     private  String type;
     private Long id;
+    private User applicant;
+    private ConsultTerm consultTerm;
 
     public RequestForConsultDTO() {
     }
 
-    public RequestForConsultDTO(Date dateAndTime, boolean isAccepted, String type, Long id) {
+    public RequestForConsultDTO(Date dateAndTime, boolean isAccepted, String type, Long id, User applicant, ConsultTerm consultTerm) {
         this.dateAndTime = dateAndTime;
         this.isAccepted = isAccepted;
         this.type = type;
         this.id=id;
+        this.applicant = applicant;
+        this.consultTerm = consultTerm;
     }
 
     public RequestForConsultDTO(RequestForConsult rfc) {
@@ -25,6 +31,8 @@ public class RequestForConsultDTO {
        isAccepted = rfc.isAccepted();
        type = rfc.getType();
        id=rfc.getId();
+       applicant = rfc.getApplicant();
+       consultTerm = rfc.getConsultTerm();
     }
 
     public Date getDateAndTime() {
@@ -57,5 +65,21 @@ public class RequestForConsultDTO {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public User getApplicant() {
+        return applicant;
+    }
+
+    public void setApplicant(User applicant) {
+        this.applicant = applicant;
+    }
+
+    public ConsultTerm getConsultTerm() {
+        return consultTerm;
+    }
+
+    public void setConsultTerm(ConsultTerm consultTerm) {
+        this.consultTerm = consultTerm;
     }
 }

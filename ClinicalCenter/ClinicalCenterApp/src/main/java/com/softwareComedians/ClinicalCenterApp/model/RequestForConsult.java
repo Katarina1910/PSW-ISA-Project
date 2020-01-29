@@ -1,5 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +28,7 @@ public class RequestForConsult {
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "consultTerm_id", referencedColumnName = "id")
+	@JsonManagedReference
 	private  ConsultTerm consultTerm;
 
 
