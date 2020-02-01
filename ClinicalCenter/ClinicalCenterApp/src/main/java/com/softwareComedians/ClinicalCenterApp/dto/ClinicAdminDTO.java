@@ -3,9 +3,12 @@ package com.softwareComedians.ClinicalCenterApp.dto;
 import com.softwareComedians.ClinicalCenterApp.model.ClinicAdministrator;
 import com.softwareComedians.ClinicalCenterApp.model.User;
 
+import java.util.Set;
+
 public class ClinicAdminDTO extends UserDTO {
 
     private String clinic;
+    private Set<RequestForConsultDTO> requestForConsultDTOS;
 
     public ClinicAdminDTO(){
 
@@ -30,4 +33,12 @@ public class ClinicAdminDTO extends UserDTO {
     public String getClinic(){return clinic;}
 
     public void setClinic(String clinic){this.clinic = clinic;}
+
+    public Set<RequestForConsultDTO> getRequestForConsultDTOS() {
+        return requestForConsultDTOS;
+    }
+
+    public void setRequestForConsultDTOS(Set<RequestForConsultDTO> requestForConsultDTOS) {
+        this.requestForConsultDTOS = requestForConsultDTOS;
+    }
 }
