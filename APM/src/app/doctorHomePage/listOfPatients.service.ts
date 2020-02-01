@@ -16,6 +16,6 @@ export class listOfPatientsService{
     constructor(private _http: HttpClient) { }
 
     getListOgPatients():Observable<any>{
-        return this._http.get<listOfPatients[]>(this._url);
+        return this._http.get<listOfPatients[]>(this.urll);
     }
 }
