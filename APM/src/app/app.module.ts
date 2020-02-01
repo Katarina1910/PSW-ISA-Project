@@ -47,6 +47,7 @@ import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicCenterAdmin.component';
 import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDoc.component';
+import { DoctorRequestForConsultComponent } from './doctorRequestForConsult/doctorRequestForConsult.component';
 // import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
 
 
@@ -92,6 +93,7 @@ import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDo
     RequestExamination,
     addNewClinicCenterAdmin,
     PatientProfileDocComponent,
+    DoctorRequestForConsultComponent,
     //ListOfDiagnosis
     ],
   imports: [
@@ -111,6 +113,7 @@ import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDo
       {path: 'HomepageCA' , component: ClinicAdminHomePageComponent},
       {path: 'HomepageDoctor', component: DoctorComponent},
       {path: 'HomepageDoctor/ListOfPatients', component: listOfPatientsDoctor},
+      {path: 'HomepageDoctor/RqForCosult', component: DoctorRequestForConsultComponent},
       {path: 'HomepageDoctor/ListOfPatients/Profile', component: PatientProfileDocComponent},
       {path: 'HomepageNurse', component: NurseComponent},
       {path: 'HomepageNurse/listOfAllPat', component: listOfAllPat},
