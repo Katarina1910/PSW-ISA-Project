@@ -1,12 +1,11 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 
+import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
-
-import static javax.persistence.InheritanceType.JOINED;
 
 @Entity
 @Getter
@@ -22,17 +21,32 @@ public class RequestForConsult {
 	@Column
 	private boolean isAccepted;
 
-	@Column
-	private  String type;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private  ConsultType type;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "consultTerm_id", referencedColumnName = "id")
 	private  ConsultTerm consultTerm;
 
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private User applicant;
+	//@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	//private User applicant;
 	//doctor or patient, activated user
+
+	//@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	//private ClinicAdministrator clinicAdministrator;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private User patient;
+
+	public RequestForConsult(RequestForConsultDTO rq){
+		this.setDateAndTime(rq.getDateAndTime());
+		this.setType(new ConsultType(rq.getType().getId(),rq.getType().getName(),rq.getType().getDescription()));
+		this.setAccepted(false);
+		//this.setApplicant(new User(rq.getApplicant()));
+		this.setPatient(new User(rq.getPatient()));
+	}
 	
 	public RequestForConsult() {
 		super();
@@ -62,19 +76,19 @@ public class RequestForConsult {
 		isAccepted = accepted;
 	}
 
-	public String getType() {
+	public ConsultType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(ConsultType type) {
 		this.type = type;
 	}
 
-	public User getApplicant() {
-		return applicant;
+	public User getPatient() {
+		return patient;
 	}
 
-	public void setApplicant(User applicant) {
-		this.applicant = applicant;
+	public void setPatient(User patient) {
+		this.patient = patient;
 	}
 }
