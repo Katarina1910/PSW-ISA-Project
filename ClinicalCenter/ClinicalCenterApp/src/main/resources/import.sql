@@ -19,7 +19,7 @@ INSERT INTO `room` (id, is_free, name, type, clinic_id) VALUES (2, 1, 'room2', 1
 
 INSERT INTO `consult_type` (id, description, name) VALUES (1, 'Opis tipa...', 'tip1');
 
-INSERT INTO `consult_term` (dtype, id, date, discount, duration, price, report, clinic_id, doctor_id, patient_id, room_id, type_id, medical_record_id) VALUES ('ConsultTerm', 1, '2019-12-31 00:00:00', '5', '10', '150', null, null, 4, null, 1, 1, null);
+
 
 INSERT INTO `user_authority` (user_id, authority_id) VALUES (1, 1);
 INSERT INTO `user_authority` (user_id, authority_id) VALUES (2, 2);
