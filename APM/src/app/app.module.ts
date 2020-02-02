@@ -54,6 +54,9 @@ import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicC
 import { AppointedExaminationsService } from './patientHomePage/patientExaminations.service';
 import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDoc.component';
 import { MedicalRecord } from './medicalRecord/medicalRecord.component';
+import { DoctorRequestForConsultComponent } from './doctorRequestForConsult/doctorRequestForConsult.component';
+import { DoctorRequestForOperationComponent } from './doctorRqForOperation/doctorRqForOperaton.component';
+import { ClinicSettingsComponent } from './clinicSettings/clinicSettings.component';
 // import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
 import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
 import { DoctorWorkCalendar } from './doctorWorkingCalendar/doctorWorkCal.component';
@@ -102,7 +105,10 @@ import { AddNurseComponent } from './nurse/addNurse.component';
     PatientProfileDocComponent,
     MedicalRecord,
     DoctorWorkCalendar,
-    AddNurseComponent
+    AddNurseComponent,
+    DoctorRequestForConsultComponent,
+    DoctorRequestForOperationComponent,
+    ClinicSettingsComponent
     //ListOfDiagnosis
     ],
   imports: [
@@ -125,6 +131,8 @@ import { AddNurseComponent } from './nurse/addNurse.component';
       {path: 'HomepageDoctor', component: DoctorComponent},
       {path: 'HomepageDoctor/ListOfPatients', component: listOfPatientsDoctor},
       {path: 'HomepageDoctor/DoctorWorkCalendar', component: DoctorWorkCalendar},
+      {path: 'HomepageDoctor/RqForCosult', component: DoctorRequestForConsultComponent},
+      {path: 'HomepageDoctor/RqForOperation', component: DoctorRequestForOperationComponent},
       {path: 'HomepageDoctor/ListOfPatients/Profile', component: PatientProfileDocComponent},
       {path: 'HomepageDoctor/ListOfPatients/Profile/MedicalRecord', component: MedicalRecord}, 
       {path: 'HomepageNurse', component: NurseComponent},
@@ -145,6 +153,7 @@ import { AddNurseComponent } from './nurse/addNurse.component';
       {path: 'HomepageCA/AddNurseComponent', component: AddNurseComponent},
       {path: 'HomepageCA/addRoom', component: AddRoomComponent},
       {path: 'HomepageCA/allRooms', component: DeleteRoomComponent},
+      {path: 'HomepageCA/clinicSettings', component: ClinicSettingsComponent},
       {path: 'HomepageCA/addConsultType', component: ConsultTypeComponent},
       {path: 'HomepageCA/ConsultTypes', component: DeleteConsultTypeComponent},
       {path: 'HomepageCA/consultTerm', component: ConsultTermComponent},

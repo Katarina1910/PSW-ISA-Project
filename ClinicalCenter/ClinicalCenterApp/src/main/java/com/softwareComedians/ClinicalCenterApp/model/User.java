@@ -1,4 +1,5 @@
 package com.softwareComedians.ClinicalCenterApp.model;
+import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
 import lombok.Getter;
 import lombok.Setter;
 import org.joda.time.DateTime;
@@ -69,11 +70,16 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private Set<Authority> authorities = new HashSet<>();
 
-    @OneToMany(mappedBy = "applicant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<RequestForConsult> requestForConsults;
 
 	@OneToOne(mappedBy = "userData")
 	private RequestForPatientRegistration requestForPatientRegistration;
+
+	//imaju pacijenti
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL ,mappedBy = "patient")
+    private Set<RequestForConsult> requestForConsultSet;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL ,mappedBy = "patient")
+    private Set<RequstForOperation> requestForOpetarionsSet;
 
 
 	public User() {
@@ -93,6 +99,21 @@ public class User implements UserDetails {
         this.username = username;
         this.password = password;
         this.isActivated = isActivated;
+    }
+
+    public User(UserDTO u){
+        this.id = u.getId();
+        this.name = u.getName();
+        this.surname = u.getSurname();
+        this.ucidn = u.getUcidn();
+        this.address = u.getAddress();
+        this.city = u.getCity();
+        this.country = u.getCountry();
+        this.email = u.getEmail();
+        this.phone = u.getPhone();
+        this.username = u.getUsername();
+        this.password = u.getPassword();
+        this.isActivated = u.isActivated();
     }
 
     public void setRole(String role) {
@@ -139,7 +160,13 @@ public class User implements UserDetails {
         this.address = address;
     }
 
+    public Set<RequstForOperation> getRequestForOpetarionsSet() {
+        return requestForOpetarionsSet;
+    }
 
+    public void setRequestForOpetarionsSet(Set<RequstForOperation> requestForOpetarionsSet) {
+        this.requestForOpetarionsSet = requestForOpetarionsSet;
+    }
 
     public String getCity() {
         return city;
@@ -236,13 +263,13 @@ public class User implements UserDetails {
         return this.authorities;
     }
 
-    public Set<RequestForConsult> getRequestForConsults() {
+   /* public Set<RequestForConsult> getRequestForConsults() {
         return requestForConsults;
     }
 
     public void setRequestForConsults(Set<RequestForConsult> requestForConsults) {
         this.requestForConsults = requestForConsults;
-    }
+    }*/
 
     public RequestForPatientRegistration getRequestForPatientRegistration() {
         return requestForPatientRegistration;
@@ -255,6 +282,16 @@ public class User implements UserDetails {
     public String getRole() {
 	    return role;
     }
+
+    public Set<RequestForConsult> getRequestForConsultSet() {
+        return requestForConsultSet;
+    }
+
+    public void setRequestForConsultSet(Set<RequestForConsult> requestForConsultSet) {
+        this.requestForConsultSet = requestForConsultSet;
+    }
+
+
 
     public Timestamp getLastPasswordResetDate() {
         return lastPasswordResetDate;

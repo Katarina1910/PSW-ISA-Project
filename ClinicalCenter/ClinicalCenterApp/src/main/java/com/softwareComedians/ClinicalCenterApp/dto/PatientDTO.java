@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Setter
 @Getter
@@ -69,8 +67,8 @@ public class PatientDTO {
         isActivated=p.isActivated();
         /*authorities = p.getAuthorities().stream()
                 .map(authority -> ((Authority) authority).getName()).collect(Collectors.toList());*/
-        medicalRecord = p.getMedicalRecord();
-        appointedTerms = p.getAppointedTerms();
+       // medicalRecord = p.getMedicalRecord();
+       // appointedTerms = p.getAppointedTerms();
     }
 
     public Long getId() {

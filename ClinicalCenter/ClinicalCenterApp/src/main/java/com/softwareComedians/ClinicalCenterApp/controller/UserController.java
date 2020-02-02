@@ -40,6 +40,7 @@ public class UserController {
 	}
 
 	@GetMapping
+	//@PreAuthorize("hasRole('ROLE_ADMIN')")
 	//@PreAuthorize("hasRole('ROLE_CA')")
 	public ResponseEntity<List<UserDTO>> getAllUsers() {
 		List<User> users = userService.findAll();

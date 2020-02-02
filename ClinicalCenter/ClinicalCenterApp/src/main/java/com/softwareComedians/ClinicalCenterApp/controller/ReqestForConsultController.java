@@ -2,6 +2,10 @@ package com.softwareComedians.ClinicalCenterApp.controller;
 
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
 import com.softwareComedians.ClinicalCenterApp.mail.SmtpMailSender;
+import com.softwareComedians.ClinicalCenterApp.model.RequestForConsult;
+import com.softwareComedians.ClinicalCenterApp.service.ConsultTypeService;
+import com.softwareComedians.ClinicalCenterApp.service.RequestForConsultService;
+import com.softwareComedians.ClinicalCenterApp.service.UserService;
 import com.softwareComedians.ClinicalCenterApp.model.*;
 import com.softwareComedians.ClinicalCenterApp.service.*;
 import com.softwareComedians.ClinicalCenterApp.service.impl.UserServiceImpl;
@@ -19,6 +23,10 @@ public class ReqestForConsultController {
     private RequestForConsultService requestForConsultService;
 
     @Autowired
+    private ConsultTypeService consultTypeService;
+
+
+  @Autowired
     private DoctorService doctorService;
 
     @Autowired
@@ -38,8 +46,24 @@ public class ReqestForConsultController {
 
         RequestForConsult rq = new RequestForConsult();
         rq.setId(requestForConsultDTO.getId());
-        rq.setDateAndTime(requestForConsultDTO.getDateAndTime());
-        rq.setType(requestForConsultDTO.getType());
+       // rq.setDateAndTime(requestForConsultDTO.getDateAndTime());
+        rq.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
+       // rq.setPatient(userService.findById(requestForConsultDTO.getPatient().getId()));
+
+        rq = requestForConsultService.save(rq);
+        return new ResponseEntity<>(new RequestForConsultDTO(rq), HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "doctor")
+    public ResponseEntity<RequestForConsultDTO> createRequestDoctor(@RequestBody RequestForConsultDTO requestForConsultDTO) {
+
+        RequestForConsult rq = new RequestForConsult();
+        rq.setId(requestForConsultDTO.getId());
+        // rq.setDateAndTime(requestForConsultDTO.getDateAndTime());
+        rq.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
+        rq.setPatient(userService.findById(requestForConsultDTO.getPatient().getId()));
+        //send mail, getPatient.getClicic.getAdmin.getMail
+        //smtpMailSender.send(requestForConsultDTO.get,"Registration", description);
 
         rq = requestForConsultService.save(rq);
         return new ResponseEntity<>(new RequestForConsultDTO(rq), HttpStatus.CREATED);
@@ -55,9 +79,9 @@ public class ReqestForConsultController {
 
         rfc.setId(requestForConsultDTO.getId());
         rfc.setDateAndTime(requestForConsultDTO.getDateAndTime());
-        rfc.setType(requestForConsultDTO.getType());
+        rfc.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
         rfc.setAccepted(false);
-        rfc.setApplicant(u);
+      //  rfc.setApplicant(u);
         rfc.setConsultTerm(ct);
 
 /*
