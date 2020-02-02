@@ -1,0 +1,39 @@
+<div class="container">
+
+    <div class="user-info-container">
+        <div class="user-info-container-row">
+            <label> Clinic's name: </label>
+            <mat-form-field class="input-field" appearance="outline" matTooltip="Name">
+                <mat-icon matPrefix class="icon">perm_identity</mat-icon>
+                <input matInput type="text" placeholder="Name" enable [(ngModel)]="clinic.name" />
+            </mat-form-field>
+            <label> Clinic's address: </label>
+            <mat-form-field class="input-field" appearance="outline" matTooltip="Address">
+                <mat-icon matPrefix class="icon">perm_identity</mat-icon>
+                <input matInput type="text" placeholder="Address" enable [(ngModel)]="clinic.address" />
+            </mat-form-field>
+        </div>
+
+        <div class="user-info-container-row">
+            <label> Clinic's description: </label>
+            <mat-form-field class="input-field" appearance="outline" matTooltip="Description">
+                <mat-icon matPrefix class="icon">perm_identity</mat-icon>
+                <input matInput type="text" placeholder="Description" enable [(ngModel)]="clinic.description" />
+            </mat-form-field>
+
+            <label> Clinic's grade: </label>
+            <mat-form-field class="input-field" appearance="outline" matTooltip="Grade">
+                <mat-icon matPrefix class="icon">perm_identity</mat-icon>
+                <input matInput type="number" placeholder="Grade" disabled [(ngModel)]="clinic.grade" />
+            </mat-form-field>
+        </div>
+
+        <div class="user-info-container-row">
+            <button mat-button matTooltip="Cancel editing" (click)="onClickCancel()">Cancel</button>
+            <button mat-raised-button color="primary" matTooltip="Save profile changes" (click)="onClickSave()">Save</button>
+        </div>
+
+       
+    </div>
+
+</div>

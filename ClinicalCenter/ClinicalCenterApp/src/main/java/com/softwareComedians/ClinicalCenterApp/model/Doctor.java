@@ -21,11 +21,13 @@ public class Doctor extends Personnel {
     @Column
     private Double grade;
 
+  //  @OneToMany(mappedBy = "applicant", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+   // private Set<RequstForOperation> requstForOperations;
     @Column
     private Double typeId;
 
-    @OneToMany(mappedBy = "applicant", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
-    private Set<RequstForOperation> requstForOperations;
+    //@OneToMany(mappedBy = "applicant", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+   // private Set<RequstForOperation> requstForOperations;
 
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private Set<ConsultTerm> consultTerms;

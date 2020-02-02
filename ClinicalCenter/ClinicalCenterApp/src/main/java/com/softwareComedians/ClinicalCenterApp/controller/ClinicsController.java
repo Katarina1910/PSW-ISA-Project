@@ -3,7 +3,10 @@ package com.softwareComedians.ClinicalCenterApp.controller;
 
 import com.softwareComedians.ClinicalCenterApp.dto.ClinicsDTO;
 import com.softwareComedians.ClinicalCenterApp.model.Clinic;
+import com.softwareComedians.ClinicalCenterApp.model.ClinicAdministrator;
+import com.softwareComedians.ClinicalCenterApp.service.ClinicAdminService;
 import com.softwareComedians.ClinicalCenterApp.service.ClinicsService;
+import com.softwareComedians.ClinicalCenterApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +20,14 @@ import java.util.List;
 @CrossOrigin
 public class ClinicsController {
 
+    @Autowired
     ClinicsService clinicsService;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    ClinicAdminService clinicAdminService;
 
     @Autowired
     public ClinicsController(ClinicsService clinicsService){
@@ -36,6 +46,15 @@ public class ClinicsController {
         return new ResponseEntity<>(clinicsDTO, HttpStatus.OK);
     }
 
+   @GetMapping(value = "/get/{id}")
+    public ResponseEntity<ClinicsDTO> getOne(@PathVariable Long id){
+
+        ClinicAdministrator ca = clinicAdminService.findById(id);
+      ClinicsDTO c = new ClinicsDTO(ca.getClinic());
+      System.out.println(c.getAddress());
+        return new ResponseEntity<>(c, HttpStatus.OK);
+    }
+
     @PostMapping()
     public  ResponseEntity<ClinicsDTO> addClinics(@RequestBody ClinicsDTO clinicsDTO){
         Clinic clinic = new Clinic(clinicsDTO);
@@ -49,5 +68,16 @@ public class ClinicsController {
 
         clinicsService.remove(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/edit")
+    public ResponseEntity<ClinicsDTO> editClinic (@RequestBody ClinicsDTO clinicsDTO) {
+        Clinic clinic = clinicsService.findOne(clinicsDTO.getId());
+        clinic.setName(clinicsDTO.getName());
+        clinic.setAddress(clinicsDTO.getAddress());
+        clinic.setDescription(clinicsDTO.getDescription());
+        clinic = clinicsService.save(clinic);
+
+        return new ResponseEntity<>(new ClinicsDTO(clinic), HttpStatus.OK);
     }
 }

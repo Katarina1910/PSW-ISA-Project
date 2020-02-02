@@ -1,0 +1,22 @@
+<form #userForm="ngForm" (ngSubmit)="onSubmit()" class="d-flex p-2 justify-content-center">
+
+    <fieldset>
+      <legend>Request for operation</legend>
+     
+      <div class="form-group" >
+
+        <label class="col-form-label" for="inputDefault">Patient:</label>
+        <select class="form-control" id="patient"  [(ngModel)]="requestForConsultModel.patient" name="patient">
+            <option [ngValue]="null">Select Category</option>
+            <option *ngFor = 'let t of patients' [ngValue]="t" name="patient">{{t.name}}</option>
+          </select>
+      </div>
+ 
+      <div class="form-group" >
+        <label class="col-form-label" for="inputDefault">Date and time:</label>
+        <input type="date" class="form-control" id="date"  [(ngModel)]="requestForConsultModel.date" name="date">
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Send</button>
+    </fieldset>
+  </form>
