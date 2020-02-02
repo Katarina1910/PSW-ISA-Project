@@ -49,6 +49,7 @@ import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicC
 import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDoc.component';
 import { DoctorRequestForConsultComponent } from './doctorRequestForConsult/doctorRequestForConsult.component';
 import { DoctorRequestForOperationComponent } from './doctorRqForOperation/doctorRqForOperaton.component';
+import { ClinicSettingsComponent } from './clinicSettings/clinicSettings.component';
 // import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
 
 
@@ -96,6 +97,7 @@ import { DoctorRequestForOperationComponent } from './doctorRqForOperation/docto
     PatientProfileDocComponent,
     DoctorRequestForConsultComponent,
     DoctorRequestForOperationComponent,
+    ClinicSettingsComponent,
     //ListOfDiagnosis
     ],
   imports: [
@@ -135,6 +137,7 @@ import { DoctorRequestForOperationComponent } from './doctorRqForOperation/docto
       {path: 'HomepageCA/allDoctors', component:DeleteDoctorComponent},
       {path: 'HomepageCA/addRoom', component: AddRoomComponent},
       {path: 'HomepageCA/allRooms', component: DeleteRoomComponent},
+      {path: 'HomepageCA/clinicSettings', component: ClinicSettingsComponent},
       {path: 'HomepageCA/addConsultType', component: ConsultTypeComponent},
       {path: 'HomepageCA/ConsultTypes', component: DeleteConsultTypeComponent},
       {path: 'HomepageCA/consultTerm', component: ConsultTermComponent},
