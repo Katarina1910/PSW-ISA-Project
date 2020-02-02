@@ -6,7 +6,7 @@ import { DoctorRequestForConsult } from './doctorRequestForConsult';
     providedIn: 'root'
 })
 export class DoctorRequestForConsultService{
-    _url = 'http://localhost:8080/api/rqForConsult';
+    _url = 'http://localhost:8080/api/rqForConsult/doctor';
 
     constructor(private _http: HttpClient) { }
 
