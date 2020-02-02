@@ -3,6 +3,9 @@ import { User } from '../registration/user';
 import { UserService } from '../registration/user.service';
 import { Router } from '@angular/router';
 import { PatientProfileSettingsService } from './patientProfileSettings.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../service';
+import { DisplayMessage } from '../shared/models/display-message';
 
 @Component({
   selector: 'app-profile-settings',
@@ -12,16 +15,21 @@ import { PatientProfileSettingsService } from './patientProfileSettings.service'
 export class PatientProfileSettingsComponent implements OnInit {
 
   user: User = new User("","","","","","","","","","","","");
-
-  password: string = '';
-  repeatPassword: string = '';
+  form: FormGroup;
+  notification: DisplayMessage;
 
   constructor(private userService: UserService, private router: Router,
-              private editUserService: PatientProfileSettingsService) { 
+              private editUserService: PatientProfileSettingsService,
+              private formBuilder: FormBuilder,
+              private authService: AuthService) { 
   }
 
   ngOnInit() {
     this.getUserInfo();
+    this.form = this.formBuilder.group({
+      oldPassword: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(32)])],
+      newPassword: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(32)])]
+    });
   }
 
   onClickCancel(){
@@ -30,16 +38,25 @@ export class PatientProfileSettingsComponent implements OnInit {
 
   onClickSave(){
     console.log('Print: ', this.user)
-        this.editUserService.editUsers(this.user)
-        .subscribe(
-            data=> {
-                alert('Request has been sent!')
-                this.router.navigate(['/HomepagePatient']);
-            
-                console.log('Updated!', JSON.stringify(data))
-            },
-            error=> console.error('Error updating!',error)
-        )
+    
+    this.authService.changePassowrd(this.form.value)
+    .subscribe(() => {
+      this.authService.logout()
+      this.router.navigate(['/login', {msgType: 'success', msgBody: 'Success! Please sign in with your new password.'}]);
+    }, error => {
+      this.notification = {msgType: 'error', msgBody: 'Invalid old password.'};
+    });
+    
+    this.editUserService.editUsers(this.user)
+    .subscribe(
+      data=> {
+        alert('Request has been sent!')
+        this.router.navigate(['/HomepagePatient']);    
+          console.log('Updated!', JSON.stringify(data))
+        },
+        error=> console.error('Error updating!',error)
+    )
+      
   }
 
   private getUserInfo(): void {

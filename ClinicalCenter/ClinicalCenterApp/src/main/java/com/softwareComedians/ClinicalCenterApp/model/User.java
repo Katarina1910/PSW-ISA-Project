@@ -2,12 +2,15 @@ package com.softwareComedians.ClinicalCenterApp.model;
 import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
 import lombok.Getter;
 import lombok.Setter;
+import org.joda.time.DateTime;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static javax.persistence.InheritanceType.JOINED;
@@ -58,7 +61,10 @@ public class User implements UserDetails {
 	@Column
     private  String role;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @Column(name = "last_password_reset_date")
+    private Timestamp lastPasswordResetDate;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
@@ -232,6 +238,8 @@ public class User implements UserDetails {
     }
 
     public void setPassword(String password) {
+	    Timestamp now = new Timestamp(DateTime.now().getMillis());
+        this.setLastPasswordResetDate( now );
         this.password = password;
     }
 
@@ -284,5 +292,13 @@ public class User implements UserDetails {
     }
 
 
+
+    public Timestamp getLastPasswordResetDate() {
+        return lastPasswordResetDate;
+    }
+
+    public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
+    }
 
 }

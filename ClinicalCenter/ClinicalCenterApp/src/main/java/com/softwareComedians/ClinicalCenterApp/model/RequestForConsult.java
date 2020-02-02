@@ -1,6 +1,7 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +28,7 @@ public class RequestForConsult {
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "consultTerm_id", referencedColumnName = "id")
+	@JsonManagedReference
 	private  ConsultTerm consultTerm;
 
 
@@ -91,4 +93,15 @@ public class RequestForConsult {
 	public void setPatient(User patient) {
 		this.patient = patient;
 	}
+
+
+
+	public ConsultTerm getConsultTerm() {
+		return consultTerm;
+	}
+
+	public void setConsultTerm(ConsultTerm consultTerm) {
+		this.consultTerm = consultTerm;
+	}
+
 }

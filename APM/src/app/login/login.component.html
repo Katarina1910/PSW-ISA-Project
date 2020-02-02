@@ -1,10 +1,10 @@
-<form #userForm="ngForm" (ngSubmit)="onSubmit()">
+<form #userForm="ngForm">
   <div class="jumbotron">
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h2>Login</h2>
-                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <form #loginForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="!submitted" [formGroup]="form">
                     <div class="form-group">
                         <label>Username</label>
                         <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" 

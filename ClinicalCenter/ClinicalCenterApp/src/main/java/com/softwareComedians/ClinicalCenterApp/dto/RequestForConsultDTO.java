@@ -1,6 +1,8 @@
 package com.softwareComedians.ClinicalCenterApp.dto;
 
+import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForConsult;
+import com.softwareComedians.ClinicalCenterApp.model.User;
 
 import java.sql.Date;
 
@@ -19,17 +21,20 @@ public class RequestForConsultDTO {
     public void setPatient(UserDTO patient) {
         this.patient = patient;
     }
+    private User applicant;
+    private ConsultTerm consultTerm;
 
     public RequestForConsultDTO() {
     }
 
-    public RequestForConsultDTO(Date dateAndTime, boolean isAccepted, ConsultTypeDTO type, Long id, UserDTO p) {
+
+    public RequestForConsultDTO(Date dateAndTime, boolean isAccepted, ConsultTypeDTO type, Long id, User applicant, ConsultTerm consultTerm) {
         this.dateAndTime = dateAndTime;
         this.isAccepted = isAccepted;
         this.type = type;
         this.id=id;
        // this.applicant = u;
-        this.patient = p;
+        //this.patient = p;
     }
 
     public RequestForConsultDTO(RequestForConsult rfc) {
@@ -40,6 +45,8 @@ public class RequestForConsultDTO {
        patient = new UserDTO(rfc.getPatient());
        //applicant = new UserDTO(rfc.getApplicant());
 
+       //applicant = rfc.getApplicant();
+       consultTerm = rfc.getConsultTerm();
     }
 
 

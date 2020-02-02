@@ -23,6 +23,11 @@ public class Doctor extends Personnel {
 
   //  @OneToMany(mappedBy = "applicant", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
    // private Set<RequstForOperation> requstForOperations;
+    @Column
+    private Double typeId;
+
+    //@OneToMany(mappedBy = "applicant", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+   // private Set<RequstForOperation> requstForOperations;
 
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private Set<ConsultTerm> consultTerms;
@@ -42,6 +47,14 @@ public class Doctor extends Personnel {
         this.grade = grade;
     }
 
+    public Double getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Double typeId) {
+        this.typeId = typeId;
+    }
+
     public Doctor(DoctorDTO d){
         this.setId(d.getId());
         this.setName(d.getName());
@@ -56,6 +69,7 @@ public class Doctor extends Personnel {
         this.setCountry(d.getCountry());
         this.setActivated(d.isActivated());
         this.grade = 0.0;
+        this.typeId = null;
         this.setRole("DOCTOR");
 
     }

@@ -22,4 +22,12 @@ public class ConsultTermService {
     public List<ConsultTerm> findAll() {
         return consultTermRepository.findAll();
     }
+
+    public List<ConsultTerm> findByTypeName(String typeName) {
+        return consultTermRepository.findByTypeName(typeName);
+    }
+
+    public ConsultTerm findById(Long id) {
+        return consultTermRepository.findById(id).orElse(null);
+    }
 }

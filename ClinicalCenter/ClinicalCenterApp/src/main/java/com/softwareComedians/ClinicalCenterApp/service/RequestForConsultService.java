@@ -1,5 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.service;
 
+import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForConsult;
 import com.softwareComedians.ClinicalCenterApp.repository.RequestForConsultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class RequestForConsultService {
         requestForConsultRepository.deleteById(id);
     }
 
-    public RequestForConsult findOne(Long id){
-        return requestForConsultRepository.findById(id).orElseGet(null);
+    public RequestForConsult findById(Long id) {
+        return requestForConsultRepository.findById(id).orElse(null);
     }
 }

@@ -100,10 +100,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         return userDto;
     }
 
-    /*
     public UserTokenState refreshAuthenticationToken(HttpServletRequest request) throws ApiRequestException {
         String token = tokenUtils.getToken(request);
-        String username = tokenUtils.getUsernameFromToken(token);
+        String username = tokenUtils.getMailFromToken(token);
         User user = (User) loadUserByUsername(username);
 
         if (this.tokenUtils.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
@@ -114,5 +113,4 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new ApiRequestException("Token can not be refreshed.");
         }
     }
-    */
 }
