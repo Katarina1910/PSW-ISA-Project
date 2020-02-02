@@ -48,6 +48,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicCenterAdmin.component';
 import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDoc.component';
 import { DoctorRequestForConsultComponent } from './doctorRequestForConsult/doctorRequestForConsult.component';
+import { DoctorRequestForOperationComponent } from './doctorRqForOperation/doctorRqForOperaton.component';
 // import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
 
 
@@ -94,6 +95,7 @@ import { DoctorRequestForConsultComponent } from './doctorRequestForConsult/doct
     addNewClinicCenterAdmin,
     PatientProfileDocComponent,
     DoctorRequestForConsultComponent,
+    DoctorRequestForOperationComponent,
     //ListOfDiagnosis
     ],
   imports: [
@@ -114,6 +116,7 @@ import { DoctorRequestForConsultComponent } from './doctorRequestForConsult/doct
       {path: 'HomepageDoctor', component: DoctorComponent},
       {path: 'HomepageDoctor/ListOfPatients', component: listOfPatientsDoctor},
       {path: 'HomepageDoctor/RqForCosult', component: DoctorRequestForConsultComponent},
+      {path: 'HomepageDoctor/RqForOperation', component: DoctorRequestForOperationComponent},
       {path: 'HomepageDoctor/ListOfPatients/Profile', component: PatientProfileDocComponent},
       {path: 'HomepageNurse', component: NurseComponent},
       {path: 'HomepageNurse/listOfAllPat', component: listOfAllPat},
