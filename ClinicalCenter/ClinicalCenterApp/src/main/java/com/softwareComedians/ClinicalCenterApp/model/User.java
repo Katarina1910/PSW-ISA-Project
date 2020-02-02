@@ -64,8 +64,6 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private Set<Authority> authorities = new HashSet<>();
 
-   // @OneToMany(mappedBy = "applicant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	//private Set<RequestForConsult> requestForConsults;
 
 	@OneToOne(mappedBy = "userData")
 	private RequestForPatientRegistration requestForPatientRegistration;
@@ -73,6 +71,9 @@ public class User implements UserDetails {
 	//imaju pacijenti
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL ,mappedBy = "patient")
     private Set<RequestForConsult> requestForConsultSet;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL ,mappedBy = "patient")
+    private Set<RequstForOperation> requestForOpetarionsSet;
 
 
 	public User() {
@@ -153,7 +154,13 @@ public class User implements UserDetails {
         this.address = address;
     }
 
+    public Set<RequstForOperation> getRequestForOpetarionsSet() {
+        return requestForOpetarionsSet;
+    }
 
+    public void setRequestForOpetarionsSet(Set<RequstForOperation> requestForOpetarionsSet) {
+        this.requestForOpetarionsSet = requestForOpetarionsSet;
+    }
 
     public String getCity() {
         return city;
@@ -275,4 +282,7 @@ public class User implements UserDetails {
     public void setRequestForConsultSet(Set<RequestForConsult> requestForConsultSet) {
         this.requestForConsultSet = requestForConsultSet;
     }
+
+
+
 }

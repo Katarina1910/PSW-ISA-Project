@@ -19,6 +19,8 @@ public class Patient extends User {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "patient")
 	private Set<ConsultTerm> appointedTerms;
 
+
+
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Clinic clinic;
 
@@ -42,6 +44,11 @@ public class Patient extends User {
 				p.getCountry(), p.getEmail(), p.getPhone(), p.getUsername(), p.getPassword(), p.isActivated());
 	}
 
+	public Clinic getClinic() {
+		return clinic;
+	}
 
-	
+	public void setClinic(Clinic clinic) {
+		this.clinic = clinic;
+	}
 }
