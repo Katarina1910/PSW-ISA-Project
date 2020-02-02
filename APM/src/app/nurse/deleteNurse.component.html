@@ -1,0 +1,26 @@
+<h1  class="d-flex p-2 justify-content-center">List od Nurses</h1>
+<p>&nbsp;</p>        
+
+<div class='table-responsive' class="d-flex p-2 justify-content-center">
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>UCIDN</th>
+                <th></th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = 'let n of nurses ' >
+                <td>{{n.name}}</td>
+                <td>{{n.surname}}</td>
+                <td>{{n.email}}</td>
+                <td>{{n.ucidn}}</td>
+                <td><button   type="button" class="btn btn-outline-primary"  (click)='deleteNurse(n.email)'>Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

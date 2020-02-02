@@ -53,8 +53,11 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicCenterAdmin.component';
 import { AppointedExaminationsService } from './patientHomePage/patientExaminations.service';
 import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDoc.component';
+import { MedicalRecord } from './medicalRecord/medicalRecord.component';
 // import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
-
+import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
+import { DoctorWorkCalendar } from './doctorWorkingCalendar/doctorWorkCal.component';
+import { AddNurseComponent } from './nurse/addNurse.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +100,9 @@ import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDo
     RequestExamination,
     addNewClinicCenterAdmin,
     PatientProfileDocComponent,
+    MedicalRecord,
+    DoctorWorkCalendar,
+    AddNurseComponent
     //ListOfDiagnosis
     ],
   imports: [
@@ -109,6 +115,7 @@ import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDo
     MatFormFieldModule,
     MatNativeDateModule,
     MatSortModule,
+    FullCalendarModule,
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
@@ -117,7 +124,9 @@ import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDo
       {path: 'HomepageCA' , component: ClinicAdminHomePageComponent},
       {path: 'HomepageDoctor', component: DoctorComponent},
       {path: 'HomepageDoctor/ListOfPatients', component: listOfPatientsDoctor},
+      {path: 'HomepageDoctor/DoctorWorkCalendar', component: DoctorWorkCalendar},
       {path: 'HomepageDoctor/ListOfPatients/Profile', component: PatientProfileDocComponent},
+      {path: 'HomepageDoctor/ListOfPatients/Profile/MedicalRecord', component: MedicalRecord}, 
       {path: 'HomepageNurse', component: NurseComponent},
       {path: 'HomepageNurse/listOfAllPat', component: listOfAllPat},
       {path: 'HomepageNurse/UserProfiles', component: UserProfiles},
@@ -133,6 +142,7 @@ import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDo
       {path: 'HomepageCCA/createDiagCod', component: createDiagnosisCodeBook}, 
       {path: 'HomepageCA/addDoctor', component: AddDoctorComponent},
       {path: 'HomepageCA/allDoctors', component:DeleteDoctorComponent},
+      {path: 'HomepageCA/AddNurseComponent', component: AddNurseComponent},
       {path: 'HomepageCA/addRoom', component: AddRoomComponent},
       {path: 'HomepageCA/allRooms', component: DeleteRoomComponent},
       {path: 'HomepageCA/addConsultType', component: ConsultTypeComponent},
@@ -149,9 +159,8 @@ import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDo
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'},
-    ], {useHash: true}),
-    BrowserAnimationsModule
-  ],
+    ], {useHash: true})
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
