@@ -66,6 +66,7 @@ public class PatientController {
         Patient patient = new Patient(request.getUserData());
         patient.setActivated(true);
         patient.setRole("PATIENT");
+        //patient.setClinic();
         patient = patientService.save(patient);
 
         if(patient!=null)
