@@ -23,7 +23,6 @@ import { AddDoctorComponent } from './doctor/addDoctor.component';
 import { DeleteDoctorComponent } from './doctor/deleteDoctor.component';
 import { NurseComponent } from './nurseHomePage/nurse.component';
 import { RecipeValidation } from './recipeValidation/recipeVal.component';
-import { RequestForAbsence } from './requestForAbsence/requestForAbsence';
 import { UserProfiles } from './UserProfiles/userProfiles.component';
 import { nurseWorkCal } from './nurseWorkingCalendar/nurseWorkCal.component';
 import { listOfAllPat } from './ListOfAllPatients/listOfAllPat.component';
@@ -53,6 +52,7 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicCenterAdmin.component';
 import { AppointedExaminationsService } from './patientHomePage/patientExaminations.service';
 import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDoc.component';
+import { RequestForAbsenceComponent } from './requestForAbsence/requestForAbsence.component';
 // import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
 
 
@@ -66,6 +66,7 @@ import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDo
     ClinicalCenterAdministratorCompoment,
     arrivedRequest,
     AddNewClinic,
+    RequestForAbsenceComponent,
     RegisterNewClinicalCenterAdministrator,
     createMedicamentCodeBook,
     createDiagnosisCodeBook,
@@ -78,7 +79,6 @@ import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDo
     listOfAllPat,
     UserProfiles,
     nurseWorkCal,
-    RequestForAbsence,    
     RecipeValidation,
     AddRoomComponent,
     DeleteRoomComponent,
@@ -122,7 +122,7 @@ import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDo
       {path: 'HomepageNurse/listOfAllPat', component: listOfAllPat},
       {path: 'HomepageNurse/UserProfiles', component: UserProfiles},
       {path: 'HomepageNurse/nurseWorkCal', component: nurseWorkCal},
-      {path: 'HomepageNurse/RequestForAbsence', component: RequestForAbsence},
+      {path: 'HomepageNurse/RequestForAbsence', component: RequestForAbsenceComponent},
       {path: 'HomepageNurse/RecipeValidation', component:RecipeValidation},
       {path: 'HomepageCCA/arrivedReq', component : arrivedRequest},
       {path: 'HomepageCCA/addNewClinicCenterAdmin', component: addNewClinicCenterAdmin},
