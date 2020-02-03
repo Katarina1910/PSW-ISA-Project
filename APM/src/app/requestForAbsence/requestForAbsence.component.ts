@@ -3,6 +3,7 @@ import { RequestForAbsence } from './requestForAbsence';
 import { RequestForAbsenceService } from './requestForAbsence.service';
 import { UserService } from '../registration/user.service';
 import { User } from '../registration/user';
+import { Doctor } from '../doctor/doctor';
 
 
 
@@ -13,7 +14,8 @@ import { User } from '../registration/user';
 export class RequestForAbsenceComponent implements OnInit{
     
     user = new User(" "," "," "," "," "," "," "," "," "," "," ","");
-    requestForAbsence = new RequestForAbsence (null,null,null,null, new Date(),new Date(),null);
+    doctorModel = new Doctor(null,null,null);
+    requestForAbsence = new RequestForAbsence (null,null,null,null, new Date(),new Date());
     
     constructor(private _reqForAbsenceService: RequestForAbsenceService, private _userService: UserService) {}
 
@@ -28,9 +30,10 @@ export class RequestForAbsenceComponent implements OnInit{
     ngOnInit(): void {
       this._userService.getUserInfo().subscribe(
           data=>{
-              this.user = data;
+              this.doctorModel = data;
               console.log(data);
-              this.requestForAbsence.applicant = this.user.id;
+              this.requestForAbsence.applicant = this.doctorModel.id;
+              console.log(this.requestForAbsence);
           }
       )
     }
