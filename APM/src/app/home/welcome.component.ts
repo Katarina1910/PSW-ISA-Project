@@ -22,6 +22,10 @@ isUserDoctor(): boolean {
   return this.userService.isUserDoctor();
 }
 
+isUserNurse(): boolean{
+  return this.userService.isUserNurse();
+}
+
 isUserCA(): boolean {
   return this.userService.isUserCA();
 }

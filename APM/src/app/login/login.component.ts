@@ -87,8 +87,10 @@ export class LoginComponent{
                 } else if(this.user.role==="ROLE_CA") {
                     this.router.navigate(['/HomepageCA'])
                 } else if(this.user.role==="ROLE_CCA") {
-                    this.router.navigate(['/HomepageCCA'])
-                } else {
+                    this.router.navigate(['/HomepageCCA']);
+                } else if(this.user.role==="ROLE_NURSE") {
+                    this.router.navigate(['/HomepageNurse']);
+                }else{
                     this.router.navigate(['']);
                 }
             }
