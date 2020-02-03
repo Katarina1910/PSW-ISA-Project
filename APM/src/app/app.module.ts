@@ -61,6 +61,7 @@ import { ClinicSettingsComponent } from './clinicSettings/clinicSettings.compone
 import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
 import { DoctorWorkCalendar } from './doctorWorkingCalendar/doctorWorkCal.component';
 import { AddNurseComponent } from './nurse/addNurse.component';
+import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseReq.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { AddNurseComponent } from './nurse/addNurse.component';
     AddNurseComponent,
     DoctorRequestForConsultComponent,
     DoctorRequestForOperationComponent,
-    ClinicSettingsComponent
+    ClinicSettingsComponent,
+    arrivedAbsenceReqComponent,
     //ListOfDiagnosis
     ],
   imports: [
@@ -157,6 +159,7 @@ import { AddNurseComponent } from './nurse/addNurse.component';
       {path: 'HomepageCA/addConsultType', component: ConsultTypeComponent},
       {path: 'HomepageCA/ConsultTypes', component: DeleteConsultTypeComponent},
       {path: 'HomepageCA/consultTerm', component: ConsultTermComponent},
+      {path: 'HomepageCA/ArrReq', component: arrivedAbsenceReqComponent},
       {path: 'HomepageCCA/allClinics', component: DeleteClinicsComponent}, 
       {path: 'HomepageCCA/allMedicaments', component: DeleteMedicamentComponent},
       {path: 'HomepageCCA/allDiagnosis', component: DeleteDiagnosisComponent},
