@@ -11,8 +11,8 @@ public class DoctorDTO extends UserDTO {
     public DoctorDTO() {
     }
 
-    public DoctorDTO(Long id, String name, String surname, String ucidn, String address, String city, String country, String email, String phone, String userName, String password, String role,boolean isActivated, Double grade, Double typeId, Long clinic) {
-        super(id, name, surname, ucidn, address, city, country, email, phone, userName, password,role, isActivated);
+    public DoctorDTO(Long id, String name, String surname, String ucidn, String address, String city, String country, String email, String phone, String userName, String password, String role,boolean isActivated, Double grade, Double typeId) {
+        super(id, name, surname, ucidn, address, city, country, email, phone, userName, password, role, isActivated);
         this.grade = grade;
         this.typeId = typeId;
         this.clinic = clinic;

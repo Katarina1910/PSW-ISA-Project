@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PatientProfileDocService } from './patientProfileDoc.service';
 import { listOfPatientsDoctor } from '../doctorHomePage/listOfPatients.component';
 import { listOfPatientsService } from '../doctorHomePage/listOfPatients.service';
+import { MedicalRecordService } from '../medicalRecord/medicalRecord.service';
 
 
 @Component({
@@ -17,14 +18,20 @@ export class PatientProfileDocComponent  implements OnInit {
    this.getProfile();
   }   
 
-  
-
-  constructor(private patientProfileDoc: listOfPatientsService, private router: Router) { 
+  constructor(private patientProfileDoc: listOfPatientsService, private router: Router, private medicalRecordService: MedicalRecordService) { 
   }
 
-
+  getUserProfile(id:number): void{
+    this.medicalRecordService.getUserProfile(id).subscribe(
+        data=>{
+            this.patientProfileDoc.user = data;
+            this.router.navigate(['/HomepageDoctor/ListOfPatients/Profile/MedicalRecord']);
+        },
+        error=> console.error('Error!', error)
+    )
+   
+  }
   
-
   getProfile(): void{
      this.user = this.patientProfileDoc.user;
   }

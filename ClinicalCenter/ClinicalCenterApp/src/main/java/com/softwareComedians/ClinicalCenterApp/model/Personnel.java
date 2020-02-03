@@ -17,31 +17,11 @@ public abstract class Personnel extends User {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private ConsultTerm consultTerm;
 
-	//@ManyToMany(mappedBy = "PersonnelPatient")
-//	private Set<Patient> myPatients;
-
 	@OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private Set<RequestForAbsence> requestForAbsences;
 	
 	public Personnel() {
 		super();
 	}
-
-	public Clinic getClinic() {
-		return clinic;
-	}
-
-	public void setClinic(Clinic clinic) {
-		this.clinic = clinic;
-	}
-
-	public ConsultTerm getConsultTerm() {
-		return consultTerm;
-	}
-
-	public void setConsultTerm(ConsultTerm consultTerm) {
-		this.consultTerm = consultTerm;
-	}
-
-
+	
 }

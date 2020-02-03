@@ -1,0 +1,60 @@
+<form (ngSubmit)="onSubmit()" class="d-flex p-2 justify-content-center">
+    <fieldset>
+     <legend>Add new nurse</legend>
+  
+     <div>
+      <label class="col-form-label" for="inputDefault"> First Name:</label>
+      <input type="text" class="form-control" id="name"  name="name"  [(ngModel)]="nurseModel.name"/>
+    </div>
+  
+    <div>
+      <label class="col-form-label" for="inputDefault"> Last Name:</label>
+      <input type="text" class="form-control" id="surename" name="surname" [(ngModel)]="nurseModel.surname"/>
+    </div>
+  
+    <div>
+      <label class="col-form-label" for="inputDefault"> UCIDN:</label>
+      <input type="text" class="form-control" name="ucidn" id="ucidn" [(ngModel)]="nurseModel.ucidn"/>
+    </div>
+  
+    <div>
+      <label  class="col-form-label" for="inputDefault">Address</label>
+      <input type="text"  class="form-control" id="address" name="address" [(ngModel)]="nurseModel.address"/>
+    </div>
+    
+    <div>
+      <label  class="col-form-label" for="inputDefault">City</label>
+      <input type="text" class="form-control"  name="city" [(ngModel)]="nurseModel.city"/>
+    </div>
+    
+    <div>
+      <label  class="col-form-label" for="inputDefault">Country</label>
+      <input type="text"  class="form-control" name="country" [(ngModel)]="nurseModel.country"/>
+    </div>
+  
+    <div>
+      <label class="col-form-label" for="inputDefault">Phone number</label>
+      <input type="text"  class="form-control" name="phone" [(ngModel)]="nurseModel.phone"/>
+                 
+      <label>Username</label>
+      <input type="text"  class="form-control" name="phone" [(ngModel)]="nurseModel.username"/>
+                         
+      <label>Email</label>
+      <input type="text"  class="form-control" id="email" [(ngModel)]="nurseModel.email" name="email" aria-describedby="emailHelp"/>
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+  
+    <div>
+      <label class="col-form-label" for="inputDefault">Password</label>
+      <input type="password"  class="form-control"  [(ngModel)]="nurseModel.password" name="password" id="exampleInputPassword1"/>
+    </div>
+
+    <div>
+      <label class="col-form-label" for="inputDefault">Password</label>
+      <input type="password"  class="form-control"  [(ngModel)]="password1" name="password1" id="exampleInputPassword2"/>
+    </div>
+  
+      <button type="submit" class="btn btn-primary">Add</button>
+    </fieldset>          
+  </form>
+  

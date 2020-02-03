@@ -53,11 +53,14 @@ import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicC
 import { AppointedExaminationsService } from './patientHomePage/patientExaminations.service';
 import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDoc.component';
 import { RequestForAbsenceComponent } from './requestForAbsence/requestForAbsence.component';
+import { MedicalRecord } from './medicalRecord/medicalRecord.component';
 import { DoctorRequestForConsultComponent } from './doctorRequestForConsult/doctorRequestForConsult.component';
 import { DoctorRequestForOperationComponent } from './doctorRqForOperation/doctorRqForOperaton.component';
 import { ClinicSettingsComponent } from './clinicSettings/clinicSettings.component';
 // import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
-
+import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
+import { DoctorWorkCalendar } from './doctorWorkingCalendar/doctorWorkCal.component';
+import { AddNurseComponent } from './nurse/addNurse.component';
 
 @NgModule({
   declarations: [
@@ -100,9 +103,12 @@ import { ClinicSettingsComponent } from './clinicSettings/clinicSettings.compone
     RequestExamination,
     addNewClinicCenterAdmin,
     PatientProfileDocComponent,
+    MedicalRecord,
+    DoctorWorkCalendar,
+    AddNurseComponent,
     DoctorRequestForConsultComponent,
     DoctorRequestForOperationComponent,
-    ClinicSettingsComponent,
+    ClinicSettingsComponent
     //ListOfDiagnosis
     ],
   imports: [
@@ -115,6 +121,7 @@ import { ClinicSettingsComponent } from './clinicSettings/clinicSettings.compone
     MatFormFieldModule,
     MatNativeDateModule,
     MatSortModule,
+    FullCalendarModule,
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
@@ -123,9 +130,11 @@ import { ClinicSettingsComponent } from './clinicSettings/clinicSettings.compone
       {path: 'HomepageCA' , component: ClinicAdminHomePageComponent},
       {path: 'HomepageDoctor', component: DoctorComponent},
       {path: 'HomepageDoctor/ListOfPatients', component: listOfPatientsDoctor},
+      {path: 'HomepageDoctor/DoctorWorkCalendar', component: DoctorWorkCalendar},
       {path: 'HomepageDoctor/RqForCosult', component: DoctorRequestForConsultComponent},
       {path: 'HomepageDoctor/RqForOperation', component: DoctorRequestForOperationComponent},
       {path: 'HomepageDoctor/ListOfPatients/Profile', component: PatientProfileDocComponent},
+      {path: 'HomepageDoctor/ListOfPatients/Profile/MedicalRecord', component: MedicalRecord}, 
       {path: 'HomepageNurse', component: NurseComponent},
       {path: 'HomepageNurse/listOfAllPat', component: listOfAllPat},
       {path: 'HomepageNurse/UserProfiles', component: UserProfiles},
@@ -141,6 +150,7 @@ import { ClinicSettingsComponent } from './clinicSettings/clinicSettings.compone
       {path: 'HomepageCCA/createDiagCod', component: createDiagnosisCodeBook}, 
       {path: 'HomepageCA/addDoctor', component: AddDoctorComponent},
       {path: 'HomepageCA/allDoctors', component:DeleteDoctorComponent},
+      {path: 'HomepageCA/AddNurseComponent', component: AddNurseComponent},
       {path: 'HomepageCA/addRoom', component: AddRoomComponent},
       {path: 'HomepageCA/allRooms', component: DeleteRoomComponent},
       {path: 'HomepageCA/clinicSettings', component: ClinicSettingsComponent},
@@ -158,9 +168,8 @@ import { ClinicSettingsComponent } from './clinicSettings/clinicSettings.compone
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'},
-    ], {useHash: true}),
-    BrowserAnimationsModule
-  ],
+    ], {useHash: true})
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
