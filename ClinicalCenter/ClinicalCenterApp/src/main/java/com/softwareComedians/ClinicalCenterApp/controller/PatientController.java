@@ -14,6 +14,9 @@ import com.softwareComedians.ClinicalCenterApp.service.PatientService;
 import com.softwareComedians.ClinicalCenterApp.service.RequestForConsultService;
 import com.softwareComedians.ClinicalCenterApp.service.RequestForPatientRegistrationService;
 import com.softwareComedians.ClinicalCenterApp.service.impl.UserServiceImpl;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +31,9 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/patient")
 @CrossOrigin
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PatientController {
 
     @Autowired
@@ -79,6 +85,14 @@ public class PatientController {
         requestForPatientRegistrationService.remove(id);
 
         Patient patient = new Patient(request.getUserData());
+        MedicalRecord medicalRecord = MedicalRecord.builder()
+                                        .alergies("-")
+                                        .bloodType("-")
+                                        .weight("-")
+                                        .height("-")
+                                        .diopter("-")
+                                        .build();
+        patient.setMedicalRecord(medicalRecord);
         patient.setActivated(true);
         patient.setRole(UserRoles.ROLE_PATIENT);
         patient = patientService.save(patient);

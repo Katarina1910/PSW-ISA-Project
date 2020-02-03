@@ -13,7 +13,6 @@ public class DoctorService {
     @Autowired
     private DoctorRepository doctorRepository;
 
-
     public Doctor findOne(Long id){
         return doctorRepository.findById(id).orElseGet(null);
     }

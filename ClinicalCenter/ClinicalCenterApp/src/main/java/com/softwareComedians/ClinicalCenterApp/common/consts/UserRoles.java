@@ -8,4 +8,6 @@ public class UserRoles {
     public static final String ROLE_DOCTOR = "ROLE_DOCTOR";
     public static final String ROLE_CCA = "ROLE_CCA";
     public static final String ROLE_CA = "ROLE_CA";
+    public static final String ROLE_NURSE = "ROLE_NURSE";
+
 }

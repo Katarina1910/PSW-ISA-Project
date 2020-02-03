@@ -1,7 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -9,13 +8,31 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MedicalRecord {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column
-	private String historyDesease;
+	private String height;
+
+	@Column
+	private String weight;
+
+	@Column
+	private String bloodType;
+
+	@Column
+	private String diopter;
+
+	@Column
+	private String alergies;
+
+	@Column
+	private String historyDisease;
 
 	@OneToOne(mappedBy = "medicalRecord")
 	private Patient patient;
@@ -34,11 +51,4 @@ public class MedicalRecord {
 
 	//@ManyToMany(mappedBy = "MedPatient")
 	private Set<Medicament> prescribedMedicaments;*/
-
-	
-	public MedicalRecord() {
-		super();
-	}
-
-
 }
