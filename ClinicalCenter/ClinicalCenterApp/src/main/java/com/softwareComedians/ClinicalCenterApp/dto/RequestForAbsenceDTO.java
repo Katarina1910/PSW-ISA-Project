@@ -30,8 +30,8 @@ public class RequestForAbsenceDTO {
         this.applicant = rq.getApplicant().getId();
         this.isAccepted = false;
         this.resaonOfRejection = rq.getResaonOfRejection();
-        this.from = rq.getFrom();
-        this.to = rq.getTo();
+        this.from = rq.getFroom();
+        this.to = rq.getToo();
         this.clinicAdministrator = rq.getClinicAdministrator().getId();
     }
 

@@ -7,10 +7,12 @@ import { User } from '../registration/user';
 })
 export class AddDoctorService{
     _url = 'http://localhost:8080/api/doctors';
+    id: string;
+
 
     constructor(private _http: HttpClient) { }
 
     addDoctor(doctor: User) {
-       return  this._http.post<any>(this._url, doctor);
+       return  this._http.post<any>(`${this._url}/${this.id}`, doctor);
     }
 }

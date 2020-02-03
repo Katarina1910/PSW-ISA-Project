@@ -4,7 +4,7 @@ export class appointedExamination {
     duration: number;
     typeID: number;
     roomID: number;
-    doctorID: number;
+    doctorID: string;
     clinicID: number;
     price: number;
     patientID: string;

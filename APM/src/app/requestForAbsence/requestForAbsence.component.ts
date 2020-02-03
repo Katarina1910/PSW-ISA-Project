@@ -26,7 +26,13 @@ export class RequestForAbsenceComponent implements OnInit{
     }
 
     ngOnInit(): void {
-      
+      this._userService.getUserInfo().subscribe(
+          data=>{
+              this.user = data;
+              console.log(data);
+              this.requestForAbsence.applicant = this.user.id;
+          }
+      )
     }
 
 }

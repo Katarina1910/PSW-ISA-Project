@@ -1,12 +1,13 @@
+import { User } from '../registration/user';
 
-export class Doctor{
+export class Doctor extends User{
     constructor(
-       public id :number,
-       public name :string,
-       public surname :string,
-       public grade :number,
-       public typeId: number,
-       public clinicID: number
-    ) {}
+        public clinic:number,
+        public grade:number,
+        public typeId: number
+     
+    ) {
+        super(null,null,null,null,null,null,null,null,null,null,null,null);
+    }
 
 }

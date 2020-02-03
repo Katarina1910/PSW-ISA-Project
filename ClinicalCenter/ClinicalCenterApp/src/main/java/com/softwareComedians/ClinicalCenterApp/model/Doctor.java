@@ -73,4 +73,6 @@ public class Doctor extends Personnel {
         this.setRole("DOCTOR");
 
     }
+
+
 }

@@ -24,17 +24,18 @@ public class RequestForAbsence {
 	@Column
 	private String resaonOfRejection;
 
-	@Column
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date from;
 
 	@Column
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date to;
+	private Date too;
+
+	@Column
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date froom;
 
 	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private ClinicAdministrator clinicAdministrator;
-	
+
 	public RequestForAbsence() {
 		super();
 	}
@@ -47,13 +48,6 @@ public class RequestForAbsence {
 		this.id = id;
 	}
 
-	public Personnel getApplicant() {
-		return applicant;
-	}
-
-	public void setApplicant(Personnel applicant) {
-		this.applicant = applicant;
-	}
 
 	public boolean isAccepted() {
 		return isAccepted;
@@ -71,20 +65,28 @@ public class RequestForAbsence {
 		this.resaonOfRejection = resaonOfRejection;
 	}
 
-	public Date getFrom() {
-		return from;
+	public Personnel getApplicant() {
+		return applicant;
 	}
 
-	public void setFrom(Date from) {
-		this.from = from;
+	public void setApplicant(Personnel applicant) {
+		this.applicant = applicant;
 	}
 
-	public Date getTo() {
-		return to;
+	public Date getToo() {
+		return too;
 	}
 
-	public void setTo(Date to) {
-		this.to = to;
+	public void setToo(Date too) {
+		this.too = too;
+	}
+
+	public Date getFroom() {
+		return froom;
+	}
+
+	public void setFroom(Date froom) {
+		this.froom = froom;
 	}
 
 	public ClinicAdministrator getClinicAdministrator() {

@@ -45,8 +45,8 @@ public class RequestForAbsenceController {
         rq.setId(rqDTO.getId());
         rq.setAccepted(rqDTO.isAccepted());
        rq.setResaonOfRejection(rqDTO.getResaonOfRejection());
-       rq.setFrom(rq.getFrom());
-       rq.setTo(rq.getTo());
+       rq.setFroom(rq.getFroom());
+       rq.setToo(rq.getToo());
        rq.setApplicant(applicant);
        rq.setClinicAdministrator(ca);
 

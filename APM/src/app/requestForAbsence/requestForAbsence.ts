@@ -1,7 +1,7 @@
 export class RequestForAbsence {
     constructor(
         public  id: number,
-        public  applicant: number,
+        public  applicant: string,
         private  isAccepted: boolean,
         private resaonOfRejection: string,
         private from: Date,
