@@ -1,5 +1,6 @@
-
-/* You can add global styles to this file, and also import other style files */
+@import '@fullcalendar/core/main.css';
+@import '@fullcalendar/daygrid/main.css';
+@import '@fullcalendar/timegrid/main.css';
 
 div.card-header {
  font-size: large;
@@ -15,7 +16,5 @@ div.card {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-@import '@fullcalendar/core/main.css';
-@import '@fullcalendar/daygrid/main.css';
-@import '@fullcalendar/timegrid/main.css';
+
 
