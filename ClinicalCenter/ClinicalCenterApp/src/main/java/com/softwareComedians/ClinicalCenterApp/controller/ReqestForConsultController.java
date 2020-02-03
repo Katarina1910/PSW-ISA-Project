@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+
 @RestController
 @RequestMapping(value = "api/rqForConsult")
 @CrossOrigin
@@ -59,7 +61,7 @@ public class ReqestForConsultController {
     }
 
     @PostMapping(value = "doctor")
-    public ResponseEntity<RequestForConsultDTO> createRequestDoctor(@RequestBody RequestForConsultDTO requestForConsultDTO) {
+    public ResponseEntity<RequestForConsultDTO> createRequestDoctor(@RequestBody RequestForConsultDTO requestForConsultDTO) throws MessagingException {
 
         RequestForConsult rq = new RequestForConsult();
         rq.setId(requestForConsultDTO.getId());
@@ -68,7 +70,8 @@ public class ReqestForConsultController {
         rq.setPatient(userService.findById(requestForConsultDTO.getPatient().getId()));
         //send mail, getPatient.getClicic.getAdmin.getMail
        // Clinic c =clinicsService.findById(requestForConsultDTO.getPatient().getC)
-        //smtpMailSender.send(requestForConsultDTO.get,"Registration", description);
+        String description = "You have scheduled a new consult!";
+        smtpMailSender.send(requestForConsultDTO.getPatient().getEmail(),"New consult", description);
 
         rq = requestForConsultService.save(rq);
         return new ResponseEntity<>(new RequestForConsultDTO(rq), HttpStatus.CREATED);
