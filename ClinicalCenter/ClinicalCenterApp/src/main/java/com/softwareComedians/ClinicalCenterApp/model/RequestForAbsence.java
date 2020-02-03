@@ -2,10 +2,8 @@ package com.softwareComedians.ClinicalCenterApp.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Getter
@@ -26,12 +24,10 @@ public class RequestForAbsence {
 
 
 	@Column
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date too;
+	private String too;
 
 	@Column
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date froom;
+	private String froom;
 
 	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private ClinicAdministrator clinicAdministrator;
@@ -73,19 +69,19 @@ public class RequestForAbsence {
 		this.applicant = applicant;
 	}
 
-	public Date getToo() {
+	public String getToo() {
 		return too;
 	}
 
-	public void setToo(Date too) {
+	public void setToo(String too) {
 		this.too = too;
 	}
 
-	public Date getFroom() {
+	public String getFroom() {
 		return froom;
 	}
 
-	public void setFroom(Date froom) {
+	public void setFroom(String froom) {
 		this.froom = froom;
 	}
 
