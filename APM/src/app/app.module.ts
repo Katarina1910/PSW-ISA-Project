@@ -53,6 +53,9 @@ import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicC
 import { AppointedExaminationsService } from './patientHomePage/patientExaminations.service';
 import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDoc.component';
 import { RequestForAbsenceComponent } from './requestForAbsence/requestForAbsence.component';
+import { DoctorRequestForConsultComponent } from './doctorRequestForConsult/doctorRequestForConsult.component';
+import { DoctorRequestForOperationComponent } from './doctorRqForOperation/doctorRqForOperaton.component';
+import { ClinicSettingsComponent } from './clinicSettings/clinicSettings.component';
 // import { ListOfDiagnosis } from './listOfAllDiagnosis/listOfAllDiagnosis.component';
 
 
@@ -97,6 +100,9 @@ import { RequestForAbsenceComponent } from './requestForAbsence/requestForAbsenc
     RequestExamination,
     addNewClinicCenterAdmin,
     PatientProfileDocComponent,
+    DoctorRequestForConsultComponent,
+    DoctorRequestForOperationComponent,
+    ClinicSettingsComponent,
     //ListOfDiagnosis
     ],
   imports: [
@@ -117,6 +123,8 @@ import { RequestForAbsenceComponent } from './requestForAbsence/requestForAbsenc
       {path: 'HomepageCA' , component: ClinicAdminHomePageComponent},
       {path: 'HomepageDoctor', component: DoctorComponent},
       {path: 'HomepageDoctor/ListOfPatients', component: listOfPatientsDoctor},
+      {path: 'HomepageDoctor/RqForCosult', component: DoctorRequestForConsultComponent},
+      {path: 'HomepageDoctor/RqForOperation', component: DoctorRequestForOperationComponent},
       {path: 'HomepageDoctor/ListOfPatients/Profile', component: PatientProfileDocComponent},
       {path: 'HomepageNurse', component: NurseComponent},
       {path: 'HomepageNurse/listOfAllPat', component: listOfAllPat},
@@ -135,6 +143,7 @@ import { RequestForAbsenceComponent } from './requestForAbsence/requestForAbsenc
       {path: 'HomepageCA/allDoctors', component:DeleteDoctorComponent},
       {path: 'HomepageCA/addRoom', component: AddRoomComponent},
       {path: 'HomepageCA/allRooms', component: DeleteRoomComponent},
+      {path: 'HomepageCA/clinicSettings', component: ClinicSettingsComponent},
       {path: 'HomepageCA/addConsultType', component: ConsultTypeComponent},
       {path: 'HomepageCA/ConsultTypes', component: DeleteConsultTypeComponent},
       {path: 'HomepageCA/consultTerm', component: ConsultTermComponent},
