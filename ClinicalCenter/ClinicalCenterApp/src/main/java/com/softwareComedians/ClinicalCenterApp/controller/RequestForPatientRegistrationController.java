@@ -2,10 +2,8 @@ package com.softwareComedians.ClinicalCenterApp.controller;
 
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForPatientRegistrationDTO;
 import com.softwareComedians.ClinicalCenterApp.model.ConfirmationToken;
-import com.softwareComedians.ClinicalCenterApp.model.Patient;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForPatientRegistration;
 import com.softwareComedians.ClinicalCenterApp.repository.ConfirmationTokenRepository;
-import com.softwareComedians.ClinicalCenterApp.service.PatientService;
 import com.softwareComedians.ClinicalCenterApp.service.RequestForPatientRegistrationService;
 import com.softwareComedians.ClinicalCenterApp.service.email.MailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,44 +56,7 @@ public class RequestForPatientRegistrationController {
 
         return new ResponseEntity<>(rqsDTO, HttpStatus.OK);
     }
-/*
-    //u frontednu ovo pozovi za reject
-    @DeleteMapping(value = "/reject/{id}")
-    public ResponseEntity<Void> remove(@PathVariable Long id){
 
-        RequestForPatientRegistration requestForPatientRegistration = requestForPatientRegistrationService.findOne(id);
-
-        if(requestForPatientRegistration == null){
-            return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }else{
-            requestForPatientRegistrationService.remove(id);
-
-            ConfirmationToken token = this.createConfirmationToken(requestForPatientRegistration);
-            //mailSenderService.sendMailForRegistration(requestForPatientRegistration, token);
-
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-
-    }
-
-    //u frontednu ovo pozovi za accept
-    @PutMapping(value = "/accept/{id}")
-    public ResponseEntity<Void> setActivate(@PathVariable Long id){
-        RequestForPatientRegistration regForPatientReq = requestForPatientRegistrationService.findOne(id);
-
-        regForPatientReq.setAccepted(true);
-        regForPatientReq.getUserData().setActivated(true);
-
-        requestForPatientRegistrationService.setAccepted(regForPatientReq);
-
-        ConfirmationToken token = this.createConfirmationToken(regForPatientReq);
-        mailSenderService.sendMailForRegistration(regForPatientReq, token);
-
-
-        return new ResponseEntity<>(HttpStatus.OK);
-
-    }
-*/
     private ConfirmationToken createConfirmationToken(RequestForPatientRegistration user) {
         ConfirmationToken confirmationToken = new ConfirmationToken(user);
         return confirmationTokenRepository.save(confirmationToken);
