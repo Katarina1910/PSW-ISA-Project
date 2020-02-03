@@ -3,8 +3,11 @@ package com.softwareComedians.ClinicalCenterApp.controller;
 import com.softwareComedians.ClinicalCenterApp.common.consts.UserRoles;
 import com.softwareComedians.ClinicalCenterApp.dto.DoctorDTO;
 import com.softwareComedians.ClinicalCenterApp.model.Authority;
+import com.softwareComedians.ClinicalCenterApp.model.ClinicAdministrator;
 import com.softwareComedians.ClinicalCenterApp.model.Doctor;
 import com.softwareComedians.ClinicalCenterApp.repository.AuthorityRepository;
+import com.softwareComedians.ClinicalCenterApp.service.ClinicAdminService;
+import com.softwareComedians.ClinicalCenterApp.service.ClinicsService;
 import com.softwareComedians.ClinicalCenterApp.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +29,13 @@ public class DoctorController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    private ClinicsService clinicsService;
+
+    @Autowired
     private AuthorityRepository authorityRepository;
+
+    @Autowired
+    private ClinicAdminService clinicAdminService;
 
     @Autowired
     public DoctorController(DoctorService doctorService){
@@ -45,8 +54,8 @@ public class DoctorController {
         return new ResponseEntity<>(doctorsDTO, HttpStatus.OK);
     }
 
-    @PostMapping()
-    public ResponseEntity<DoctorDTO> addDoctor(@RequestBody DoctorDTO doctorDTO) {
+    @PostMapping(value = "/{id}")
+    public ResponseEntity<DoctorDTO> addDoctor(@PathVariable Long id,@RequestBody DoctorDTO doctorDTO) {
         Doctor doctor = new Doctor();
         doctor.setId(doctorDTO.getId());
         doctor.setName(doctorDTO.getName());
@@ -63,6 +72,11 @@ public class DoctorController {
         doctor.setTypeId(null);
         doctor.setRole("DOCTOR");
         doctor.setActivated(true);
+        ClinicAdministrator ca = clinicAdminService.findById(id);
+        if (ca!=null){
+            doctor.setClinic(ca.getClinic());
+        }
+
         Authority doctorAutority = authorityRepository.findByName(UserRoles.ROLE_DOCTOR);
         doctor.getUsersAuthorities().add(doctorAutority);
         doctor = doctorService.save(doctor);

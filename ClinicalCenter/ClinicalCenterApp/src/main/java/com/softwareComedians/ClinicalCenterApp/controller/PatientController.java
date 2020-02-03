@@ -9,10 +9,7 @@ import com.softwareComedians.ClinicalCenterApp.mail.SmtpMailSender;
 import com.softwareComedians.ClinicalCenterApp.mappers.UserMapper;
 import com.softwareComedians.ClinicalCenterApp.model.*;
 import com.softwareComedians.ClinicalCenterApp.repository.AuthorityRepository;
-import com.softwareComedians.ClinicalCenterApp.service.ConsultTermService;
-import com.softwareComedians.ClinicalCenterApp.service.PatientService;
-import com.softwareComedians.ClinicalCenterApp.service.RequestForConsultService;
-import com.softwareComedians.ClinicalCenterApp.service.RequestForPatientRegistrationService;
+import com.softwareComedians.ClinicalCenterApp.service.*;
 import com.softwareComedians.ClinicalCenterApp.service.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -60,6 +57,9 @@ public class PatientController {
     private SmtpMailSender smtpMailSender;
 
     @Autowired
+    private ClinicsService clinicsService;
+
+    @Autowired
     public PatientController(PatientService patientService, RequestForPatientRegistrationService requestForPatientRegistrationService) {
         this.patientService = patientService;
         this.requestForPatientRegistrationService = requestForPatientRegistrationService;
@@ -95,6 +95,7 @@ public class PatientController {
         patient.setMedicalRecord(medicalRecord);
         patient.setActivated(true);
         patient.setRole(UserRoles.ROLE_PATIENT);
+
         patient = patientService.save(patient);
 
         if(patient!=null)

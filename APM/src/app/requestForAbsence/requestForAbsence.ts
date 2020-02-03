@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
-
-
-@Component({
-    selector: 'request-abs',
-    templateUrl: './requestForAbsence.component.html'
-})
-
-export class RequestForAbsence{
-
+export class RequestForAbsence {
+    constructor(
+        public  id: number,
+        public  applicant: string,
+        public  isAccepted: boolean,
+        public resaonOfRejection: string,
+        public from: Date,
+        public to: Date,
+    ){}
 }
