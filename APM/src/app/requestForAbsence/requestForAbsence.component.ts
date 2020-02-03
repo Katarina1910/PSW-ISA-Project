@@ -32,7 +32,7 @@ export class RequestForAbsenceComponent implements OnInit{
           data=>{
               this.doctorModel = data;
               console.log(data);
-              this.requestForAbsence.applicant = this.doctorModel.id;
+              this.requestForAbsence.applicant = this.doctorModel;
               console.log(this.requestForAbsence);
           }
       )

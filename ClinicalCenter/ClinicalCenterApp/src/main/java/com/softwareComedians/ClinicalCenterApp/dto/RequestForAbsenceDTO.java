@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class RequestForAbsenceDTO {
     private Long id;
-    private Long applicant;
+    private PersonnelDTO applicant;
     private boolean isAccepted;
     private String resaonOfRejection;
     private Date from;
@@ -15,7 +15,7 @@ public class RequestForAbsenceDTO {
     public RequestForAbsenceDTO() {
     }
 
-    public RequestForAbsenceDTO(Long id, Long applicant, boolean isAccepted, String resaonOfRejection, Date from, Date to) {
+    public RequestForAbsenceDTO(Long id, PersonnelDTO applicant, boolean isAccepted, String resaonOfRejection, Date from, Date to) {
         this.id = id;
         this.applicant = applicant;
         this.isAccepted = false;
@@ -26,7 +26,7 @@ public class RequestForAbsenceDTO {
 
     public RequestForAbsenceDTO(RequestForAbsence rq) {
         this.id = rq.getId();
-        this.applicant = rq.getApplicant().getId();
+        this.applicant = new PersonnelDTO(rq.getApplicant());
         this.isAccepted = false;
         this.resaonOfRejection = rq.getResaonOfRejection();
         this.from = rq.getFroom();
@@ -74,12 +74,11 @@ public class RequestForAbsenceDTO {
         this.to = to;
     }
 
-    public Long getApplicant() {
+    public PersonnelDTO getApplicant() {
         return applicant;
     }
 
-    public void setApplicant(Long applicant) {
+    public void setApplicant(PersonnelDTO applicant) {
         this.applicant = applicant;
     }
-
 }
