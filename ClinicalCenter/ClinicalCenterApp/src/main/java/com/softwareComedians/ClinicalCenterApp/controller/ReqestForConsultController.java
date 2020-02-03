@@ -2,11 +2,9 @@ package com.softwareComedians.ClinicalCenterApp.controller;
 
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
 import com.softwareComedians.ClinicalCenterApp.mail.SmtpMailSender;
+import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForConsult;
-import com.softwareComedians.ClinicalCenterApp.service.ConsultTypeService;
-import com.softwareComedians.ClinicalCenterApp.service.RequestForConsultService;
-import com.softwareComedians.ClinicalCenterApp.service.UserService;
-import com.softwareComedians.ClinicalCenterApp.model.*;
+import com.softwareComedians.ClinicalCenterApp.model.User;
 import com.softwareComedians.ClinicalCenterApp.service.*;
 import com.softwareComedians.ClinicalCenterApp.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,12 @@ public class ReqestForConsultController {
 
     @Autowired
     private ConsultTypeService consultTypeService;
+
+    @Autowired
+    private ClinicsService clinicsService;
+
+    @Autowired
+    private ClinicAdminService clinicAdminService;
 
 
   @Autowired
@@ -63,6 +67,7 @@ public class ReqestForConsultController {
         rq.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
         rq.setPatient(userService.findById(requestForConsultDTO.getPatient().getId()));
         //send mail, getPatient.getClicic.getAdmin.getMail
+       // Clinic c =clinicsService.findById(requestForConsultDTO.getPatient().getC)
         //smtpMailSender.send(requestForConsultDTO.get,"Registration", description);
 
         rq = requestForConsultService.save(rq);
