@@ -48,7 +48,7 @@ public class RequestForAbsenceController {
     public ResponseEntity<RequestForAbsenceDTO> createRqForAbsence(@RequestBody RequestForAbsenceDTO rqDTO) {
 
         RequestForAbsence rq = new RequestForAbsence();
-        Personnel applicant = (Personnel) userService.findById(rqDTO.getApplicant());
+        Personnel applicant = (Personnel) userService.findById(rqDTO.getApplicant().getId());
         rq.setId(rqDTO.getId());
         rq.setAccepted(rqDTO.isAccepted());
        rq.setResaonOfRejection(rqDTO.getResaonOfRejection());

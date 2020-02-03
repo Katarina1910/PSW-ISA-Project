@@ -1,7 +1,9 @@
+import { User } from '../registration/user';
+
 export class RequestForAbsence {
     constructor(
         public  id: number,
-        public  applicant: string,
+        public  applicant: User,
         public  isAccepted: boolean,
         public resaonOfRejection: string,
         public from: Date,
