@@ -1,10 +1,12 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForAbsenceDTO;
-import com.softwareComedians.ClinicalCenterApp.model.ClinicAdministrator;
+import com.softwareComedians.ClinicalCenterApp.model.Clinic;
 import com.softwareComedians.ClinicalCenterApp.model.Personnel;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForAbsence;
 import com.softwareComedians.ClinicalCenterApp.repository.ConfirmationTokenRepository;
+import com.softwareComedians.ClinicalCenterApp.service.ClinicAdminService;
+import com.softwareComedians.ClinicalCenterApp.service.ClinicsService;
 import com.softwareComedians.ClinicalCenterApp.service.RequestForAbsenceService;
 import com.softwareComedians.ClinicalCenterApp.service.UserService;
 import com.softwareComedians.ClinicalCenterApp.service.email.MailSenderService;
@@ -29,6 +31,12 @@ public class RequestForAbsenceController {
     private UserService userService;
 
     @Autowired
+    private ClinicsService clinicsService;
+
+    @Autowired
+    private ClinicAdminService clinicAdminService;
+
+    @Autowired
     private ConfirmationTokenRepository confirmationTokenRepository;
 
     @Autowired
@@ -40,16 +48,15 @@ public class RequestForAbsenceController {
     public ResponseEntity<RequestForAbsenceDTO> createRqForAbsence(@RequestBody RequestForAbsenceDTO rqDTO) {
 
         RequestForAbsence rq = new RequestForAbsence();
-        Personnel applicant = (Personnel) userService.findById(rqDTO.getId());
-        ClinicAdministrator ca = (ClinicAdministrator) userService.findById(rqDTO.getClinicAdministrator());
+        Personnel applicant = (Personnel) userService.findById(rqDTO.getApplicant());
         rq.setId(rqDTO.getId());
         rq.setAccepted(rqDTO.isAccepted());
        rq.setResaonOfRejection(rqDTO.getResaonOfRejection());
        rq.setFroom(rq.getFroom());
        rq.setToo(rq.getToo());
        rq.setApplicant(applicant);
-       rq.setClinicAdministrator(ca);
-
+       Clinic c = clinicsService.findById(applicant.getClinic().getId());
+       rq.setClinicAdministrator(clinicAdminService.findById(c.getClinicAdministrator().getId()));
         rq = requestForAbsenceService.save(rq);
         return new ResponseEntity<>(new RequestForAbsenceDTO(rq), HttpStatus.CREATED);
     }
