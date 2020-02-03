@@ -1,9 +1,7 @@
 import { ConsultType } from 'src/consultType/consultType';
-import { Time } from '@angular/common';
-import { Room } from '../rooms/room';
 import { User } from '../registration/user';
 
-export class ConsultTerm {
+export class ConsultTerm{
     constructor(
         private id:number,
         public date: Date,
@@ -12,6 +10,7 @@ export class ConsultTerm {
         private  price: number,
         private  discount: number,
         private room: string,
-        private doctor: string
+        private doctor: string,
+        private patient: User
     ){}
 }
