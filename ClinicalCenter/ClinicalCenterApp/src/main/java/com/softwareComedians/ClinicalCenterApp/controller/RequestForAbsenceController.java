@@ -48,15 +48,19 @@ public class RequestForAbsenceController {
     public ResponseEntity<RequestForAbsenceDTO> createRqForAbsence(@RequestBody RequestForAbsenceDTO rqDTO) {
 
         RequestForAbsence rq = new RequestForAbsence();
+
         Personnel applicant = (Personnel) userService.findById(rqDTO.getApplicant().getId());
         rq.setId(rqDTO.getId());
         rq.setAccepted(rqDTO.isAccepted());
        rq.setResaonOfRejection(rqDTO.getResaonOfRejection());
-       rq.setFroom(rq.getFroom());
-       rq.setToo(rq.getToo());
+       rq.setFroom(rqDTO.getFrom());
+       rq.setToo(rqDTO.getTo());
        rq.setApplicant(applicant);
+
        Clinic c = clinicsService.findById(applicant.getClinic().getId());
+
        rq.setClinicAdministrator(clinicAdminService.findById(c.getClinicAdministrator().getId()));
+       System.out.println(rq.getFroom()+"saas"+rq.getToo());
         rq = requestForAbsenceService.save(rq);
         return new ResponseEntity<>(new RequestForAbsenceDTO(rq), HttpStatus.CREATED);
     }
