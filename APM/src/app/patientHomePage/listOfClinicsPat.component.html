@@ -34,7 +34,7 @@
                 </div>
         </div>
         <div class='table-responsive' class="d-flex p-2 justify-content-center">
-        <table class='table table-striped' *ngIf='filteredClinics || listClin' matSort (matSortChange)="sortData($event)">
+        <table class='table table-striped' *ngIf='listClin' matSort (matSortChange)="sortData($event)">
         <thead>
                 <tr>
                 <th mat-sort-header="name">Name</th>
@@ -45,7 +45,7 @@
                 </tr>
         </thead>
         <tbody>
-                <tr *ngFor = 'let c of filteredClinics || listClin || sortedClinics'>
+                <tr *ngFor = 'let c of listClin || sortedClinics'>
                 <td>{{c.name}}</td>
                 <td>{{c.address}}</td>
                 <td>{{c.description}}</td>
@@ -65,7 +65,6 @@
                         <div class='col'>Name:</div>
                         <div class='col'>Surname:</div>
                         <div class='col'>Grade:</div>
-                        <div class='col'></div>
                     </div>
                     <div class='row'>
                             <div class='col'>
@@ -76,9 +75,6 @@
                             </div>
                             <div class='col'>
                                     <input type='text' [(ngModel)]='doctorGrade'>
-                            </div>
-                            <div class='col'>
-                                    <button (click)="buttonSearchDoctors()">Search</button>
                             </div>
                     </div>
 

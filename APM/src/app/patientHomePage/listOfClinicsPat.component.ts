@@ -45,6 +45,7 @@ export class ListOfPatClinics implements OnInit{
     public selectedClinic: Clinic;
     public doctors: Doctor[] = [];
     public doctors2: Doctor[] = [];
+    public seeDoctorsList: Doctor[] = [];
 
     public appointedExamination: appointedExamination;
     public user: User;
@@ -185,23 +186,39 @@ export class ListOfPatClinics implements OnInit{
 
     buttonSearch(): void{
         const formatedDate = moment(this.selectedDate).format('YYYY-MM-DD')
-
-        this._consultTermService.getConsultTermsInfo().subscribe(
+        const selectedType2 = this.selectedType;
+        this.listClin = [];
+        this._getAllDoctors.getDoctors().subscribe(
             data=> {
-                this.consultTerms = data;
-                this.consultTerms.forEach(function (value){
-                    const formatedDate2 = moment(value.date).format('YYYY-MM-DD')
-                    if(formatedDate == formatedDate2) {
-                        console.log("Datumi su isti");
-                    } else {
-                        console.log("Datumi nisu isti");
-                    }
-                });
-            }, error => {
-                console.log("Error in getting consult term data!")
-            });
+                this.doctors2 = data;
+                for(let doc of this.doctors2) {
+                    const formatedDateFrom = moment(doc.scheduledFrom).format('YYYY-MM-DD');
+                    const formatedDateTo = moment(doc.scheduledTo).format('YYYY-MM-DD');
+                    if(formatedDate <= formatedDateTo && formatedDate >= formatedDateFrom) {
 
-        console.log('ime tipa je: ', this.selectedType.name);
+                    } else {
+                        if(selectedType2.id == doc.typeId) {
+                            console.log("Doktor kojem tip i datum odgovaraju: ", doc);
+                            this.seeDoctorsList.push(doc);
+                            //TODO: uzeti sve klinike koje imaju ove doktore
+                            this._listOfClinicsService.getListOfClinics().subscribe(
+                                data=>{
+                                    this.pListClin = data;
+                                    for(let clin of this.pListClin) {
+                                        if(clin.id == doc.clinic) {
+                                            this.listClin.push(clin);
+                                        }
+                                    }
+                                },
+                                error=>console.error('Error list of clinics!',error)
+                            )
+                        }
+                    }
+                }
+            }, error => {
+                console.log("Error in getting doctors!");
+            }
+        )
     }
 
     listOfDoctors(clinic: Clinic): void {
@@ -209,31 +226,11 @@ export class ListOfPatClinics implements OnInit{
         this.doctors = [];
         if(this.selectedType.id != null) {
             this.seeDoctors = true;
-            this._consultTermService.getConsultTermsInfo().subscribe(
-                data=> {
-                    this.consultTerms2 = data;
-                    for(let ct of this.consultTerms2) {
-                        if(JSON.stringify(ct.type) == JSON.stringify(this.selectedType.name)) {
-                            this._getAllDoctors.getDoctors().subscribe(
-                                data=> {
-                                    this.doctors2 = data;
-                                    for(let d of this.doctors2) {
-                                        if(JSON.stringify(this.selectedType.id) == JSON.stringify(d.typeId)) {
-                                            this.doctors.push(d);
-                                        } else {
-                                            console.log("Izabrani tip pregleda se ne poklapa sa tipom iz baze")
-                                        }
-                                    }
-                                })
-                        break;  //da ne bi vise puta iste lekare ispisivao
-                        } else {
-                            console.log("Imena tipova pregleda nisu jednaka")
-                        }
-                    }
-                }, error => {
-                    console.log("Error in getting consult term2 data!")
-                });
-                
+            for(let doc of this.seeDoctorsList) {
+                if(this.selectedClinic.id == doc.clinic) {
+                    this.doctors.push(doc);
+                }
+            }
         } else {
             alert("Type or date is not selected!");
         }

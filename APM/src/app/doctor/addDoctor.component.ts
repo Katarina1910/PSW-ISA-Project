@@ -21,7 +21,7 @@ export class AddDoctorComponent implements OnInit{
             }
         )
     }
-    doctorModel = new Doctor(null,null,null);
+    doctorModel = new Doctor(null,null,null,null,null);
     user = new User(null,null,null,null,null,null,null,null,null,null,null,null)
     
     constructor(private _addDoctorService: AddDoctorService,  private router: Router, private _userService : UserService) {}
