@@ -54,12 +54,12 @@
                    <th>Name</th>
                     <th>Type</th>
                     <th>Number</th>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    <th>6</th>
+                    <th>07:00-09:00</th>
+                    <th>09:00-11:00</th>
+                    <th>11:00-13:00</th>
+                    <th>13:00-15:00</th>
+                    <th>15:00-17:00</th>
+                    <th>17:00-19:00</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -69,12 +69,12 @@
                     <td>{{d.room.name}}</td>
                     <td>{{d.room.name}}</td>
                     <td>{{d.room.id}}</td>
-                    <td><input type="checkbox"  [(ngModel)]="d.term1" ></td>
-                    <td><input type="checkbox"  [(ngModel)]="d.term2" ></td>
-                    <td><input type="checkbox"  [(ngModel)]="d.term3" ></td>
-                    <td><input type="checkbox"  [(ngModel)]="d.term4" ></td>
-                    <td><input type="checkbox"  [(ngModel)]="d.term5" ></td>
-                    <td><input type="checkbox"  [(ngModel)]="d.term6" ></td>
+                    <td><input type="checkbox" disabled  [(ngModel)]="d.term1" ></td>
+                    <td><input type="checkbox" disabled  [(ngModel)]="d.term2" ></td>
+                    <td><input type="checkbox" disabled  [(ngModel)]="d.term3" ></td>
+                    <td><input type="checkbox" disabled [(ngModel)]="d.term4" ></td>
+                    <td><input type="checkbox" disabled [(ngModel)]="d.term5" ></td>
+                    <td><input type="checkbox" disabled [(ngModel)]="d.term6" ></td>
                     <td><button   type="button" class="btn btn-outline-primary" (click)='deleteRoom(d.id)'>Delete</button></td>
                     <td><button   type="button"  class="btn btn-outline-primary" (click)='editRoom(d)'>Edit</button></td>
                 </tr>
