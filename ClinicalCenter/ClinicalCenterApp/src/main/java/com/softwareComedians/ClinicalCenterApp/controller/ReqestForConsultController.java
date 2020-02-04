@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/rqForConsult")
@@ -48,6 +50,18 @@ public class ReqestForConsultController {
     @Autowired
     private  RoomTermsServie roomTermsServie;
 
+    @GetMapping(value = "/getAll")
+    public ResponseEntity<List<RequestForConsultDTO>> getAll() {
+
+        List<RequestForConsult> requestForConsults = requestForConsultService.findAll();
+        List<RequestForConsultDTO> requestForConsultDTOS= new ArrayList<>();
+        for (RequestForConsult d : requestForConsults) {
+            requestForConsultDTOS.add(new RequestForConsultDTO(d));
+        }
+
+        return new ResponseEntity<>(requestForConsultDTOS, HttpStatus.OK);
+    }
+
     @PostMapping()
     public ResponseEntity<RequestForConsultDTO> createRequest(@RequestBody RequestForConsultDTO requestForConsultDTO) {
 
@@ -73,7 +87,7 @@ public class ReqestForConsultController {
         //send mail, getPatient.getClicic.getAdmin.getMail
        // Clinic c =clinicsService.findById(requestForConsultDTO.getPatient().getC)
         String description = "You have scheduled a new consult!";
-        smtpMailSender.send(requestForConsultDTO.getPatient().getEmail(),"New consult", description);
+      //  smtpMailSender.send(requestForConsultDTO.getPatient().getEmail(),"New consult", description);
 
         for(RoomTerms rr : roomTermsServie.findAll()){
             if (rr.getDate().equals(rq.getDateAndTime())){
