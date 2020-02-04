@@ -22,6 +22,12 @@ public class RoomTerms {
     boolean term4;
 
     @Column
+    boolean term5;
+
+    @Column
+    boolean term6;
+
+    @Column
     String date;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -32,6 +38,8 @@ public class RoomTerms {
         term2= true;
         term3=true;
         term4=true;
+        term5=true;
+        term6=true;
 
     }
 
@@ -65,6 +73,22 @@ public class RoomTerms {
 
     public void setTerm3(boolean term3) {
         this.term3 = term3;
+    }
+
+    public boolean isTerm5() {
+        return term5;
+    }
+
+    public void setTerm5(boolean term5) {
+        this.term5 = term5;
+    }
+
+    public boolean isTerm6() {
+        return term6;
+    }
+
+    public void setTerm6(boolean term6) {
+        this.term6 = term6;
     }
 
     public boolean isTerm4() {
