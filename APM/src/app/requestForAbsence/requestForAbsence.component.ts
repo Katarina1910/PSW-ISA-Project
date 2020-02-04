@@ -24,11 +24,8 @@ export class RequestForAbsenceComponent implements OnInit{
     constructor(private _reqForAbsenceService: RequestForAbsenceService, private _userService: UserService) {}
 
     onSubmit(){
-        console.log(this.datee)
         this.requestForAbsence.from =this.datee;
-        console.log(this.datee);
         this.requestForAbsence.to =this.datee2;
-        console.log(this.requestForAbsence)
         this._reqForAbsenceService.addRequestForAbsence(this.requestForAbsence)
        .subscribe(
            data=> console.log('Success!', data),
