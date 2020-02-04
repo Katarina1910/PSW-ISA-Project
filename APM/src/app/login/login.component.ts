@@ -15,8 +15,9 @@ import { DisplayMessage } from '../shared/models/display-message';
     templateUrl : './login.component.html'
 })
 export class LoginComponent{
+
     loginModel = new Login('','');
-    u:User = null;
+    u : User = null;
     loginForm: FormGroup;
     submitted = false;
     private user:User;
