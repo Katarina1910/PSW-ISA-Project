@@ -1,7 +1,7 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 
 import javax.persistence.*;
-import java.util.Stack;
+
 
 @Entity
 public class RoomTerms {
@@ -10,7 +10,16 @@ public class RoomTerms {
     private Long id;
 
     @Column
-    Stack<String> stack;
+    boolean term1;
+
+    @Column
+    boolean term2;
+
+    @Column
+    boolean term3;
+
+    @Column
+    boolean term4;
 
     @Column
     String date;
@@ -19,6 +28,11 @@ public class RoomTerms {
     Room room;
 
     public RoomTerms() {
+        term1=true;
+        term2= true;
+        term3=true;
+        term4=true;
+
     }
 
     public Long getId() {
@@ -29,12 +43,36 @@ public class RoomTerms {
         this.id = id;
     }
 
-    public Stack<String> getStack() {
-        return stack;
+    public boolean isTerm1() {
+        return term1;
     }
 
-    public void setStack(Stack<String> stack) {
-        this.stack = stack;
+    public void setTerm1(boolean term1) {
+        this.term1 = term1;
+    }
+
+    public boolean isTerm2() {
+        return term2;
+    }
+
+    public void setTerm2(boolean term2) {
+        this.term2 = term2;
+    }
+
+    public boolean isTerm3() {
+        return term3;
+    }
+
+    public void setTerm3(boolean term3) {
+        this.term3 = term3;
+    }
+
+    public boolean isTerm4() {
+        return term4;
+    }
+
+    public void setTerm4(boolean term4) {
+        this.term4 = term4;
     }
 
     public String getDate() {
