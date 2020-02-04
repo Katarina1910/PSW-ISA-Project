@@ -41,7 +41,6 @@ public class RoomController {
         Room room = new Room();
         room.setId(roomDTO.getId());
         room.setName(roomDTO.getName());
-        room.setFree(true);
         room.setType(roomDTO.getType());
         room = roomService.save(room);
 

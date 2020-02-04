@@ -24,8 +24,8 @@ INSERT INTO `personnel` (id, clinic_id, consult_term_id) VALUES (6, 1, 1);
 
 INSERT INTO `clinic_administrator` (id, clinic_id) VALUES (7, 1);
 
-INSERT INTO `room` (id, is_free, name, type, clinic_id) VALUES (1, 1, 'room1', 0, null);
-INSERT INTO `room` (id, is_free, name, type, clinic_id) VALUES (2, 1, 'room2', 1, null);
+INSERT INTO `room` (id, name, type, clinic_id) VALUES (1, 'room1', 0, null);
+INSERT INTO `room` (id, name, type, clinic_id) VALUES (2, 'room2', 1, null);
 
 INSERT INTO `consult_type` (id, description, name) VALUES (1, 'Opis tipa1...', 'tip1');
 INSERT INTO `consult_type` (id, description, name) VALUES (2, 'Opis tipa2...', 'tip2');

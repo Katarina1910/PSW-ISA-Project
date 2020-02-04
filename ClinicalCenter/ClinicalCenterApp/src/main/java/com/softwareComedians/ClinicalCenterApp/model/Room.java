@@ -14,9 +14,6 @@ public class Room {
 	private Type type;
 
 	@Column
-	private boolean isFree;
-
-	@Column
 	private String name;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -28,16 +25,18 @@ public class Room {
 	@OneToOne(mappedBy = "room")
 	private Operation operation;
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "room")
+	private Set<RoomTerms> roomTerms;
+
 
 
 	public Room() {
 		super();
 	}
 
-	public Room(Type type, boolean isFree, String name) {
+	public Room(Type type,  String name) {
 		super();
 		this.type = type;
-		this.isFree = isFree;
 		this.name = name;
 	}
 
@@ -47,14 +46,6 @@ public class Room {
 
 	public void setType(Type type) {
 		this.type = type;
-	}
-
-	public boolean isFree() {
-		return isFree;
-	}
-
-	public void setFree(boolean isFree) {
-		this.isFree = isFree;
 	}
 
 	public String getName() {
