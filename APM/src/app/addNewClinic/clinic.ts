@@ -4,7 +4,7 @@ export class Clinic{
         private address: string,
         private description: string,
         private grade: number,
-        private id: number
+        public id: number
     ){}
 
     public getId(){
