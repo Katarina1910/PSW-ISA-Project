@@ -1,15 +1,11 @@
 package com.softwareComedians.ClinicalCenterApp.dto;
 
 import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
 
 public class ConsultTermDTO {
     private  String type;
     private Long id;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    private String date;
     private  Double duration;
     private  Double price;
     private  Double discount;
@@ -19,7 +15,7 @@ public class ConsultTermDTO {
     public ConsultTermDTO() {
     }
 
-    public ConsultTermDTO(String type, Long id, Date date, Double duration, Double price, Double discount, String doctor, String room) {
+    public ConsultTermDTO(String type, Long id, String date, Double duration, Double price, Double discount, String doctor, String room) {
         this.type = type;
         this.id = id;
         this.date = date;
@@ -57,11 +53,11 @@ public class ConsultTermDTO {
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
