@@ -185,23 +185,41 @@ export class ListOfPatClinics implements OnInit{
 
     buttonSearch(): void{
         const formatedDate = moment(this.selectedDate).format('YYYY-MM-DD')
-
-        this._consultTermService.getConsultTermsInfo().subscribe(
+        const selectedType2 = this.selectedType;
+        const clinicsId = this.listClin;
+        this.listClin = [];
+        this._getAllDoctors.getDoctors().subscribe(
             data=> {
-                this.consultTerms = data;
-                this.consultTerms.forEach(function (value){
-                    const formatedDate2 = moment(value.date).format('YYYY-MM-DD')
-                    if(formatedDate == formatedDate2) {
-                        console.log("Datumi su isti");
+                this.doctors2 = data;
+                for(let doc of this.doctors2) {
+                    const formatedDateFrom = moment(doc.scheduledFrom).format('YYYY-MM-DD');
+                    const formatedDateTo = moment(doc.scheduledTo).format('YYYY-MM-DD');
+                    if(formatedDate <= formatedDateTo && formatedDate >= formatedDateFrom) {
+                        console.log("Zauzet doktor: ",doc.id);
                     } else {
-                        console.log("Datumi nisu isti");
+                        console.log("Slobodan doktor: ",doc.id);
+                        if(selectedType2.id == doc.typeId) {
+                            console.log("Doktor kome tip i datum odgovaraju: ", doc);
+                            //TODO: uzeti sve klinike koje imaju ove doktore
+                            this._listOfClinicsService.getListOfClinics().subscribe(
+                                data=>{
+                                    this.pListClin = data;
+                                    for(let clin of this.pListClin) {
+                                        if(clin.id == doc.clinic) {
+                                            this.listClin.push(clin);
+                                        }
+                                    }
+                                },
+                                error=>console.error('Error list of clinics!',error)
+                            )
+                        }
                     }
-                });
+                }
             }, error => {
-                console.log("Error in getting consult term data!")
-            });
-
-        console.log('ime tipa je: ', this.selectedType.name);
+                console.log("Error in getting doctors!");
+            }
+        )
+        console.log("Id Klinike: ",clinicsId);
     }
 
     listOfDoctors(clinic: Clinic): void {
@@ -213,7 +231,7 @@ export class ListOfPatClinics implements OnInit{
                 data=> {
                     this.consultTerms2 = data;
                     for(let ct of this.consultTerms2) {
-                        if(JSON.stringify(ct.type) == JSON.stringify(this.selectedType.name)) {
+                        if(JSON.stringify(ct.type) == JSON.stringify(this.selectedType)) {
                             this._getAllDoctors.getDoctors().subscribe(
                                 data=> {
                                     this.doctors2 = data;

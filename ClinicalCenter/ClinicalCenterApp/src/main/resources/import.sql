@@ -15,9 +15,10 @@ INSERT INTO `clinic` (id, address, description, grade, name, price_list_id) VALU
 INSERT INTO `clinic` (id, address, description, grade, name, price_list_id) VALUES (2, 'Adresa 2', 'Opis klinike2...', '5', 'klinika2', null);
 INSERT INTO `clinic` (id, address, description, grade, name, price_list_id) VALUES (3, 'Adresa 3', 'Opis klinike3...', '4', 'klinika3', null);
 
-INSERT INTO `doctor` (grade, type_id, id) VALUES (5, 1, 4);
-INSERT INTO `doctor` (grade, type_id, id) VALUES (5, 1, 5);
-INSERT INTO `doctor` (grade, type_id, id) VALUES (4, 2, 6);
+INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (5, 1, 4, '2020-02-15 00:00:00', '2020-02-17 00:00:00');
+INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (5, 1, 5, '2020-02-21 00:00:00', '2020-02-22 00:00:00');
+INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (4, 2, 6, '2020-02-25 00:00:00', '2020-02-28 00:00:00');
+
 INSERT INTO `personnel` (id, clinic_id, consult_term_id) VALUES (4, 1, 2);
 INSERT INTO `personnel` (id, clinic_id, consult_term_id) VALUES (5, 2, 1);
 INSERT INTO `personnel` (id, clinic_id, consult_term_id) VALUES (6, 1, 1);
