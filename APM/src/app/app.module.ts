@@ -128,6 +128,7 @@ import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseRe
     MatNativeDateModule,
     MatSortModule,
     FullCalendarModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},

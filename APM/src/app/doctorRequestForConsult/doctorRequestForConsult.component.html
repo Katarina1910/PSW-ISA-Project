@@ -7,7 +7,7 @@
         {{aosi}}
         <label class="col-form-label" for="inputDefault">Patient:</label>
         <select class="form-control" id="patient"  [(ngModel)]="requestForConsultModel.patient" name="patient">
-            <option [ngValue]="null">Select Category</option>
+            <option [ngValue]="null">Select Patient</option>
             <option *ngFor = 'let t of patients' [ngValue]="t" name="patient">{{t.name}}</option>
           </select>
       </div>

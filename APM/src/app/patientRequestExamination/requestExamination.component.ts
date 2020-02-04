@@ -36,6 +36,7 @@ export class RequestExamination implements OnInit{
 
     scheduleExamination(ct: ConsultTerm): void {
         this.consultTermModel = ct;
+        console.log(this.consultTermModel);
         this._requestExaminationService.appointExamination(this.consultTermModel, this.user.id).subscribe(
             data=> {
                 console.log('Success!', JSON.stringify(data));
