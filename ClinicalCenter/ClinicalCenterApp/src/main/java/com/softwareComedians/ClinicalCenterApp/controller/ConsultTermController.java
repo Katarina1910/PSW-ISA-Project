@@ -73,4 +73,16 @@ public class ConsultTermController {
 
         return new ResponseEntity<>(termsDTO, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/getConsults/{id}/{role}")
+    public ResponseEntity<List<ConsultTermDTO>> getConsultsByUser(@PathVariable Long id, @PathVariable String role){
+        List<ConsultTermDTO>  consults= consultTermService.getConsultsByUser(id,role);
+
+        if(consults == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else{
+            return  new ResponseEntity<>(consults, HttpStatus.OK);
+        }
+
+    }
 }

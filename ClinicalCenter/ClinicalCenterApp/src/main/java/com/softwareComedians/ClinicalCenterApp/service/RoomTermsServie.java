@@ -18,5 +18,7 @@ public class RoomTermsServie {
     public RoomTerms save(RoomTerms roomTerms) {
         return  roomTermRepository.save(roomTerms);
     }
-
+    public  List<RoomTerms> findByDate(String date){
+        return  roomTermRepository.findByDate(date);
+    }
 }

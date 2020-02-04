@@ -8,7 +8,7 @@ import { MedicalRecordd } from './medicalRecord';
     providedIn: 'root'
 })
 export class MedicalRecordService{
-
+    
     public user : User;
     _url1 = 'http://localhost:8080/api/users/public';
     _url2 = 'http://localhost:8080/api/medicalRecord/get';

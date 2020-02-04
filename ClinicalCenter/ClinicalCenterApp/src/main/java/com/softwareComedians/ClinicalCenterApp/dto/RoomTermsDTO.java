@@ -1,37 +1,38 @@
-package com.softwareComedians.ClinicalCenterApp.model;
+package com.softwareComedians.ClinicalCenterApp.dto;
 
-import javax.persistence.*;
+import com.softwareComedians.ClinicalCenterApp.model.RoomTerms;
 
-
-@Entity
-public class RoomTerms {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class RoomTermsDTO {
     private Long id;
-
-    @Column
     boolean term1;
-
-    @Column
     boolean term2;
-
-    @Column
     boolean term3;
-
-    @Column
     boolean term4;
-
-    @Column
     String date;
+    RoomDTO room;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    Room room;
+    public RoomTermsDTO() {
 
-    public RoomTerms() {
-        term1=true;
-        term2= true;
-        term3=true;
-        term4=true;
+    }
+
+    public RoomTermsDTO(Long id, boolean term1, boolean term2, boolean term3, boolean term4, String date, RoomDTO room) {
+        this.id = id;
+        this.term1 = term1;
+        this.term2 = term2;
+        this.term3 = term3;
+        this.term4 = term4;
+        this.date = date;
+        this.room = room;
+    }
+
+    public RoomTermsDTO(RoomTerms d) {
+        this.id = d.getId();
+        this.term1 = d.isTerm1();
+        this.term2 = d.isTerm2();
+        this.term3 = d.isTerm3();
+        this.term4 = d.isTerm4();
+        this.date = d.getDate();
+        this.room = new RoomDTO(d.getRoom());
 
     }
 
@@ -83,11 +84,11 @@ public class RoomTerms {
         this.date = date;
     }
 
-    public Room getRoom() {
+    public RoomDTO getRoom() {
         return room;
     }
 
-    public void setRoom(Room room) {
+    public void setRoom(RoomDTO room) {
         this.room = room;
     }
 }

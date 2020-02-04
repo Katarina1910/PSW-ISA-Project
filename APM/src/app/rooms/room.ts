@@ -4,7 +4,6 @@ export class Room {
         public id: number,
         public name: string,
         public type: Type,
-        public isFree: boolean,
        // public free: string,
        
     ){}

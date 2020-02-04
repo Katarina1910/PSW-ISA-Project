@@ -8,16 +8,14 @@ import com.softwareComedians.ClinicalCenterApp.model.Type;
 public class RoomDTO {
     private Long id;
     private Type type;
-    private boolean isFree;
     private String name;
 
     public RoomDTO() {
     }
 
-    public RoomDTO(Long id, Type type, boolean isFree, String name) {
+    public RoomDTO(Long id, Type type,  String name) {
         this.id = id;
         this.type = type;
-        this.isFree = isFree;
         this.name = name;
     }
     public RoomDTO(Room room){
@@ -40,14 +38,6 @@ public class RoomDTO {
 
     public void setType(Type type) {
         this.type = type;
-    }
-
-    public boolean isFree() {
-        return isFree;
-    }
-
-    public void setFree(boolean free) {
-        isFree = free;
     }
 
     public String getName() {

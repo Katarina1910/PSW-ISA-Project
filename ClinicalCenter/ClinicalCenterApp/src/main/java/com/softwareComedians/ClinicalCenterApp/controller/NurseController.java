@@ -45,7 +45,20 @@ public class NurseController {
 
     @PostMapping()
     public ResponseEntity<NurseDTO> addNurse(@RequestBody NurseDTO nurseDTO) {
-        Nurse nurse = new Nurse(nurseDTO);
+        Nurse nurse = new Nurse();
+        nurse.setId(nurseDTO.getId());
+        nurse.setName(nurseDTO.getName());
+        nurse.setSurname((nurseDTO.getSurname()));
+        nurse.setUcidn(nurseDTO.getUcidn());
+        nurse.setEmail(nurseDTO.getEmail());
+        nurse.setPassword(passwordEncoder.encode(nurseDTO.getPassword()));
+        nurse.setUsername(nurseDTO.getUsername());
+        nurse.setPhone(nurseDTO.getPhone());
+        nurse.setAddress(nurseDTO.getAddress());
+        nurse.setCity(nurseDTO.getCity());
+        nurse.setCountry(nurseDTO.getCountry());
+        nurse.setActivated(nurseDTO.isActivated());
+        nurse.setRole("ROLE_NURSE");
         nurse.setActivated(true);
         Authority nurseAutority = authorityRepository.findByName(UserRoles.ROLE_NURSE);
         nurse.getUsersAuthorities().add(nurseAutority);

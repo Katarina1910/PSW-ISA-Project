@@ -1,3 +1,4 @@
+import { User } from '../registration/user';
 
 export class MedicalRecordd{
     constructor(
@@ -37,4 +38,6 @@ export class MedicalRecordd{
     public getDisease(){
         return this.disease;
     }
+
+
 }
