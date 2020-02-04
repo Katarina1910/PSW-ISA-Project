@@ -1,7 +1,19 @@
-
-    <h1  class="d-flex p-2 justify-content-center">Request for absence</h1>
-    <p>&nbsp;</p>        
-    <div>
-        Work in progress!
-    </div>      
+     
+    <form #userForm="ngForm" (ngSubmit)="onSubmit()" class="d-flex p-2 justify-content-center">
+        <fieldset>
+          <legend>Request for absence</legend>
+     
+          <div class="form-group" >
+            <label class="col-form-label" for="inputDefault">From:</label>
+            <input type="date" class="form-control" id="datePickerDate"  [(ngModel)]="datee" name="datePickerDate">
+          </div>
+    
+          <div class="form-group" >
+              <label class="col-form-label" for="inputDefault">To:</label>
+              <input type="date" class="form-control" id="type"  [(ngModel)]="datee2" name="type">
+            </div>
+        
+          <button type="submit" class="btn btn-primary">Send</button>
+        </fieldset>
+      </form>    
       

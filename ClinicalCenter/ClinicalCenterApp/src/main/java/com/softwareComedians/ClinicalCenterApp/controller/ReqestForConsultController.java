@@ -2,10 +2,6 @@ package com.softwareComedians.ClinicalCenterApp.controller;
 
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
 import com.softwareComedians.ClinicalCenterApp.mail.SmtpMailSender;
-import com.softwareComedians.ClinicalCenterApp.model.RequestForConsult;
-import com.softwareComedians.ClinicalCenterApp.service.ConsultTypeService;
-import com.softwareComedians.ClinicalCenterApp.service.RequestForConsultService;
-import com.softwareComedians.ClinicalCenterApp.service.UserService;
 import com.softwareComedians.ClinicalCenterApp.model.*;
 import com.softwareComedians.ClinicalCenterApp.service.*;
 import com.softwareComedians.ClinicalCenterApp.service.impl.UserServiceImpl;
@@ -13,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
 
 @RestController
 @RequestMapping(value = "api/rqForConsult")
@@ -24,6 +22,12 @@ public class ReqestForConsultController {
 
     @Autowired
     private ConsultTypeService consultTypeService;
+
+    @Autowired
+    private ClinicsService clinicsService;
+
+    @Autowired
+    private ClinicAdminService clinicAdminService;
 
 
   @Autowired
@@ -41,6 +45,9 @@ public class ReqestForConsultController {
     @Autowired
     private SmtpMailSender smtpMailSender;
 
+    @Autowired
+    private  RoomTermsServie roomTermsServie;
+
     @PostMapping()
     public ResponseEntity<RequestForConsultDTO> createRequest(@RequestBody RequestForConsultDTO requestForConsultDTO) {
 
@@ -55,15 +62,36 @@ public class ReqestForConsultController {
     }
 
     @PostMapping(value = "doctor")
-    public ResponseEntity<RequestForConsultDTO> createRequestDoctor(@RequestBody RequestForConsultDTO requestForConsultDTO) {
+    public ResponseEntity<RequestForConsultDTO> createRequestDoctor(@RequestBody RequestForConsultDTO requestForConsultDTO) throws MessagingException {
+        boolean cT = true;
 
         RequestForConsult rq = new RequestForConsult();
         rq.setId(requestForConsultDTO.getId());
-        // rq.setDateAndTime(requestForConsultDTO.getDateAndTime());
+        rq.setDateAndTime(requestForConsultDTO.getDateAndTime());
         rq.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
         rq.setPatient(userService.findById(requestForConsultDTO.getPatient().getId()));
         //send mail, getPatient.getClicic.getAdmin.getMail
-        //smtpMailSender.send(requestForConsultDTO.get,"Registration", description);
+       // Clinic c =clinicsService.findById(requestForConsultDTO.getPatient().getC)
+        String description = "You have scheduled a new consult!";
+        smtpMailSender.send(requestForConsultDTO.getPatient().getEmail(),"New consult", description);
+
+        for(RoomTerms rr : roomTermsServie.findAll()){
+            if (rr.getDate().equals(rq.getDateAndTime())){
+                cT = false;
+            }
+        }
+        if(cT){
+            System.out.println("ctt");
+            for (Room r: roomService.findAll()){
+                System.out.println(r.getName());
+                RoomTerms roomTerms = new RoomTerms();
+                roomTerms.setDate(requestForConsultDTO.getDateAndTime());
+                roomTerms.setRoom(r);
+                roomTermsServie.save(roomTerms);
+            }
+        }
+
+
 
         rq = requestForConsultService.save(rq);
         return new ResponseEntity<>(new RequestForConsultDTO(rq), HttpStatus.CREATED);

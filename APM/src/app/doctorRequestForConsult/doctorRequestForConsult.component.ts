@@ -6,6 +6,7 @@ import { User } from '../registration/user';
 import { DeleteConsultTypeService } from '../consultType/deleteConsultType.service';
 import { listOfClinicsPatService } from '../patientHomePage/listOfClinicsPat.service';
 import { listOfPatientsService } from '../doctorHomePage/listOfPatients.service';
+import { templateVisitAll } from '@angular/compiler';
 
 @Component({
     selector : 'cc-rqForConsult',
@@ -15,8 +16,12 @@ export class DoctorRequestForConsultComponent implements OnInit {
     requestForConsultModel = new DoctorRequestForConsult(null,null,null,null,null);
     public types: ConsultType[];
     public patients: User[];
+    datee : any = new Date().toISOString();
 
     ngOnInit(): void {
+        const mySQLDateString = this.datee.slice(0, 10).replace('T', ' ');
+        this.requestForConsultModel.dateAndTime = mySQLDateString
+        console.log(this.datee)
         this._listOfPatientsService.getListOgPatients().subscribe(
             data=> this.patients = data,
             error=> console.error('Error!', error)           

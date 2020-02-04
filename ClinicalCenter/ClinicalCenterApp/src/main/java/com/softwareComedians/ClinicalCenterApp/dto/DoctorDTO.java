@@ -6,6 +6,7 @@ import com.softwareComedians.ClinicalCenterApp.model.User;
 public class DoctorDTO extends UserDTO {
     private Double grade;
     private Double typeId;
+    private  Long clinic;
 
     public DoctorDTO() {
     }
@@ -14,12 +15,14 @@ public class DoctorDTO extends UserDTO {
         super(id, name, surname, ucidn, address, city, country, email, phone, userName, password, role, isActivated);
         this.grade = grade;
         this.typeId = typeId;
+        this.clinic = clinic;
     }
 
-    public DoctorDTO(User u, Double grade, Double typeId) {
+    public DoctorDTO(User u, Double grade, Double typeId, Long clinic) {
         super(u);
         this.grade = grade;
         this.typeId = typeId;
+        this.clinic = clinic;
     }
 
     public DoctorDTO(Doctor d){
@@ -27,6 +30,7 @@ public class DoctorDTO extends UserDTO {
                 d.getPhone(),d.getUsername(),d.getPassword(),d.getRole(),d.isActivated());
         this.grade = d.getGrade();
         this.typeId = d.getTypeId();
+        this.clinic = d.getClinic().getId();
     }
 
     public Double getGrade() {
@@ -43,5 +47,13 @@ public class DoctorDTO extends UserDTO {
 
     public void setTypeId(Double typeId) {
         this.typeId = typeId;
+    }
+
+    public Long getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Long clinic) {
+        this.clinic = clinic;
     }
 }

@@ -10,7 +10,7 @@ import { AddRoomService } from './rooms.service';
 })
 
 export class AddRoomComponent{
-    roomModel = new Room(null,null,null,null);
+    roomModel = new Room(null,null,null);
     
     constructor(private _addRoomService: AddRoomService,  private router: Router) {}
 

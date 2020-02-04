@@ -23,5 +23,28 @@ public abstract class Personnel extends User {
 	public Personnel() {
 		super();
 	}
-	
+
+	public Clinic getClinic() {
+		return clinic;
+	}
+
+	public void setClinic(Clinic clinic) {
+		this.clinic = clinic;
+	}
+
+	public ConsultTerm getConsultTerm() {
+		return consultTerm;
+	}
+
+	public void setConsultTerm(ConsultTerm consultTerm) {
+		this.consultTerm = consultTerm;
+	}
+
+	public Set<RequestForAbsence> getRequestForAbsences() {
+		return requestForAbsences;
+	}
+
+	public void setRequestForAbsences(Set<RequestForAbsence> requestForAbsences) {
+		this.requestForAbsences = requestForAbsences;
+	}
 }

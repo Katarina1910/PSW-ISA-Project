@@ -22,13 +22,74 @@ public class RequestForAbsence {
 	@Column
 	private String resaonOfRejection;
 
+
+	@Column
+	private String too;
+
+	@Column
+	private String froom;
+
 	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private ClinicAdministrator clinicAdministrator;
-	
+
 	public RequestForAbsence() {
 		super();
 	}
 
+	public Long getId() {
+		return id;
+	}
 
-	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public boolean isAccepted() {
+		return isAccepted;
+	}
+
+	public void setAccepted(boolean accepted) {
+		isAccepted = accepted;
+	}
+
+	public String getResaonOfRejection() {
+		return resaonOfRejection;
+	}
+
+	public void setResaonOfRejection(String resaonOfRejection) {
+		this.resaonOfRejection = resaonOfRejection;
+	}
+
+	public Personnel getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(Personnel applicant) {
+		this.applicant = applicant;
+	}
+
+	public String getToo() {
+		return too;
+	}
+
+	public void setToo(String too) {
+		this.too = too;
+	}
+
+	public String getFroom() {
+		return froom;
+	}
+
+	public void setFroom(String froom) {
+		this.froom = froom;
+	}
+
+	public ClinicAdministrator getClinicAdministrator() {
+		return clinicAdministrator;
+	}
+
+	public void setClinicAdministrator(ClinicAdministrator clinicAdministrator) {
+		this.clinicAdministrator = clinicAdministrator;
+	}
 }

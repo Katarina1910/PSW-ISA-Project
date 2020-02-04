@@ -23,7 +23,6 @@ import { AddDoctorComponent } from './doctor/addDoctor.component';
 import { DeleteDoctorComponent } from './doctor/deleteDoctor.component';
 import { NurseComponent } from './nurseHomePage/nurse.component';
 import { RecipeValidation } from './recipeValidation/recipeVal.component';
-import { RequestForAbsence } from './requestForAbsence/requestForAbsence';
 import { UserProfiles } from './UserProfiles/userProfiles.component';
 import { nurseWorkCal } from './nurseWorkingCalendar/nurseWorkCal.component';
 import { listOfAllPat } from './ListOfAllPatients/listOfAllPat.component';
@@ -53,6 +52,7 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicCenterAdmin.component';
 import { AppointedExaminationsService } from './patientHomePage/patientExaminations.service';
 import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDoc.component';
+import { RequestForAbsenceComponent } from './requestForAbsence/requestForAbsence.component';
 import { MedicalRecord } from './medicalRecord/medicalRecord.component';
 import { DoctorRequestForConsultComponent } from './doctorRequestForConsult/doctorRequestForConsult.component';
 import { DoctorRequestForOperationComponent } from './doctorRqForOperation/doctorRqForOperaton.component';
@@ -62,6 +62,8 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
 import { DoctorWorkCalendar } from './doctorWorkingCalendar/doctorWorkCal.component';
 import { AddNurseComponent } from './nurse/addNurse.component';
 import { DeleteNurseComponent } from './nurse/deleteNurse.component';
+import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseReq.component';
+
 
 @NgModule({
   declarations: [
@@ -73,6 +75,7 @@ import { DeleteNurseComponent } from './nurse/deleteNurse.component';
     ClinicalCenterAdministratorCompoment,
     arrivedRequest,
     AddNewClinic,
+    RequestForAbsenceComponent,
     RegisterNewClinicalCenterAdministrator,
     createMedicamentCodeBook,
     createDiagnosisCodeBook,
@@ -85,7 +88,6 @@ import { DeleteNurseComponent } from './nurse/deleteNurse.component';
     listOfAllPat,
     UserProfiles,
     nurseWorkCal,
-    RequestForAbsence,    
     RecipeValidation,
     AddRoomComponent,
     DeleteRoomComponent,
@@ -110,7 +112,8 @@ import { DeleteNurseComponent } from './nurse/deleteNurse.component';
     DoctorRequestForConsultComponent,
     DoctorRequestForOperationComponent,
     ClinicSettingsComponent,
-    DeleteNurseComponent
+    DeleteNurseComponent,
+    arrivedAbsenceReqComponent
     //ListOfDiagnosis
     ],
   imports: [
@@ -142,7 +145,7 @@ import { DeleteNurseComponent } from './nurse/deleteNurse.component';
       {path: 'HomepageNurse/listOfAllPat', component: listOfAllPat},
       {path: 'HomepageNurse/UserProfiles', component: UserProfiles},
       {path: 'HomepageNurse/nurseWorkCal', component: nurseWorkCal},
-      {path: 'HomepageNurse/RequestForAbsence', component: RequestForAbsence},
+      {path: 'HomepageNurse/RequestForAbsence', component: RequestForAbsenceComponent},
       {path: 'HomepageNurse/RecipeValidation', component:RecipeValidation},
       {path: 'HomepageCCA/arrivedReq', component : arrivedRequest},
       {path: 'HomepageCCA/addNewClinicCenterAdmin', component: addNewClinicCenterAdmin},
@@ -161,6 +164,7 @@ import { DeleteNurseComponent } from './nurse/deleteNurse.component';
       {path: 'HomepageCA/addConsultType', component: ConsultTypeComponent},
       {path: 'HomepageCA/ConsultTypes', component: DeleteConsultTypeComponent},
       {path: 'HomepageCA/consultTerm', component: ConsultTermComponent},
+      {path: 'HomepageCA/ArrReq', component: arrivedAbsenceReqComponent},
       {path: 'HomepageCCA/allClinics', component: DeleteClinicsComponent}, 
       {path: 'HomepageCCA/allMedicaments', component: DeleteMedicamentComponent},
       {path: 'HomepageCCA/allDiagnosis', component: DeleteDiagnosisComponent},

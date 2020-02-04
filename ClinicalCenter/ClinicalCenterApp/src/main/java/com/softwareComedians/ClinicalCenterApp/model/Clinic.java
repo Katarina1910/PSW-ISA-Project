@@ -77,4 +77,12 @@ public class Clinic {
 
     public double getGrade(){return grade;}
     public void setGrade(double grade){this.grade = grade;}
+
+    public ClinicAdministrator getClinicAdministrator() {
+        return clinicAdministrators.iterator().next();
+    }
+
+    public void setClinicAdministrators(Set<ClinicAdministrator> clinicAdministrators) {
+        this.clinicAdministrators = clinicAdministrators;
+    }
 }

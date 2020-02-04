@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { User } from '../registration/user';
 
-
-@Component({
-    selector: 'request-abs',
-    templateUrl: './requestForAbsence.component.html'
-})
-
-export class RequestForAbsence{
-
+export class RequestForAbsence {
+    constructor(
+        public  id: number,
+        public  applicant: User,
+        public  isAccepted: boolean,
+        public resaonOfRejection: string,
+        public from: string,
+        public to: string,
+    ){}
 }
