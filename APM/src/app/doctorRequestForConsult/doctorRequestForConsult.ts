@@ -5,7 +5,7 @@ export class DoctorRequestForConsult {
     constructor(
                 public id: string,
                 public  type: ConsultType,
-                public  date: Date,
+                public  dateAndTime: string,
                 public  applicant: string,
                 public patient:User,
             ){}
