@@ -6,7 +6,7 @@ export class RequestForAbsence {
         public  applicant: User,
         public  isAccepted: boolean,
         public resaonOfRejection: string,
-        public from: Date,
-        public to: Date,
+        public from: string,
+        public to: string,
     ){}
 }

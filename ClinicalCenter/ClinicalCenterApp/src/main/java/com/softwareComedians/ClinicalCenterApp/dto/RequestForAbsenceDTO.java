@@ -2,20 +2,18 @@ package com.softwareComedians.ClinicalCenterApp.dto;
 
 import com.softwareComedians.ClinicalCenterApp.model.RequestForAbsence;
 
-import java.util.Date;
-
 public class RequestForAbsenceDTO {
     private Long id;
     private PersonnelDTO applicant;
     private boolean isAccepted;
     private String resaonOfRejection;
-    private Date from;
-    private Date to;
+    private String from;
+    private String to;
 
     public RequestForAbsenceDTO() {
     }
 
-    public RequestForAbsenceDTO(Long id, PersonnelDTO applicant, boolean isAccepted, String resaonOfRejection, Date from, Date to) {
+    public RequestForAbsenceDTO(Long id, PersonnelDTO applicant, boolean isAccepted, String resaonOfRejection, String from, String to) {
         this.id = id;
         this.applicant = applicant;
         this.isAccepted = false;
@@ -29,8 +27,8 @@ public class RequestForAbsenceDTO {
         this.applicant = new PersonnelDTO(rq.getApplicant());
         this.isAccepted = false;
         this.resaonOfRejection = rq.getResaonOfRejection();
-        this.from = rq.getFroom();
-        this.to = rq.getToo();
+        this.from = rq.getFroom().toString();
+        this.to = rq.getToo().toString();
     }
 
     public Long getId() {
@@ -58,19 +56,19 @@ public class RequestForAbsenceDTO {
         this.resaonOfRejection = resaonOfRejection;
     }
 
-    public Date getFrom() {
+    public String getFrom() {
         return from;
     }
 
-    public void setFrom(Date from) {
+    public void setFrom(String from) {
         this.from = from;
     }
 
-    public Date getTo() {
+    public String getTo() {
         return to;
     }
 
-    public void setTo(Date to) {
+    public void setTo(String to) {
         this.to = to;
     }
 

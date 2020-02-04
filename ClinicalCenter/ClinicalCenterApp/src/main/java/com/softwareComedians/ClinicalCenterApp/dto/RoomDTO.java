@@ -23,7 +23,6 @@ public class RoomDTO {
     public RoomDTO(Room room){
         this.id= room.getId();
         this.type=room.getType();
-        this.isFree = room.isFree();
         this.name = room.getName();
     }
 

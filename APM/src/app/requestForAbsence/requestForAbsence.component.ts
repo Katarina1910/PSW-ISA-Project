@@ -15,11 +15,17 @@ export class RequestForAbsenceComponent implements OnInit{
     
     user = new User(" "," "," "," "," "," "," "," "," "," "," ","");
     doctorModel = new Doctor(null,null,null);
-    requestForAbsence = new RequestForAbsence (null,null,null,null, new Date(),new Date());
+    datee : any = new Date().toISOString;
+    datee2 : any = new Date().toISOString;
+    requestForAbsence = new RequestForAbsence (null,null,null,null,null,null);
+    isoDateString: string ;
+    isoDateString2: string ;
     
     constructor(private _reqForAbsenceService: RequestForAbsenceService, private _userService: UserService) {}
 
     onSubmit(){
+        this.requestForAbsence.from =this.datee;
+        this.requestForAbsence.to =this.datee2;
         this._reqForAbsenceService.addRequestForAbsence(this.requestForAbsence)
        .subscribe(
            data=> console.log('Success!', data),
