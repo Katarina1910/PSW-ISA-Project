@@ -4,10 +4,8 @@ import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForConsult;
 import com.softwareComedians.ClinicalCenterApp.model.User;
 
-import java.sql.Date;
-
 public class RequestForConsultDTO {
-    private Date dateAndTime;
+    private String dateAndTime;
     private boolean isAccepted;
     private  ConsultTypeDTO type;
     private Long id;
@@ -28,7 +26,7 @@ public class RequestForConsultDTO {
     }
 
 
-    public RequestForConsultDTO(Date dateAndTime, boolean isAccepted, ConsultTypeDTO type, Long id, User applicant, ConsultTerm consultTerm) {
+    public RequestForConsultDTO(String dateAndTime, boolean isAccepted, ConsultTypeDTO type, Long id, User applicant, ConsultTerm consultTerm) {
         this.dateAndTime = dateAndTime;
         this.isAccepted = isAccepted;
         this.type = type;
@@ -50,10 +48,6 @@ public class RequestForConsultDTO {
     }
 
 
-    public Date getDateAndTime() {
-        return dateAndTime;
-    }
-
     public Long getId() {
         return id;
     }
@@ -62,7 +56,11 @@ public class RequestForConsultDTO {
         this.id = id;
     }
 
-    public void setDateAndTime(Date dateAndTime) {
+    public String getDateAndTime() {
+        return dateAndTime;
+    }
+
+    public void setDateAndTime(String dateAndTime) {
         this.dateAndTime = dateAndTime;
     }
 

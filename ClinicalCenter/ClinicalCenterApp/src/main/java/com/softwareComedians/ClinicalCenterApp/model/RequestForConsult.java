@@ -1,12 +1,11 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 
-import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Date;
 
 @Entity
 @Getter
@@ -17,7 +16,7 @@ public class RequestForConsult {
 	private Long id;
 
 	@Column
-	private Date dateAndTime;
+	private String dateAndTime;
 
 	@Column
 	private boolean isAccepted;
@@ -62,11 +61,11 @@ public class RequestForConsult {
 		this.id = id;
 	}
 
-	public Date getDateAndTime() {
+	public String getDateAndTime() {
 		return dateAndTime;
 	}
 
-	public void setDateAndTime(Date dateAndTime) {
+	public void setDateAndTime(String dateAndTime) {
 		this.dateAndTime = dateAndTime;
 	}
 
