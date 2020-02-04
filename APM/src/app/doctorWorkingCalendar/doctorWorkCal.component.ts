@@ -8,6 +8,7 @@ import { DoctorWorkCalService } from './doctorWorkCal.service';
 import { ConsultTerm } from '../consultTerm/consultTerm';
 import { UserService } from '../registration/user.service';
 import { User } from '../registration/user';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-root',
@@ -15,34 +16,34 @@ import { User } from '../registration/user';
 })
 export class DoctorWorkCalendar implements OnInit {
     
+  showModal: boolean;
+  room: string='room1';
+  date: string="date";
+  patient: string="patient";
   public consults: ConsultTerm[];
+  public  events =[];
   user: User = new User("","","","","","","","","","","","");
+  
 
   constructor(private _doctorWorkCalService: DoctorWorkCalService, private _userService:UserService, private router: Router) {}
   
   ngOnInit() {
     this.getUserInfo();
-    this._doctorWorkCalService.getConsults(parseInt("4"), "ROLE_DOCTOR").subscribe(
+    this.events = [];
+    this._doctorWorkCalService.getConsults(parseInt(localStorage.getItem('user-id')), localStorage.getItem('user-role')).subscribe(
       data=>{
         
         this.consults = data;
-        for(var c of this.consults){
-          console.log(JSON.stringify(c));
-      }
-
+        
       },
       error=> console.error('Error!', error)
     )
+     
+    this.getEvents();
+    
   }
 
-  events = [
-      {
-            title:'Examination',
-            start: '2020-02-10',
-            allDay: false
-      }
-    ];
-
+  
   calendarPlugins = [dayGridPlugin, timGridPlugin, interactionPlugin, listPlugin];
 
   private getUserInfo(): void {
@@ -53,4 +54,19 @@ export class DoctorWorkCalendar implements OnInit {
     });
   }
 
+  private eventClick(): void{
+      this.showModal = true;
+  }
+
+  private close(): void{
+    this.showModal = false;
+}
+
+  private getEvents() : void{
+    this.events.push({
+      start: '2020-02-10',
+      title: 'Examination',
+      allDay: false
+    });
+  }
 }

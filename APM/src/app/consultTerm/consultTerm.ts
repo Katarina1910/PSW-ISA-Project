@@ -3,14 +3,14 @@ import { User } from '../registration/user';
 
 export class ConsultTerm{
     constructor(
-        private id:number,
+        public id:number,
         public date: Date,
         public  type: ConsultType,
-        private  duration: number,
-        private  price: number,
-        private  discount: number,
-        private room: string,
-        private doctor: string,
-        private patient: User
+        public  duration: number,
+        public  price: number,
+        public  discount: number,
+        public room: string,
+        public doctor: string,
+        public patient: User
     ){}
 }

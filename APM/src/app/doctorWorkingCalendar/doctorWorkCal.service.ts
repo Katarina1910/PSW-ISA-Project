@@ -8,6 +8,7 @@ import { ConsultTerm } from '../consultTerm/consultTerm';
 })
 export class DoctorWorkCalService{
     
+    public consults: ConsultTerm[];
     _url = 'http://localhost:8080/api/ConsultTerm/getConsults';
 
     
