@@ -29,8 +29,7 @@ public class ReqestForConsultController {
     @Autowired
     private ClinicAdminService clinicAdminService;
 
-
-  @Autowired
+    @Autowired
     private DoctorService doctorService;
 
     @Autowired
@@ -53,9 +52,9 @@ public class ReqestForConsultController {
 
         RequestForConsult rq = new RequestForConsult();
         rq.setId(requestForConsultDTO.getId());
-       // rq.setDateAndTime(requestForConsultDTO.getDateAndTime());
+        // rq.setDateAndTime(requestForConsultDTO.getDateAndTime());
         rq.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
-       // rq.setPatient(userService.findById(requestForConsultDTO.getPatient().getId()));
+        // rq.setPatient(userService.findById(requestForConsultDTO.getPatient().getId()));
 
         rq = requestForConsultService.save(rq);
         return new ResponseEntity<>(new RequestForConsultDTO(rq), HttpStatus.CREATED);
@@ -71,7 +70,7 @@ public class ReqestForConsultController {
         rq.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
         rq.setPatient(userService.findById(requestForConsultDTO.getPatient().getId()));
         //send mail, getPatient.getClicic.getAdmin.getMail
-       // Clinic c =clinicsService.findById(requestForConsultDTO.getPatient().getC)
+        // Clinic c =clinicsService.findById(requestForConsultDTO.getPatient().getC)
         String description = "You have scheduled a new consult!";
         smtpMailSender.send(requestForConsultDTO.getPatient().getEmail(),"New consult", description);
 
@@ -98,19 +97,19 @@ public class ReqestForConsultController {
     }
 
     @PostMapping( value = "/add/{userId}")
-    public ResponseEntity<?> addExamination(@RequestBody RequestForConsultDTO requestForConsultDTO,  @PathVariable Long userId) throws Exception {
+    public ResponseEntity<?> requestForConsultPatient(@RequestBody RequestForConsultDTO requestForConsultDTO,  @PathVariable Long userId) throws Exception {
 
-        RequestForConsult rfc = new RequestForConsult();
+        RequestForConsult rq = new RequestForConsult();
 
         User u = userService.findById(userId);
         ConsultTerm ct = consultTermService.findById(requestForConsultDTO.getId());
 
-        rfc.setId(requestForConsultDTO.getId());
-        rfc.setDateAndTime(requestForConsultDTO.getDateAndTime());
-        rfc.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
-        rfc.setAccepted(false);
-      //  rfc.setApplicant(u);
-        rfc.setConsultTerm(ct);
+        rq.setId(requestForConsultDTO.getId());
+        rq.setDateAndTime(requestForConsultDTO.getDateAndTime());
+        rq.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
+        rq.setPatient(u);
+        rq.setAccepted(false);
+        rq.setConsultTerm(ct);
 
 /*
         if (rfc.getDuration() < 1) {
@@ -128,17 +127,17 @@ public class ReqestForConsultController {
             return new ResponseEntity<>("Error! Date is in the past!", HttpStatus.METHOD_NOT_ALLOWED);
         }
 */
-        rfc = requestForConsultService.save(rfc);
+        rq = requestForConsultService.save(rq);
 
         //salje mejl adminu klinike
         //TODO: preko pacijenotovog ID-a pronaci u kojoj je klinici i poslati mejl odgovarajucem administratoru te klinike
-        smtpMailSender.send("sansaduvic@gmail.com","Request for consult",
+        smtpMailSender.send("pswtim2@gmail.com","Request for consult",
                 " You have a request for consult: type: "+ct.getType().getName()+ "\r\n"+
                         "doctor's name: "+ct.getDoctor().getName()+ " "+ct.getDoctor().getSurname()+ "\r\n"+
                         "patient's name: "+u.getName()+" "+u.getSurname()+"\r\n"+
-                        " <a href='http://localhost:8080/api/patient/requestConsultTerm/"+rfc.getId()+"'> Confirm </a>");
+                        " <a href='http://localhost:8080/api/patient/requestConsultTerm/"+rq.getId()+"'> Confirm </a>");
 
-        return new ResponseEntity<>(new RequestForConsultDTO(rfc), HttpStatus.CREATED);
+        return new ResponseEntity<>(new RequestForConsultDTO(rq), HttpStatus.CREATED);
     }
 
 }

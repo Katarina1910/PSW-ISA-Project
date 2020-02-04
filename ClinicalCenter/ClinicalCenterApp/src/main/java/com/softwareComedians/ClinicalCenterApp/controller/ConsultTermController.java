@@ -46,16 +46,16 @@ public class ConsultTermController {
         ct.setPrice(consultTermDTO.getPrice());
         ct.setDate(consultTermDTO.getDate());
 
-        Doctor d = doctorService.findByName(consultTermDTO.getDoctor());
+        Doctor d = doctorService.findByName(consultTermDTO.getDoctor().getName());
         //stampaj
        // System.out.println(d.getName()+"sdfgh IME"+consultTermDTO.getDoctor());
         ct.setDoctor(d);
 
-        Room r = roomService.findByName(consultTermDTO.getRoom());
+        Room r = roomService.findByName(consultTermDTO.getRoom().getName());
       //  System.out.println(r.getName());
         ct.setRoom(r);
 
-        ConsultType consultType = consultTypeService.findByName(consultTermDTO.getType());
+        ConsultType consultType = consultTypeService.findByName(consultTermDTO.getType().getName());
         ct.setType(consultType);
 
         ct = consultTermService.save(ct);
