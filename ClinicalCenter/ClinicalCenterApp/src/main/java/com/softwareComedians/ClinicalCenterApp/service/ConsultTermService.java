@@ -44,6 +44,7 @@ public class ConsultTermService {
         }
 
         for (ConsultTerm ct : consultTerms) {
+            System.out.println(ct.getId());
             consultTermsDTO.add(new ConsultTermDTO(ct));
         }
 

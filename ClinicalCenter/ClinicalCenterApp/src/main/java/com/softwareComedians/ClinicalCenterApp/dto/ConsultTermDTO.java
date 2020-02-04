@@ -1,6 +1,7 @@
 package com.softwareComedians.ClinicalCenterApp.dto;
 
 import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
+import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -15,7 +16,7 @@ public class ConsultTermDTO {
     private  Double discount;
     private  String doctor;
     private  String room;
-    private PatientDTO patient;
+    private String patient;
 
     public ConsultTermDTO() {
     }
@@ -29,6 +30,7 @@ public class ConsultTermDTO {
         this.discount = discount;
         this.doctor = doctor;
         this.room = room;
+
     }
 
     public ConsultTermDTO(ConsultTerm c){
@@ -40,7 +42,7 @@ public class ConsultTermDTO {
         discount=c.getDiscount();
         doctor = c.getDoctor().getName();
         room = c.getRoom().getName();
-        patient = new PatientDTO(c.getPatient());
+        patient = c.getPatient().getName()+" "+c.getPatient().getSurname();
     }
 
     public String getType() {

@@ -74,7 +74,7 @@ public class ConsultTermController {
         return new ResponseEntity<>(termsDTO, HttpStatus.OK);
     }
 
-    @GetMapping(value = "getConsults/{id}/{role}")
+    @GetMapping(value = "/getConsults/{id}/{role}")
     public ResponseEntity<List<ConsultTermDTO>> getConsultsByUser(@PathVariable Long id, @PathVariable String role){
         List<ConsultTermDTO>  consults= consultTermService.getConsultsByUser(id,role);
 
