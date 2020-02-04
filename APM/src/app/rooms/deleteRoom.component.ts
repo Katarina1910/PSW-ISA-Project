@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Room } from './room';
 import { DeleteRoomService } from './deleteRoom.servce';
+import { RoomTerms } from './roomTerms';
 
 
 
@@ -12,11 +13,48 @@ import { DeleteRoomService } from './deleteRoom.servce';
 
 export class DeleteRoomComponent implements OnInit {
     public rooms: Room[];
-    editModel = new Room(null,null,null,null);
+    editModel = new Room(null,null,null);
     edit : boolean = false;
     public editedRoom:Room;
+
+    public filteredRooms : Room[];
+    public pListRooms: Room[] = [];
+    public _roomName: string;
+    public _roomId: string;
+    public _roomDate: string;
+    public roomTerms: RoomTerms[];
+    datee : any = new Date().toISOString();
+    tabela1: boolean = true;
+    tabela2: boolean = false;
     
     constructor(private _deleteRoomService: DeleteRoomService,private router: Router) {}
+
+    get roomName():string{
+        return this._roomName;
+    }
+
+    set  roomName(value:string){
+        this._roomName=value;
+        this.filteredRooms = this.roomName ? this.filter(this.roomName):this.rooms;
+    }
+    filter(filterField:string):Room[]{
+        filterField = filterField.toLocaleLowerCase();
+        return this.rooms.filter((pat:Room)=>pat.name.toLowerCase().indexOf(filterField)!=-1);
+    }
+
+    get roomId():string{
+        return this._roomId;
+    }
+
+    set roomId(value:string){
+        this._roomId=value;
+        this.filteredRooms = this.roomId ? this.filter3(this.roomId):this.rooms;
+    }
+    
+    filter3(filterField:string):Room[]{
+        filterField = filterField.toLocaleLowerCase();
+        return this.rooms.filter((pat:Room)=>pat.id.toString().toLowerCase().indexOf(filterField)!=-1);
+    }
 
 
     ngOnInit() { 
@@ -24,12 +62,8 @@ export class DeleteRoomComponent implements OnInit {
         data=>{
           
             this.rooms = data;
+            this.filteredRooms = data;
             for(var d of this.rooms){
-               /* if(d.isFree){
-                    d.free = "Da";
-                }else{
-                    d.free="Ne";
-                }*/
                 console.log(JSON.stringify(d));
             }
 
@@ -61,6 +95,24 @@ export class DeleteRoomComponent implements OnInit {
                 alert('Room edited!');
                 this.editedRoom = data as Room;
                 
+                this.router.navigate(['/HomepageCA/allRooms']);
+            },
+            error=> console.error('Error!', error)
+        )
+        this.edit = false; 
+    }
+
+    onSubmitDate(){
+        const mySQLDateString = this.datee.slice(0, 10).replace('T', ' ');
+        this.datee = mySQLDateString
+        console.log(this.datee)
+        this.tabela1 = false;
+        this.tabela2=true;
+        this._deleteRoomService.getRoomTerms(this.datee).subscribe(
+            data=>{
+                this.roomTerms = data;
+               // console.log(this._roomDate);
+                console.log(this.roomTerms);
                 this.router.navigate(['/HomepageCA/allRooms']);
             },
             error=> console.error('Error!', error)
