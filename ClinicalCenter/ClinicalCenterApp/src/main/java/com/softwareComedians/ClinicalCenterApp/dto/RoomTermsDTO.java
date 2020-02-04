@@ -8,6 +8,8 @@ public class RoomTermsDTO {
     boolean term2;
     boolean term3;
     boolean term4;
+    boolean term5;
+    boolean term6;
     String date;
     RoomDTO room;
 
@@ -15,12 +17,14 @@ public class RoomTermsDTO {
 
     }
 
-    public RoomTermsDTO(Long id, boolean term1, boolean term2, boolean term3, boolean term4, String date, RoomDTO room) {
+    public RoomTermsDTO(Long id, boolean term1, boolean term2, boolean term3, boolean term4,boolean term5, boolean term6, String date, RoomDTO room) {
         this.id = id;
         this.term1 = term1;
         this.term2 = term2;
         this.term3 = term3;
         this.term4 = term4;
+        this.term5 = term5;
+        this.term6 = term6;
         this.date = date;
         this.room = room;
     }
@@ -31,6 +35,8 @@ public class RoomTermsDTO {
         this.term2 = d.isTerm2();
         this.term3 = d.isTerm3();
         this.term4 = d.isTerm4();
+        this.term5 = d.isTerm5();
+        this.term6 = d.isTerm6();
         this.date = d.getDate();
         this.room = new RoomDTO(d.getRoom());
 
@@ -90,5 +96,21 @@ public class RoomTermsDTO {
 
     public void setRoom(RoomDTO room) {
         this.room = room;
+    }
+
+    public boolean isTerm5() {
+        return term5;
+    }
+
+    public void setTerm5(boolean term5) {
+        this.term5 = term5;
+    }
+
+    public boolean isTerm6() {
+        return term6;
+    }
+
+    public void setTerm6(boolean term6) {
+        this.term6 = term6;
     }
 }
