@@ -220,6 +220,7 @@ export class ListOfPatClinics implements OnInit{
                 console.log("Error in getting doctors!");
             }
         )
+        this.seeDoctors = false;
     }
 
     listOfDoctors(clinic: Clinic): void {
@@ -229,7 +230,6 @@ export class ListOfPatClinics implements OnInit{
             this.seeDoctors = true;
             for(let doc of this.seeDoctorsList) {
                 if(this.selectedClinic.id == doc.clinic && this.selectedType.id == doc.typeId) {
-                    console.log("Lista doktora; ", doc);
                     this.doctors.push(doc);
                 }
             }
