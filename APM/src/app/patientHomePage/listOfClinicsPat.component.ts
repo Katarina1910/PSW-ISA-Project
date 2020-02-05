@@ -188,6 +188,7 @@ export class ListOfPatClinics implements OnInit{
         const formatedDate = moment(this.selectedDate).format('YYYY-MM-DD')
         const selectedType2 = this.selectedType;
         this.listClin = [];
+        this.seeDoctorsList = [];
         this._getAllDoctors.getDoctors().subscribe(
             data=> {
                 this.doctors2 = data;
@@ -227,7 +228,8 @@ export class ListOfPatClinics implements OnInit{
         if(this.selectedType.id != null) {
             this.seeDoctors = true;
             for(let doc of this.seeDoctorsList) {
-                if(this.selectedClinic.id == doc.clinic) {
+                if(this.selectedClinic.id == doc.clinic && this.selectedType.id == doc.typeId) {
+                    console.log("Lista doktora; ", doc);
                     this.doctors.push(doc);
                 }
             }
