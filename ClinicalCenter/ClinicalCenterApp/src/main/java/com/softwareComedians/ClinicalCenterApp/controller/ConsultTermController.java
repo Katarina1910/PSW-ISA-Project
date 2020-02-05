@@ -35,6 +35,9 @@ public class ConsultTermController {
     private RoomTermsServie roomTermsServie;
 
     @Autowired
+    private DoctorTermsService doctorTermsService;
+
+    @Autowired
     private  RequestForConsultService requestForConsultService;
 
     @PostMapping()
@@ -77,44 +80,68 @@ public class ConsultTermController {
         return new ResponseEntity<>(termsDTO, HttpStatus.OK);
     }
 
-    @PostMapping(value = "res/{idr}/{s}/{id}")
-    public ResponseEntity<ConsultTermDTO> addConsultTerm(@PathVariable Long idr, @PathVariable String s, @PathVariable Long id) {
+    @PostMapping(value = "res/{date}/{term}/{room}/{doctor}/{id}")
+    public ResponseEntity<ConsultTermDTO> addConsultTerm(@PathVariable String date, @PathVariable String term,
+                                                         @PathVariable String room, @PathVariable Long doctor, @PathVariable Long id) {
 
         ConsultTerm ct = new ConsultTerm();
         RequestForConsult rq = requestForConsultService.findById(id);
         System.out.println(rq.getId());
 
-        RoomTerms r = roomTermsServie.findOne(idr);
-        System.out.println(r.getRoom().getName()); //datum i ssoba
-
-        if(s.equals("07:00-09:00")){
-            r.setTerm1(false);
-        }else if(s.equals("09:00-11:00")){
-            r.setTerm2(false);
-        }else if(s.equals("11:00-13:00")){
-            r.setTerm3(false);
+        List<RoomTerms> rts= roomTermsServie.findByDate(date);
+        List<DoctorTerms> dts = doctorTermsService.findByDate(date);
+        DoctorTerms dt = null;
+        RoomTerms r = null;
+        for (RoomTerms rr : rts){
+            if(rr.getRoom().getName().equals(room)){
+                r=rr;
+                System.out.println(r.getRoom().getName());
+            }
         }
-        else if(s.equals("13:00-15:00")){
+
+        for(DoctorTerms d : dts){
+            if(d.getDoctor().getId() == doctor){
+                dt = d;
+            }
+        }
+
+
+        if(term.equals("07:00-09:00")){
+            r.setTerm1(false);
+            dt.setTerm1(false);
+        }else if(term.equals("09:00-11:00")){
+            r.setTerm2(false);
+            dt.setTerm2(false);
+        }else if(term.equals("11:00-13:00")){
+            r.setTerm3(false);
+            dt.setTerm3(false);
+        }
+        else if(term.equals("13:00-15:00")){
             r.setTerm4(false);
-        }else if(s.equals("15:00-17:00")){
+            dt.setTerm4(false);
+        }else if(term.equals("15:00-17:00")){
             r.setTerm5(false);
-        }else if(s.equals("17:00-19:00")){
+            dt.setTerm5(false);
+        }else if(term.equals("17:00-19:00")){
             r.setTerm6(false);
+            dt.setTerm6(false);
         }
         roomTermsServie.save(r);
+        doctorTermsService.save(dt);
 
         ct.setType(rq.getType());
-        ct.setRoom(r.getRoom());
+        ct.setRoom(roomService.findByName(room));
         ct.setRequestForConsult(rq);
         ct.setPatient((Patient) rq.getPatient());
-        ct.setDate(rq.getDateAndTime());
+        ct.setDate(date);
         ct.setPrice((double) 0);
         ct.setDuration((double) 2);
         ct.setDiscount((double) 0);
 
         //nije dobar doktor, ni klinika
-        ct.setDoctor(new Doctor());
-        ct.setClinic(clinicsService.findOne(r.getId()));
+        Doctor doc = doctorService.findOne(doctor);
+        ct.setDoctor(doc);
+        ct.setClinic(clinicsService.findOne(doc.getClinic().getId()));
 
 
 
