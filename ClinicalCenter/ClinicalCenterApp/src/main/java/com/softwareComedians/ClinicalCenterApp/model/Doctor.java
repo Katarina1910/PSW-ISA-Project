@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -26,14 +27,13 @@ public class Doctor extends Personnel {
     private Double typeId;
 
     @Column
-    private Timestamp scheduledFrom;    //od kog datuma je zauzet
+    private Date scheduledFrom;    //od kog datuma je zauzet
 
     @Column
-    private Timestamp scheduledTo;
+    private Date scheduledTo;      //do kog datuma je zauzet
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "doctor")
     private Set<DoctorTerms> doctorTerms;
-
 
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private Set<ConsultTerm> consultTerms;
@@ -88,7 +88,7 @@ public class Doctor extends Personnel {
         this.typeId = typeId;
     }
 
-    public Timestamp getScheduledFrom() {
+    public Date getScheduledFrom() {
         return scheduledFrom;
     }
 
@@ -96,7 +96,7 @@ public class Doctor extends Personnel {
         this.scheduledFrom = scheduledFrom;
     }
 
-    public Timestamp getScheduledTo() {
+    public Date getScheduledTo() {
         return scheduledTo;
     }
 
