@@ -52,3 +52,6 @@ insert into room_terms (date, room_id, term1, term2, term3, term4, term5, term6)
 insert into room_terms (date, room_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',2,true,true,true,true,true,true);
 insert into request_for_consult (consult_term_id, date_and_time, is_accepted, patient_id, type_id) values (null,'2020-02-04', false, 3,2);
 
+insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',4,false ,true,true,true,true,true);
+insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',5,true ,true,true,true,true,true);
+insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',6,true,true,true,true,true,true);
