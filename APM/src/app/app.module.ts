@@ -44,7 +44,7 @@ import { DeleteDiagnosisComponent } from './createDiagCodeBook/deleteDiagnosis.c
 import { RequestExamination } from './patientRequestExamination/requestExamination.component';
 import { MatDatepickerModule, MatNativeDateModule, MatIconRegistry } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatSortModule} from '@angular/material/sort';
+import { MatSortModule } from '@angular/material/sort';
 import { ApiService, AuthService, ConfigService } from './service';
 import { LoginGuard, GuestGuard, AdminGuard } from 'src/guard';
 import { UserService } from './registration/user.service';
@@ -61,9 +61,14 @@ import { ClinicSettingsComponent } from './clinicSettings/clinicSettings.compone
 import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
 import { DoctorWorkCalendar } from './doctorWorkingCalendar/doctorWorkCal.component';
 import { AddNurseComponent } from './nurse/addNurse.component';
+import { DeleteNurseComponent } from './nurse/deleteNurse.component';
 import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseReq.component';
 import { ConsultTermReportComponent } from './ConsultTermReport/consultTermReport.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
+import { ReserveRoomsOPComponent } from './reserveRoomOP/reserveRoomOP.component';
+import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfilePage/clinicCenterAdminProfilePage.component';
+
 
 @NgModule({
   declarations: [
@@ -113,12 +118,18 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     DoctorRequestForOperationComponent,
     ClinicSettingsComponent,
     arrivedAbsenceReqComponent,
-    ConsultTermReportComponent
+    ConsultTermReportComponent,
+    ReserveRoomsComponent,
+    DeleteNurseComponent,
+    arrivedAbsenceReqComponent,
+    ReserveRoomsOPComponent,
+    ClinicCenterAdminProfilePageComponent
     //ListOfDiagnosis
     ],
   imports: [
     BrowserModule,
     FormsModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MaterialModule,
@@ -128,6 +139,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     MatSortModule,
     FullCalendarModule,
     NgMultiSelectDropDownModule.forRoot(),
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
@@ -156,6 +168,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
       {path: 'HomepageCCA/createDiagCod', component: createDiagnosisCodeBook}, 
       {path: 'HomepageCA/addDoctor', component: AddDoctorComponent},
       {path: 'HomepageCA/allDoctors', component:DeleteDoctorComponent},
+      {path: 'HomepageCA/allNurses', component: DeleteNurseComponent},
       {path: 'HomepageCA/AddNurseComponent', component: AddNurseComponent},
       {path: 'HomepageCA/addRoom', component: AddRoomComponent},
       {path: 'HomepageCA/allRooms', component: DeleteRoomComponent},
@@ -164,9 +177,12 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
       {path: 'HomepageCA/ConsultTypes', component: DeleteConsultTypeComponent},
       {path: 'HomepageCA/consultTerm', component: ConsultTermComponent},
       {path: 'HomepageCA/ArrReq', component: arrivedAbsenceReqComponent},
+      {path: 'HomepageCA/ReserveRooms', component: ReserveRoomsComponent},
+      {path: 'HomepageCA/ReserveRoomOP', component: ReserveRoomsOPComponent},
       {path: 'HomepageCCA/allClinics', component: DeleteClinicsComponent}, 
       {path: 'HomepageCCA/allMedicaments', component: DeleteMedicamentComponent},
       {path: 'HomepageCCA/allDiagnosis', component: DeleteDiagnosisComponent},
+      {path: 'HomepageCCA/clinicCenterAdminProfilePage', component: ClinicCenterAdminProfilePageComponent},
       {path: 'HomepagePatient', component:PatientComponent},
       {path: 'HomepagePatient/listOfClinics', component:ListOfClinics},
       {path: 'HomepagePatient/ListOfPatClinics', component: ListOfPatClinics},

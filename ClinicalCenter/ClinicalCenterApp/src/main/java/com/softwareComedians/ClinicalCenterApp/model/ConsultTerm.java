@@ -4,10 +4,8 @@ package com.softwareComedians.ClinicalCenterApp.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -19,8 +17,7 @@ public class ConsultTerm {
 	private Long id;
 
 	@Column
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date date;
+	private String date;
 
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -132,14 +129,13 @@ public class ConsultTerm {
 		this.patient = patient;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
-
 
 	public ConsultType getType() {
 		return type;

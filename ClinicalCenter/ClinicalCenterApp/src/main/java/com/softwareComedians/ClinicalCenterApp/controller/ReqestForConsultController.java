@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/rqForConsult")
@@ -29,8 +31,7 @@ public class ReqestForConsultController {
     @Autowired
     private ClinicAdminService clinicAdminService;
 
-
-  @Autowired
+    @Autowired
     private DoctorService doctorService;
 
     @Autowired
@@ -48,14 +49,33 @@ public class ReqestForConsultController {
     @Autowired
     private  RoomTermsServie roomTermsServie;
 
+    @Autowired
+    private  DoctorTermsService doctorTermsService;
+
+
+    @GetMapping(value = "/getAll")
+    public ResponseEntity<List<RequestForConsultDTO>> getAll() {
+
+        List<RequestForConsult> requestForConsults = requestForConsultService.findAll();
+        List<RequestForConsultDTO> requestForConsultDTOS= new ArrayList<>();
+        for (RequestForConsult d : requestForConsults) {
+            requestForConsultDTOS.add(new RequestForConsultDTO(d));
+        }
+
+        return new ResponseEntity<>(requestForConsultDTOS, HttpStatus.OK);
+    }
+
+
+
+
     @PostMapping()
     public ResponseEntity<RequestForConsultDTO> createRequest(@RequestBody RequestForConsultDTO requestForConsultDTO) {
 
         RequestForConsult rq = new RequestForConsult();
         rq.setId(requestForConsultDTO.getId());
-       // rq.setDateAndTime(requestForConsultDTO.getDateAndTime());
+        // rq.setDateAndTime(requestForConsultDTO.getDateAndTime());
         rq.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
-       // rq.setPatient(userService.findById(requestForConsultDTO.getPatient().getId()));
+        // rq.setPatient(userService.findById(requestForConsultDTO.getPatient().getId()));
 
         rq = requestForConsultService.save(rq);
         return new ResponseEntity<>(new RequestForConsultDTO(rq), HttpStatus.CREATED);
@@ -64,20 +84,28 @@ public class ReqestForConsultController {
     @PostMapping(value = "doctor")
     public ResponseEntity<RequestForConsultDTO> createRequestDoctor(@RequestBody RequestForConsultDTO requestForConsultDTO) throws MessagingException {
         boolean cT = true;
+        boolean dT = true;
 
         RequestForConsult rq = new RequestForConsult();
+        rq.setAccepted(true);
         rq.setId(requestForConsultDTO.getId());
         rq.setDateAndTime(requestForConsultDTO.getDateAndTime());
         rq.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
         rq.setPatient(userService.findById(requestForConsultDTO.getPatient().getId()));
         //send mail, getPatient.getClicic.getAdmin.getMail
-       // Clinic c =clinicsService.findById(requestForConsultDTO.getPatient().getC)
+        // Clinic c =clinicsService.findById(requestForConsultDTO.getPatient().getC)
         String description = "You have scheduled a new consult!";
-        smtpMailSender.send(requestForConsultDTO.getPatient().getEmail(),"New consult", description);
+      //  smtpMailSender.send(requestForConsultDTO.getPatient().getEmail(),"New consult", description);
 
         for(RoomTerms rr : roomTermsServie.findAll()){
             if (rr.getDate().equals(rq.getDateAndTime())){
                 cT = false;
+            }
+        }
+
+        for(DoctorTerms dt : doctorTermsService.findAll()){
+            if (dt.getDate().equals(rq.getDateAndTime())){
+                dT = false;
             }
         }
         if(cT){
@@ -91,54 +119,50 @@ public class ReqestForConsultController {
             }
         }
 
+        if(dT){
+            System.out.println("dtt");
+            for (Doctor d: doctorService.findAll()){
+                System.out.println(d.getName());
+                DoctorTerms dTerms = new DoctorTerms();
+                dTerms.setDate(requestForConsultDTO.getDateAndTime());
+                dTerms.setDoctor(d);
+                doctorTermsService.save(dTerms);
+            }
+        }
+
 
 
         rq = requestForConsultService.save(rq);
+        requestForConsultService.remove(rq.getId());
         return new ResponseEntity<>(new RequestForConsultDTO(rq), HttpStatus.CREATED);
     }
 
     @PostMapping( value = "/add/{userId}")
-    public ResponseEntity<?> addExamination(@RequestBody RequestForConsultDTO requestForConsultDTO,  @PathVariable Long userId) throws Exception {
+    public ResponseEntity<?> requestForConsultPatient(@RequestBody RequestForConsultDTO requestForConsultDTO,  @PathVariable Long userId) throws Exception {
 
-        RequestForConsult rfc = new RequestForConsult();
+        RequestForConsult rq = new RequestForConsult();
 
         User u = userService.findById(userId);
         ConsultTerm ct = consultTermService.findById(requestForConsultDTO.getId());
 
-        rfc.setId(requestForConsultDTO.getId());
-        rfc.setDateAndTime(requestForConsultDTO.getDateAndTime());
-        rfc.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
-        rfc.setAccepted(false);
-      //  rfc.setApplicant(u);
-        rfc.setConsultTerm(ct);
+        rq.setId(requestForConsultDTO.getId());
+        rq.setDateAndTime(requestForConsultDTO.getDateAndTime());
+        rq.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
+        rq.setPatient(u);
+        rq.setAccepted(false);
+        rq.setConsultTerm(ct);
 
-/*
-        if (rfc.getDuration() < 1) {
-            return new ResponseEntity<>("Error! Duration is smaller then 1!", HttpStatus.METHOD_NOT_ALLOWED);
-        }
-
-        if (rfc.getPrice() < 0) {
-            return new ResponseEntity<>("Error! Price is smaller then 0!", HttpStatus.METHOD_NOT_ALLOWED);
-        }
-        LocalDateTime dateTimeNow = LocalDateTime.now();
-
-        int compareValue = appexm.getDateTime().compareTo(dateTimeNow);
-
-        if (compareValue < 0) {
-            return new ResponseEntity<>("Error! Date is in the past!", HttpStatus.METHOD_NOT_ALLOWED);
-        }
-*/
-        rfc = requestForConsultService.save(rfc);
+        rq = requestForConsultService.save(rq);
 
         //salje mejl adminu klinike
         //TODO: preko pacijenotovog ID-a pronaci u kojoj je klinici i poslati mejl odgovarajucem administratoru te klinike
-        smtpMailSender.send("sansaduvic@gmail.com","Request for consult",
+        smtpMailSender.send("pswtim2@gmail.com","Request for consult",
                 " You have a request for consult: type: "+ct.getType().getName()+ "\r\n"+
                         "doctor's name: "+ct.getDoctor().getName()+ " "+ct.getDoctor().getSurname()+ "\r\n"+
                         "patient's name: "+u.getName()+" "+u.getSurname()+"\r\n"+
-                        " <a href='http://localhost:8080/api/patient/requestConsultTerm/"+rfc.getId()+"'> Confirm </a>");
+                        " <a href='http://localhost:8080/api/patient/requestConsultTerm/"+rq.getId()+"'> Confirm </a>");
 
-        return new ResponseEntity<>(new RequestForConsultDTO(rfc), HttpStatus.CREATED);
+        return new ResponseEntity<>(new RequestForConsultDTO(rq), HttpStatus.CREATED);
     }
 
 }

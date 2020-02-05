@@ -41,7 +41,7 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/ClinicalCenterApp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -91,6 +91,7 @@
       <workItem from="1574756903656" duration="217000" />
       <workItem from="1574757159487" duration="15000" />
       <workItem from="1574922333994" duration="39000" />
+      <workItem from="1580755632940" duration="5000" />
     </task>
     <servers />
   </component>

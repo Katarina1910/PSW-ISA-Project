@@ -15,8 +15,9 @@ import { DisplayMessage } from '../shared/models/display-message';
     templateUrl : './login.component.html'
 })
 export class LoginComponent{
+
     loginModel = new Login('','');
-    u:User = null;
+    u : User = null;
     loginForm: FormGroup;
     submitted = false;
     private user:User;
@@ -87,8 +88,10 @@ export class LoginComponent{
                 } else if(this.user.role==="ROLE_CA") {
                     this.router.navigate(['/HomepageCA'])
                 } else if(this.user.role==="ROLE_CCA") {
-                    this.router.navigate(['/HomepageCCA'])
-                } else {
+                    this.router.navigate(['/HomepageCCA']);
+                } else if(this.user.role==="ROLE_NURSE") {
+                    this.router.navigate(['/HomepageNurse']);
+                }else{
                     this.router.navigate(['']);
                 }
             }

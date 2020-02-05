@@ -3,6 +3,7 @@ package com.softwareComedians.ClinicalCenterApp.controller;
 
 import com.softwareComedians.ClinicalCenterApp.dto.RoomDTO;
 import com.softwareComedians.ClinicalCenterApp.model.Room;
+import com.softwareComedians.ClinicalCenterApp.model.Type;
 import com.softwareComedians.ClinicalCenterApp.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,36 @@ public class RoomController {
         List<RoomDTO> roomsDTO = new ArrayList<>();
         for (Room d : rooms) {
             roomsDTO.add(new RoomDTO(d));
+        }
+
+        return new ResponseEntity<>(roomsDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getEx")
+    public ResponseEntity<List<RoomDTO>> getEx() {
+
+        List<Room> rooms = roomService.findAll();
+        List<RoomDTO> roomsDTO = new ArrayList<>();
+        for (Room d : rooms) {
+            if(d.getType().equals(Type.examination)){
+                roomsDTO.add(new RoomDTO(d));
+            }
+
+        }
+
+        return new ResponseEntity<>(roomsDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getOp")
+    public ResponseEntity<List<RoomDTO>> getOp() {
+
+        List<Room> rooms = roomService.findAll();
+        List<RoomDTO> roomsDTO = new ArrayList<>();
+        for (Room d : rooms) {
+            if(d.getType().equals(Type.operation)){
+                roomsDTO.add(new RoomDTO(d));
+            }
+
         }
 
         return new ResponseEntity<>(roomsDTO, HttpStatus.OK);

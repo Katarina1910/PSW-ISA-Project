@@ -15,10 +15,17 @@ public class RoomTermsServie {
 
     public List<RoomTerms> findAll() { return roomTermRepository.findAll(); }
 
+
     public RoomTerms save(RoomTerms roomTerms) {
         return  roomTermRepository.save(roomTerms);
     }
+
     public  List<RoomTerms> findByDate(String date){
         return  roomTermRepository.findByDate(date);
     }
+
+    public RoomTerms findOne(Long id){
+        return roomTermRepository.findById(id).orElseGet(null);
+    }
+
 }

@@ -15,7 +15,7 @@ import { User } from '../registration/user';
 export class RequestExamination implements OnInit{
 
     public consultTerms: ConsultTerm[];
-    consultTermModel = new ConsultTerm(null,null,null,null,null,null,null,null);
+    consultTermModel = new ConsultTerm(null,null,null,null,null,null,null,null,null);
     user: User = new User("","","","","","","","","","","","");
     private userId: number;
 
@@ -36,6 +36,7 @@ export class RequestExamination implements OnInit{
 
     scheduleExamination(ct: ConsultTerm): void {
         this.consultTermModel = ct;
+        console.log(this.consultTermModel);
         this._requestExaminationService.appointExamination(this.consultTermModel, this.user.id).subscribe(
             data=> {
                 console.log('Success!', JSON.stringify(data));
