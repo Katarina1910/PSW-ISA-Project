@@ -1,0 +1,71 @@
+      
+<div class='table-responsive' class="d-flex p-2 justify-content-center">
+    <table class='table'>
+        <thead>
+                <tr>
+                   <th>Patient name</th>
+                   <th>Patient surname</th>
+                   <th>Patient UCIDN</th>
+                
+                    <th>Date</th>
+                    <th> Doctor </th>
+                </tr>
+        </thead>
+        <tbody>
+                <tr *ngFor = 'let d of rqs' >
+                    <td>{{d.patient.name}}</td>
+                    <td>{{d.patient.surname}}</td>
+                    <td>{{d.patient.ucidn}}</td>
+                       <td>{{d.dateAndTime}}</td>
+                    <td> <form  (ngSubmit)="onSubmitDate(d.id)">
+                        <input type="date" name="hdsi" value="yyyy-mm-dd" [(ngModel)]='datee'> 
+                        <select class="form-control" id="tyoe"  [(ngModel)]="selRoom" name="type">
+                            <option>soba</option>
+                            <option *ngFor = 'let t of rooms' name="type">{{t.name}}</option>
+                          </select>
+                        <button type="submit" class="btn btn-primary">Find</button>
+                        </form>  </td>
+
+                </tr>
+        </tbody>
+        </table>
+</div>
+
+<div>
+    Results:
+    <table class='table' >
+        <thead>
+                <tr>
+                   <th>Name</th>
+                    <th>Type</th>
+                    <th>Number</th>
+                    <th>Free terms</th>
+                    <th>Free doctors </th>
+                    
+                </tr>
+        </thead>
+        <tbody>
+                <tr *ngFor = 'let d of roomTerms'>
+                    <td>{{d.room.name}}</td>
+                    <td>{{d.room.type}}</td>
+                    <td>{{d.room.id}}</td>
+                    <td>
+                        <select class="form-control" id="tyoe" (change)="onSelectTerm()"  [(ngModel)]="selRoomReserve" name="type">
+                        <option *ngIf = 'd.term1'> 07:00-09:00 </option>
+                        <option *ngIf = 'd.term2'>09:00-11:00 </option>
+                        <option *ngIf = 'd.term3'>11:00-13:00 </option>
+                        <option *ngIf = 'd.term4'> 13:00-15:00 </option>
+                        <option *ngIf = 'd.term5'>15:00-17:00 </option>
+                        <option *ngIf = 'd.term6'>17:00-19:00 </option> </select>    
+                    </td>
+                    <td>  <form  (ngSubmit)="onSubmitRoom()">
+                     
+                        <select class="form-control" id="tyoe"  [(ngModel)]="selDoctor" name="type">
+                            <option *ngFor = 'let s of docTerms' [ngValue]="s.doctorDTO.id" name="type">{{s.doctorDTO.name}}</option>
+                          </select>
+                          <button type="submit"  class="btn btn-outline-primary">Reserve</button>
+                        </form>  </td>
+                </tr>
+        </tbody>
+        </table>
+</div>
