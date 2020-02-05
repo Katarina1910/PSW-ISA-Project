@@ -49,6 +49,10 @@ public class ReqestForConsultController {
     @Autowired
     private  RoomTermsServie roomTermsServie;
 
+    @Autowired
+    private  DoctorTermsService doctorTermsService;
+
+
     @GetMapping(value = "/getAll")
     public ResponseEntity<List<RequestForConsultDTO>> getAll() {
 
@@ -60,6 +64,9 @@ public class ReqestForConsultController {
 
         return new ResponseEntity<>(requestForConsultDTOS, HttpStatus.OK);
     }
+
+
+
 
     @PostMapping()
     public ResponseEntity<RequestForConsultDTO> createRequest(@RequestBody RequestForConsultDTO requestForConsultDTO) {
@@ -77,6 +84,7 @@ public class ReqestForConsultController {
     @PostMapping(value = "doctor")
     public ResponseEntity<RequestForConsultDTO> createRequestDoctor(@RequestBody RequestForConsultDTO requestForConsultDTO) throws MessagingException {
         boolean cT = true;
+        boolean dT = true;
 
         RequestForConsult rq = new RequestForConsult();
         rq.setId(requestForConsultDTO.getId());
@@ -93,6 +101,12 @@ public class ReqestForConsultController {
                 cT = false;
             }
         }
+
+        for(DoctorTerms dt : doctorTermsService.findAll()){
+            if (dt.getDate().equals(rq.getDateAndTime())){
+                dT = false;
+            }
+        }
         if(cT){
             System.out.println("ctt");
             for (Room r: roomService.findAll()){
@@ -101,6 +115,17 @@ public class ReqestForConsultController {
                 roomTerms.setDate(requestForConsultDTO.getDateAndTime());
                 roomTerms.setRoom(r);
                 roomTermsServie.save(roomTerms);
+            }
+        }
+
+        if(dT){
+            System.out.println("dtt");
+            for (Doctor d: doctorService.findAll()){
+                System.out.println(d.getName());
+                DoctorTerms dTerms = new DoctorTerms();
+                dTerms.setDate(requestForConsultDTO.getDateAndTime());
+                dTerms.setDoctor(d);
+                doctorTermsService.save(dTerms);
             }
         }
 
@@ -125,22 +150,6 @@ public class ReqestForConsultController {
         rq.setAccepted(false);
         rq.setConsultTerm(ct);
 
-/*
-        if (rfc.getDuration() < 1) {
-            return new ResponseEntity<>("Error! Duration is smaller then 1!", HttpStatus.METHOD_NOT_ALLOWED);
-        }
-
-        if (rfc.getPrice() < 0) {
-            return new ResponseEntity<>("Error! Price is smaller then 0!", HttpStatus.METHOD_NOT_ALLOWED);
-        }
-        LocalDateTime dateTimeNow = LocalDateTime.now();
-
-        int compareValue = appexm.getDateTime().compareTo(dateTimeNow);
-
-        if (compareValue < 0) {
-            return new ResponseEntity<>("Error! Date is in the past!", HttpStatus.METHOD_NOT_ALLOWED);
-        }
-*/
         rq = requestForConsultService.save(rq);
 
         //salje mejl adminu klinike
