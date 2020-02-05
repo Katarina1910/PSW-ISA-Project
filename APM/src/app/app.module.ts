@@ -44,7 +44,7 @@ import { DeleteDiagnosisComponent } from './createDiagCodeBook/deleteDiagnosis.c
 import { RequestExamination } from './patientRequestExamination/requestExamination.component';
 import { MatDatepickerModule, MatNativeDateModule, MatIconRegistry } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatSortModule} from '@angular/material/sort';
+import { MatSortModule } from '@angular/material/sort';
 import { ApiService, AuthService, ConfigService } from './service';
 import { LoginGuard, GuestGuard, AdminGuard } from 'src/guard';
 import { UserService } from './registration/user.service';
@@ -61,8 +61,10 @@ import { ClinicSettingsComponent } from './clinicSettings/clinicSettings.compone
 import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
 import { DoctorWorkCalendar } from './doctorWorkingCalendar/doctorWorkCal.component';
 import { AddNurseComponent } from './nurse/addNurse.component';
+import { DeleteNurseComponent } from './nurse/deleteNurse.component';
 import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseReq.component';
 import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
+
 
 @NgModule({
   declarations: [
@@ -113,11 +115,14 @@ import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
     ClinicSettingsComponent,
     arrivedAbsenceReqComponent,
     ReserveRoomsComponent,
+    DeleteNurseComponent,
+    arrivedAbsenceReqComponent
     //ListOfDiagnosis
     ],
   imports: [
     BrowserModule,
     FormsModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MaterialModule,
@@ -126,6 +131,7 @@ import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
     MatNativeDateModule,
     MatSortModule,
     FullCalendarModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
@@ -154,6 +160,7 @@ import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
       {path: 'HomepageCCA/createDiagCod', component: createDiagnosisCodeBook}, 
       {path: 'HomepageCA/addDoctor', component: AddDoctorComponent},
       {path: 'HomepageCA/allDoctors', component:DeleteDoctorComponent},
+      {path: 'HomepageCA/allNurses', component: DeleteNurseComponent},
       {path: 'HomepageCA/AddNurseComponent', component: AddNurseComponent},
       {path: 'HomepageCA/addRoom', component: AddRoomComponent},
       {path: 'HomepageCA/allRooms', component: DeleteRoomComponent},

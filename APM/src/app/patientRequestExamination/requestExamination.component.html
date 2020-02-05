@@ -18,9 +18,9 @@
                 
                     <td>{{ct.date}}</td>
                     <td>{{ct.duration}}</td>
-                    <td>{{ct.doctor}}</td>
-                    <td>{{ct.type}}</td>
-                    <td>{{ct.room}}</td>
+                    <td>{{ct.doctor.name}} {{ct.doctor.surname}}</td>
+                    <td>{{ct.type.name}}</td>
+                    <td>{{ct.room.name}} {{ct.room.type}}</td>
                     <td>{{ct.price}}$</td>
                     <td>{{ct.discount}}%</td>
                     <td><button  type="button" class="btn btn-outline-primary" (click)='scheduleExamination(ct)'>Schedule</button></td>

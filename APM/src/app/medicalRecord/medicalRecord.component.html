@@ -1,4 +1,4 @@
-<form onsubmit="onSubmit()" class="d-flex p-2 justify-content-left">
+<form class="d-flex p-2 justify-content-left">
     <fieldset>
       <legend>Medical record</legend>
 
@@ -26,7 +26,5 @@
         <label class="col-form-label" for="inputDefault"> Alergic to medicament:</label>
         <input type="text" class="form-control"  [(ngModel)]="medicalRecord.alergies" id="alergic"  name="alergic">
       </div>
-
-      <button type="submit" class="btn btn-primary">Add</button>
     </fieldset>
   </form>

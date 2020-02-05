@@ -1,24 +1,31 @@
 ﻿<div class="d-flex p-2 justify-content-center">
+  
 <div>
       <h1>
+        <p>&nbsp;</p>
         Welcome to the Clinical Center!
       </h1>
+      <img src="assets/ambulance.jpg" alt="">
       <p>&nbsp;</p>
-      <button><a [routerLink]="['/HomepageCCA']">Homepage for Clinical Center Administrator </a></button>
-      <button><a [routerLink]="['/HomepageCA']">Homepage for Clinic Administartor </a></button>
-      <button><a [routerLink]="['/HomepageNurse']">Homepage for Nurse</a></button>
-      <button><a [routerLink]="['/HomepageDoctor']">Homepage for Doctor </a></button>
-  
       <ng-template [ngIf]=" isUserDoctor()">
         <button><a [routerLink]="['/HomepageDoctor']">Homepage for Doctor </a></button>
+      </ng-template>
+
+      <ng-template [ngIf]=" isUserNurse()">
+        <button><a [routerLink]="['/HomepageNurse']">Homepage for Nurse </a></button>
       </ng-template>
 
       <ng-template [ngIf]=" isUserPatient()">
         <button><a [routerLink]="['/HomepagePatient']">Homepage for Patient</a></button>
       </ng-template>
 
-    
- 
+      <ng-template [ngIf]=" isUserAdminCCA()">
+        <button><a [routerLink]="['/HomepageCCA']">Homepage for Clinical Center Administrator</a></button>
+      </ng-template>
+
+      <ng-template [ngIf]=" isUserAdminCA()">
+        <button><a [routerLink]="['/HomepageCA']">Homepage for Clinic Administartor</a></button>
+      </ng-template>
     </div>
 </div>
 

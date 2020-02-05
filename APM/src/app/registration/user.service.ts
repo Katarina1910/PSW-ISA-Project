@@ -61,6 +61,19 @@ export class UserService{
         return false;
     }
 
+    isUserNurse(): boolean {
+        if(this.isUserLoggedIn()) {
+            this.user = JSON.parse(sessionStorage.getItem("user"));
+            console.log(JSON.stringify(this.user));
+            if(this.user.role==="ROLE_NURSE"){
+                return true;
+            }
+            return false
+        }
+
+        return false;
+    }
+
     isUserCA(): boolean {
         if(this.isUserLoggedIn()) {
             this.user = JSON.parse(sessionStorage.getItem("user"));

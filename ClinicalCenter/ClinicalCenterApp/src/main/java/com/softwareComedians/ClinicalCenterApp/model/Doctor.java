@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -26,11 +28,18 @@ public class Doctor extends Personnel {
     @Column
     private Double typeId;
 
+    @Column
+    private Timestamp scheduledFrom;    //od kog datuma je zauzet
+
+    @Column
+    private Timestamp scheduledTo;      //do kog datuma je zauzet
+
     //@OneToMany(mappedBy = "applicant", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
    // private Set<RequstForOperation> requstForOperations;
 
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private Set<ConsultTerm> consultTerms;
+
 
   //  @ManyToMany
   //  @JoinTable(name = "DocOp", joinColumns = @JoinColumn(name = "doc_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "op_id", referencedColumnName = "id"))

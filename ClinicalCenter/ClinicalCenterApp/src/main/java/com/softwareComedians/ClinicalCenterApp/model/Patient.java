@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -19,12 +20,8 @@ public class Patient extends User {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "patient")
 	private Set<ConsultTerm> appointedTerms;
 
-
-
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Clinic clinic;
-
-
 
 //	@ManyToMany
 //	@JoinTable(name = "PersonnelPatient", joinColumns = @JoinColumn(name = "pat_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "presonnel_id", referencedColumnName = "id"))

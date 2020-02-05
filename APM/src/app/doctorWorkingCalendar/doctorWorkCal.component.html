@@ -1,10 +1,33 @@
-<full-calendar [plugins]="calendarPlugins"
-                [weekends]="false"
-                [events]="events"
-                [header]="{
-                    left: 'prevYear, prev,next, nextYear,today',
-                    center: 'title',
-                    right: 'dayGridMonth, timeGridWeek, timeGridDay, listweek'
-                }"
-                >
-</full-calendar>
+<div class="d-flex p-2 justify-content-center">
+    <full-calendar [plugins]="calendarPlugins"
+                    [weekends]="false"
+                    [events]="events"
+                    [header]="{
+                        left: 'prevYear, prev,next, nextYear,today',
+                        center: 'title',
+                        right: 'dayGridMonth, timeGridWeek, timeGridDay, listweek'
+                    }"
+                    (eventClick)="eventClick()"
+                    
+                    >
+                
+    </full-calendar>
+
+  <div class="modal" [style.display]="showModal ? 'block' : 'none'" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            Examination: <br>
+            Room: {{room}}<br>
+            Patient: {{patient}} <br>
+            Date: {{date}} <br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onClickSendMessage()">Start</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
