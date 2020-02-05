@@ -62,6 +62,8 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
 import { DoctorWorkCalendar } from './doctorWorkingCalendar/doctorWorkCal.component';
 import { AddNurseComponent } from './nurse/addNurse.component';
 import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseReq.component';
+import { ConsultTermReportComponent } from './ConsultTermReport/consultTermReport.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -111,6 +113,7 @@ import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseRe
     DoctorRequestForOperationComponent,
     ClinicSettingsComponent,
     arrivedAbsenceReqComponent,
+    ConsultTermReportComponent
     //ListOfDiagnosis
     ],
   imports: [
@@ -124,6 +127,7 @@ import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseRe
     MatNativeDateModule,
     MatSortModule,
     FullCalendarModule,
+    NgMultiSelectDropDownModule.forRoot(),
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
@@ -169,6 +173,7 @@ import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseRe
       {path: 'HomepagePatient/PatientProfileSettings', component: PatientProfileSettingsComponent},
       {path: 'HomepagePatient/requestExamination', component: RequestExamination},
       {path: 'requestConsult', component: RequestForConsultComponent},
+      {path: 'HomepageDoctor/consultTermReport', component: ConsultTermReportComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'},
     ], {useHash: true})

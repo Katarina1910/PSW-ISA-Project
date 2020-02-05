@@ -39,6 +39,7 @@
     "jquery": "^3.4.1",
     "minty": "^0.5.10",
     "moment": "^2.24.0",
+    "ng-multiselect-dropdown": "^0.2.10",
     "ng-pick-datetime": "^7.0.0",
     "ngx-bootstrap": "^5.2.0",
     "rxjs": "~6.4.0",
