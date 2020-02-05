@@ -65,6 +65,7 @@ import { DeleteNurseComponent } from './nurse/deleteNurse.component';
 import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseReq.component';
 import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
 import { ReserveRoomsOPComponent } from './reserveRoomOP/reserveRoomOP.component';
+import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfilePage/clinicCenterAdminProfilePage.component';
 
 
 @NgModule({
@@ -119,6 +120,7 @@ import { ReserveRoomsOPComponent } from './reserveRoomOP/reserveRoomOP.component
     DeleteNurseComponent,
     arrivedAbsenceReqComponent,
     ReserveRoomsOPComponent,
+    ClinicCenterAdminProfilePageComponent
     //ListOfDiagnosis
     ],
   imports: [
@@ -176,6 +178,7 @@ import { ReserveRoomsOPComponent } from './reserveRoomOP/reserveRoomOP.component
       {path: 'HomepageCCA/allClinics', component: DeleteClinicsComponent}, 
       {path: 'HomepageCCA/allMedicaments', component: DeleteMedicamentComponent},
       {path: 'HomepageCCA/allDiagnosis', component: DeleteDiagnosisComponent},
+      {path: 'HomepageCCA/clinicCenterAdminProfilePage', component: ClinicCenterAdminProfilePageComponent},
       {path: 'HomepagePatient', component:PatientComponent},
       {path: 'HomepagePatient/listOfClinics', component:ListOfClinics},
       {path: 'HomepagePatient/ListOfPatClinics', component: ListOfPatClinics},
