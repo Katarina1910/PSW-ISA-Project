@@ -63,6 +63,7 @@ import { DoctorWorkCalendar } from './doctorWorkingCalendar/doctorWorkCal.compon
 import { AddNurseComponent } from './nurse/addNurse.component';
 import { DeleteNurseComponent } from './nurse/deleteNurse.component';
 import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseReq.component';
+import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
 
 
 @NgModule({
@@ -112,6 +113,8 @@ import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseRe
     DoctorRequestForConsultComponent,
     DoctorRequestForOperationComponent,
     ClinicSettingsComponent,
+    arrivedAbsenceReqComponent,
+    ReserveRoomsComponent,
     DeleteNurseComponent,
     arrivedAbsenceReqComponent
     //ListOfDiagnosis
@@ -166,6 +169,7 @@ import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseRe
       {path: 'HomepageCA/ConsultTypes', component: DeleteConsultTypeComponent},
       {path: 'HomepageCA/consultTerm', component: ConsultTermComponent},
       {path: 'HomepageCA/ArrReq', component: arrivedAbsenceReqComponent},
+      {path: 'HomepageCA/ReserveRooms', component: ReserveRoomsComponent},
       {path: 'HomepageCCA/allClinics', component: DeleteClinicsComponent}, 
       {path: 'HomepageCCA/allMedicaments', component: DeleteMedicamentComponent},
       {path: 'HomepageCCA/allDiagnosis', component: DeleteDiagnosisComponent},

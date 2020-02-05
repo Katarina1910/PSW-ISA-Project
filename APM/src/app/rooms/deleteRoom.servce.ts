@@ -8,10 +8,16 @@ import { RoomTerms } from './roomTerms';
     providedIn: 'root'
 })
 export class DeleteRoomService{
+    getRoomTerms2(datee: any, selRoom: any, id: string) {
+        throw new Error("Method not implemented.");
+    }
     _url = 'http://localhost:8080/api/rooms/del';
     _url2 = 'http://localhost:8080/api/rooms/getAll';
     _url3 = 'http://localhost:8080/api/rooms/edit';
     _url4 = 'http://localhost:8080/api/roomTerms/getAllDate';
+    _url5 = 'http://localhost:8080/api/roomTerms/getAllDate';
+    _url6 = 'http://localhost:8080/api/rooms/getEx';
+
 
     
     constructor(private _http: HttpClient) { }
@@ -24,6 +30,10 @@ export class DeleteRoomService{
         return this._http.get<Room[]>(this._url2);
     }
 
+    getRoomsEx():Observable<any> {
+        return this._http.get<Room[]>(this._url6);
+    }
+
     editRooms(room: Room) : Observable<Room> {
         return  this._http.put<Room>(this._url3, room);
      }
@@ -31,4 +41,8 @@ export class DeleteRoomService{
      getRoomTerms(date: string) : Observable<any> {
          return this._http.get<RoomTerms>(`${this._url4}/${date}`);
      }
+
+     getRoomTerms22(date: string, room : string) : Observable<any> {
+        return this._http.get<RoomTerms>(`${this._url5}/${date}/${room}`);
+    }
 }

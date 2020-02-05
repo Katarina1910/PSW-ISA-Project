@@ -32,4 +32,5 @@ public class RoomService {
     public Room findByName(String s) {
         return roomRepository.findByName(s);
     }
+
 }
