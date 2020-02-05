@@ -138,27 +138,7 @@ public class ReqestForConsultController {
     @PostMapping( value = "/add/{userId}")
     public ResponseEntity<?> requestForConsultPatient(@RequestBody RequestForConsultDTO requestForConsultDTO,  @PathVariable Long userId) throws Exception {
 
-        RequestForConsult rq = new RequestForConsult();
-
-        User u = userService.findById(userId);
-        ConsultTerm ct = consultTermService.findById(requestForConsultDTO.getId());
-
-        rq.setId(requestForConsultDTO.getId());
-        rq.setDateAndTime(requestForConsultDTO.getDateAndTime());
-        rq.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
-        rq.setPatient(u);
-        rq.setAccepted(false);
-        rq.setConsultTerm(ct);
-
-        rq = requestForConsultService.save(rq);
-
-        //salje mejl adminu klinike
-        //TODO: preko pacijenotovog ID-a pronaci u kojoj je klinici i poslati mejl odgovarajucem administratoru te klinike
-        smtpMailSender.send("pswtim2@gmail.com","Request for consult",
-                " You have a request for consult: type: "+ct.getType().getName()+ "\r\n"+
-                        "doctor's name: "+ct.getDoctor().getName()+ " "+ct.getDoctor().getSurname()+ "\r\n"+
-                        "patient's name: "+u.getName()+" "+u.getSurname()+"\r\n"+
-                        " <a href='http://localhost:8080/api/patient/requestConsultTerm/"+rq.getId()+"'> Confirm </a>");
+        RequestForConsult rq = this.requestForConsultService.createReq(requestForConsultDTO, userId);
 
         return new ResponseEntity<>(new RequestForConsultDTO(rq), HttpStatus.CREATED);
     }
