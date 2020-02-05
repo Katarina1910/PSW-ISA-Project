@@ -141,7 +141,7 @@ public class PatientController {
     public ResponseEntity<Void> requestConsultTerm(@PathVariable Long id) throws MessagingException {
         RequestForConsult request = requestForConsultService.findById(id);
 
-        smtpMailSender.send("sansaduvic@gmail.com","Consult term accepted",
+        smtpMailSender.send("pswtim2@gmail.com","Consult term accepted",
                 " You can confirm or reject your request for consult: "+ "\r\n"+
                         " <a href='http://localhost:8080/api/patient/acceptConsultTerm/"+request.getId()+"'> Confirm </a>"+ "\r\n"+
                         " <a href='http://localhost:8080/api/patient/rejectConsultTerm/"+request.getId()+"'> Reject </a>");
