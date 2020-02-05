@@ -7,6 +7,9 @@ import { RequestForConsult } from '../requestForConsult/requestForConsult';
 import { DoctorRequestForConsult } from '../doctorRequestForConsult/doctorRequestForConsult';
 import { DoctorRequestForConsultService } from '../doctorRequestForConsult/doctorRequestForConsult.service';
 import { ReserveRoomService } from './reserveRooms.service';
+import { DoctorTerm } from './doctorTerm';
+import { timingSafeEqual } from 'crypto';
+import { Doctor } from '../doctor/doctor';
 
 
 
@@ -22,6 +25,8 @@ export class ReserveRoomsComponent implements OnInit {
     datee : any = new Date().toISOString();
     selRoom : any = new Date().toISOString();
     selRoomReserve : string;
+    public docTerms : DoctorTerm[];
+    public selDoctor : string;
 
     
     constructor(private _deleteRoomService: DeleteRoomService,private router: Router,
@@ -58,10 +63,21 @@ export class ReserveRoomsComponent implements OnInit {
         )
     }
 
-    onSubmitRoom(r:Room){
-        console.log(r)
+    onSelectTerm(){
+        alert(this.selRoomReserve);
+        this.rrService.getDoctorTerms(this.datee, this.selRoomReserve).subscribe(
+            data=>{
+                this.docTerms = data;
+                console.log(this.docTerms)
+            }
+        )
+    }
+
+    onSubmitRoom(){
+        this.rrService.doctorId = this.selDoctor;
+        alert(this.selDoctor)
         console.log(this.selRoomReserve)
-        this.rrService.reserveRoom(r,this.selRoomReserve).subscribe(
+        this.rrService.reserveRoom(this.datee,this.selRoomReserve,this.selRoom, this.selDoctor).subscribe(
             data=>{
                 console.log(data)
             }
