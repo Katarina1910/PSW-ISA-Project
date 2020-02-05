@@ -15,7 +15,7 @@ public class ConsultTermDTO {
     public ConsultTermDTO() {
     }
 
-    public ConsultTermDTO(String type, Long id, String date, Double duration, Double price, Double discount, String doctor, String room) {
+    public ConsultTermDTO(ConsultTypeDTO type, Long id, String date, Double duration, Double price, Double discount, DoctorDTO doctor, RoomDTO room) {
         this.type = type;
         this.id = id;
         this.date = date;
