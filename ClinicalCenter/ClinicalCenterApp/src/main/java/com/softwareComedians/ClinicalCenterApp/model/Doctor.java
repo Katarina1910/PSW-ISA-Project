@@ -29,10 +29,10 @@ public class Doctor extends Personnel {
     private Double typeId;
 
     @Column
-    private Timestamp scheduledFrom;    //od kog datuma je zauzet
+    private Date scheduledFrom;    //od kog datuma je zauzet
 
     @Column
-    private Timestamp scheduledTo;      //do kog datuma je zauzet
+    private Date scheduledTo;      //do kog datuma je zauzet
 
     //@OneToMany(mappedBy = "applicant", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
    // private Set<RequstForOperation> requstForOperations;

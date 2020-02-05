@@ -42,6 +42,7 @@
                 <th mat-sort-header="description">Description</th>
                 <th mat-sort-header="grade">Grade</th>
                 <th></th>
+                <th></th>
                 </tr>
         </thead>
         <tbody>
@@ -51,6 +52,7 @@
                 <td>{{c.description}}</td>
                 <td>{{c.grade}}</td>
                 <td><button class="btn btn-info" (click)='listOfDoctors(c)'>See doctors</button></td>
+                <td><button class="btn btn-info" (click)='listOfClinicsDoctors(c)'>Clinic's profile</button></td>
                 </tr>
         </tbody> 
                 
@@ -94,7 +96,71 @@
                                 <td>{{d.name}}</td>
                                 <td>{{d.surname}}</td>
                                 <td>{{d.grade}}</td>
-                                <td>{{d.date}}</td>
+                                <td>Before: {{d.scheduledFrom | date: 'yyyy.MM.dd'}}; After: {{d.scheduledTo | date: 'yyyy.MM.dd'}}</td>
+                                <td><button class="btn btn-info" (click)='schedule(d)'>Schedule</button></td>
+                                </tr>
+                        </tbody> 
+                                
+                        </table>
+                        </div>
+        </div>
+
+        <div class='table-responsive' *ngIf='seeClinicsDoctors'>
+                <h3>All doctors of selected clinic: {{selectedClinic.name}}</h3>
+                
+                <div class='row'>
+                        <div class='col'>Date:</div>
+                        <div class='col'>Type:</div>
+                        <div class='col'>Name:</div>
+                        <div class='col'>Surname:</div>
+                        <div class='col'>Grade:</div>
+                        <div class='col'></div>
+                    </div>
+                    <div class='row'>
+                        <div class='col'>
+                                <mat-form-field>
+                                        <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="selectedDate2">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class='col'>
+                                <select id="type" name="type" [(ngModel)]="selectedType2">
+                                  <!--<option [ngValue]="null">Select Category</option>-->
+                                  <option *ngFor = 'let t of types' name="type" [ngValue]="t">{{t.name}}</option>
+                                </select>
+                            </div>
+                            <div class='col'>
+                                    <input type="text" [(ngModel)]='doctorName2'>
+                            </div>
+                            <div class='col'>
+                                    <input type="text" [(ngModel)]='doctorSurname2'>
+                            </div>
+                            <div class='col'>
+                                    <input type='text' [(ngModel)]='doctorGrade2'>
+                            </div>
+                            <div class='col'>
+                                <button (click)="buttonSearch2()">Search</button>
+                        </div>
+                    </div>
+
+                <div class='table-responsive' class="d-flex p-2 justify-content-center">
+                        <table class='table table-striped' *ngIf='filteredDoctorsClinic || doctorsClinic' matSort (matSortChange)="sortData2($event)">
+                        <thead>
+                                <tr>
+                                <th mat-sort-header="name">Name</th>
+                                <th mat-sort-header="surname">Surname</th>
+                                <th mat-sort-header="grade">Average grade</th>
+                                <th mat-sort-header="avalible">Avalibe appointments</th>
+                                <th></th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr *ngFor = 'let d of filteredDoctorsClinic || doctorsClinic'>
+                                <td>{{d.name}}</td>
+                                <td>{{d.surname}}</td>
+                                <td>{{d.grade}}</td>
+                                <td>Before: {{d.scheduledFrom | date: 'yyyy.MM.dd'}}; After: {{d.scheduledTo | date: 'yyyy.MM.dd'}}</td>
                                 <td><button class="btn btn-info" (click)='schedule(d)'>Schedule</button></td>
                                 </tr>
                         </tbody> 
