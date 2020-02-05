@@ -17,6 +17,7 @@ export class DeleteRoomService{
     _url4 = 'http://localhost:8080/api/roomTerms/getAllDate';
     _url5 = 'http://localhost:8080/api/roomTerms/getAllDate';
     _url6 = 'http://localhost:8080/api/rooms/getEx';
+    _url7 = 'http://localhost:8080/api/rooms/getOp';
 
 
     
@@ -32,6 +33,10 @@ export class DeleteRoomService{
 
     getRoomsEx():Observable<any> {
         return this._http.get<Room[]>(this._url6);
+    }
+
+    getRoomsOp():Observable<any> {
+        return this._http.get<Room[]>(this._url7);
     }
 
     editRooms(room: Room) : Observable<Room> {
