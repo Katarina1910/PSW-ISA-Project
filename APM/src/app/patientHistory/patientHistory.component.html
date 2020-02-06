@@ -1,0 +1,32 @@
+<h1>History of all examinations</h1>
+<div class='table-responsive' class="d-flex p-2 justify-content-center">
+    <div>
+        <table class="table" matSort (matSortChange)="sortData($event)">
+            <thead>
+                <tr>
+                    <th mat-sort-header="date">Date</th>
+                    <th>Duration</th>
+                    <th mat-sort-header="doctor">Doctor</th>
+                    <th mat-sort-header="type">Type</th>
+                    <th>Room</th>
+                    <th mat-sort-header="price">Price</th>
+                    <th>Discount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = 'let ct of consultTerms ' >
+                
+                    <td>{{ct.date}}</td>
+                    <td>{{ct.duration}}</td>
+                    <td>{{ct.doctor.name}} {{ct.doctor.surname}}</td>
+                    <td>{{ct.type.name}}</td>
+                    <td>{{ct.room.name}}</td>
+                    <td>{{ct.price}}$</td>
+                    <td>{{ct.discount}}%</td>
+                </tr>
+            
+            </tbody>
+        </table>
+    </div>
+
+</div>

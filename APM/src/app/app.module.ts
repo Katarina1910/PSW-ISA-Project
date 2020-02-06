@@ -64,6 +64,7 @@ import { AddNurseComponent } from './nurse/addNurse.component';
 import { DeleteNurseComponent } from './nurse/deleteNurse.component';
 import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseReq.component';
 import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
+import { patientHistory } from './patientHistory/patientHistory.component';
 
 
 @NgModule({
@@ -116,7 +117,8 @@ import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
     arrivedAbsenceReqComponent,
     ReserveRoomsComponent,
     DeleteNurseComponent,
-    arrivedAbsenceReqComponent
+    arrivedAbsenceReqComponent,
+    patientHistory,
     //ListOfDiagnosis
     ],
   imports: [
@@ -178,6 +180,7 @@ import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
       {path: 'HomepagePatient/ListOfPatClinics', component: ListOfPatClinics},
       {path: 'HomepagePatient/PatientProfileSettings', component: PatientProfileSettingsComponent},
       {path: 'HomepagePatient/requestExamination', component: RequestExamination},
+      {path: 'HomepagePatient/History', component: patientHistory},
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'},
