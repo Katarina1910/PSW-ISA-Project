@@ -19,6 +19,8 @@ public class ConsultTerm {
 	@Column
 	private String date;
 
+	@Column
+	private String report;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private ConsultType type;

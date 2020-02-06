@@ -31,6 +31,13 @@ public class ConsultTermController {
 
 
 
+
+
+    @PostMapping(value = "/addConsultReport")
+    public ResponseEntity<Void> addConsultReport(@RequestBody ConsultTermDTO consultTermDTO){
+        return this.consultTermService.addReport(consultTermDTO);
+    }
+
     @PostMapping()
     public ResponseEntity<ConsultTermDTO> createConsultTerm(@RequestBody ConsultTermDTO consultTermDTO) {
 

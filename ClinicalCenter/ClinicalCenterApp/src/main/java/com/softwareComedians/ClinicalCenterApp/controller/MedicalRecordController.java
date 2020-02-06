@@ -28,4 +28,9 @@ public class MedicalRecordController {
         return new ResponseEntity<>(medicalRecordDTO, HttpStatus.OK);
     }
 
+    @PutMapping(value = "/update")
+    public ResponseEntity<Void> update(@RequestBody MedicalRecordDTO medicalRecordDTO){
+        return medicalRecordService.update(medicalRecordDTO);
+    }
+
 }
