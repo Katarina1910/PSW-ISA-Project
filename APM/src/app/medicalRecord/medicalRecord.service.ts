@@ -12,6 +12,8 @@ export class MedicalRecordService{
     public user : User;
     _url1 = 'http://localhost:8080/api/users/public';
     _url2 = 'http://localhost:8080/api/medicalRecord/get';
+    _url3 = 'http://localhost:8080/api/medicalRecord/update';
+    id: string;
 
 
     constructor(private _http: HttpClient) { }
@@ -20,7 +22,11 @@ export class MedicalRecordService{
         return this._http.get<User>(`${this._url1}/${id}`);
     }
 
-    getMedicalRecord(id: any):Observable<any>{
-        return this._http.get<MedicalRecordd>(`${this._url2}/${id}`);
+    getMedicalRecord():Observable<any>{
+        return this._http.get<MedicalRecordd>(`${this._url2}/${this.id}`);
+    }
+
+    editMedicalRecord(m:MedicalRecordd):Observable<any>{
+        return this._http.put<void>(this._url3, m);
     }
 }

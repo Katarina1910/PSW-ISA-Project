@@ -18,4 +18,5 @@ export class listOfPatientsService{
     getListOgPatients():Observable<any>{
         return this._http.get<listOfPatients[]>(this._url);
     }
+
 }

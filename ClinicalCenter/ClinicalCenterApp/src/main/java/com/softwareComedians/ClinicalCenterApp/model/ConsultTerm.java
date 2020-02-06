@@ -19,6 +19,8 @@ public class ConsultTerm {
 	@Column
 	private String date;
 
+	@Column
+	private String report;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private ConsultType type;
@@ -52,7 +54,14 @@ public class ConsultTerm {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Patient patient;
 
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "diagnosis_id", referencedColumnName = "id")
+	public Diagnosis diagnosis;
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "recipe_id", referencedColumnName = "id")
+	public Recipe recipe;
+
 	public ConsultTerm() {
 		super();
 	}
