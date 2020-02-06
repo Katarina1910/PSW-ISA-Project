@@ -1,16 +1,11 @@
 package com.softwareComedians.ClinicalCenterApp.dto;
 
 import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-import java.util.Date;
-import com.softwareComedians.ClinicalCenterApp.model.Recipe;
 import lombok.*;
 
 @Setter
 @Getter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class ConsultTermDTO {
     private  ConsultTypeDTO type;
@@ -20,14 +15,10 @@ public class ConsultTermDTO {
     private  Double price;
     private String report;
     private  Double discount;
-    private  String doctor;
-    private  String room;
     private String patient;
     private  DoctorDTO doctor;
     private  RoomDTO room;
-     private DiagnosisDTO diagnosis;
-    private RecipeDTO recipe;
-    
+
     public ConsultTermDTO() {
     }
 

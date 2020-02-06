@@ -4,7 +4,6 @@ import com.softwareComedians.ClinicalCenterApp.dto.DiagnosisDTO;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -29,8 +28,6 @@ public class Diagnosis {
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private DiagnosisCodebook diagnosisCodebook;
 
-    @OneToMany(mappedBy = "diagnosis")
-    public Set<ConsultTerm> consultTerms;
 
 
   //  private Set<MedicalRecord> medicalRecords;
