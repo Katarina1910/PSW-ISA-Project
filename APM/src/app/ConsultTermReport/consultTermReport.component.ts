@@ -24,14 +24,7 @@ import { Router } from '@angular/router';
     selectedItems = [];
     dropdownSettings = {};
 
-    ngOnInit(){
-        
-        this.dropdownSettings = {
-            singleSelection: false,
-            idField: 'item_id',
-            textField: 'item_text',
-
-    public consult = new ConsultTerm(null,null,null,null,null,null,null,null, null,null,null, null); 
+    public consult = new ConsultTerm(null,null,null,null,null,null,null,null, null,null); 
     public listDiag : [];
     public listMed : [];
     public report : string;
@@ -70,13 +63,14 @@ import { Router } from '@angular/router';
             allowSearchFilter: true
           };
     }
-    
+  
+  
     onItemSelect(item: any) {
         console.log(item);
       }
       onSelectAll(items: any) {
         console.log(items);
-      }
+      
 
           this.diagnosisSettings = {
             singleSelection: true,
@@ -94,13 +88,13 @@ import { Router } from '@angular/router';
         }
         this.consult.id = this._consultTermReportService.id;
         this.consult.report = this.report;
-        this.consult.diagnosis = new listOfDiagnosis(this.selectedDiagnosis[0].id,null,null,null);
+      //  this.consult.diagnosis = new listOfDiagnosis(this.selectedDiagnosis[0].id,null,null,null);
         this.recipe =  new Recipe(null,null,null,null,null,null);
         this.recipe.medicaments = <listOfMedicaments[]>[];
         for(let i=0; i<this.selectedMedicaments.length; i++){
               this.recipe.medicaments.push(new listOfMedicaments(this.selectedMedicaments[i].id,null,null,null));     
         }
-        this.consult.recipe = this.recipe;
+       // this.consult.recipe = this.recipe;
         this._consultTermReportService.addConsultTerm(this.consult).subscribe(
           data=> {
             this.router.navigate(['/HomepageDoctor/DoctorWorkCalendar']);
@@ -109,7 +103,6 @@ import { Router } from '@angular/router';
            alert('Examination report has not been saved properly');
          }
         )
-
-    }
     
-}
+      }
+    }
