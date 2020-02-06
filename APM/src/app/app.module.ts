@@ -66,6 +66,7 @@ import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseRe
 import { ConsultTermReportComponent } from './ConsultTermReport/consultTermReport.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
+import { patientHistory } from './patientHistory/patientHistory.component';
 import { ReserveRoomsOPComponent } from './reserveRoomOP/reserveRoomOP.component';
 import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfilePage/clinicCenterAdminProfilePage.component';
 
@@ -122,6 +123,7 @@ import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfil
     ReserveRoomsComponent,
     DeleteNurseComponent,
     arrivedAbsenceReqComponent,
+    patientHistory,
     ReserveRoomsOPComponent,
     ClinicCenterAdminProfilePageComponent
     //ListOfDiagnosis
@@ -188,6 +190,7 @@ import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfil
       {path: 'HomepagePatient/ListOfPatClinics', component: ListOfPatClinics},
       {path: 'HomepagePatient/PatientProfileSettings', component: PatientProfileSettingsComponent},
       {path: 'HomepagePatient/requestExamination', component: RequestExamination},
+      {path: 'HomepagePatient/History', component: patientHistory},
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: 'HomepageDoctor/consultTermReport', component: ConsultTermReportComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
