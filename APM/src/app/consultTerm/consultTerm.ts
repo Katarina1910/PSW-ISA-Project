@@ -14,8 +14,6 @@ export class ConsultTerm{
         public  price: number,
         public  discount: number,
         public room: string,
-        public diagnosis: listOfDiagnosis,
-        public recipe: Recipe
         public doctor: Doctor,
         public patient: User
 

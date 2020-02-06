@@ -54,14 +54,10 @@ public class ConsultTerm {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Patient patient;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "diagnosis_id", referencedColumnName = "id")
-	public Diagnosis diagnosis;
+	@OneToOne(mappedBy = "consultTerm")
+	private Consult consult;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "recipe_id", referencedColumnName = "id")
-	public Recipe recipe;
-
+	
 	public ConsultTerm() {
 		super();
 	}
@@ -153,6 +149,8 @@ public class ConsultTerm {
 	public void setType(ConsultType type) {
 		this.type = type;
 	}
+
+
 
 	public RequestForConsult getRequestForConsult() {
 		return requestForConsult;
