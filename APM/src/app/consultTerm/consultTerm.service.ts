@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class ConsultTermService{
     _url = 'http://localhost:8080/api/ConsultTerm';
     _url2 = 'http://localhost:8080/api/patient/getAllExaminations';
+    _url3 = 'http://localhost:8080/api/ConsultTerm/getConsultTerms';
 
     constructor(private _http: HttpClient) { }
 
@@ -18,5 +19,9 @@ export class ConsultTermService{
 
     public getConsultTermsInfo(): Observable<any> {
         return this._http.get(this._url2);
+    }
+    
+    getConsultTerms(userId: any):Observable<any> {
+        return  this._http.get<ConsultTerm[]>(`${this._url3}/${userId}`);
     }
 }

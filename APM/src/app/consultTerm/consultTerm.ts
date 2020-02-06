@@ -1,7 +1,8 @@
-import { ConsultType } from 'src/consultType/consultType';
 import { User } from '../registration/user';
 import { Recipe } from '../ConsultTermReport/Recipe';
 import { listOfDiagnosis } from '../listOfAllDiagnosis/listOfAllDiagnosis';
+import { ConsultType } from '../consultType/consultType';
+import { Doctor } from '../doctor/doctor';
 
 export class ConsultTerm{
     constructor(
@@ -13,9 +14,10 @@ export class ConsultTerm{
         public  price: number,
         public  discount: number,
         public room: string,
-        public doctor: string,
-        public patient: User,
         public diagnosis: listOfDiagnosis,
         public recipe: Recipe
+        public doctor: Doctor,
+        public patient: User
+
     ){}
 }

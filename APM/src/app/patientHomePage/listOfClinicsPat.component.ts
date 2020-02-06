@@ -4,16 +4,16 @@ import { listOfClinicsPat } from './listOfClinicsPat';
 import { DeleteConsultTypeService } from '../consultType/deleteConsultType.service';
 import { ConsultType } from '../consultType/consultType';
 import { ConsultTerm } from '../consultTerm/consultTerm';
-import { ConsultTermService } from '../consultTerm/consultTerm.service';
 import * as moment from 'moment';
 import {Sort} from '@angular/material/sort';
 import { DeleteDoctorService } from '../doctor/deleteDoctor.service';
 import { Clinic } from '../addNewClinic/clinic';
 import { Doctor } from '../doctor/doctor';
 import { appointedExamination } from './appointedExamination';
-import { AppointedExaminationsService } from './patientExaminations.service';
 import { UserService } from '../registration/user.service';
 import { User } from '../registration/user';
+import { requestExamination } from '../patientRequestExamination/requestExamination.service';
+import { ConsultTermService } from '../consultTerm/consultTerm.service';
 
 @Component({
     selector: 'pat-listOfClinics',
@@ -55,11 +55,15 @@ export class ListOfPatClinics implements OnInit{
     public appointedExamination: appointedExamination;
     public user: User;
 
+    public consultTerms: ConsultTerm[];
+    consultTermModel = new ConsultTerm(null,null,null,null,null,null,null,null,null);
+
     constructor(private _listOfClinicsService: listOfClinicsPatService, 
                 private _getConsultTypes: DeleteConsultTypeService,
                 private _getAllDoctors: DeleteDoctorService,
-                private _appointedExaminations: AppointedExaminationsService,
-                private _loginService: UserService) {
+                private _requestExaminationService: requestExamination,
+                private _loginService: UserService,
+                private _consultTermService: ConsultTermService) {
         
         this.selectedType = new ConsultType(null,null,null);
         this.appointedExamination = new appointedExamination();
@@ -88,32 +92,39 @@ export class ListOfPatClinics implements OnInit{
             this.user=user;
             console.log(user);}
         })
-    }
 
-    schedule2(examination: appointedExamination) {
-        this.appointedExamination.clinicID = examination.clinicID;
-        this.appointedExamination.doctorID = examination.doctorID;
-        this.appointedExamination.roomID = examination.roomID;
-        this.appointedExamination.typeID = examination.typeID;
-        this.appointedExamination.dateTime = examination.dateTime;
-        this.appointedExamination.duration = examination.duration;
-        this.appointedExamination.price = examination.price;
-
-        this.appointedExamination.patientID = this.user.id;
-        this._appointedExaminations.save(this.appointedExamination).subscribe();
-        console.log(this.appointedExamination);
-        alert("Examination is appointed");
+        this._consultTermService.getConsultTermsInfo().subscribe(
+            data=> {
+                this.consultTerms = data;
+            }, error => {
+                console.log("Error in getting consult term data!")
+        });
     }
 
     schedule(doc: Doctor) {
-        //this.appointedExamination.clinicID = doc.clinicID;
-        this.appointedExamination.doctorID = doc.id;
-        this.appointedExamination.typeID = doc.typeId;
-
-        this.appointedExamination.patientID = this.user.id;
-        this._appointedExaminations.save(this.appointedExamination).subscribe();
-        console.log(this.appointedExamination);
-        alert("Examination is appointed");
+        for(let ct of this.consultTerms) {
+            if(ct.doctor.id == doc.id) {
+                this.consultTermModel.id = +doc.id;
+            }
+        }
+        this.consultTermModel.id = 1;
+        this.consultTermModel.doctor = doc;
+        this.consultTermModel.date = this.selectedDate;
+        for(let t of this.types) {
+            if(t.id == doc.typeId) {
+                this.consultTermModel.type = t;
+            }
+        }
+        this.consultTermModel.patient = this.user;
+        this._requestExaminationService.appointExamination(this.consultTermModel, this.user.id).subscribe(
+            data=> {
+                console.log('Success!', JSON.stringify(data));
+            }, error => {
+                console.log("Error in appointing examination");
+            }
+        )
+        console.log(this.consultTermModel);
+        alert("Examination has been scheduled!")
     }
 
     get clinicAddress():string{

@@ -168,4 +168,19 @@ public class ConsultTermController {
         }
 
     }
+
+    @GetMapping(value = "/getConsultTerms/{userId}")
+    public ResponseEntity<List<ConsultTermDTO>> getAllConsultTerms(@PathVariable Long userId) {
+
+        List<ConsultTerm> cts = consultTermService.findAll();
+        List<ConsultTermDTO> ctDTO = new ArrayList<>();
+        for (ConsultTerm ct : cts) {
+            if(ct.getPatient().getId() == userId)
+                ctDTO.add(new ConsultTermDTO(ct));
+        }
+
+        return new ResponseEntity<>(ctDTO, HttpStatus.OK);
+    }
+
+
 }
