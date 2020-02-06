@@ -31,14 +31,14 @@ INSERT INTO `room` (id, name, type, clinic_id) VALUES (2, 'room2', 1, null);
 INSERT INTO `consult_type` (id, description, name) VALUES (1, 'Opis tipa1...', 'tip1');
 INSERT INTO `consult_type` (id, description, name) VALUES (2, 'Opis tipa2...', 'tip2');
 
-INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (2, null, null);
-INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (3, null, null);
 
 
-INSERT INTO `consult_term` (dtype, id, date, discount, duration, price, report, clinic_id, doctor_id, patient_id, room_id, type_id, medical_record_id) VALUES ('ConsultTerm', 1, '2019-12-31 00:00:00', '5', '10', '150', null, 1, 4, 2, 2, 1, null);
-INSERT INTO `consult_term` (dtype, id, date, discount, duration, price, report, clinic_id, doctor_id, patient_id, room_id, type_id, medical_record_id) VALUES ('ConsultTerm', 2, '2019-12-30 00:00:00', '10', '11', '100', null, 1, 6, 2, 1, 2, null);
-INSERT INTO `consult_term` (dtype, id, date, discount, duration, price, report, clinic_id, doctor_id, patient_id, room_id, type_id, medical_record_id) VALUES ('ConsultTerm', 3, '2019-12-29 00:00:00', '15', '12', '170', null, 1, 5, 3, 2, 2, null);
-INSERT INTO `consult_term` (dtype, id, date, discount, duration, price, report, clinic_id, doctor_id, patient_id, room_id, type_id, medical_record_id) VALUES ('ConsultTerm', 4, '2019-12-28 00:00:00', '20', '13', '90', null, 1, 4, 3, 1, 1, null);
+
+INSERT INTO `consult_term` ( id, date, discount, duration, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES (1, '2019-12-31 00:00:00', '5', '10', '150',  1, 4, 2, 2, 1);
+INSERT INTO `consult_term` (id, date, discount, duration, price,clinic_id, doctor_id, patient_id, room_id, type_id) VALUES (2, '2019-12-30 00:00:00', '10', '11', '100',  1, 6, 2, 1, 2);
+INSERT INTO `consult_term` (id, date, discount, duration, price,  clinic_id, doctor_id, patient_id, room_id, type_id) VALUES (3, '2019-12-29 00:00:00', '15', '12', '170',  1, 5, 3, 2, 2);
+INSERT INTO `consult_term` (id, date, discount, duration, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES (4, '2019-12-28 00:00:00', '20', '13', '90',  1, 4, 3, 1, 1);
+INSERT INTO `consult_term` (id, date, discount, duration, price,  clinic_id, doctor_id, patient_id, room_id, type_id) VALUES ( 5, '2019-01-28 00:00:00', '60', '14', '10',  1, 4, 2, 1, 1);
 
 
 INSERT INTO `user_authority` (user_id, authority_id) VALUES (1, 1);
@@ -55,3 +55,21 @@ insert into request_for_consult (consult_term_id, date_and_time, is_accepted, pa
 insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',4,false ,true,true,true,true,true);
 insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',5,true ,true,true,true,true,true);
 insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',6,true,true,true,true,true,true);
+
+
+insert into diagnosis (id, code, description, name) values (1,'001', 'opis','Upala pluca');
+insert into diagnosis (id, code, description, name) values (2,'002', 'opis','Brohintis');
+insert into diagnosis (id, code, description, name) values (3,'003', 'opis','Astma');
+
+insert into medicament (id, code, description, name) values (1,'001', 'opis','Paracetamol');
+insert into medicament (id, code, description, name) values (2,'002', 'opis','Brufen');
+insert into medicament (id, code, description, name) values (3,'003', 'opis','Andol');
+
+
+insert into medical_record (id, alergies, blood_type, diopter, height, weight) values  (1,'nema', '0','-1','180','80');
+insert into medical_record (id, alergies, blood_type, diopter, height, weight) values  (2,'nema', 'A','0','190','100');
+
+
+INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (2, null, 1);
+INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (3, null, 2);
+

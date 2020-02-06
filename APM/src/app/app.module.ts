@@ -64,6 +64,7 @@ import { AddNurseComponent } from './nurse/addNurse.component';
 import { DeleteNurseComponent } from './nurse/deleteNurse.component';
 import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseReq.component';
 import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
+import { patientHistory } from './patientHistory/patientHistory.component';
 import { ReserveRoomsOPComponent } from './reserveRoomOP/reserveRoomOP.component';
 import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfilePage/clinicCenterAdminProfilePage.component';
 
@@ -119,6 +120,7 @@ import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfil
     ReserveRoomsComponent,
     DeleteNurseComponent,
     arrivedAbsenceReqComponent,
+    patientHistory,
     ReserveRoomsOPComponent,
     ClinicCenterAdminProfilePageComponent
     //ListOfDiagnosis
@@ -184,6 +186,7 @@ import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfil
       {path: 'HomepagePatient/ListOfPatClinics', component: ListOfPatClinics},
       {path: 'HomepagePatient/PatientProfileSettings', component: PatientProfileSettingsComponent},
       {path: 'HomepagePatient/requestExamination', component: RequestExamination},
+      {path: 'HomepagePatient/History', component: patientHistory},
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'},

@@ -1,0 +1,28 @@
+
+<p>&nbsp;</p>
+<h4 class="d-flex p-2 justify-content-center"></h4>
+<div class="d-flex flex-column p-2 justify-content-center" style="width: 600px">
+    <label>Select medicaments:</label>
+        <ng-multiselect-dropdown 
+            [placeholder]="'Select medicaments'"
+            [data]="listMed"
+            [(ngModel)]="selectedMedicaments"
+            [settings]="medicamentsSettings"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)">
+      </ng-multiselect-dropdown>
+      <br>
+      <label>Select diagnosis:</label>
+      <ng-multiselect-dropdown
+            [placeholder]="'Select diagnosis'"
+            [data]="listDiag"
+            [(ngModel)]="selectedDiagnosis"
+            [settings]="diagnosisSettings"
+            (onSelect)="onItemSelect($event)">
+      </ng-multiselect-dropdown>
+      <br>
+      <label>Add report:</label>
+      <textarea style="width: 580px; height:150px" [(ngModel)]="report" placeholder="Add report"></textarea>
+      <br>
+      <button  class="btn btn-primary" (click)="onAddReport()">Add</button>
+ </div>

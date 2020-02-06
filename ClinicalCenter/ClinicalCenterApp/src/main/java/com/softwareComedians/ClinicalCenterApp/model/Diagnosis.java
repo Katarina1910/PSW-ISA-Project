@@ -1,15 +1,16 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 
 import com.softwareComedians.ClinicalCenterApp.dto.DiagnosisDTO;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Diagnosis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +29,9 @@ public class Diagnosis {
     private DiagnosisCodebook diagnosisCodebook;
 
 
+
   //  private Set<MedicalRecord> medicalRecords;
 
-    public Diagnosis() {
-    }
 
     public Long getId() {
         return id;
