@@ -87,6 +87,7 @@ public class ReqestForConsultController {
         boolean dT = true;
 
         RequestForConsult rq = new RequestForConsult();
+        rq.setAccepted(true);
         rq.setId(requestForConsultDTO.getId());
         rq.setDateAndTime(requestForConsultDTO.getDateAndTime());
         rq.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
@@ -132,6 +133,7 @@ public class ReqestForConsultController {
 
 
         rq = requestForConsultService.save(rq);
+        requestForConsultService.remove(rq.getId());
         return new ResponseEntity<>(new RequestForConsultDTO(rq), HttpStatus.CREATED);
     }
 

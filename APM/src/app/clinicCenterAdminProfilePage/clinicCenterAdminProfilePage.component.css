@@ -1,0 +1,21 @@
+.container {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-field {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.user-info-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+.user-info-container-row {
+    display: flex;
+    justify-content: center;
+}

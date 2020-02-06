@@ -51,6 +51,21 @@ public class RoomController {
         return new ResponseEntity<>(roomsDTO, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/getOp")
+    public ResponseEntity<List<RoomDTO>> getOp() {
+
+        List<Room> rooms = roomService.findAll();
+        List<RoomDTO> roomsDTO = new ArrayList<>();
+        for (Room d : rooms) {
+            if(d.getType().equals(Type.operation)){
+                roomsDTO.add(new RoomDTO(d));
+            }
+
+        }
+
+        return new ResponseEntity<>(roomsDTO, HttpStatus.OK);
+    }
+
 
     @PostMapping()
     public ResponseEntity<RoomDTO> addRooms(@RequestBody RoomDTO roomDTO) {

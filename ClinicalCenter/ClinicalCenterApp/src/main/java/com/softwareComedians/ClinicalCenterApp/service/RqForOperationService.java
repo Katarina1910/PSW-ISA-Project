@@ -5,6 +5,8 @@ import com.softwareComedians.ClinicalCenterApp.repository.RqForOperationReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RqForOperationService {
     @Autowired
@@ -20,6 +22,9 @@ public class RqForOperationService {
 
     public RequstForOperation findOne(Long id){
         return rqForOperationRepository.findById(id).orElseGet(null);
+    }
+
+    public List<RequstForOperation> findAll() { return  rqForOperationRepository.findAll();
     }
 }
 
