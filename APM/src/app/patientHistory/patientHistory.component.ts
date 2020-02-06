@@ -15,8 +15,8 @@ import { ConsultTermService } from '../consultTerm/consultTerm.service';
 export class patientHistory implements OnInit{
 
     user: User = new User("","","","","","","","","","","","");
-    private consultTerms: RequestForConsult[];
-    private sortedRequests: RequestForConsult[];
+    private consultTerms: ConsultTerm[];
+    private sortedTerms: ConsultTerm[];
 
     constructor(private _consultTermService: ConsultTermService,
                 private userService: UserService) {}
@@ -48,16 +48,20 @@ export class patientHistory implements OnInit{
     sortData(sort: Sort) {
         const data = this.consultTerms;
         if (!sort.active || sort.direction === '') {
-          this.sortedRequests = data;
+          this.sortedTerms = data;
           return;
         }
     
-        this.sortedRequests = data.sort((a, b) => {
+        this.sortedTerms = data.sort((a, b) => {
           const isAsc = sort.direction === 'asc';
           switch (sort.active) {
-            case 'type': return compare(a.type, b.type, isAsc);
+            case 'type': return compare(a.type.name, b.type.name, isAsc);
             case 'date': return compare(a.date, b.date, isAsc);
             case 'price': return compare(a.price, b.price, isAsc);
+            case 'discount': return compare(a.discount, b.discount, isAsc);
+            case 'duration': return compare(a.duration, b.duration, isAsc);
+            case 'doctor': return compare(a.doctor.name, b.doctor.name, isAsc);
+            case 'room': return compare(a.room, b.room, isAsc);
             default: return 0;
           }
         });
