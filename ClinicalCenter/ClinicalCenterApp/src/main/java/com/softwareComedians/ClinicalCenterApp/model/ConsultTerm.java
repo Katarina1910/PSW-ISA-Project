@@ -52,6 +52,9 @@ public class ConsultTerm {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Patient patient;
 
+	@OneToOne(mappedBy = "consultTerm")
+	private Consult consult;
+
 	
 	public ConsultTerm() {
 		super();
@@ -144,6 +147,8 @@ public class ConsultTerm {
 	public void setType(ConsultType type) {
 		this.type = type;
 	}
+
+
 
 	public RequestForConsult getRequestForConsult() {
 		return requestForConsult;
