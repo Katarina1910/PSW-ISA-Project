@@ -1,8 +1,9 @@
 
 export class listOfDiagnosis {
     constructor(
-        private  name: string,
-        private  code: string,
-        private  description: string
+        public id: number,
+        public  name: string,
+        public  code: string,
+        public  description: string
     ){}
 }

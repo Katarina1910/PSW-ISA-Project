@@ -32,6 +32,9 @@ public class Doctor extends Personnel {
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private Set<ConsultTerm> consultTerms;
 
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public Set<Recipe> recipes;
+
   //  @ManyToMany
   //  @JoinTable(name = "DocOp", joinColumns = @JoinColumn(name = "doc_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "op_id", referencedColumnName = "id"))
    // private Set<Operation> operations;

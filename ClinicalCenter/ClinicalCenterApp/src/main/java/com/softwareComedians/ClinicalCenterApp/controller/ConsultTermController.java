@@ -34,6 +34,21 @@ public class ConsultTermController {
     @Autowired
     private ConsultTypeService consultTypeService;
 
+    @Autowired
+    private RoomTermsServie roomTermsServie;
+
+    @Autowired
+    private DoctorTermsService doctorTermsService;
+
+    @Autowired
+    private  RequestForConsultService requestForConsultService;
+
+
+    @PostMapping(value = "/addConsultReport")
+    public ResponseEntity<Void> addConsultReport(@RequestBody ConsultTermDTO consultTermDTO){
+        return this.consultTermService.addReport(consultTermDTO);
+    }
+
     @PostMapping()
     public ResponseEntity<ConsultTermDTO> createConsultTerm(@RequestBody ConsultTermDTO consultTermDTO) {
 
