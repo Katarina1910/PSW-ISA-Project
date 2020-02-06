@@ -1,11 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.service;
 import com.softwareComedians.ClinicalCenterApp.dto.ConsultTermDTO;
 import com.softwareComedians.ClinicalCenterApp.model.*;
-import com.softwareComedians.ClinicalCenterApp.dto.MedicamentDTO;
-import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
-import com.softwareComedians.ClinicalCenterApp.model.Diagnosis;
-import com.softwareComedians.ClinicalCenterApp.model.Medicament;
-import com.softwareComedians.ClinicalCenterApp.model.Recipe;
 import com.softwareComedians.ClinicalCenterApp.repository.ConsultTermRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,9 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class ConsultTermService {
@@ -150,18 +143,18 @@ public class ConsultTermService {
     }
 
 
-}
+
 
     public ResponseEntity<Void> addReport(ConsultTermDTO consultTermDTO) {
-            ConsultTerm consultTerm = consultTermRepository.findById(consultTermDTO.getId()).orElseGet(null);
-            if(consultTerm == null){
-                return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }else{
-                Diagnosis diagnosis = Diagnosis.builder()
-                        .id(consultTermDTO.getDiagnosis().getId())
-                        .build();
-                Recipe recipe =  new Recipe();
-                recipe.setValidated(false);
+            //ConsultTerm consultTerm = consultTermRepository.findById(consultTermDTO.getId()).orElseGet(null);
+           // if(consultTerm == null){
+            //    return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+          //  }else{
+            //    Diagnosis diagnosis = Diagnosis.builder()
+            //            .id(consultTermDTO.getDiagnosis().getId())
+             //           .build();
+             //   Recipe recipe =  new Recipe();
+             /*   recipe.setValidated(false);
                 Set<Medicament> medicaments = new HashSet<>();
                 for(MedicamentDTO m: consultTermDTO.getRecipe().getMedicaments()){
                     Medicament medicament = Medicament.builder()
@@ -170,17 +163,16 @@ public class ConsultTermService {
                     medicaments.add(medicament);
                 }
 
-                recipe.setMedicaments(medicaments);
-                recipe.setDoctor(consultTerm.getDoctor());
-                recipe.setMedicalRecord(consultTerm.getPatient().getMedicalRecord());
+              //  recipe.setMedicaments(medicaments);
+              //  recipe.setDoctor(consultTerm.getDoctor());
+              //  recipe.setMedicalRecord(consultTerm.getPatient().getMedicalRecord());
 
-                consultTerm.setReport(consultTermDTO.getReport());
-                consultTerm.setDiagnosis(diagnosis);
-                consultTerm.setRecipe(recipe);
+              //  consultTerm.setReport(consultTermDTO.getReport());
+              //  consultTerm.setDiagnosis(diagnosis);
+               // consultTerm.setRecipe(recipe);
 
-                consultTermRepository.save(consultTerm);
-                return new ResponseEntity<>(HttpStatus.OK);
+              //  consultTermRepository.save(consultTerm);
+              */  return new ResponseEntity<>(HttpStatus.OK);
             }
     }
 
-    }

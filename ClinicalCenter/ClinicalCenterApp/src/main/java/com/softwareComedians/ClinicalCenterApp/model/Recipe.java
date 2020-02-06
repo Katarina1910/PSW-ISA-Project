@@ -18,8 +18,6 @@ public class Recipe {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Nurse nurse;
 
-	@OneToOne(mappedBy = "recipe")
-	public ConsultTerm consultTerm;
 
 	@ManyToMany
 	@JoinTable(
