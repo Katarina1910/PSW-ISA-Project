@@ -3,7 +3,7 @@ import { User } from '../registration/user';
 export class DoctorRequestForOperation {
     constructor(
                 public id: string,
-                public  date: Date,
+                public  dateAndTime: string,
                 public  applicant: string,
                 public patient:User,
             ){}

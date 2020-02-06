@@ -63,6 +63,9 @@ import { DoctorWorkCalendar } from './doctorWorkingCalendar/doctorWorkCal.compon
 import { AddNurseComponent } from './nurse/addNurse.component';
 import { DeleteNurseComponent } from './nurse/deleteNurse.component';
 import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseReq.component';
+import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
+import { ReserveRoomsOPComponent } from './reserveRoomOP/reserveRoomOP.component';
+import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfilePage/clinicCenterAdminProfilePage.component';
 
 
 @NgModule({
@@ -112,8 +115,12 @@ import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseRe
     DoctorRequestForConsultComponent,
     DoctorRequestForOperationComponent,
     ClinicSettingsComponent,
+    arrivedAbsenceReqComponent,
+    ReserveRoomsComponent,
     DeleteNurseComponent,
-    arrivedAbsenceReqComponent
+    arrivedAbsenceReqComponent,
+    ReserveRoomsOPComponent,
+    ClinicCenterAdminProfilePageComponent
     //ListOfDiagnosis
     ],
   imports: [
@@ -128,6 +135,7 @@ import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseRe
     MatNativeDateModule,
     MatSortModule,
     FullCalendarModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
@@ -165,9 +173,12 @@ import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseRe
       {path: 'HomepageCA/ConsultTypes', component: DeleteConsultTypeComponent},
       {path: 'HomepageCA/consultTerm', component: ConsultTermComponent},
       {path: 'HomepageCA/ArrReq', component: arrivedAbsenceReqComponent},
+      {path: 'HomepageCA/ReserveRooms', component: ReserveRoomsComponent},
+      {path: 'HomepageCA/ReserveRoomOP', component: ReserveRoomsOPComponent},
       {path: 'HomepageCCA/allClinics', component: DeleteClinicsComponent}, 
       {path: 'HomepageCCA/allMedicaments', component: DeleteMedicamentComponent},
       {path: 'HomepageCCA/allDiagnosis', component: DeleteDiagnosisComponent},
+      {path: 'HomepageCCA/clinicCenterAdminProfilePage', component: ClinicCenterAdminProfilePageComponent},
       {path: 'HomepagePatient', component:PatientComponent},
       {path: 'HomepagePatient/listOfClinics', component:ListOfClinics},
       {path: 'HomepagePatient/ListOfPatClinics', component: ListOfPatClinics},

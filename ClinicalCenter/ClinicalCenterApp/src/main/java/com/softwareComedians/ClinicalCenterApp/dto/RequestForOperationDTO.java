@@ -2,11 +2,9 @@ package com.softwareComedians.ClinicalCenterApp.dto;
 
 import com.softwareComedians.ClinicalCenterApp.model.RequstForOperation;
 
-import java.sql.Date;
-
 public class RequestForOperationDTO {
     private Long id;
-    private Date dateAndTime;
+    private String dateAndTime;
     private boolean isAccepted;
     private UserDTO patient;
     private UserDTO applicant;
@@ -15,7 +13,7 @@ public class RequestForOperationDTO {
     public RequestForOperationDTO() {
     }
 
-    public RequestForOperationDTO(Date dateAndTime, boolean isAccepted, Long id, UserDTO p, UserDTO a) {
+    public RequestForOperationDTO(String dateAndTime, boolean isAccepted, Long id, UserDTO p, UserDTO a) {
         this.dateAndTime = dateAndTime;
         this.isAccepted = isAccepted;
         this.id=id;
@@ -27,16 +25,16 @@ public class RequestForOperationDTO {
         dateAndTime = rfc.getDateAndTime();
         isAccepted = rfc.isAccepted();
         id=rfc.getId();
-      //  patient = new UserDTO(rfc.getPatient());
+        patient = new UserDTO(rfc.getPatient());
        // applicant = new UserDTO(rfc.getApplicant());
 
     }
 
-    public Date getDateAndTime() {
+    public String getDateAndTime() {
         return dateAndTime;
     }
 
-    public void setDateAndTime(Date dateAndTime) {
+    public void setDateAndTime(String dateAndTime) {
         this.dateAndTime = dateAndTime;
     }
 

@@ -15,9 +15,10 @@ INSERT INTO `clinic` (id, address, description, grade, name, price_list_id) VALU
 INSERT INTO `clinic` (id, address, description, grade, name, price_list_id) VALUES (2, 'Adresa 2', 'Opis klinike2...', '5', 'klinika2', null);
 INSERT INTO `clinic` (id, address, description, grade, name, price_list_id) VALUES (3, 'Adresa 3', 'Opis klinike3...', '4', 'klinika3', null);
 
-INSERT INTO `doctor` (grade, type_id, id) VALUES (5, 1, 4);
-INSERT INTO `doctor` (grade, type_id, id) VALUES (5, 1, 5);
-INSERT INTO `doctor` (grade, type_id, id) VALUES (4, 2, 6);
+INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (5, 1, 4, '2020-02-15 00:00:00', '2020-02-17 00:00:00');
+INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (5, 1, 5, '2020-02-21 00:00:00', '2020-02-22 00:00:00');
+INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (4, 2, 6, '2020-02-25 00:00:00', '2020-02-28 00:00:00');
+
 INSERT INTO `personnel` (id, clinic_id, consult_term_id) VALUES (4, 1, 2);
 INSERT INTO `personnel` (id, clinic_id, consult_term_id) VALUES (5, 2, 1);
 INSERT INTO `personnel` (id, clinic_id, consult_term_id) VALUES (6, 1, 1);
@@ -46,10 +47,14 @@ INSERT INTO `user_authority` (user_id, authority_id) VALUES (4, 3);
 INSERT INTO `user_authority` (user_id, authority_id) VALUES (5, 3);
 INSERT INTO `user_authority` (user_id, authority_id) VALUES (6, 3);
 
+insert into room_terms (date, room_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',1,true,true,true,true,true,true);
+insert into room_terms (date, room_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',2,true,true,true,true,true,true);
+insert into request_for_consult (consult_term_id, date_and_time, is_accepted, patient_id, type_id) values (null,'2020-02-04', false, 3,2);
 
 insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',4,false ,true,true,true,true,true);
 insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',5,true ,true,true,true,true,true);
 insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',6,true,true,true,true,true,true);
+
 
 insert into diagnosis (id, code, description, name) values (1,'001', 'opis','Upala pluca');
 insert into diagnosis (id, code, description, name) values (2,'002', 'opis','Brohintis');
@@ -66,3 +71,4 @@ insert into medical_record (id, alergies, blood_type, diopter, height, weight) v
 
 INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (2, null, 1);
 INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (3, null, 2);
+

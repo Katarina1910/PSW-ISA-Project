@@ -32,26 +32,31 @@ export class ListOfPatClinics implements OnInit{
     public _doctorGrade: any;
     public filteredClinics: listOfClinicsPat[];
     public selectedType: ConsultType;
+    public selectedType2: ConsultType;
     public filteredDoctors: Doctor[];
+    public filteredDoctorsClinic: Doctor[];
     public _clinicRating: any;
     public selectedDate: Date;
-    public consultTerms: ConsultTerm[];
-    public consultTerms2: ConsultTerm[];
-
+    public selectedDate2: Date;
     public sortedClinics: listOfClinicsPat[];
+    public sortedDoctorsClinics: listOfClinicsPat[];
     
     public sortedDoctors: Doctor[];
     private seeDoctors: boolean;
+    private seeClinicsDoctors: boolean;
     public selectedClinic: Clinic;
     public doctors: Doctor[] = [];
     public doctors2: Doctor[] = [];
+    public doctors3: Doctor[] = [];
+    public doctorsClinic: Doctor[] = [];
+    public seeDoctorsList: Doctor[] = [];
+    public seeDoctorsList2: Doctor[] = [];
 
     public appointedExamination: appointedExamination;
     public user: User;
 
     constructor(private _listOfClinicsService: listOfClinicsPatService, 
                 private _getConsultTypes: DeleteConsultTypeService,
-                private _consultTermService: ConsultTermService,
                 private _getAllDoctors: DeleteDoctorService,
                 private _appointedExaminations: AppointedExaminationsService,
                 private _loginService: UserService) {
@@ -184,24 +189,43 @@ export class ListOfPatClinics implements OnInit{
     }
 
     buttonSearch(): void{
-        const formatedDate = moment(this.selectedDate).format('YYYY-MM-DD')
-
-        this._consultTermService.getConsultTermsInfo().subscribe(
+        const formatedDate = moment(this.selectedDate).format('YYYY-MM-DD');
+        const selectedType2 = this.selectedType;
+        this.listClin = [];
+        this.seeDoctorsList = [];
+        this._getAllDoctors.getDoctors().subscribe(
             data=> {
-                this.consultTerms = data;
-                this.consultTerms.forEach(function (value){
-                    const formatedDate2 = moment(value.date).format('YYYY-MM-DD')
-                    if(formatedDate == formatedDate2) {
-                        console.log("Datumi su isti");
-                    } else {
-                        console.log("Datumi nisu isti");
-                    }
-                });
-            }, error => {
-                console.log("Error in getting consult term data!")
-            });
+                this.doctors2 = data;
+                for(let doc of this.doctors2) {
+                    const formatedDateFrom = moment(doc.scheduledFrom).format('YYYY-MM-DD');
+                    const formatedDateTo = moment(doc.scheduledTo).format('YYYY-MM-DD');
+                    if(formatedDate <= formatedDateTo && formatedDate >= formatedDateFrom) {
 
-        console.log('ime tipa je: ', this.selectedType.name);
+                    } else {
+                        if(selectedType2.id == doc.typeId) {
+                            console.log(doc);
+                            this.seeDoctorsList.push(doc);
+                            //TODO: uzeti sve klinike koje imaju ove doktore
+                            this._listOfClinicsService.getListOfClinics().subscribe(
+                                data=>{
+                                    this.pListClin = data;
+                                    for(let clin of this.pListClin) {
+                                        if(clin.id == doc.clinic) {
+                                            this.listClin.push(clin);
+                                        }
+                                    }
+                                },
+                                error=>console.error('Error list of clinics!',error)
+                            )
+                        }
+                    }
+                }
+            }, error => {
+                console.log("Error in getting doctors!");
+            }
+        )
+        this.seeDoctors = false;
+        this.seeClinicsDoctors = false;
     }
 
     listOfDoctors(clinic: Clinic): void {
@@ -209,34 +233,52 @@ export class ListOfPatClinics implements OnInit{
         this.doctors = [];
         if(this.selectedType.id != null) {
             this.seeDoctors = true;
-            this._consultTermService.getConsultTermsInfo().subscribe(
-                data=> {
-                    this.consultTerms2 = data;
-                    for(let ct of this.consultTerms2) {
-                        if(JSON.stringify(ct.type) == JSON.stringify(this.selectedType.name)) {
-                            this._getAllDoctors.getDoctors().subscribe(
-                                data=> {
-                                    this.doctors2 = data;
-                                    for(let d of this.doctors2) {
-                                        if(JSON.stringify(this.selectedType.id) == JSON.stringify(d.typeId)) {
-                                            this.doctors.push(d);
-                                        } else {
-                                            console.log("Izabrani tip pregleda se ne poklapa sa tipom iz baze")
-                                        }
-                                    }
-                                })
-                        break;  //da ne bi vise puta iste lekare ispisivao
-                        } else {
-                            console.log("Imena tipova pregleda nisu jednaka")
-                        }
-                    }
-                }, error => {
-                    console.log("Error in getting consult term2 data!")
-                });
-                
+            for(let doc of this.seeDoctorsList) {
+                if(this.selectedClinic.id == doc.clinic && this.selectedType.id == doc.typeId) {
+                    this.doctors.push(doc);
+                }
+            }
         } else {
             alert("Type or date is not selected!");
         }
+    }
+
+    listOfClinicsDoctors(clinic: Clinic): void {
+        this.selectedClinic = clinic;
+        this.seeClinicsDoctors = true;
+        this.doctorsClinic = [];
+        this.doctors3 = [];
+        this._getAllDoctors.getDoctors().subscribe(
+            data => {
+                this.doctors2 = data;
+                for(let doc of this.doctors2) {
+                    if(this.selectedClinic.id == doc.clinic) {
+                        this.doctorsClinic.push(doc);
+                        this.doctors3.push(doc);
+                    }
+                }
+            }
+        )
+        this.doctors2=[];
+    }
+
+    buttonSearch2(): void {
+        const formatedDate = moment(this.selectedDate2).format('YYYY-MM-DD');
+        const selectedTypePom = this.selectedType2;
+        this.doctorsClinic = [];
+        
+        for(let doc of this.doctors3){
+            const formatedDateFrom = moment(doc.scheduledFrom).format('YYYY-MM-DD');
+            const formatedDateTo = moment(doc.scheduledTo).format('YYYY-MM-DD');
+            if(formatedDate <= formatedDateTo && formatedDate >= formatedDateFrom) {
+            } else {
+                if(selectedTypePom.id == doc.typeId) {
+                    console.log(doc);
+                    this.doctorsClinic.push(doc);      
+                }
+            }
+        }
+        //this.doctors3 = [];
     }
 
     sortData(sort: Sort) {
@@ -278,6 +320,50 @@ export class ListOfPatClinics implements OnInit{
     
     hideAllDoctors(): void{
         this.seeDoctors = false;
+    }
+
+    //filtriranje za doktora po imenu, prezimenu i oceni
+    get doctorName2():string{
+        return this._doctorName;
+    }
+
+    set doctorName2(value:string){
+        this._doctorName=value;
+        this.filteredDoctorsClinic = this.doctorName2 ? this.filterDoctorName2(this.doctorName2):this.doctorsClinic;
+    }
+
+    filterDoctorName2(filterField:string):Doctor[]{
+        filterField = filterField.toLocaleLowerCase();
+        return this.doctorsClinic.filter((doctor:Doctor)=>doctor.name.toLowerCase().indexOf(filterField)!=-1);
+    }
+
+    get doctorSurname2():string{
+        return this._doctorSurname;
+    }
+
+    set doctorSurname2(value:string){
+        this._doctorSurname=value;
+        this.filteredDoctorsClinic = this.doctorSurname2 ? this.filterDoctorSurname2(this.doctorSurname2):this.doctorsClinic;
+    }
+
+    filterDoctorSurname2(filterField:string):Doctor[]{
+        filterField = filterField.toLocaleLowerCase();
+        return this.doctorsClinic.filter((doctor:Doctor)=>doctor.surname.toLowerCase().indexOf(filterField)!=-1);
+    }
+
+
+    get doctorGrade2():string{
+        return this._doctorGrade;
+    }
+
+    set doctorGrade2(value:string){
+        this._doctorGrade=value;
+        this.filteredDoctorsClinic = this.doctorGrade2 ? this.filterDoctorGrade2(this.doctorGrade2):this.doctorsClinic;
+    }
+
+    filterDoctorGrade2(filterField:string):Doctor[]{
+        filterField = filterField.toLocaleLowerCase();
+        return this.doctorsClinic.filter((doctor:Doctor)=>doctor.grade.toString().indexOf(filterField)!=-1);
     }
 
 }
