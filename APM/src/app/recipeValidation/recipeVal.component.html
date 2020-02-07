@@ -1,16 +1,16 @@
 <div lass="d-flex flex-column flex-wrap p-2 justify-content-center">
-<h1  class="d-flex p-2 justify-content-center">Recipe Validation</h1>
-    <div class="d-flex flex-row flex-wrap p-2 justify-content-center">
-        
-        <label *ngIf="!recipes" ><h3>Currently there are no new recipes</h3></label>
-          <div class="card border-success mb-3" style="max-width: 20rem; max-height: 15rem; height:15rem; width:20rem; margin-right: 10px; margin-top:20px"
-           *ngFor = 'let r of recipes'>
-           <div>Doctor: {{r.doctor.name}} {{r.doctor.surname}}</div><br/>
-              <div class="card-body"> 
-                <h4 *ngFor = 'let m of r.medicaments'>{{m.name}} {{m.code}}</h4>
-                <button type="button" style="position: absolute; right: 0; bottom:0; margin: 10px" class="btn btn-primary" (click)="certify(r.id)">Certify</button>
+    <h1  class="d-flex p-2 justify-content-center">Recipe Validation</h1>
+        <div class="d-flex flex-row flex-wrap p-2 justify-content-center">
+            
+            <label *ngIf="!recipes" ><h3>Currently there are no new recipes</h3></label>
+              <div class="card border-success mb-3" style="max-width: 20rem; max-height: 15rem; height:15rem; width:20rem; margin-right: 10px; margin-top:20px"
+               *ngFor = 'let r of recipes'>
+               <div>Doctor: {{r.doctor.name}} {{r.doctor.surname}}</div><br/>
+                  <div class="card-body"> 
+                    <h4 *ngFor = 'let m of r.medicaments'>{{m.name}} {{m.code}}</h4>
+                    <button type="button" style="position: absolute; right: 0; bottom:0; margin: 10px" class="btn btn-primary" (click)="certify(r.id)">Certify</button>
+                  </div>
               </div>
+              
           </div>
-          
-      </div>
-    </div>
+        </div>

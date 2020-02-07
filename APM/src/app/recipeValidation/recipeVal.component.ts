@@ -23,15 +23,7 @@ export class RecipeValidation implements OnInit{
         );
     }
 
-    private refresh():void{
-        this._recipeValService.getAll(localStorage.getItem("user-id")).subscribe(
-            data=>{
-                    this.recipes = data;
-            },error=>{
-
-            }
-        );
-    }
+    
 
     public recipes : Recipe[];
 
@@ -39,12 +31,14 @@ export class RecipeValidation implements OnInit{
         this._recipeValService.certify(id).subscribe(
             data=>{
                     alert("Succesfully certified");
-                    this.refresh();
+                   
             },error=>{
-                    alert("Already certified");
+                    alert("Already certified or gone");
             }
         );
 
     }
+
+    
 
 }
