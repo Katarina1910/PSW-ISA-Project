@@ -1,14 +1,21 @@
 package com.softwareComedians.ClinicalCenterApp.dto;
 
 import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
+import lombok.*;
 
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
 public class ConsultTermDTO {
     private  ConsultTypeDTO type;
     private Long id;
     private String date;
     private  Double duration;
     private  Double price;
+    private String report;
     private  Double discount;
+    private String patient;
     private  DoctorDTO doctor;
     private  RoomDTO room;
 
@@ -26,7 +33,7 @@ public class ConsultTermDTO {
         this.room = room;
 
     }
-
+   
     public ConsultTermDTO(ConsultTerm c){
         id=c.getId();
         type = new ConsultTypeDTO(c.getType());

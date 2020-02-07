@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -17,12 +18,21 @@ public class Recipe {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Nurse nurse;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "medicament_id", referencedColumnName = "id")
-	private Medicament medicament;
+
+	@ManyToMany
+	@JoinTable(
+			name = "recipe_medicament",
+			joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "medicament_id", referencedColumnName = "id")
+	)
+	public Set<Medicament> medicaments;
 
 	@Column
 	private boolean isValidated;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "doctor_id", referencedColumnName = "id")
+	public Doctor doctor;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private MedicalRecord medicalRecord;
