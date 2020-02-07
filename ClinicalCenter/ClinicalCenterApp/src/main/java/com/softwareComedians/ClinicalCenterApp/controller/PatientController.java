@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/patient")
@@ -116,8 +118,8 @@ public class PatientController {
         return new ResponseEntity<>(termsDTO, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/edit")
     @PreAuthorize("ROLE_PATIENT")
+    @PostMapping(value = "/edit")
     public ResponseEntity<UserDTO> editPatient(@RequestBody PatientDTO patientDTO) {
 
         User userInfo = userService.findById(patientDTO.getId());

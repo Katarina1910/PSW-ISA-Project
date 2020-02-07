@@ -1,11 +1,13 @@
 package com.softwareComedians.ClinicalCenterApp.dto;
 
+import com.softwareComedians.ClinicalCenterApp.model.Authority;
 import com.softwareComedians.ClinicalCenterApp.model.User;
 import com.softwareComedians.ClinicalCenterApp.model.UserTokenState;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Setter
 @Getter
@@ -60,8 +62,32 @@ public class UserDTO {
         role = u.getRole();
         password=u.getPassword();
         isActivated=u.isActivated();
-        /*authorities = u.getAuthorities().stream()
-                .map(authority -> ((Authority) authority).getName()).collect(Collectors.toList());*/
+        this.authorities = u.getAuthorities().stream()
+                .map(authority -> ((Authority) authority).getName()).collect(Collectors.toList());
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public UserTokenState getToken() {
+        return token;
+    }
+
+    public void setToken(UserTokenState token) {
+        this.token = token;
+    }
+
+    public List<String> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<String> authorities) {
+        this.authorities = authorities;
     }
 
     public Long getId() {

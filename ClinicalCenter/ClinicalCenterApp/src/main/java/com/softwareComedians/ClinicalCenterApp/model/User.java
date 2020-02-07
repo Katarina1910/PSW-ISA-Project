@@ -230,7 +230,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.authorities;
     }
 
     public String getPassword() {
@@ -262,14 +262,6 @@ public class User implements UserDetails {
     public Set<Authority> getUsersAuthorities() {
         return this.authorities;
     }
-
-   /* public Set<RequestForConsult> getRequestForConsults() {
-        return requestForConsults;
-    }
-
-    public void setRequestForConsults(Set<RequestForConsult> requestForConsults) {
-        this.requestForConsults = requestForConsults;
-    }*/
 
     public RequestForPatientRegistration getRequestForPatientRegistration() {
         return requestForPatientRegistration;
