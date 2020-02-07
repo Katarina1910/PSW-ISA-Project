@@ -30,6 +30,8 @@ public class ConsultTermController {
     private ConsultTypeService consultTypeService;
 
 
+
+
     @PostMapping(value = "/addConsultReport")
     public ResponseEntity<Void> addConsultReport(@RequestBody ConsultTermDTO consultTermDTO){
         return this.consultTermService.addReport(consultTermDTO);
@@ -41,7 +43,7 @@ public class ConsultTermController {
         ConsultTerm ct = new ConsultTerm();
         //System.out.println("Dodaj");
 
-       // ct.setType(new ConsultType(consultTermDTO.getType().getId(), consultTermDTO.getType().getName()));
+        ct.setType(consultTypeService.findOne(consultTermDTO.getType().getId()));
         ct.setDuration(consultTermDTO.getDuration());
         ct.setDiscount(consultTermDTO.getDiscount());
         ct.setPrice(consultTermDTO.getPrice());
@@ -56,8 +58,8 @@ public class ConsultTermController {
       //  System.out.println(r.getName());
         ct.setRoom(r);
 
-        ConsultType consultType = consultTypeService.findByName(consultTermDTO.getType().getName());
-        ct.setType(consultType);
+        ct.setPatient(new Patient());
+
 
         ct = consultTermService.save(ct);
         return new ResponseEntity<>(new ConsultTermDTO(ct), HttpStatus.CREATED);
