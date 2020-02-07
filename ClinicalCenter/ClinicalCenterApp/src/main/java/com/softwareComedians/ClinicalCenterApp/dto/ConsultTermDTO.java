@@ -15,7 +15,7 @@ public class ConsultTermDTO {
     private  Double price;
     private String report;
     private  Double discount;
-    private String patient;
+    private PatientDTO patient;
     private  DoctorDTO doctor;
     private  RoomDTO room;
 
@@ -36,6 +36,7 @@ public class ConsultTermDTO {
    
     public ConsultTermDTO(ConsultTerm c){
         id=c.getId();
+        report = c.getReport();
         type = new ConsultTypeDTO(c.getType());
         date = c.getDate();
         duration=c.getDuration();
@@ -43,6 +44,7 @@ public class ConsultTermDTO {
         discount=c.getDiscount();
         doctor = new DoctorDTO(c.getDoctor());
         room = new RoomDTO(c.getRoom());
+        patient = new PatientDTO(c.getPatient());
     }
 
     public ConsultTypeDTO getType() {
