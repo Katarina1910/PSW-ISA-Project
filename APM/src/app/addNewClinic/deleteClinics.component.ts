@@ -12,7 +12,11 @@ import { Clinic } from './clinic';
 })
 
 export class DeleteClinicsComponent implements OnInit {
+
     public clinics: Clinic[];
+    editClinicmodel = new Clinic(null, null, null, null, null);
+    edit : boolean = false;
+    public editedClinic:Clinic;
     
     constructor(private _deleteClinicsService: DeleteClinicsService, private router: Router) {}
 
@@ -39,7 +43,24 @@ export class DeleteClinicsComponent implements OnInit {
         )  
     }
 
-    onClick(){
-        console.log("Clinics deleted");
+    editClinic(c:Clinic):void{   
+        this.edit = true;
+        this.editClinicmodel.name = c.name;
+        this.editClinicmodel.address = c.address;
+        this.editClinicmodel.description = c.description;
+        this.editClinicmodel.id = c.id;
+    }
+
+    onSubmit(){
+        this._deleteClinicsService.editClinic(this.editClinicmodel).subscribe(
+            data=>{
+                alert('Clinic edited!');
+                this.editedClinic = data as Clinic;
+                
+                this.router.navigate(['/HomepageCCA']);
+            },
+            error=> console.error('Error!', error)
+        )
+        this.edit = false; 
     }
 }

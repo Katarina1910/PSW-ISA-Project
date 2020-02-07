@@ -26,10 +26,8 @@ public class NurseService {
 
     public Nurse save(Nurse n){ return nurseRepository.save(n);}
 
-    public void remove(Long id){nurseRepository.deleteById(id);}
-
-    public void remove(String email){
-        Nurse n = nurseRepository.findByEmail(email);
+    public void remove(Long id){
+        Nurse n = nurseRepository.findById(id).orElseGet(null);
         if(n!=null){
             nurseRepository.delete(n);
         }

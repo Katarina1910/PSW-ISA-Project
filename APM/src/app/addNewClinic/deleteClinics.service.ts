@@ -9,6 +9,7 @@ import { Clinic } from './clinic';
 export class DeleteClinicsService{
     _url = 'http://localhost:8080/api/clinics/del';
     _url2 = 'http://localhost:8080/api/clinics/getAll';
+    _url3 = 'http://localhost:8080/api/clinics/edit';
 
     
     constructor(private _http: HttpClient) { }
@@ -20,4 +21,8 @@ export class DeleteClinicsService{
     getClinics():Observable<any> {
         return this._http.get<Clinic[]>(this._url2);
     }
+
+    editClinic(clinic: Clinic) : Observable<Clinic> {
+        return  this._http.put<Clinic>(this._url3, clinic);
+     }
 }
