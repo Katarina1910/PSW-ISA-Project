@@ -2,6 +2,7 @@ INSERT INTO `authorities` (id, name) VALUES (1, 'ROLE_CCA');
 INSERT INTO `authorities` (id, name) VALUES (2, 'ROLE_CA');
 INSERT INTO `authorities` (id, name) VALUES (3, 'ROLE_DOCTOR');
 INSERT INTO `authorities` (id, name) VALUES (4, 'ROLE_PATIENT');
+INSERT INTO `authorities` (id, name) VALUES (5, 'ROLE_NURSE');
 
 INSERT INTO `user` (id, address, city, country, email, is_activated, name, password, phone, role, surname, ucidn, username, last_password_reset_date) VALUES (1, 'Kralja Petra 42', 'Novi Sad', 'Srbija', 'pswtim2+1@gmail.com', true, 'John', '$2a$10$iGnVynNJEax7VXDAAnl7eOn02lNDjQ.VXn4S8rqKiVOLhFnld8K3q', '06122251251', 'ROLE_CCA', 'Doe', '0701921800150', 'admin1', '2019-12-31 00:00:00');
 INSERT INTO `user` (id, address, city, country, email, is_activated, name, password, phone, role, surname, ucidn, username, last_password_reset_date) VALUES (2, 'Jovana Obrenovica 55', 'Foca', 'BiH', 'pswtim2+2@gmail.com', true, 'Mike', '$2a$10$iGnVynNJEax7VXDAAnl7eOn02lNDjQ.VXn4S8rqKiVOLhFnld8K3q', '06022251232', 'ROLE_PATIENT', 'Smith', '0711951122164', 'pac1', '2019-12-31 00:00:00');
@@ -72,4 +73,9 @@ insert into medical_record (id, alergies, blood_type, diopter, height, weight) v
 
 INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (2, null, 1);
 INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (3, null, 2);
+
+INSERT INTO `user` (id, address, city, country, email, is_activated, name, password, phone, role, surname, ucidn, username, last_password_reset_date) VALUES (8, 'Skolska 10', 'Nis', 'Srbija', 'nurse@gmail.com', true, 'Nurse', '$2a$10$iGnVynNJEax7VXDAAnl7eOn02lNDjQ.VXn4S8rqKiVOLhFnld8K3q', '06512000000', 'ROLE_NURSE', 'Nurse', '0206123800000', 'nurse', '2019-12-31 00:00:00');
+insert into nurse (id) values (8);
+INSERT INTO `personnel` (id, clinic_id, consult_term_id) VALUES (8, 1, 2);
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (8, 5);
 
