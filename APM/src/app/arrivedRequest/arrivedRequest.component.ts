@@ -1,5 +1,6 @@
     import { Component, OnInit } from '@angular/core';
     import { arrivedRequestService } from './arrivedRequest.service';
+import { Router } from '@angular/router';
 
     @Component({
         selector: 'cca-arrivrequest',
@@ -12,7 +13,7 @@
         public pomocnaId: any;
         public email:any;
         public reason:string;
-        constructor(private _arrivedRequestService: arrivedRequestService) {}
+        constructor(private _arrivedRequestService: arrivedRequestService,  private router: Router) {}
 
         ngOnInit(){
             this._arrivedRequestService.getArrivedRequests().subscribe(
@@ -28,7 +29,7 @@
             this._arrivedRequestService.sendActivationEmail(id,email, this.arrReq).subscribe(
             data=> {
                 alert('Request has been sent!')
-                console.log('Success!', JSON.stringify(data))
+                console.log('Success!', JSON.stringify(data));
             },
             error=> console.error('Error!',error)
             )
@@ -40,20 +41,13 @@
         }
 
         onClickSendMessage(): void{
-            this._arrivedRequestService.sendRejectEmail(this.email,this.reason,this.pomocnaId).subscribe(
-            data=> {
-                alert('Reject email has been sent!')
-                console.log('Success!', JSON.stringify(data))
+            
+            this._arrivedRequestService.sendRejectEmail(this.email, this.reason,this.pomocnaId).subscribe(
+            data=> { 
             },
-            error=> console.error('Error!',error))
-/*
-            this._arrivedRequestService.removeArrivedRequest(this.pomocnaId).subscribe(
-                data=> {
-                    alert('Request has been removed')
-                    console.log('Success!', JSON.stringify(data))
-                },
-                error=> console.error('Error!',error))
-*/
+            error=> console.error('Error!',error));
+            alert('Reject email has been sent!');
+            this.router.navigate(['/HomepageCCA']);
         }
 
     }
