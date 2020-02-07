@@ -18,6 +18,7 @@ public class ConsultTermDTO {
     private PatientDTO patient;
     private  DoctorDTO doctor;
     private  RoomDTO room;
+    private  Long typeId;
 
     public ConsultTermDTO() {
     }
