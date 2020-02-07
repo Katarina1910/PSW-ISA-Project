@@ -1,6 +1,7 @@
 package com.softwareComedians.ClinicalCenterApp.service;
 
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
+import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
 import com.softwareComedians.ClinicalCenterApp.mail.SmtpMailSender;
 import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForConsult;
@@ -8,12 +9,11 @@ import com.softwareComedians.ClinicalCenterApp.model.User;
 import com.softwareComedians.ClinicalCenterApp.repository.RequestForConsultRepository;
 import com.softwareComedians.ClinicalCenterApp.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class RequestForConsultService {
@@ -44,7 +44,11 @@ public class RequestForConsultService {
     }
 
     public RequestForConsult findById(Long id) {
-        return requestForConsultRepository.findById(id).orElse(null);
+        try {
+            return requestForConsultRepository.findById(id).get();
+        } catch (NoSuchElementException e) {
+            throw new ApiRequestException("Request forConsult term with id '" + id + "' doesn't exist.");
+        }
     }
 
     public List<RequestForConsult> findAll() { return  requestForConsultRepository.findAll(); }
