@@ -1,5 +1,7 @@
 package com.softwareComedians.ClinicalCenterApp.service;
+
 import com.softwareComedians.ClinicalCenterApp.dto.ConsultTermDTO;
+import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
 import com.softwareComedians.ClinicalCenterApp.model.*;
 import com.softwareComedians.ClinicalCenterApp.repository.ConsultTermRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ConsultTermService {
@@ -38,6 +41,9 @@ public class ConsultTermService {
     @Autowired
     private ClinicsService clinicsService;
 
+    @Autowired
+    private  PatientService patientService;
+
 
     public ConsultTerm save(ConsultTerm consultTerm) {
         return consultTermRepository.save(consultTerm);
@@ -56,7 +62,11 @@ public class ConsultTermService {
     }
 
     public ConsultTerm findById(Long id) {
-        return consultTermRepository.findById(id).orElse(null);
+        try {
+            return consultTermRepository.findById(id).get();
+        } catch (NoSuchElementException e) {
+            throw new ApiRequestException("Consult term with id '" + id + "' doesn't exist.");
+        }
     }
 
     public List<ConsultTermDTO> getConsultsByUser(Long id, String role) {
@@ -125,7 +135,8 @@ public class ConsultTermService {
         ct.setType(rq.getType());
         ct.setRoom(roomService.findByName(room));
         ct.setRequestForConsult(rq);
-        ct.setPatient((Patient) rq.getPatient());
+        Patient p = patientService.findById(rq.getPatient().getId());
+        ct.setPatient(p);
         ct.setDate(date);
         ct.setPrice((double) 0);
         ct.setDuration((double) 2);
@@ -135,8 +146,8 @@ public class ConsultTermService {
         ct.setDoctor(doc);
         ct.setClinic(clinicsService.findOne(doc.getClinic().getId()));
 
-        System.out.println(ct.getDate()+ ct.getType().getName()+ ct.getDoctor().getName()+ ct.getPatient().getName()+ct.getRoom().getName()+
-                ct.getClinic().getName()+ct.getRequestForConsult().getId());
+        /*System.out.println(ct.getDate()+ ct.getType().getName()+ ct.getDoctor().getName()+ ct.getPatient().getName()+ct.getRoom().getName()+
+                ct.getClinic().getName()+ct.getRequestForConsult().getId());*/
 
         ct = consultTermService.save(ct);
         return ct;
