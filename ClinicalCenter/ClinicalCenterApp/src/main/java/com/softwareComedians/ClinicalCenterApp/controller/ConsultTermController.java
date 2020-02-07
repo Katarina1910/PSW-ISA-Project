@@ -30,9 +30,6 @@ public class ConsultTermController {
     private ConsultTypeService consultTypeService;
 
 
-
-
-
     @PostMapping(value = "/addConsultReport")
     public ResponseEntity<Void> addConsultReport(@RequestBody ConsultTermDTO consultTermDTO){
         return this.consultTermService.addReport(consultTermDTO);
