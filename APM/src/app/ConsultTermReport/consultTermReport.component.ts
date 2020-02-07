@@ -69,48 +69,6 @@ import { Router } from '@angular/router';
           };
     }
 
-    onItemSelect(item: any) {
-        console.log(item);
-      }
-      onSelectAll(items: any) {
-        console.log(items);
 
-      }
-}
-
-      
-
-          this.diagnosisSettings = {
-            singleSelection: true,
-            idField: 'id',
-            textField: 'name',
-            itemsShowLimit: 3,
-            allowSearchFilter: true
-          };
-    }
-
-    onAddReport(): void{
-        if(this.selectedMedicaments == null || this.selectedDiagnosis == null){
-          alert('Please, fill the information');
-            return;
-        }
-        this.consult.id = this._consultTermReportService.id;
-        this.consult.report = this.report;
-      //  this.consult.diagnosis = new listOfDiagnosis(this.selectedDiagnosis[0].id,null,null,null);
-        this.recipe =  new Recipe(null,null,null,null,null,null);
-        this.recipe.medicaments = <listOfMedicaments[]>[];
-        for(let i=0; i<this.selectedMedicaments.length; i++){
-              this.recipe.medicaments.push(new listOfMedicaments(this.selectedMedicaments[i].id,null,null,null));     
-        }
-       // this.consult.recipe = this.recipe;
-        this._consultTermReportService.addConsultTerm(this.consult).subscribe(
-          data=> {
-            this.router.navigate(['/HomepageDoctor/DoctorWorkCalendar']);
-        },
-         error=> {
-           alert('Examination report has not been saved properly');
-         }
-        )
-    
-      }
+  
     }
