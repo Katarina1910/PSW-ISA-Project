@@ -13,6 +13,9 @@ import { ListOfMedicament } from '../listOfMedicaments/listOfMedicament.componen
 import { ListOfDiagnosis } from '../listOfAllDiagnosis/listOfAllDiagnosis.component';
 import { Recipe } from './Recipe';
 import { Router } from '@angular/router';
+import { DoctorWorkCalService } from '../doctorWorkingCalendar/doctorWorkCal.service';
+import { Consult } from './Consult';
+
 
 
 @Component({
@@ -26,13 +29,12 @@ import { Router } from '@angular/router';
     selectedItems = [];
     dropdownSettings = {};
 
-
-
-    public consult = new ConsultTerm(null,null,null,null,null,null,null,null, null,null); 
+    public consultTerm = new ConsultTerm(null,null,null,null,null,null,null,null, null,null); 
     public listDiag : [];
     public listMed : [];
     public report : string;
     public recipe: Recipe;
+    public consult =  new Consult(null,null,null,null,null,null);
     public selectedMedicaments : Array<any>;
     public medicamentsSettings : {};
     public selectedDiagnosis : {}; 
@@ -40,7 +42,8 @@ import { Router } from '@angular/router';
 
     constructor(private _listOfDiagnosisService: listOfDiagnosisService,private _listOfMedicametService: listOfMedicamentService,
       private router: Router,
-      private _consultTermReportService: ConsultTermReportService) {}
+      private _consultTermReportService: ConsultTermReportService,
+      private _workCalendarService: DoctorWorkCalService) {}
 
     ngOnInit(){
         this._listOfDiagnosisService.getListOfDiagnosis().subscribe(
@@ -61,14 +64,52 @@ import { Router } from '@angular/router';
             singleSelection: false,
             idField: 'id',
             textField: 'name',
-
             selectAllText: 'Select All',
             unSelectAllText: 'UnSelect All',
             itemsShowLimit: 3,
             allowSearchFilter: true
           };
+
+          this.diagnosisSettings = {
+            singleSelection: true,
+            idField: 'id',
+            textField: 'name',
+            allowSearchFilter: true
+          };
+
+          this._workCalendarService.getConsult(this._consultTermReportService.id).subscribe(
+            data=>{
+                  this.consultTerm = data;
+            },error=>{
+
+            }
+          );
+    }
+
+    private onAddReport(): void{
+          if(this.selectedMedicaments == null || this.selectedDiagnosis == null || this.report === null || this.report === undefined || this.report ===""){
+            alert("Please fill information");
+            return;
+          }
+          this.consult.report = this.report;
+          this.consult.consultTerm = this.consultTerm;
+          this.consult.diagnosis = new listOfDiagnosis(this.selectedDiagnosis[0].id,null,null,null);
+          this.recipe = new Recipe(null,null,null, null, null,null);
+          this.recipe.medicaments = <listOfMedicaments[]>[];
+          for(let i=0; i<this.selectedMedicaments.length; i++){
+              this.recipe.medicaments.push(new  listOfMedicaments(this.selectedMedicaments[i].id,null,null,null));
+          }
+          this.consult.recipe = this.recipe;
+
+          this._consultTermReportService.addConsultTerm(this.consult).subscribe(
+            data =>{
+              this.router.navigate(['HompageDoctor/DoctorWorkCalendar']);
+            },error => {
+              alert("Consult report hasn't been sabed properly");
+            }
+          );
+
     }
 
 
-  
-    }
+}
