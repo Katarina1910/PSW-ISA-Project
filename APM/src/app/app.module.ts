@@ -68,7 +68,7 @@ import { patientHistory } from './patientHistory/patientHistory.component';
 import { ReserveRoomsOPComponent } from './reserveRoomOP/reserveRoomOP.component';
 import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfilePage/clinicCenterAdminProfilePage.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -140,6 +140,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FullCalendarModule,
     BrowserAnimationsModule,
     NgbModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyASA1PH4V5-ZK3mRpFF5Yn2ZbtnMl7UnIc'
+    }),
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},

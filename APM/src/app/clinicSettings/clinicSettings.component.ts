@@ -1,18 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, ElementRef, ViewChild } from '@angular/core';
 import { User } from '../registration/user';
 import { UserService } from '../registration/user.service';
 import { Router } from '@angular/router';
 import { Clinic } from '../addNewClinic/clinic';
 import { ClinicSettingsService } from './clinicSettings.service';
-
+import { MapsAPILoader } from '@agm/core';
 
 @Component({
   selector: 'app-profile-settings',
   templateUrl: './clinicSettings.component.html',
+  styles: [`
+  agm-map {
+    height: 300px;
+    width: 700px;
+  }
+`],
 
 })
 export class ClinicSettingsComponent implements OnInit {
 
+  latitude: number = 45.267136;
+  longitude: number = 29.833549;
+  zoom:number = 15;
+  address: string;
+  private geoCoder;
+ google: any;
   
   user: User = new User("","","","","","","","","","","","");
   clinic: Clinic = new Clinic(null,null,null,null,null)  
@@ -21,12 +33,72 @@ export class ClinicSettingsComponent implements OnInit {
   password: string = '';
   repeatPassword: string = '';
 
+  @ViewChild('search',null)
+  public searchElementRef: ElementRef;
+
   constructor(private userService: UserService, private router: Router,
-              private ccService: ClinicSettingsService) { 
+              private ccService: ClinicSettingsService,private mapsAPILoader: MapsAPILoader,
+              private ngZone: NgZone) { 
   }
 
   ngOnInit() {
     this.getUserInfo();
+
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {  
+      this.setCurrentLocation();
+      this.geoCoder = new google.maps.Geocoder;
+ 
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ["address"]
+      });
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+ 
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+ 
+          //set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 12;
+        });
+      });
+    });
+  }
+  
+  // Get Current Location Coordinates
+  private setCurrentLocation() {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.zoom = 8;
+        this.getAddress(this.latitude, this.longitude);
+      });
+    }
+  }
+  
+  getAddress(latitude, longitude) {
+    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+      console.log(results);
+      console.log(status);
+      if (status === 'OK') {
+        if (results[0]) {
+          this.zoom = 12;
+          this.address = results[0].formatted_address;
+        } else {
+          window.alert('No results found');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+ 
+    });
   }
 
   onClickCancel(){
