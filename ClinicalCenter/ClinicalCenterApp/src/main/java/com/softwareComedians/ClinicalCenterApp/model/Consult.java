@@ -19,6 +19,18 @@ public class Consult{
 	@JoinColumn(name = "consultTerm_id", referencedColumnName = "id")
 	private ConsultTerm consultTerm;
 
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "recipe_id", referencedColumnName = "id")
+	public Recipe recipe;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "nurse_id", referencedColumnName = "id")
+	public Nurse nurse;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "diagnosis_id", referencedColumnName = "id")
+	public Diagnosis diagnosis;
+
 	@Column
 	private String report;
 
@@ -31,7 +43,6 @@ public class Consult{
 	}
 
 
-	
-	
-
+	public Consult() {
+	}
 }
