@@ -1,8 +1,11 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {Router} from '@angular/router';
-import {UserService} from '../service';
+
+
 import {AdminGuard} from './admin.guard';
-import {MockUserService} from '../service/mocks';
+
+import { UserService } from 'src/app/registration/user.service';
+import { MockUserService } from 'src/app/service/mocks';
 
 export class RouterStub {
   navigate(commands?: any[], extras?: any) {
