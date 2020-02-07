@@ -54,8 +54,8 @@ public class ConsultTerm {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Patient patient;
 
-	@OneToOne(mappedBy = "consultTerm")
-	private Consult consult;
+	/*@OneToOne(mappedBy = "consultTerm")
+	private Consult consult;*/
 
 	
 	public ConsultTerm() {
