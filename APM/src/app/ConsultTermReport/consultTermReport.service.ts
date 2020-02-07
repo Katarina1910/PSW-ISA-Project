@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { listOfDiagnosis } from '../listOfAllDiagnosis/listOfAllDiagnosis';
 import { ConsultTerm } from '../consultTerm/consultTerm';
+import { Consult } from './Consult';
 
 @Injectable({
     providedIn: 'root'
@@ -15,8 +16,8 @@ export class ConsultTermReportService{
 
     constructor(private _http: HttpClient) { }
 
-    addConsultTerm(consultTerm: ConsultTerm) {
-        return  this._http.post<void>(this._url, consultTerm);  
+    addConsultTerm(consult: Consult) {
+        return  this._http.post<void>(this._url, consult);  
      }
 
 }
