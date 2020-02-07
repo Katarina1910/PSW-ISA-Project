@@ -1,5 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
+import com.softwareComedians.ClinicalCenterApp.common.TimeProvider;
 import com.softwareComedians.ClinicalCenterApp.common.consts.UserRoles;
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForPatientRegistrationDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
@@ -7,6 +8,7 @@ import com.softwareComedians.ClinicalCenterApp.dto.UserRegistrationDTO;
 import com.softwareComedians.ClinicalCenterApp.mappers.UserMapper;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForPatientRegistration;
 import com.softwareComedians.ClinicalCenterApp.model.User;
+import com.softwareComedians.ClinicalCenterApp.repository.AuthorityRepository;
 import com.softwareComedians.ClinicalCenterApp.service.RequestForPatientRegistrationService;
 import com.softwareComedians.ClinicalCenterApp.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,12 @@ public class UserController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private AuthorityRepository authorityRepository;
+
+	@Autowired
+	private TimeProvider timeProvider;
 
 	@GetMapping("/public/{id}")
 	//@PreAuthorize("hasRole('ROLE_CA')")
@@ -61,7 +69,9 @@ public class UserController {
 		user.setPhone(rqDTO.getUserData().getPhone());
 		user.setUsername(rqDTO.getUserData().getUsername());
 		user.setPassword(passwordEncoder.encode(rqDTO.getUserData().getPassword()));
+		user.setLastPasswordResetDate(timeProvider.nowTimestamp());
 		user.setRole(UserRoles.ROLE_PATIENT);
+		user.getUsersAuthorities().add(authorityRepository.findByName(UserRoles.ROLE_PATIENT));
 
 		user = userService.save(user);
 
@@ -72,6 +82,7 @@ public class UserController {
 	}
 
 	@PutMapping(value = "/edit")
+	//@PreAuthorize("hasRole('ROLE_PATIENT')")
 	public ResponseEntity<UserDTO> editUser(@RequestBody UserDTO userDTO) {
 		//User newUserInfo = userService.editUser(user);
 		//newUserInfo = userService.save(newUserInfo);
@@ -81,7 +92,7 @@ public class UserController {
 		userInfo.setSurname(userDTO.getSurname());
 		userInfo.setPhone(userDTO.getPhone());
 		userInfo.setUsername(userDTO.getUsername());
-		userInfo.setPassword(userDTO.getPassword());
+		//userInfo.setPassword(userDTO.getPassword());
 		userInfo.setActivated(userDTO.isActivated());
 		userInfo.setCountry(userDTO.getCountry());
 		userInfo.setCity(userDTO.getCity());

@@ -1,7 +1,16 @@
-INSERT INTO `authorities` (id, name) VALUES (1, 'ROLE_CCA');
-INSERT INTO `authorities` (id, name) VALUES (2, 'ROLE_CA');
-INSERT INTO `authorities` (id, name) VALUES (3, 'ROLE_DOCTOR');
-INSERT INTO `authorities` (id, name) VALUES (4, 'ROLE_PATIENT');
+INSERT INTO `authorities` (name) VALUES ('ROLE_CCA');
+INSERT INTO `authorities` (name) VALUES ('ROLE_CA');
+INSERT INTO `authorities` (name) VALUES ('ROLE_DOCTOR');
+INSERT INTO `authorities` (name) VALUES ('ROLE_PATIENT');
+INSERT INTO `authorities` (name) VALUES ('ROLE_NURSE');
+
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (1, 1);
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (2, 4);
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (3, 4);
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (4, 3);
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (5, 3);
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (6, 3);
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (7, 2);
 
 INSERT INTO `user` (id, address, city, country, email, is_activated, name, password, phone, role, surname, ucidn, username, last_password_reset_date) VALUES (1, 'Kralja Petra 42', 'Novi Sad', 'Srbija', 'pswtim2+1@gmail.com', true, 'John', '$2a$10$iGnVynNJEax7VXDAAnl7eOn02lNDjQ.VXn4S8rqKiVOLhFnld8K3q', '06122251251', 'ROLE_CCA', 'Doe', '0701921800150', 'admin1', '2019-12-31 00:00:00');
 INSERT INTO `user` (id, address, city, country, email, is_activated, name, password, phone, role, surname, ucidn, username, last_password_reset_date) VALUES (2, 'Jovana Obrenovica 55', 'Foca', 'BiH', 'pswtim2+2@gmail.com', true, 'Mike', '$2a$10$iGnVynNJEax7VXDAAnl7eOn02lNDjQ.VXn4S8rqKiVOLhFnld8K3q', '06022251232', 'ROLE_PATIENT', 'Smith', '0711951122164', 'pac1', '2019-12-31 00:00:00');
@@ -31,22 +40,11 @@ INSERT INTO `room` (id, name, type, clinic_id) VALUES (2, 'room2', 1, null);
 INSERT INTO `consult_type` (id, description, name) VALUES (1, 'Opis tipa1...', 'tip1');
 INSERT INTO `consult_type` (id, description, name) VALUES (2, 'Opis tipa2...', 'tip2');
 
-
-
-
 INSERT INTO `consult_term` ( id, date, discount, duration, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES (1, '2019-12-31 00:00:00', '5', '10', '150',  1, 4, 2, 2, 1);
 INSERT INTO `consult_term` (id, date, discount, duration, price,clinic_id, doctor_id, patient_id, room_id, type_id) VALUES (2, '2019-12-30 00:00:00', '10', '11', '100',  1, 6, 2, 1, 2);
 INSERT INTO `consult_term` (id, date, discount, duration, price,  clinic_id, doctor_id, patient_id, room_id, type_id) VALUES (3, '2019-12-29 00:00:00', '15', '12', '170',  1, 5, 3, 2, 2);
 INSERT INTO `consult_term` (id, date, discount, duration, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES (4, '2019-12-28 00:00:00', '20', '13', '90',  1, 4, 3, 1, 1);
 INSERT INTO `consult_term` (id, date, discount, duration, price,  clinic_id, doctor_id, patient_id, room_id, type_id) VALUES ( 5, '2019-01-28 00:00:00', '60', '14', '10',  1, 4, 2, 1, 1);
-
-
-INSERT INTO `user_authority` (user_id, authority_id) VALUES (1, 1);
-INSERT INTO `user_authority` (user_id, authority_id) VALUES (2, 2);
-INSERT INTO `user_authority` (user_id, authority_id) VALUES (3, 2);
-INSERT INTO `user_authority` (user_id, authority_id) VALUES (4, 3);
-INSERT INTO `user_authority` (user_id, authority_id) VALUES (5, 3);
-INSERT INTO `user_authority` (user_id, authority_id) VALUES (6, 3);
 
 insert into room_terms (date, room_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',1,true,true,true,true,true,true);
 insert into room_terms (date, room_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',2,true,true,true,true,true,true);
@@ -55,7 +53,6 @@ insert into request_for_consult (consult_term_id, date_and_time, is_accepted, pa
 insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',4,false ,true,true,true,true,true);
 insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',5,true ,true,true,true,true,true);
 insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-04',6,true,true,true,true,true,true);
-
 
 insert into diagnosis (id, code, description, name) values (1,'001', 'opis','Upala pluca');
 insert into diagnosis (id, code, description, name) values (2,'002', 'opis','Brohintis');

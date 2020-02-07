@@ -69,6 +69,7 @@ import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
 import { patientHistory } from './patientHistory/patientHistory.component';
 import { ReserveRoomsOPComponent } from './reserveRoomOP/reserveRoomOP.component';
 import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfilePage/clinicCenterAdminProfilePage.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -142,6 +143,7 @@ import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfil
     FullCalendarModule,
     NgMultiSelectDropDownModule.forRoot(),
     BrowserAnimationsModule,
+    NgbModule,
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
