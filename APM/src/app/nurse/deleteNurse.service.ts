@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class DeleteNurseService{
-    _url = 'http://localhost:8080/api/nurses/delete';
+    _url = 'http://localhost:8080/api/nurses/del';
     _url2 = 'http://localhost:8080/api/nurses/getAll';
 
     
