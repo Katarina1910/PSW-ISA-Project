@@ -8,7 +8,16 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-public class Consult extends ConsultTerm {
+public class Consult{
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "consultTerm_id", referencedColumnName = "id")
+	private ConsultTerm consultTerm;
 
 	@Column
 	private String report;

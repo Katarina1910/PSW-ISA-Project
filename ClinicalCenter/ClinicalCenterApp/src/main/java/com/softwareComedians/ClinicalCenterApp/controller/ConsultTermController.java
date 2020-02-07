@@ -22,8 +22,6 @@ public class ConsultTermController {
     @Autowired
     private DoctorService doctorService;
 
-    @Autowired
-    private ClinicsService clinicsService;
 
     @Autowired
     private RoomService roomService;
@@ -31,14 +29,14 @@ public class ConsultTermController {
     @Autowired
     private ConsultTypeService consultTypeService;
 
-    @Autowired
-    private RoomTermsServie roomTermsServie;
 
-    @Autowired
-    private DoctorTermsService doctorTermsService;
 
-    @Autowired
-    private  RequestForConsultService requestForConsultService;
+
+
+    @PostMapping(value = "/addConsultReport")
+    public ResponseEntity<Void> addConsultReport(@RequestBody ConsultTermDTO consultTermDTO){
+        return this.consultTermService.addReport(consultTermDTO);
+    }
 
     @PostMapping()
     public ResponseEntity<ConsultTermDTO> createConsultTerm(@RequestBody ConsultTermDTO consultTermDTO) {
@@ -84,68 +82,7 @@ public class ConsultTermController {
     public ResponseEntity<ConsultTermDTO> addConsultTerm(@PathVariable String date, @PathVariable String term,
                                                          @PathVariable String room, @PathVariable Long doctor, @PathVariable Long id) {
 
-        ConsultTerm ct = new ConsultTerm();
-        RequestForConsult rq = requestForConsultService.findById(id);
-        System.out.println(rq.getId());
-
-        List<RoomTerms> rts= roomTermsServie.findByDate(date);
-        List<DoctorTerms> dts = doctorTermsService.findByDate(date);
-        DoctorTerms dt = null;
-        RoomTerms r = null;
-        for (RoomTerms rr : rts){
-            if(rr.getRoom().getName().equals(room)){
-                r=rr;
-                System.out.println(r.getRoom().getName());
-            }
-        }
-
-        for(DoctorTerms d : dts){
-            if(d.getDoctor().getId() == doctor){
-                dt = d;
-            }
-        }
-
-
-        if(term.equals("07:00-09:00")){
-            r.setTerm1(false);
-            dt.setTerm1(false);
-        }else if(term.equals("09:00-11:00")){
-            r.setTerm2(false);
-            dt.setTerm2(false);
-        }else if(term.equals("11:00-13:00")){
-            r.setTerm3(false);
-            dt.setTerm3(false);
-        }
-        else if(term.equals("13:00-15:00")){
-            r.setTerm4(false);
-            dt.setTerm4(false);
-        }else if(term.equals("15:00-17:00")){
-            r.setTerm5(false);
-            dt.setTerm5(false);
-        }else if(term.equals("17:00-19:00")){
-            r.setTerm6(false);
-            dt.setTerm6(false);
-        }
-        roomTermsServie.save(r);
-        doctorTermsService.save(dt);
-
-        ct.setType(rq.getType());
-        ct.setRoom(roomService.findByName(room));
-        ct.setRequestForConsult(rq);
-        ct.setPatient((Patient) rq.getPatient());
-        ct.setDate(date);
-        ct.setPrice((double) 0);
-        ct.setDuration((double) 2);
-        ct.setDiscount((double) 0);
-
-        //nije dobar doktor, ni klinika
-        Doctor doc = doctorService.findOne(doctor);
-        ct.setDoctor(doc);
-        ct.setClinic(clinicsService.findOne(doc.getClinic().getId()));
-
-
-
-        ct = consultTermService.save(ct);
+       ConsultTerm ct = consultTermService.reserveRoom(date, term, room, doctor, id);
         return new ResponseEntity<>(new ConsultTermDTO(ct), HttpStatus.CREATED);
     }
 

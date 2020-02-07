@@ -19,12 +19,14 @@
 
       <div class="form-group" >
         <label class="col-form-label" for="inputDefault"> Dioptre:</label>
-        <input type="text" class="form-control"  [(ngModel)]="medicalRecord.dioptre" id="dioptre"  name="dioptre">
+        <input type="text" class="form-control"  [(ngModel)]="medicalRecord.diopter" id="dioptre"  name="dioptre">
       </div>
 
       <div class="form-group" >
         <label class="col-form-label" for="inputDefault"> Alergic to medicament:</label>
-        <input type="text" class="form-control"  [(ngModel)]="medicalRecord.alergies" id="alergic"  name="alergic">
+        <textarea type="text" class="form-control"  [(ngModel)]="medicalRecord.alergies" id="alergic"  name="alergic"></textarea>
       </div>
+      
+      <button  type="button" class="btn btn-outline-primary" (click)='Edit()'>Edit</button>
     </fieldset>
   </form>

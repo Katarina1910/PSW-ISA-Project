@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,6 +24,7 @@ public class MedicalRecordService {
         MedicalRecord medicalRecord = medicalRecordRepository.findByUserId(id);
 
         MedicalRecordDTO medicalRecordDTO =  MedicalRecordDTO.builder()
+                                            .id(medicalRecord.getId())
                                             .alergies(medicalRecord.getAlergies())
                                             .bloodType(medicalRecord.getBloodType())
                                             .diopter(medicalRecord.getDiopter())
@@ -33,5 +36,21 @@ public class MedicalRecordService {
 
     public MedicalRecord save(MedicalRecord m){return medicalRecordRepository.save(m);}
 
+    public ResponseEntity<Void> update(MedicalRecordDTO medicalRecordDTO) {
+        MedicalRecord medicalRecord = medicalRecordRepository.findById(medicalRecordDTO.getId()).orElseGet(null);
+
+        if(medicalRecord == null){
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+        }else{
+            medicalRecord.setAlergies(medicalRecordDTO.getAlergies());
+            medicalRecord.setBloodType(medicalRecordDTO.getBloodType());
+            medicalRecord.setDiopter(medicalRecordDTO.getDiopter());
+            medicalRecord.setHeight(medicalRecordDTO.getHeight());
+            medicalRecord.setWeight(medicalRecordDTO.getWeight());
+            medicalRecordRepository.save(medicalRecord);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+
+    }
 }
 

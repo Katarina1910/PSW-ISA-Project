@@ -19,6 +19,8 @@ public class ConsultTerm {
 	@Column
 	private String date;
 
+	@Column
+	private String report;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private ConsultType type;
@@ -51,6 +53,9 @@ public class ConsultTerm {
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Patient patient;
+
+	@OneToOne(mappedBy = "consultTerm")
+	private Consult consult;
 
 	
 	public ConsultTerm() {
@@ -144,6 +149,8 @@ public class ConsultTerm {
 	public void setType(ConsultType type) {
 		this.type = type;
 	}
+
+
 
 	public RequestForConsult getRequestForConsult() {
 		return requestForConsult;
