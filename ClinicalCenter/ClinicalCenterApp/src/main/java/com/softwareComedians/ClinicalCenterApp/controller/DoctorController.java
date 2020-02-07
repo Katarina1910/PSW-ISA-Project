@@ -88,7 +88,8 @@ public class DoctorController {
     @PutMapping(value = "/rateDoctor/{rate}")
     public ResponseEntity<DoctorDTO> rateDoctorGrade (@RequestBody DoctorDTO doctorDTO, @PathVariable Double rate) {
         Doctor doc = doctorService.findOne(doctorDTO.getId());
-        doc.setGrade(rate);
+        Double r = (doc.getGrade()+rate)/2;
+        doc.setGrade(r);
         doc = doctorService.save(doc);
 
         return new ResponseEntity<>(new DoctorDTO(doc), HttpStatus.OK);
