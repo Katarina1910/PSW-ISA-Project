@@ -1,5 +1,6 @@
 import { OnInit, Component } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+
 import { listOfDiagnosis } from '../listOfAllDiagnosis/listOfAllDiagnosis';
 import { listOfDiagnosisService } from '../listOfAllDiagnosis/listOfAllDiagnosis.service';
 import { listOfMedicamentService } from '../listOfMedicaments/listOfMedicament.service';
@@ -13,6 +14,7 @@ import { ListOfDiagnosis } from '../listOfAllDiagnosis/listOfAllDiagnosis.compon
 import { Recipe } from './Recipe';
 import { Router } from '@angular/router';
 
+
 @Component({
     selector: 'consu-term-report',
     templateUrl: './consultTermReport.component.html'
@@ -23,6 +25,8 @@ import { Router } from '@angular/router';
     dropdownList = [];
     selectedItems = [];
     dropdownSettings = {};
+
+
 
     public consult = new ConsultTerm(null,null,null,null,null,null,null,null, null,null); 
     public listDiag : [];
@@ -57,19 +61,23 @@ import { Router } from '@angular/router';
             singleSelection: false,
             idField: 'id',
             textField: 'name',
+
             selectAllText: 'Select All',
             unSelectAllText: 'UnSelect All',
             itemsShowLimit: 3,
             allowSearchFilter: true
           };
     }
-  
-  
+
     onItemSelect(item: any) {
         console.log(item);
       }
       onSelectAll(items: any) {
         console.log(items);
+
+      }
+}
+
       
 
           this.diagnosisSettings = {
