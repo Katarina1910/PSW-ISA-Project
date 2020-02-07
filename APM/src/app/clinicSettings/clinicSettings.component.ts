@@ -4,6 +4,8 @@ import { UserService } from '../registration/user.service';
 import { Router } from '@angular/router';
 import { Clinic } from '../addNewClinic/clinic';
 import { ClinicSettingsService } from './clinicSettings.service';
+import { Doctor } from '../doctor/doctor';
+import { DeleteDoctorService } from '../doctor/deleteDoctor.service';
 
 
 @Component({
@@ -16,21 +18,29 @@ export class ClinicSettingsComponent implements OnInit {
   
   user: User = new User("","","","","","","","","","","","");
   clinic: Clinic = new Clinic(null,null,null,null,null)  
+  doctors: Doctor[];
 
 
   password: string = '';
   repeatPassword: string = '';
 
   constructor(private userService: UserService, private router: Router,
-              private ccService: ClinicSettingsService) { 
+              private ccService: ClinicSettingsService, private deleteDocSevice : DeleteDoctorService) { 
   }
 
   ngOnInit() {
     this.getUserInfo();
+    this.deleteDocSevice.getDoctors().subscribe(
+      data=>{
+        this.doctors = data;
+        console.log(this.doctors)
+      }
+    )
   }
 
   onClickCancel(){
     this.router.navigate(['/HomepageCA']);
+    
   }
 
   onClickSave(){
