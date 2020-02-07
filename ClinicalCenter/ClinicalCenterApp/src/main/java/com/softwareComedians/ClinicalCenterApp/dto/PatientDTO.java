@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Setter
 @Getter
@@ -24,7 +26,7 @@ public class PatientDTO {
     private String password;
     private boolean isActivated;
     private UserTokenState token;
-    private Set<Authority> authorities = new HashSet<>();
+    private List<String> authorities;
     private MedicalRecord medicalRecord;
     private Set<ConsultTerm> appointedTerms;
 
@@ -34,7 +36,7 @@ public class PatientDTO {
 
     public PatientDTO(Long id, String name, String surname, String ucidn, String address,String city, String country,
                       String email, String phone, String username, String password, boolean isActivated,
-                      Set<Authority> authorities, MedicalRecord medicalRecord, Set<ConsultTerm> appointedTerms) {
+                      List<String> authorities, MedicalRecord medicalRecord, Set<ConsultTerm> appointedTerms) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -66,8 +68,8 @@ public class PatientDTO {
         username=p.getUsername();
         password=p.getPassword();
         isActivated=p.isActivated();
-        /*authorities = p.getAuthorities().stream()
-                .map(authority -> ((Authority) authority).getName()).collect(Collectors.toList());*/
+        authorities = p.getAuthorities().stream()
+                .map(authority -> ((Authority) authority).getName()).collect(Collectors.toList());
        // medicalRecord = p.getMedicalRecord();
        // appointedTerms = p.getAppointedTerms();
     }
@@ -192,11 +194,11 @@ public class PatientDTO {
         this.appointedTerms = appointedTerms;
     }
 
-    public Set<Authority> getAuthorities() {
+    public List<String> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(Set<Authority> authorities) {
+    public void setAuthorities(List<String> authorities) {
         this.authorities = authorities;
     }
 }

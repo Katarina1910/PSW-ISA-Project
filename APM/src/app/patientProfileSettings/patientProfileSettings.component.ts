@@ -37,16 +37,6 @@ export class PatientProfileSettingsComponent implements OnInit {
   }
 
   onClickSave(){
-    console.log('Print: ', this.user)
-    
-    this.authService.changePassowrd(this.form.value)
-    .subscribe(() => {
-      this.authService.logout()
-      this.router.navigate(['/login', {msgType: 'success', msgBody: 'Success! Please sign in with your new password.'}]);
-    }, error => {
-      this.notification = {msgType: 'error', msgBody: 'Invalid old password.'};
-    });
-    
     this.editUserService.editUsers(this.user)
     .subscribe(
       data=> {
@@ -57,6 +47,18 @@ export class PatientProfileSettingsComponent implements OnInit {
         error=> console.error('Error updating!',error)
     )
       
+  }
+
+  onClickChangePassword() {
+    console.log('Print: ', this.form.value);
+    this.authService.changePassowrd(this.form.value)
+    .subscribe(() => {
+      this.authService.logout()
+      this.router.navigate(['/login', {msgType: 'success', msgBody: 'Success! Please sign in with your new password.'}]);
+    }, error => {
+      this.notification = {msgType: 'error', msgBody: 'Invalid old password.'};
+    });
+    
   }
 
   private getUserInfo(): void {

@@ -6,6 +6,7 @@ import { ConsultTerm } from '../consultTerm/consultTerm';
 import { RequestForConsult } from '../requestForConsult/requestForConsult';
 import { Sort } from '@angular/material';
 import { ConsultTermService } from '../consultTerm/consultTerm.service';
+import { AddDoctorService } from '../doctor/addDoctor.service';
 
 @Component({
     selector : 'cc-patientHistory',
@@ -17,9 +18,11 @@ export class patientHistory implements OnInit{
     user: User = new User("","","","","","","","","","","","");
     private consultTerms: ConsultTerm[];
     private sortedTerms: ConsultTerm[];
+    currentRate = 3;
 
     constructor(private _consultTermService: ConsultTermService,
-                private userService: UserService) {}
+                private userService: UserService,
+                private addDoctorService: AddDoctorService) {}
   
     ngOnInit(): void {
         this.getUserInfo();
@@ -42,6 +45,16 @@ export class patientHistory implements OnInit{
         }, error => {
           console.log("Error in getting user data!")
         });
+    }
+
+    rateDoctor(ct: ConsultTerm): void {
+      const rate = ct.doctor.grade;
+      this.addDoctorService.rateDoctor(ct.doctor, rate).subscribe(
+        data=> {
+          alert('Doctors grade is sent!')
+        },
+        error=> console.error('Error rating!',error))
+      console.log("ocena doktora: ",rate);
     }
     
     //sortiranje

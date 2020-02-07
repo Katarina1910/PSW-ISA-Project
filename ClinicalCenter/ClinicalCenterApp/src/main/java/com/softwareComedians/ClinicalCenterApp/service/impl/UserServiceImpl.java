@@ -144,8 +144,7 @@ public class UserServiceImpl implements UserService {
         //user.setLastPasswordResetDate(timeProvider.nowTimestamp());
         //user.setProfileImagePath(defaultProfileImage);
 
-        Authority regularUserAuthority = authorityRepository.findByName(roleName);
-        user.getUsersAuthorities().add(regularUserAuthority);
+        user.getUsersAuthorities().add(authorityRepository.findByName(roleName));
 
         return user;
     }
