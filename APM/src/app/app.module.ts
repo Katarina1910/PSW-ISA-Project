@@ -126,7 +126,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     arrivedAbsenceReqComponent,
     patientHistory,
     ReserveRoomsOPComponent,
-    ClinicCenterAdminProfilePageComponent
+    ClinicCenterAdminProfilePageComponent,
     //ListOfDiagnosis
     ],
   imports: [
