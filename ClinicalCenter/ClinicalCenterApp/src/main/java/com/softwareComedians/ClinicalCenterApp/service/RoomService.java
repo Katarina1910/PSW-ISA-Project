@@ -1,5 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.service;
 
+import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
 import com.softwareComedians.ClinicalCenterApp.model.Operation;
 import com.softwareComedians.ClinicalCenterApp.model.Room;
 import com.softwareComedians.ClinicalCenterApp.repository.OperationRepository;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class RoomService {
@@ -19,7 +21,11 @@ public class RoomService {
     private OperationRepository operationRepository;
 
     public Room findOne(Long id){
-        return roomRepository.findById(id).orElseGet(null);
+        try {
+            return roomRepository.findById(id).get();
+        } catch (NoSuchElementException e) {
+            throw new ApiRequestException("Room with id '" + id + "' doesn't exist.");
+        }
     }
 
     public List<Room> findAll(){
