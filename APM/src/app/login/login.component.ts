@@ -72,7 +72,7 @@ export class LoginComponent{
             console.log(data);
             
             localStorage.setItem(USER_ID_KEY, data.id);
-            localStorage.setItem(USER_ROLE_KEY, data.authorities);
+            localStorage.setItem(USER_ROLE_KEY, data.authorities[0]);
             localStorage.setItem(USERNAME_KEY, data.email);
             localStorage.setItem(USER_TOKEN_KEY, data.token.accessToken);
             localStorage.setItem(USER_ROLE_KEY, data.role)

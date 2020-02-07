@@ -63,10 +63,13 @@ import { DoctorWorkCalendar } from './doctorWorkingCalendar/doctorWorkCal.compon
 import { AddNurseComponent } from './nurse/addNurse.component';
 import { DeleteNurseComponent } from './nurse/deleteNurse.component';
 import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseReq.component';
+import { ConsultTermReportComponent } from './ConsultTermReport/consultTermReport.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
 import { patientHistory } from './patientHistory/patientHistory.component';
 import { ReserveRoomsOPComponent } from './reserveRoomOP/reserveRoomOP.component';
 import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfilePage/clinicCenterAdminProfilePage.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -117,6 +120,7 @@ import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfil
     DoctorRequestForOperationComponent,
     ClinicSettingsComponent,
     arrivedAbsenceReqComponent,
+    ConsultTermReportComponent,
     ReserveRoomsComponent,
     DeleteNurseComponent,
     arrivedAbsenceReqComponent,
@@ -137,7 +141,9 @@ import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfil
     MatNativeDateModule,
     MatSortModule,
     FullCalendarModule,
+    NgMultiSelectDropDownModule.forRoot(),
     BrowserAnimationsModule,
+    NgbModule,
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
@@ -188,6 +194,7 @@ import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfil
       {path: 'HomepagePatient/requestExamination', component: RequestExamination},
       {path: 'HomepagePatient/History', component: patientHistory},
       {path: 'requestConsult', component: RequestForConsultComponent},
+      {path: 'HomepageDoctor/consultTermReport', component: ConsultTermReportComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'},
     ], {useHash: true})

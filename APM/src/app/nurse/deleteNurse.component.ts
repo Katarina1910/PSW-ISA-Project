@@ -31,7 +31,7 @@ export class DeleteNurseComponent implements OnInit {
         this._deleteNurseService.deleteNurse(email).subscribe(
             data=>{
                 alert('Nurse deleted!');
-                this.router.navigate(['/welcome']);
+                this.router.navigate(['/HomepageCA']);
             },
             error=> console.error('Error!', error)
         )
