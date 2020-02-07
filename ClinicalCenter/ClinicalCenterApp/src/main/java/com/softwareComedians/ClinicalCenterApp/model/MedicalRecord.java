@@ -46,6 +46,9 @@ public class MedicalRecord {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "medicalRecord")
 	private Set<Recipe> recipes;
 
+	@OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	public Set<Consult> consults;
+
 	/*//@ManyToMany(mappedBy = "diagAtMedRec")
 	private Set<Diagnosis> diagnosis;
 

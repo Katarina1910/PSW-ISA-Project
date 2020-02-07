@@ -2,6 +2,7 @@ package com.softwareComedians.ClinicalCenterApp.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.softwareComedians.ClinicalCenterApp.dto.ConsultTermDTO;
 import lombok.Getter;
 import lombok.Setter;
 

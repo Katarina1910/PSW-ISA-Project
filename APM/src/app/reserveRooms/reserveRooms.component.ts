@@ -8,11 +8,8 @@ import { DoctorRequestForConsult } from '../doctorRequestForConsult/doctorReques
 import { DoctorRequestForConsultService } from '../doctorRequestForConsult/doctorRequestForConsult.service';
 import { ReserveRoomService } from './reserveRooms.service';
 import { DoctorTerm } from './doctorTerm';
-import { timingSafeEqual } from 'crypto';
-import { Doctor } from '../doctor/doctor';
-
-
-
+//import { timingSafeEqual } from 'crypto';
+//import { Doctor } from '../doctor/doctor';
 
 @Component({
     templateUrl: './reserveRooms.component.html'

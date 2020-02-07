@@ -27,6 +27,9 @@ public class Recipe {
 	)
 	public Set<Medicament> medicaments;
 
+	@OneToOne(mappedBy = "recipe")
+	public Consult consults;
+
 	@Column
 	private boolean isValidated;
 
