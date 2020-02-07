@@ -1,89 +1,170 @@
-import { Component, OnInit } from '@angular/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import listPlugin from '@fullcalendar/list';
-import { Router } from '@angular/router';
+import {Component, ChangeDetectionStrategy, ViewChild,TemplateRef, OnInit } from '@angular/core';
+import {startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
+import { Subject } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
 import { DoctorWorkCalService } from './doctorWorkCal.service';
 import { ConsultTerm } from '../consultTerm/consultTerm';
-import { UserService } from '../registration/user.service';
-import { User } from '../registration/user';
-import { $ } from 'protractor';
+import { Router } from '@angular/router';
 import { ConsultTermReportService } from '../ConsultTermReport/consultTermReport.service';
 
+const colors: any = {
+  red: {
+    primary: '#ad2121',
+    secondary: '#FAE3E3'
+  },
+  blue: {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF'
+  },
+  yellow: {
+    primary: '#e3bc08',
+    secondary: '#FDF1BA'
+  }
+};
+
 @Component({
-  selector: 'app-root',
-  templateUrl: './doctorWorkCal.component.html',
+  selector: 'doctor-work-cal',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['doctorWorkCal.component.css'],
+  templateUrl: 'doctorWorkCal.component.html'
 })
-export class DoctorWorkCalendar implements OnInit {
-    
-  showModal: boolean;
-  room: string='room1';
-  date: string="date";
-  id: number=1;
-  patient: string="patient";
-  public consults: ConsultTerm[];
-  public  events:any[] = [];
+export class DoctorWorkCalendar  implements OnInit{
 
-  user: User = new User("","","","","","","","","","","","");
-  
+public consults: ConsultTerm[];
+public consultTerm = new ConsultTerm(null,null,null,null,null,null,null,null,null,null);
+public room: string;
+showModal: boolean;
+public patient: string;
+public duration: string;
+public start: string;
+public id: string;
 
-  constructor(private _doctorWorkCalService: DoctorWorkCalService,
-    private consultTermReport: ConsultTermReportService,
-     private _userService:UserService, private router: Router) {}
-  
-  ngOnInit() {
-    this.getUserInfo();
-    this.events = [];
-    this._doctorWorkCalService.getConsults(parseInt(localStorage.getItem('user-id')), localStorage.getItem('user-role')).subscribe(
-      data=>{
+ngOnInit(): void {
+  this._docWorkCalService.getConsults(parseInt(localStorage.getItem('user-id')), localStorage.getItem('user-role')).subscribe(
+    data=>{
         this.consults = data;
-      },
-      error=> console.error('Error!', error)
-    )    
-    this.events.push({
-      start: '2020-02-10',
-      title: 'Examination',
-      allDay: false
-    });
+        for(let i=0; i< this.consults.length; i++){
+          this.events = [...this.events,{
+              title : 'Consult',
+              start : new Date(this.consults[i].date),
+              id : this.consults[i].id,
+              color: colors.red
+          }];
+        }      
+    }, 
+    error=>{
+    }
+  );
+}
+
+  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+
+  view: CalendarView = CalendarView.Month;
+
+  CalendarView = CalendarView;
+
+  viewDate: Date = new Date();
+
+  modalData: {
+    action: string;
+    event: CalendarEvent;
+  };
+
+  actions: CalendarEventAction[] = [
+    {
+      label: '<i class="fa fa-fw fa-pencil"></i>',
+      a11yLabel: 'Edit',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        this.handleEvent('Edited', event);
+      }
+    },
+    {
+      label: '<i class="fa fa-fw fa-times"></i>',
+      a11yLabel: 'Delete',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        this.events = this.events.filter(iEvent => iEvent !== event);
+        this.handleEvent('Deleted', event);
+      }
+    }
+  ];
+
+  refresh: Subject<any> = new Subject();
+
+  events: CalendarEvent[] = [];
+
+  activeDayIsOpen: boolean = true;
+
+  constructor(private modal: NgbModal, private _docWorkCalService: DoctorWorkCalService, private router: Router,
+              private _consultTermReportService: ConsultTermReportService) {}
+
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    if (isSameMonth(date, this.viewDate)) {
+      if (
+        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+        events.length === 0
+      ) {
+        this.activeDayIsOpen = false;
+      } else {
+        this.activeDayIsOpen = true;
+      }
+      this.viewDate = date;
+    }
   }
 
-  
-  calendarPlugins = [dayGridPlugin, timGridPlugin, interactionPlugin, listPlugin];
-
-  private getUserInfo(): void {
-    this._userService.getUserInfo().subscribe(data => {
-      this.user = data;     
-    }, error => {
-      console.log("Error in getting user data!")
+  eventTimesChanged({
+    event,
+    newStart,
+    newEnd
+  }: CalendarEventTimesChangedEvent): void {
+    this.events = this.events.map(iEvent => {
+      if (iEvent === event) {
+        return {
+          ...event,
+          start: newStart,
+          end: newEnd
+        };
+      }
+      return iEvent;
     });
+    this.handleEvent('Dropped or resized', event);
+    alert(1);
   }
 
-  private eventClick(event): void{
-      //this.date = event.info.start;
-      this.id = 2;
-      this.showModal = true;
+  handleEvent(action: string, event: CalendarEvent): void {   
+    this._docWorkCalService.getConsult(event.id.toString()).subscribe(
+        data=>{
+              this.consultTerm = data;
+              this.id = data.id;
+              this.duration = data.duration;
+              this.start = data.date.toString();
+              this.room =  data.room.name;
+              this.patient = data.patient.name + " "+ data.patient.surname;
+              this.showModal = true;
+        },error =>{
+
+        }
+    );
+
   }
 
   private close(): void{
     this.showModal = false;
-}
-
-  private getEvents() : void{
-    console.log(this.consults);
-    console.log(this.events);
-    this.events.push({
-      start: '2020-02-10',
-      title: 'Examination',
-      allDay: false
-    });
-    for(let i=0; i<this.consults.length; i++){
-      
-    } 
   }
 
-  private startConsultTerm(id: string): void{
-    this.consultTermReport.id = id;
+  private startConsult(): void{
+    this._consultTermReportService.id = this.id;
     this.router.navigate(['/HomepageDoctor/consultTermReport']);
   }
+
+  setView(view: CalendarView) {
+    this.view = view;
+  }
+
+  closeOpenMonthViewDay() {
+    this.activeDayIsOpen = false;
+  }
+
+  
+
 }
