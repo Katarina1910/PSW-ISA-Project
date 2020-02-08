@@ -2,6 +2,7 @@ package com.softwareComedians.ClinicalCenterApp.service;
 
 import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
 import com.softwareComedians.ClinicalCenterApp.model.Doctor;
+import com.softwareComedians.ClinicalCenterApp.model.Operation;
 import com.softwareComedians.ClinicalCenterApp.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

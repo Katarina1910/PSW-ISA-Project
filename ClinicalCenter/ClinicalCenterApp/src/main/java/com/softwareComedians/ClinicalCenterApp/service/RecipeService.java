@@ -3,9 +3,11 @@ package com.softwareComedians.ClinicalCenterApp.service;
 import com.softwareComedians.ClinicalCenterApp.dto.DoctorDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.MedicamentDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.RecipeDTO;
+import com.softwareComedians.ClinicalCenterApp.model.Consult;
 import com.softwareComedians.ClinicalCenterApp.model.Medicament;
 import com.softwareComedians.ClinicalCenterApp.model.Nurse;
 import com.softwareComedians.ClinicalCenterApp.model.Recipe;
+import com.softwareComedians.ClinicalCenterApp.repository.ConsultRepository;
 import com.softwareComedians.ClinicalCenterApp.repository.RecipeRepository;
 import com.softwareComedians.ClinicalCenterApp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,10 @@ public class RecipeService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ConsultRepository consultRepository;
+
 
     public List<RecipeDTO> getAll(Long id) {
         Nurse nurse = (Nurse) userRepository.findById(id).orElseGet(null);
@@ -73,6 +79,9 @@ public class RecipeService {
         Nurse nurse = (Nurse)userRepository.findById(userid).orElseGet(null);
         recipe.setValidated(true);
         recipe.setNurse(nurse);
+        Consult consult = consultRepository.findById(recipe.getConsults().getId()).orElseGet(null);
+        consult.setNurse(nurse);
+        consultRepository.save(consult);
         recipeRepository.save(recipe);
 
         return  new ResponseEntity<>(HttpStatus.OK);
