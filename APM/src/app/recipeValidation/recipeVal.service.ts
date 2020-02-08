@@ -16,8 +16,8 @@ export class recipeValService{
         return  this._http.get<Recipe[]>(`${this._url}/${id}`);  
     }
 
-    certify(id: any) {
-        return  this._http.get<void>(`${this._url}/${id}`);  
+    certify(id: any, id1: any) {
+        return  this._http.get<void>(`${this._url1}/${id}/${id1}`);  
     }
     
 }
