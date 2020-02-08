@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ConsultTerm } from '../consultTerm/consultTerm';
 import { RequestForAbsence } from '../requestForAbsence/requestForAbsence';
+import { Operation } from './Operation';
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +14,7 @@ export class DoctorWorkCalService{
     _url = 'http://localhost:8080/api/ConsultTerm/getConsults';
     _url1 = 'http://localhost:8080/api/ConsultTerm/getConsult';
     _url2 = 'http://localhost:8080/api/RqForAbsence/getAll';
+    _url3 = 'http://localhost:8080/api/operations/getAll';
  
     constructor(private _http: HttpClient) { }
 
@@ -26,5 +28,9 @@ export class DoctorWorkCalService{
 
     getVacations(id: any):Observable<any> {
         return this._http.get<RequestForAbsence[]>(`${this._url2}/${id}`);
+    }
+
+    getOperations(id: any):Observable<any> {
+        return this._http.get<Operation[]>(`${this._url3}/${id}`);
     }
 }

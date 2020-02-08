@@ -8,6 +8,7 @@ import { ConsultTerm } from '../consultTerm/consultTerm';
 import { Router } from '@angular/router';
 import { ConsultTermReportService } from '../ConsultTermReport/consultTermReport.service';
 import { RequestForAbsence } from '../requestForAbsence/requestForAbsence';
+import { Operation } from './Operation';
 
 const colors: any = {
   red: {
@@ -34,6 +35,7 @@ export class DoctorWorkCalendar  implements OnInit{
 
   public consults: ConsultTerm[];
   public vacations: RequestForAbsence[];
+  public operations: Operation[];
   public consultTerm = new ConsultTerm(null,null,null,null,null,null,null,null,null,null);
   public room: string;
   showModal: boolean;
@@ -75,6 +77,24 @@ export class DoctorWorkCalendar  implements OnInit{
       error=>{
       }
     );
+
+    if(localStorage.getItem("user-role")=="ROLE_DOCTOR"){
+      this._docWorkCalService.getOperations(parseInt(localStorage.getItem('user-id'))).subscribe(
+        data=>{
+            this.operations = data;
+            for(let i=0; i< this.operations.length; i++){
+              this.events = [...this.events,{
+                  title : 'Operation',
+                  start : new Date(this.operations[i].requestForOperation.dateAndTime),
+                  id : this.operations[i].id,
+                  color: colors.green
+              }];
+            }      
+        }, 
+        error=>{
+        }
+      );
+    }
   }
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
