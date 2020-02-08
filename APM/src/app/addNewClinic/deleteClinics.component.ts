@@ -14,7 +14,7 @@ import { Clinic } from './clinic';
 export class DeleteClinicsComponent implements OnInit {
 
     public clinics: Clinic[];
-    editClinicmodel = new Clinic(null, null, null, null, null);
+    editClinicmodel = new Clinic(null, null, null, null, null, null);
     edit : boolean = false;
     public editedClinic:Clinic;
     

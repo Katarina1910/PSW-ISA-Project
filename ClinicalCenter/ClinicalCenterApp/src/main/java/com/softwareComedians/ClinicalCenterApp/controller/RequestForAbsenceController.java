@@ -73,4 +73,20 @@ public class RequestForAbsenceController {
 
         return new ResponseEntity<>(rqsDTO, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/getAll/{id}")
+    public ResponseEntity<List<RequestForAbsenceDTO>> getAllDoctor(@PathVariable Long id) {
+
+        List<RequestForAbsence> rqs = requestForAbsenceService.findAllById(id);
+        List<RequestForAbsenceDTO> rqsDTO = new ArrayList<>();
+        for (RequestForAbsence rq : rqs) {
+            if(rq.isAccepted() == true) {
+                rqsDTO.add(new RequestForAbsenceDTO(rq));
+            }
+        }
+
+        return new ResponseEntity<>(rqsDTO, HttpStatus.OK);
+    }
+
+
 }
