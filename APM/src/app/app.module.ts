@@ -69,8 +69,9 @@ import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
 import { patientHistory } from './patientHistory/patientHistory.component';
 import { ReserveRoomsOPComponent } from './reserveRoomOP/reserveRoomOP.component';
 import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfilePage/clinicCenterAdminProfilePage.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 
 @NgModule({
   declarations: [
@@ -126,7 +127,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     arrivedAbsenceReqComponent,
     patientHistory,
     ReserveRoomsOPComponent,
-    ClinicCenterAdminProfilePageComponent
+    ClinicCenterAdminProfilePageComponent,
     //ListOfDiagnosis
     ],
   imports: [
@@ -142,6 +143,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatSortModule,
     FullCalendarModule,
     NgMultiSelectDropDownModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
     BrowserAnimationsModule,
     NgbModule,
     RouterModule.forRoot([

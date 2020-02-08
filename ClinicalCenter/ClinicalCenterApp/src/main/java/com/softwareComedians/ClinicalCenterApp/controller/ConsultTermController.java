@@ -1,5 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
+import com.softwareComedians.ClinicalCenterApp.dto.ConsultDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.ConsultTermDTO;
 import com.softwareComedians.ClinicalCenterApp.model.*;
 import com.softwareComedians.ClinicalCenterApp.service.*;
@@ -30,9 +31,11 @@ public class ConsultTermController {
     private ConsultTypeService consultTypeService;
 
 
+
+
     @PostMapping(value = "/addConsultReport")
-    public ResponseEntity<Void> addConsultReport(@RequestBody ConsultTermDTO consultTermDTO){
-        return this.consultTermService.addReport(consultTermDTO);
+    public ResponseEntity<Void> addConsultReport(@RequestBody ConsultDTO consultDTO){
+        return this.consultTermService.addReport(consultDTO);
     }
 
     @PostMapping()
@@ -41,7 +44,7 @@ public class ConsultTermController {
         ConsultTerm ct = new ConsultTerm();
         //System.out.println("Dodaj");
 
-       // ct.setType(new ConsultType(consultTermDTO.getType().getId(), consultTermDTO.getType().getName()));
+        ct.setType(consultTypeService.findOne(consultTermDTO.getType().getId()));
         ct.setDuration(consultTermDTO.getDuration());
         ct.setDiscount(consultTermDTO.getDiscount());
         ct.setPrice(consultTermDTO.getPrice());
@@ -56,8 +59,8 @@ public class ConsultTermController {
       //  System.out.println(r.getName());
         ct.setRoom(r);
 
-        ConsultType consultType = consultTypeService.findByName(consultTermDTO.getType().getName());
-        ct.setType(consultType);
+        ct.setPatient(new Patient());
+
 
         ct = consultTermService.save(ct);
         return new ResponseEntity<>(new ConsultTermDTO(ct), HttpStatus.CREATED);
@@ -107,6 +110,17 @@ public class ConsultTermController {
         }
 
         return new ResponseEntity<>(ctDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getConsult/{id}")
+    public ResponseEntity<ConsultTermDTO> getConsult(@PathVariable Long id) {
+            ConsultTermDTO consult = consultTermService.findByIdDTO(id);
+
+            if(consult != null){
+                return new ResponseEntity<>(consult, HttpStatus.OK);
+            }else {
+                return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
     }
 
 
