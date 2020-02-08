@@ -15,11 +15,11 @@ public class Consult{
 	private Long id;
 
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "consultTerm_id", referencedColumnName = "id")
 	private ConsultTerm consultTerm;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "recipe_id", referencedColumnName = "id")
 	public Recipe recipe;
 
@@ -34,7 +34,7 @@ public class Consult{
 	@Column
 	private String report;
 
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private MedicalRecord medicalRecord;
 
 	public Consult(String report) {

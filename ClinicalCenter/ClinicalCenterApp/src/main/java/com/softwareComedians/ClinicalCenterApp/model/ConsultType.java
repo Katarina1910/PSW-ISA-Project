@@ -22,11 +22,11 @@ public class ConsultType {
     @Column
     private String description;
 
-    @OneToMany(mappedBy = "type", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "type", fetch = FetchType.EAGER)
     Set<RequestForConsult> requestForConsultSet;
 
     @Column
-    @OneToMany(mappedBy = "type", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "type", fetch = FetchType.EAGER)
     List<ConsultTerm> consultTerms;
 
     public ConsultType() {
