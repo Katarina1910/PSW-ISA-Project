@@ -18,8 +18,8 @@ export class AddNurseComponent{
 
     onSubmit(){
         if(this.nurseModel.password != this.password1){
-            return;
             alert("Password don't match!");
+            return;
         }
         
         this._addNurseService.addNurse(this.nurseModel)
@@ -27,7 +27,7 @@ export class AddNurseComponent{
            data=>{
             console.log('Success!', JSON.stringify(data))
             alert('Nurse added!');
-            this.router.navigate(['/welcome']);
+            this.router.navigate(['/HomepageCA']);
            } ,
             error=> console.error('Error!',error)
         )
