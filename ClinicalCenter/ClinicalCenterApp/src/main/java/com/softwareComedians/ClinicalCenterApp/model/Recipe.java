@@ -15,7 +15,7 @@ public class Recipe {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Nurse nurse;
 
 
@@ -37,7 +37,7 @@ public class Recipe {
 	@JoinColumn(name = "doctor_id", referencedColumnName = "id")
 	public Doctor doctor;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private MedicalRecord medicalRecord;
 	
 	public Recipe() {
