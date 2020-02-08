@@ -11,7 +11,7 @@ import { ClinicAdmin } from './ClinicAdmin';
 })
 
 export class AddClinicAdminComponent implements OnInit{
-    adminModel = new ClinicAdmin('','','','','','','','','','','');
+    adminModel = new ClinicAdmin('','','','','','','','','',null,'');
     public clinics : Clinic[];
     
     constructor(private _addClinicAdminService: AddClinicAdminService,  private router: Router) {}
@@ -26,6 +26,7 @@ export class AddClinicAdminComponent implements OnInit{
     }
 
     onSubmit(){
+        console.log(this.adminModel.clinic);
         this._addClinicAdminService.addClinicAdmin(this.adminModel)
        .subscribe(
            data=>{

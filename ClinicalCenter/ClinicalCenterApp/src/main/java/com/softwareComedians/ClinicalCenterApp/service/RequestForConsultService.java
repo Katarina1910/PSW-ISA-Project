@@ -2,6 +2,7 @@ package com.softwareComedians.ClinicalCenterApp.service;
 
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
 import com.softwareComedians.ClinicalCenterApp.mail.SmtpMailSender;
+import com.softwareComedians.ClinicalCenterApp.model.ClinicAdministrator;
 import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForConsult;
 import com.softwareComedians.ClinicalCenterApp.model.User;
@@ -35,6 +36,9 @@ public class RequestForConsultService {
     @Autowired
     private SmtpMailSender smtpMailSender;
 
+    @Autowired
+    private ClinicAdminService clinicAdminService;
+
     public RequestForConsult save(RequestForConsult requestForConsult) {
         return requestForConsultRepository.save(requestForConsult);
     }
@@ -66,7 +70,21 @@ public class RequestForConsultService {
 
         //salje mejl adminu klinike
         //TODO: preko pacijenotovog ID-a pronaci u kojoj je klinici i poslati mejl odgovarajucem administratoru te klinike
-        smtpMailSender.send("pswtim2@gmail.com","Request for consult",
+
+        String adminEmail="";
+        Long clinicId = ct.getClinic().getId();
+        List<ClinicAdministrator> admins = clinicAdminService.findAll();
+        for(ClinicAdministrator ca : admins) {
+            if(ca.getClinic().getId() == clinicId) {
+                adminEmail = ca.getEmail();
+            }
+        }
+
+        if(adminEmail=="") {
+            adminEmail = clinicAdminService.findById(1L).getEmail();
+        }
+
+        smtpMailSender.send(adminEmail,"Request for consult",
                 " You have a request for consult: type: "+ct.getType().getName()+ "\r\n"+
                         "doctor's name: "+ct.getDoctor().getName()+ " "+ct.getDoctor().getSurname()+ "\r\n"+
                         "patient's name: "+u.getName()+" "+u.getSurname()+"\r\n"+

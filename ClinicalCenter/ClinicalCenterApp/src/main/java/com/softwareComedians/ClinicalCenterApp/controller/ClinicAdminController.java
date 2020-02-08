@@ -65,12 +65,12 @@ public class ClinicAdminController {
         clinicAdministrator.setEmail(clinicAdminDTO.getEmail());
         clinicAdministrator.setPassword(passwordEncoder.encode(clinicAdminDTO.getPassword()));
 
-        clinicAdministrator.setRole("CA");
+        clinicAdministrator.setRole(UserRoles.ROLE_CA);
         clinicAdministrator.setActivated(true);
         Authority caAutority = authorityRepository.findByName(UserRoles.ROLE_CA);
         clinicAdministrator.getUsersAuthorities().add(caAutority);
 
-        Clinic c = clinicsService.findByName(clinicAdminDTO.getClinic());
+        Clinic c = clinicsService.findById(clinicAdminDTO.getClinic().getId());
         clinicAdministrator.setClinic(c);
         clinicAdministrator = clinicAdminService.save(clinicAdministrator);
 

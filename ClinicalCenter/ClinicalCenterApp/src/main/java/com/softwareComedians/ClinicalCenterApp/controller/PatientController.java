@@ -107,6 +107,7 @@ public class PatientController {
     }
 
     @GetMapping("/getAllExaminations")
+    //@PreAuthorize("hasRole('ROLE_PATIENT')")
     public ResponseEntity<List<ConsultTermDTO>> getAllExaminations() {
         List<ConsultTerm> terms = consultTermService.findAll();
         List<ConsultTermDTO> termsDTO = new ArrayList<>();
