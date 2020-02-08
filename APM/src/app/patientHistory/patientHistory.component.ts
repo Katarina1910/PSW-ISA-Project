@@ -29,8 +29,10 @@ export class patientHistory implements OnInit{
                 private clinicService: DeleteClinicsService) {}
   
     ngOnInit(): void {
-        this.getUserInfo();
-        this._consultTermService.getConsultTerms(2).subscribe(
+        this.userService.getUserInfo().subscribe(data => {
+          this.user = data;
+
+          this._consultTermService.getConsultTerms(this.user.id).subscribe(
             data => {
                 this.consultTerms = data;
                 console.log(this.consultTerms);
@@ -38,7 +40,10 @@ export class patientHistory implements OnInit{
                 console.log("Error in getting request for consult term data!")
             }
         )
-        
+        }, error => {
+          console.log("Error in getting user data!")
+        });
+  
         this.clinicService.getClinics().subscribe(
           data => {
             this.listOfClinics = data;

@@ -1,0 +1,30 @@
+<form class="d-flex p-2 justify-content-left">
+    <fieldset>
+      <legend>Medical record</legend>
+
+      <div class="form-group" >
+        <label class="col-form-label" for="inputDefault"> Height:</label>
+        <input type="text" class="form-control" disabled [(ngModel)]="medicalRecord.height" id="height"  name="height"/>
+      </div>
+
+      <div class="form-group" >
+        <label class="col-form-label" for="inputDefault"> Weight:</label>
+        <input type="text" class="form-control" disabled [(ngModel)]="medicalRecord.weight" id="weight"  name="weight">
+      </div>
+
+      <div class="form-group" >
+        <label class="col-form-label" for="inputDefault"> Blood type:</label>
+        <input type="text" class="form-control" disabled [(ngModel)]="medicalRecord.bloodType" id="bloodType"  name="bloodType">
+      </div>
+
+      <div class="form-group" >
+        <label class="col-form-label" for="inputDefault"> Dioptre:</label>
+        <input type="text" class="form-control" disabled [(ngModel)]="medicalRecord.diopter" id="dioptre"  name="dioptre">
+      </div>
+
+      <div class="form-group" >
+        <label class="col-form-label" for="inputDefault"> Alergic to medicament:</label>
+        <textarea type="text" class="form-control" disabled [(ngModel)]="medicalRecord.alergies" id="alergic"  name="alergic"></textarea>
+      </div>
+    </fieldset>
+  </form>

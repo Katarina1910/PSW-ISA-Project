@@ -26,6 +26,10 @@ export class MedicalRecordService{
         return this._http.get<MedicalRecordd>(`${this._url2}/${this.id}`);
     }
 
+    getMedicalRecordById(id2: any):Observable<any>{
+        return this._http.get<MedicalRecordd>(`${this._url2}/${id2}`);
+    }
+
     editMedicalRecord(m:MedicalRecordd):Observable<any>{
         return this._http.put<void>(this._url3, m);
     }
