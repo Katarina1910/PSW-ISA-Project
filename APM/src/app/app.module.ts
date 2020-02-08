@@ -169,7 +169,6 @@ import { AgmCoreModule } from '@agm/core';
       {path: 'HomepageNurse', component: NurseComponent},
       {path: 'HomepageNurse/ListOfPatients', component: listOfPatientsDoctor},
       {path: 'HomepageNurse/UserProfiles', component: UserProfiles},
-      {path: 'HomepageNurse/nurseWorkCal', component: nurseWorkCal},
       {path: 'HomepageNurse/RequestForAbsence', component: RequestForAbsenceComponent},
       {path: 'HomepageNurse/RecipeValidation', component:RecipeValidation},
       {path: 'HomepageCCA/arrivedReq', component : arrivedRequest},

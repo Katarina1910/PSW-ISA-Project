@@ -73,4 +73,5 @@ public class RecipeDTO {
     public void setMedicalRecord(MedicalRecordDTO medicalRecord) {
         this.medicalRecord = medicalRecord;
     }
+
 }

@@ -22,9 +22,9 @@ INSERT INTO `user_authority` (user_id, authority_id) VALUES (5, 3);
 INSERT INTO `user_authority` (user_id, authority_id) VALUES (6, 3);
 INSERT INTO `user_authority` (user_id, authority_id) VALUES (7, 2);
 
-INSERT INTO `clinic` (id, address, description, grade, name, price_list_id) VALUES (1, 'Adresa 1', 'Opis klinike1...', '4', 'klinika1', null);
-INSERT INTO `clinic` (id, address, description, grade, name, price_list_id) VALUES (2, 'Adresa 2', 'Opis klinike2...', '5', 'klinika2', null);
-INSERT INTO `clinic` (id, address, description, grade, name, price_list_id) VALUES (3, 'Adresa 3', 'Opis klinike3...', '4', 'klinika3', null);
+INSERT INTO `clinic` (id, address, description, grade, name, price_list_id, income) VALUES (1, 'Adresa 1', 'Opis klinike1...', '4', 'klinika1', null,0);
+INSERT INTO `clinic` (id, address, description, grade, name, price_list_id, income) VALUES (2, 'Adresa 2', 'Opis klinike2...', '5', 'klinika2', null,0);
+INSERT INTO `clinic` (id, address, description, grade, name, price_list_id, income) VALUES (3, 'Adresa 3', 'Opis klinike3...', '4', 'klinika3', null,0);
 
 INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (5, 1, 4, '2020-02-15 00:00:00', '2020-02-17 00:00:00');
 INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (5, 1, 5, '2020-02-21 00:00:00', '2020-02-22 00:00:00');
@@ -77,6 +77,24 @@ insert into nurse (id) values (8);
 INSERT INTO `personnel` (id, clinic_id, consult_term_id) VALUES (8, 1, 2);
 INSERT INTO `user_authority` (user_id, authority_id) VALUES (8, 5);
 
+
+insert into request_for_absence(froom, is_accepted, too, applicant_id, clinic_administrator_id) values ('2020-02-04', true, '2020-02-15', 5,7);
+insert into request_for_absence(froom, is_accepted, too, applicant_id, clinic_administrator_id) values ('2020-02-04', true, '2020-02-15', 8,7);
+insert into request_for_absence(froom, is_accepted, too, applicant_id, clinic_administrator_id) values ('2020-03-04', true, '2020-03-15', 5,7);
+
+insert into recipe (is_validated, doctor_id, medical_record_id , nurse_id) values (false, 4, 1, null);
+insert into recipe (is_validated, doctor_id, medical_record_id , nurse_id) values (false, 4, 1, null);
+insert into recipe (is_validated, doctor_id, medical_record_id , nurse_id) values (false, 4, 1, null);
+
+insert into recipe_medicament(recipe_id, medicament_id) values (1,1)
+insert into recipe_medicament(recipe_id, medicament_id) values (1,2)
+insert into recipe_medicament(recipe_id, medicament_id) values (1,3)
+
+insert into recipe_medicament(recipe_id, medicament_id) values (2,1)
+insert into recipe_medicament(recipe_id, medicament_id) values (2,2)
+
+insert into recipe_medicament(recipe_id, medicament_id) values (3,1)
+
 insert into `requst_for_operation` (id, date_and_time, is_accepted, patient_id) value (1, '2020-02-07',false, 2);
 insert into `requst_for_operation` (id, date_and_time, is_accepted, patient_id) value (2, '2020-02-08',false, 3);
 insert into room_terms (date, room_id, term1, term2, term3, term4, term5, term6) values ('2020-02-07',2,true,true,true,true,true,true);
@@ -88,5 +106,14 @@ insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, te
 insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-07',6,false ,true,true,true,true,true);
 insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-08',5,false ,true,true,true,true,true);
 insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-08',6,false ,true,true,true,true,true);
+
+INSERT INTO `consult_term` ( id, date, discount, duration, price, clinic_id, doctor_id, patient_id, room_id, type_id, report) VALUES (6, '2019-12-31 00:00:00', '5', '10', '150',  1, 4, 2, 2, 1, 'asd');
+INSERT INTO `consult_term` (id, date, discount, duration, price,clinic_id, doctor_id, patient_id, room_id, type_id, report) VALUES (7, '2019-12-30 00:00:00', '10', '11', '100',  1, 6, 2, 1, 2, 'asd');
+INSERT INTO `consult_term` (id, date, discount, duration, price,  clinic_id, doctor_id, patient_id, room_id, type_id, report) VALUES (8, '2019-12-29 00:00:00', '15', '12', '170',  1, 5, 3, 2, 2, 'asd');
+
+
+insert into consult (report, consult_term_id, diagnosis_id, medical_record_id, nurse_id, recipe_id ) values ('asd', 6, 1, 1, null, 1 );
+insert into consult (report, consult_term_id, diagnosis_id, medical_record_id, nurse_id, recipe_id ) values ('asd', 7, 2, 1, null, 2 );
+insert into consult (report, consult_term_id, diagnosis_id, medical_record_id, nurse_id, recipe_id ) values ('asd', 8, 3, 1, null, 3);
 
 

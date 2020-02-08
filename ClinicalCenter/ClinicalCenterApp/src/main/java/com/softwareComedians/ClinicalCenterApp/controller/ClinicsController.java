@@ -60,6 +60,7 @@ public class ClinicsController {
     @PostMapping()
     public  ResponseEntity<ClinicsDTO> addClinics(@RequestBody ClinicsDTO clinicsDTO){
         Clinic clinic = new Clinic(clinicsDTO);
+        clinic.setIncome(0);
         clinic = clinicsService.save(clinic);
 
         return new ResponseEntity<>(new ClinicsDTO(clinic), HttpStatus.OK);
