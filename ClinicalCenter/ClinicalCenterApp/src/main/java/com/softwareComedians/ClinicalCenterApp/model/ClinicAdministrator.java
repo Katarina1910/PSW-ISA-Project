@@ -18,22 +18,14 @@ public class ClinicAdministrator extends User {
 	@Transient
 	private PasswordEncoder passwordEncoder;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "clinicAdministrator")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "clinicAdministrator")
 	private Set<RequestForAbsence> requests;
 
-	//@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "clinicAdministrator")
-	//private Set<RequestForConsult> requestForConsultSet;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Clinic clinic;
 
-	//public Set<RequestForConsult> getRequestForConsultSet() {
-	//	return requestForConsultSet;
-	//}
 
-	//public void setRequestForConsultSet(Set<RequestForConsult> requestForConsultSet) {
-	//	this.requestForConsultSet = requestForConsultSet;
-	//}
 
 	public ClinicAdministrator(ClinicAdminDTO ca){
 		this.setId(ca.getId());

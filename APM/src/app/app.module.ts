@@ -69,8 +69,10 @@ import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
 import { patientHistory } from './patientHistory/patientHistory.component';
 import { ReserveRoomsOPComponent } from './reserveRoomOP/reserveRoomOP.component';
 import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfilePage/clinicCenterAdminProfilePage.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -126,7 +128,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     arrivedAbsenceReqComponent,
     patientHistory,
     ReserveRoomsOPComponent,
-    ClinicCenterAdminProfilePageComponent
+    ClinicCenterAdminProfilePageComponent,
     //ListOfDiagnosis
     ],
   imports: [
@@ -142,8 +144,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatSortModule,
     FullCalendarModule,
     NgMultiSelectDropDownModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
     BrowserAnimationsModule,
     NgbModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyASA1PH4V5-ZK3mRpFF5Yn2ZbtnMl7UnIc'
+    }),
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
@@ -158,7 +167,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       {path: 'HomepageDoctor/ListOfPatients/Profile', component: PatientProfileDocComponent},
       {path: 'HomepageDoctor/ListOfPatients/Profile/MedicalRecord', component: MedicalRecord}, 
       {path: 'HomepageNurse', component: NurseComponent},
-      {path: 'HomepageNurse/listOfAllPat', component: listOfAllPat},
+      {path: 'HomepageNurse/ListOfPatients', component: listOfPatientsDoctor},
       {path: 'HomepageNurse/UserProfiles', component: UserProfiles},
       {path: 'HomepageNurse/nurseWorkCal', component: nurseWorkCal},
       {path: 'HomepageNurse/RequestForAbsence', component: RequestForAbsenceComponent},

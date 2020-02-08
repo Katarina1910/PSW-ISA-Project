@@ -22,7 +22,7 @@ public class ConsultTerm {
 	@Column
 	private String report;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private ConsultType type;
 
 	@Column
@@ -34,30 +34,27 @@ public class ConsultTerm {
 	@Column
 	private Double discount;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Room room;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Doctor doctor;
 
 	@OneToOne(mappedBy = "consultTerm")
 	@JsonBackReference
 	private RequestForConsult requestForConsult;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "consultTerm")
+	@OneToMany( fetch = FetchType.LAZY, mappedBy = "consultTerm")
 	private Set<Personnel> personnels;
 
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne( fetch = FetchType.LAZY)
 	private Clinic clinic;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Patient patient;
 
-	@OneToOne(mappedBy = "consultTerm")
-	private Consult consult;
 
-	
 	public ConsultTerm() {
 		super();
 	}
@@ -150,7 +147,13 @@ public class ConsultTerm {
 		this.type = type;
 	}
 
+	public String getReport() {
+		return report;
+	}
 
+	public void setReport(String report) {
+		this.report = report;
+	}
 
 	public RequestForConsult getRequestForConsult() {
 		return requestForConsult;

@@ -20,14 +20,14 @@
                       
         </div>
         <div class='table-responsive' class="d-flex p-2 justify-content-center">
-        <table class='table'>
+        <table class='table' matSort (matSortChange)="sortData($event)">
         <thead>
                 <tr>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>UCIDN</th>
-                <th>Email</th>
-                <th>Address </th>
+                <th mat-sort-header="name">Name</th>
+                <th mat-sort-header="surname">Surname</th>
+                <th mat-sort-header="ucidn">UCIDN</th>
+                <th mat-sort-header="email">Email</th>
+                <th mat-sort-header="address">Address </th>
                 <th></th>
                 </tr>
         </thead>

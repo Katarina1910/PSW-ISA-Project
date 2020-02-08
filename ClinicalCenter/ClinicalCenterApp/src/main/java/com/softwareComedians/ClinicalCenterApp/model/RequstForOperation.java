@@ -24,13 +24,10 @@ public class RequstForOperation {
 	private boolean isAccepted;
 
 
-	//@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	//private Doctor applicant;
-
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private User patient;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(fetch =FetchType.LAZY)
 	@JoinColumn(name = "operation_id", referencedColumnName = "id")
 	@JsonManagedReference
 	private  Operation operation;
@@ -64,13 +61,6 @@ public class RequstForOperation {
 		isAccepted = accepted;
 	}
 
-	/*public Doctor getApplicant() {
-		return applicant;
-	}
-
-	public void setApplicant(Doctor applicant) {
-		this.applicant = applicant;
-	}*/
 
 	public User getPatient() {
 		return patient;

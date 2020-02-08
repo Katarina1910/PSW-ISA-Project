@@ -13,7 +13,7 @@ public class RequestForAbsence {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Personnel applicant;
 
 	@Column
@@ -29,7 +29,7 @@ public class RequestForAbsence {
 	@Column
 	private String froom;
 
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private ClinicAdministrator clinicAdministrator;
 
 	public RequestForAbsence() {

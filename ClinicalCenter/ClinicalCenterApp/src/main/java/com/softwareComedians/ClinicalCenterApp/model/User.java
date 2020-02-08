@@ -10,7 +10,6 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static javax.persistence.InheritanceType.JOINED;
@@ -64,7 +63,7 @@ public class User implements UserDetails {
     @Column(name = "last_password_reset_date")
     private Timestamp lastPasswordResetDate;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
@@ -75,10 +74,10 @@ public class User implements UserDetails {
 	private RequestForPatientRegistration requestForPatientRegistration;
 
 	//imaju pacijenti
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL ,mappedBy = "patient")
+    @OneToMany(fetch = FetchType.LAZY ,mappedBy = "patient")
     private Set<RequestForConsult> requestForConsultSet;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL ,mappedBy = "patient")
+    @OneToMany(fetch = FetchType.LAZY ,mappedBy = "patient")
     private Set<RequstForOperation> requestForOpetarionsSet;
 
 

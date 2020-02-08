@@ -32,19 +32,14 @@ public class Doctor extends Personnel {
     @Column
     private Date scheduledTo;      //do kog datuma je zauzet
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "doctor")
+    @OneToMany( fetch = FetchType.LAZY, mappedBy = "doctor")
     private Set<DoctorTerms> doctorTerms;
 
-    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY )
     private Set<ConsultTerm> consultTerms;
 
-    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
     public Set<Recipe> recipes;
-
-
-  //  @ManyToMany
-  //  @JoinTable(name = "DocOp", joinColumns = @JoinColumn(name = "doc_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "op_id", referencedColumnName = "id"))
-   // private Set<Operation> operations;
 
     public Doctor() {
     }

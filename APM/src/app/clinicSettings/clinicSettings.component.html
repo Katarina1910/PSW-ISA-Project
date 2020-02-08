@@ -10,7 +10,8 @@
             <label> Clinic's address: </label>
             <mat-form-field class="input-field" appearance="outline" matTooltip="Address">
                 <mat-icon matPrefix class="icon">perm_identity</mat-icon>
-                <input matInput type="text" placeholder="Address" enable [(ngModel)]="clinic.address" />
+                <input matInput type="text" placeholder="Address" enable [(ngModel)]="clinic.address" class="form-control" (keydown.enter)="$event.preventDefault()" 
+                autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search/>
             </mat-form-field>
         </div>
 
@@ -21,11 +22,7 @@
                 <input matInput type="text" placeholder="Description" enable [(ngModel)]="clinic.description" />
             </mat-form-field>
 
-            <label> Clinic's grade: </label>
-            <mat-form-field class="input-field" appearance="outline" matTooltip="Grade">
-                <mat-icon matPrefix class="icon">perm_identity</mat-icon>
-                <input matInput type="number" placeholder="Grade" disabled [(ngModel)]="clinic.grade" />
-            </mat-form-field>
+           
         </div>
 
         <div class="user-info-container-row">
@@ -33,8 +30,26 @@
             <button mat-raised-button color="primary" matTooltip="Save profile changes" (click)="onClickSave()">Save</button>
         </div>
 
+         
+          <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+            <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+              (dragEnd)="markerDragEnd($event)"></agm-marker>
+          </agm-map>
        
     </div>
+</div>
+
+    <div class="user-info-container-row">
+        <label> Clinic income:  </label>
+        <mat-form-field class="input-field" appearance="outline" matTooltip="Name">
+            <mat-icon matPrefix class="icon">perm_identity</mat-icon>
+            <input disabled  matInput type="text" value="500000" enable/>
+        </mat-form-field>
+        <label> Clinic's grade: </label>
+        <mat-form-field class="input-field" appearance="outline" matTooltip="Grade">
+            <mat-icon matPrefix class="icon">perm_identity</mat-icon>
+            <input matInput type="number" placeholder="Grade" disabled [(ngModel)]="clinic.grade" />
+        </mat-form-field>
 
 </div>
 

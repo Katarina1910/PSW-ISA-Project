@@ -4,13 +4,6 @@ INSERT INTO `authorities` (name) VALUES ('ROLE_DOCTOR');
 INSERT INTO `authorities` (name) VALUES ('ROLE_PATIENT');
 INSERT INTO `authorities` (name) VALUES ('ROLE_NURSE');
 
-INSERT INTO `user_authority` (user_id, authority_id) VALUES (1, 1);
-INSERT INTO `user_authority` (user_id, authority_id) VALUES (2, 4);
-INSERT INTO `user_authority` (user_id, authority_id) VALUES (3, 4);
-INSERT INTO `user_authority` (user_id, authority_id) VALUES (4, 3);
-INSERT INTO `user_authority` (user_id, authority_id) VALUES (5, 3);
-INSERT INTO `user_authority` (user_id, authority_id) VALUES (6, 3);
-INSERT INTO `user_authority` (user_id, authority_id) VALUES (7, 2);
 
 INSERT INTO `user` (id, address, city, country, email, is_activated, name, password, phone, role, surname, ucidn, username, last_password_reset_date) VALUES (1, 'Kralja Petra 42', 'Novi Sad', 'Srbija', 'pswtim2+1@gmail.com', true, 'John', '$2a$10$iGnVynNJEax7VXDAAnl7eOn02lNDjQ.VXn4S8rqKiVOLhFnld8K3q', '06122251251', 'ROLE_CCA', 'Doe', '0701921800150', 'admin1', '2019-12-31 00:00:00');
 INSERT INTO `user` (id, address, city, country, email, is_activated, name, password, phone, role, surname, ucidn, username, last_password_reset_date) VALUES (2, 'Jovana Obrenovica 55', 'Foca', 'BiH', 'pswtim2+2@gmail.com', true, 'Mike', '$2a$10$iGnVynNJEax7VXDAAnl7eOn02lNDjQ.VXn4S8rqKiVOLhFnld8K3q', '06022251232', 'ROLE_PATIENT', 'Smith', '0711951122164', 'pac1', '2019-12-31 00:00:00');
@@ -21,12 +14,17 @@ INSERT INTO `user` (id, address, city, country, email, is_activated, name, passw
 INSERT INTO `user` (id, address, city, country, email, is_activated, name, password, phone, role, surname, ucidn, username, last_password_reset_date) VALUES (7, 'Skolska 10', 'Nis', 'Srbija', 'pswtim2+4@gmail.com', true, 'Cadmin', '$2a$10$iGnVynNJEax7VXDAAnl7eOn02lNDjQ.VXn4S8rqKiVOLhFnld8K3q', '06512000288', 'ROLE_CA', 'Cadminic', '0206123820121', 'cadmin1', '2019-12-31 00:00:00');
 
 
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (1, 1);
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (2, 4);
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (3, 4);
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (4, 3);
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (5, 3);
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (6, 3);
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (7, 2);
 
-
-INSERT INTO `clinic` (id, address, description, grade, name, price_list_id, income) VALUES (1, 'Adresa 1', 'Opis klinike1...', '4', 'klinika1', null, 22222);
-INSERT INTO `clinic` (id, address, description, grade, name, price_list_id, income) VALUES (2, 'Adresa 2', 'Opis klinike2...', '5', 'klinika2', null, 34000);
-INSERT INTO `clinic` (id, address, description, grade, name, price_list_id, income) VALUES (3, 'Adresa 3', 'Opis klinike3...', '4', 'klinika3', null, 5600000);
-
+INSERT INTO `clinic` (id, address, description, grade, name, price_list_id) VALUES (1, 'Adresa 1', 'Opis klinike1...', '4', 'klinika1', null);
+INSERT INTO `clinic` (id, address, description, grade, name, price_list_id) VALUES (2, 'Adresa 2', 'Opis klinike2...', '5', 'klinika2', null);
+INSERT INTO `clinic` (id, address, description, grade, name, price_list_id) VALUES (3, 'Adresa 3', 'Opis klinike3...', '4', 'klinika3', null);
 
 INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (5, 1, 4, '2020-02-15 00:00:00', '2020-02-17 00:00:00');
 INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (5, 1, 5, '2020-02-21 00:00:00', '2020-02-22 00:00:00');
@@ -73,4 +71,22 @@ insert into medical_record (id, alergies, blood_type, diopter, height, weight) v
 
 INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (2, null, 1);
 INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (3, null, 2);
+
+INSERT INTO `user` (id, address, city, country, email, is_activated, name, password, phone, role, surname, ucidn, username, last_password_reset_date) VALUES (8, 'Skolska 10', 'Nis', 'Srbija', 'nurse@gmail.com', true, 'Nurse', '$2a$10$iGnVynNJEax7VXDAAnl7eOn02lNDjQ.VXn4S8rqKiVOLhFnld8K3q', '06512000000', 'ROLE_NURSE', 'Nurse', '0206123800000', 'nurse', '2019-12-31 00:00:00');
+insert into nurse (id) values (8);
+INSERT INTO `personnel` (id, clinic_id, consult_term_id) VALUES (8, 1, 2);
+INSERT INTO `user_authority` (user_id, authority_id) VALUES (8, 5);
+
+insert into `requst_for_operation` (id, date_and_time, is_accepted, patient_id) value (1, '2020-02-07',false, 2);
+insert into `requst_for_operation` (id, date_and_time, is_accepted, patient_id) value (2, '2020-02-08',false, 3);
+insert into room_terms (date, room_id, term1, term2, term3, term4, term5, term6) values ('2020-02-07',2,true,true,true,true,true,true);
+insert into room_terms (date, room_id, term1, term2, term3, term4, term5, term6) values ('2020-02-07',1,true,true,true,true,true,true);
+
+insert into room_terms (date, room_id, term1, term2, term3, term4, term5, term6) values ('2020-02-08',2,true,true,true,true,true,true);
+insert into room_terms (date, room_id, term1, term2, term3, term4, term5, term6) values ('2020-02-08',1,true,true,true,true,true,true);
+insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-07',5,false ,true,true,true,true,true);
+insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-07',6,false ,true,true,true,true,true);
+insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-08',5,false ,true,true,true,true,true);
+insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-08',6,false ,true,true,true,true,true);
+
 

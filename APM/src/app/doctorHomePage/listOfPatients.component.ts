@@ -4,6 +4,7 @@ import { listOfPatientsService } from './listOfPatients.service';
 import { PatientProfileDocService } from '../patientProfileDoc/patientProfileDoc.service';
 import { User } from '../registration/user';
 import { Router } from '@angular/router';
+import { Sort } from '@angular/material';
 
 
 
@@ -21,6 +22,7 @@ export class listOfPatientsDoctor implements OnInit{
     public _patientName: string;
     public _patientSurname: string;
     public user: User = new User("","","","","","","","","","","","");
+    public sortedPatients : listOfPatients[];
 
   
     constructor(private _listOfPatientsService: listOfPatientsService,  private router: Router,private patientProfileDoc: PatientProfileDocService) {}
@@ -90,4 +92,28 @@ export class listOfPatientsDoctor implements OnInit{
         console.log(this.filteredPatients);
     }
 
+    sortData(sort: Sort) {
+        const data = this.listPatients;
+        if (!sort.active || sort.direction === '') {
+          this.sortedPatients = data;
+          return;
+        }
+    
+        this.sortedPatients = data.sort((a, b) => {
+          const isAsc = sort.direction === 'asc';
+          switch (sort.active) {
+            case 'name': return compare(a.name, b.name, isAsc);
+            case 'surname': return compare(a.surname, b.surname, isAsc);
+            case 'ucidn': return compare(a.ucidn, b.ucidn, isAsc);
+            case 'address': return compare(a.address, b.address, isAsc);
+            case 'email': return compare(a.email, b.email, isAsc);
+            default: return 0;
+          }
+        });
+    }
+
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

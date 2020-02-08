@@ -20,7 +20,7 @@ public class PriceListItem {
     @Column
     private double price;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private PriceList priceList;
 
     public PriceListItem(String name, double price) {

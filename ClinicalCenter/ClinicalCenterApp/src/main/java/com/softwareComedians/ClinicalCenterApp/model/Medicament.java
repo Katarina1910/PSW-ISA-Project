@@ -17,9 +17,6 @@ public class Medicament {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-   // @ManyToMany
-    //@JoinTable(name = "MedCd", joinColumns = @JoinColumn(name = "med_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "medCodeBook_id", referencedColumnName = "id"))
-   // private  Set<MedicamentCodeBook> medicamentCodeBooks;
 
     @Column
     private String name;
@@ -32,10 +29,6 @@ public class Medicament {
 
     @ManyToMany(mappedBy = "medicaments")
     public Set<Recipe> recipes;
-
-   // @ManyToMany
-    //@JoinTable(name = "MedPatient", joinColumns = @JoinColumn(name = "med_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "medRec_id", referencedColumnName = "id"))
-  //  private Set<MedicalRecord> medicalRecords;
 
 
 

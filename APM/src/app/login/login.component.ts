@@ -75,7 +75,7 @@ export class LoginComponent{
             localStorage.setItem(USER_ROLE_KEY, data.authorities[0]);
             localStorage.setItem(USERNAME_KEY, data.email);
             localStorage.setItem(USER_TOKEN_KEY, data.token.accessToken);
-            localStorage.setItem(USER_ROLE_KEY, data.role)
+            localStorage.setItem(USER_ROLE_KEY, data.role);
             
             alert("Logged in!");
 

@@ -56,7 +56,7 @@
             <label for="exampleSelect1">Clinic:</label>
             <select class="form-control" id="clinic"  [(ngModel)]="adminModel.clinic" name="clinic" >
               <option [ngValue]="null">Select Clinic</option>
-              <option *ngFor = 'let c of clinics' name="clinic" >{{c.name}}</option>
+              <option *ngFor = 'let c of clinics' name="clinic" [ngValue]="c">{{c.name}}</option>
             </select>
           </div>
 

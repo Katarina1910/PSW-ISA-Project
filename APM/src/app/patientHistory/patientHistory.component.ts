@@ -74,7 +74,7 @@ export class patientHistory implements OnInit{
             case 'discount': return compare(a.discount, b.discount, isAsc);
             case 'duration': return compare(a.duration, b.duration, isAsc);
             case 'doctor': return compare(a.doctor.name, b.doctor.name, isAsc);
-            case 'room': return compare(a.room, b.room, isAsc);
+            case 'room': return compare(a.room.name, b.room.name, isAsc);
             default: return 0;
           }
         });

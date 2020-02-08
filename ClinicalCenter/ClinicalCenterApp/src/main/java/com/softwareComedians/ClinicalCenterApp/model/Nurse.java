@@ -19,7 +19,10 @@ public class Nurse extends Personnel {
     @Transient
     private PasswordEncoder passwordEncoder;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "nurse")
+    @OneToMany(mappedBy = "nurse")
+    public Set<Consult> consults;
+
+    @OneToMany(fetch = FetchType.LAZY,  mappedBy = "nurse")
     private Set<Recipe> recipes;
 
 }

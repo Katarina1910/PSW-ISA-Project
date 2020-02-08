@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Builder
 @NoArgsConstructor
@@ -23,16 +25,25 @@ public class MedicalRecordService {
     public MedicalRecordDTO getByUserId(Long id) {
         MedicalRecord medicalRecord = medicalRecordRepository.findByUserId(id);
 
-        MedicalRecordDTO medicalRecordDTO =  MedicalRecordDTO.builder()
-                                            .id(medicalRecord.getId())
-                                            .alergies(medicalRecord.getAlergies())
-                                            .bloodType(medicalRecord.getBloodType())
-                                            .diopter(medicalRecord.getDiopter())
-                                            .height(medicalRecord.getHeight())
-                                            .weight(medicalRecord.getWeight())
-                                            .build();
+        MedicalRecordDTO medicalRecordDTO = new MedicalRecordDTO(medicalRecord);
+
         return medicalRecordDTO;
     }
+    public MedicalRecord getByUserId2(Long id) {
+        List<MedicalRecord> medicalRecords = medicalRecordRepository.findAll();
+        MedicalRecord found=null;
+
+        for(MedicalRecord m : medicalRecords){
+            if(m.getPatient().getId() == id){
+
+                found = m;
+                System.out.println(found.getAlergies());
+            }
+        }
+
+        return found;
+    }
+
 
     public MedicalRecord save(MedicalRecord m){return medicalRecordRepository.save(m);}
 
@@ -52,5 +63,6 @@ public class MedicalRecordService {
         }
 
     }
+
 }
 
