@@ -16,16 +16,17 @@ public class Room {
 	@Column
 	private String name;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne( fetch = FetchType.LAZY)
 	private Clinic clinic;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "room")
+	@OneToMany( fetch = FetchType.LAZY, mappedBy = "room")
 	private Set<ConsultTerm> consultTerms;
 
-	@OneToOne(mappedBy = "room")
-	private Operation operation;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "room")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
+	private Set<Operation> operations;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
 	private Set<RoomTerms> roomTerms;
 
 
@@ -79,14 +80,19 @@ public class Room {
 		this.consultTerms = consultTerms;
 	}
 
-	public Operation getOperation() {
-		return operation;
+	public Set<Operation> getOperations() {
+		return operations;
 	}
 
-	public void setOperation(Operation operation) {
-		this.operation = operation;
+	public void setOperations(Set<Operation> operations) {
+		this.operations = operations;
 	}
-	
-	
-	
+
+	public Set<RoomTerms> getRoomTerms() {
+		return roomTerms;
+	}
+
+	public void setRoomTerms(Set<RoomTerms> roomTerms) {
+		this.roomTerms = roomTerms;
+	}
 }

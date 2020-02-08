@@ -22,7 +22,7 @@ public class Nurse extends Personnel {
     @OneToMany(mappedBy = "nurse")
     public Set<Consult> consults;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "nurse")
+    @OneToMany(fetch = FetchType.LAZY,  mappedBy = "nurse")
     private Set<Recipe> recipes;
 
 }

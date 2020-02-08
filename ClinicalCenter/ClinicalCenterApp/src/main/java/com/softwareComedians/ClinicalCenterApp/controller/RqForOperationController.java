@@ -20,9 +20,18 @@ public class RqForOperationController {
     @Autowired
     private RqForOperationService rqForOperationService;
 
+    @Autowired
+    private OperationService operationService;
+
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private  MedicalRecordService medicalRecordService;
+
+    @Autowired
+    private  PatientService patientService;
 
     @Autowired
     private SmtpMailSender smtpMailSender;
@@ -125,7 +134,6 @@ public class RqForOperationController {
 
         Operation ct = new Operation();
         RequstForOperation rq = rqForOperationService.findOne(id);
-        System.out.println(rq.getId());
 
         List<RoomTerms> rts= roomTermsServie.findByDate(date);
         List<DoctorTerms> dts = doctorTermsService.findByDate(date);
@@ -134,7 +142,6 @@ public class RqForOperationController {
         for (RoomTerms rr : rts){
             if(rr.getRoom().getName().equals(room)){
                 r=rr;
-                System.out.println(r.getRoom().getName());
             }
         }
 
@@ -169,14 +176,17 @@ public class RqForOperationController {
         doctorTermsService.save(dt);
 
         ct.setRoom(roomService.findByName(room));
-        ct.setRoom(new Room());
-        System.out.println(roomService.findByName(room));
         ct.setRequstForOperation(rq);
 
         //req.getPatient.getMedical
-        ct.setMedicalRecord(new MedicalRecord());
+        Patient patient = patientService.findById(rq.getPatient().getId());
+        MedicalRecord mr = medicalRecordService.getByUserId2(patient.getId());
+        ct.setMedicalRecord(mr);
 
-        ct = roomService.saveOperation(ct);
+        ct = operationService.saveOperation(ct);
+        rqForOperationService.remove(rq.getId());
+
+        //posalji mailove
 
         return new ResponseEntity<>(new OperationDTO(ct), HttpStatus.CREATED);
     }

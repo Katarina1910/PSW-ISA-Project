@@ -1,11 +1,13 @@
 package com.softwareComedians.ClinicalCenterApp.service;
 
+import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
 import com.softwareComedians.ClinicalCenterApp.model.Clinic;
 import com.softwareComedians.ClinicalCenterApp.repository.ClinicsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ClinicsService {
@@ -20,8 +22,11 @@ public class ClinicsService {
     public List<Clinic> findAll(){return  clinicsRepository.findAll();}
 
     public Clinic findById(Long id){
-        Clinic clinic = clinicsRepository.findById(id).orElseGet(null);
-        return clinic;
+        try {
+            return clinicsRepository.findById(id).get();
+        } catch (NoSuchElementException e) {
+            throw new ApiRequestException("Clinic with id '" + id + "' doesn't exist.");
+        }
     }
 
     public Clinic findByName(String name){

@@ -8,24 +8,32 @@ public class ClinicsDTO {
     private String description;
     private double grade;
     private Long id;
+    private Double income;
 
     public ClinicsDTO(){
 
     }
 
-    public ClinicsDTO(String name, String address, String description, double grade, long id){
+    public void setIncome(Double income) {
+        this.income = income;
+    }
+
+    public ClinicsDTO(String name, Double inc,String address, String description, double grade, long id){
         this.name = name;
         this.address = address;
         this.description = description;
         this.grade = grade;
         this.id = id;
+        this.income = inc;
     }
 
-    public ClinicsDTO(String name, String address, String description, double grade){
+    public ClinicsDTO(String name, Double income, String address, String description, double grade){
         this.name = name;
         this.address = address;
         this.description = description;
         this.grade = grade;
+        this.income = income;
+
 
     }
 
@@ -36,6 +44,7 @@ public class ClinicsDTO {
         description = c.getDescription();
         grade = c.getGrade();
         id = c.getId();
+        income = c.getIncome();
     }
 
     public Long getId(){return id;}
@@ -52,4 +61,8 @@ public class ClinicsDTO {
 
     public double getGrade(){return grade;}
     public void setGrade(double grade){this.grade = grade;}
+
+    public Double getIncome() {
+        return income;
+    }
 }

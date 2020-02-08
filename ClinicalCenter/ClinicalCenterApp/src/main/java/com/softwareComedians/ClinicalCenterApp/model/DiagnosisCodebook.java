@@ -14,7 +14,7 @@ public class DiagnosisCodebook {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "diagnosisCodebook")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "diagnosisCodebook")
     private Set<Diagnosis> diagnoses;
 
 

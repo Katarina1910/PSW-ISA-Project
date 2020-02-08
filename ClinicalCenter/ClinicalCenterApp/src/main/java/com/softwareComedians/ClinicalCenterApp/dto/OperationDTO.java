@@ -18,7 +18,7 @@ public class OperationDTO {
     }
 
     public OperationDTO(Operation operation){
-        this.id= room.getId();
+        this.id= operation.getId();
         this.room = new RoomDTO(operation.getRoom());
         this.requestForOperation = new RequestForOperationDTO(operation.getRequstForOperation());
     }

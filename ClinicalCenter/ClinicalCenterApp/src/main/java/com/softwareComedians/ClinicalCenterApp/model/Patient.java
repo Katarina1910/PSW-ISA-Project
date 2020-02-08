@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -13,20 +12,17 @@ import java.util.Set;
 @Setter
 public class Patient extends User {
 	//preuzmi user data iz requesta
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "medicalRecord", referencedColumnName = "id")
 	private MedicalRecord medicalRecord;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "patient")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "patient")
 	private Set<ConsultTerm> appointedTerms;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Clinic clinic;
 
-//	@ManyToMany
-//	@JoinTable(name = "PersonnelPatient", joinColumns = @JoinColumn(name = "pat_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "presonnel_id", referencedColumnName = "id"))
-	//private Set<Personnel> personnels;
-	
+
 	public Patient() {
 		super();
 	}
@@ -47,5 +43,21 @@ public class Patient extends User {
 
 	public void setClinic(Clinic clinic) {
 		this.clinic = clinic;
+	}
+
+	public MedicalRecord getMedicalRecord() {
+		return medicalRecord;
+	}
+
+	public void setMedicalRecord(MedicalRecord medicalRecord) {
+		this.medicalRecord = medicalRecord;
+	}
+
+	public Set<ConsultTerm> getAppointedTerms() {
+		return appointedTerms;
+	}
+
+	public void setAppointedTerms(Set<ConsultTerm> appointedTerms) {
+		this.appointedTerms = appointedTerms;
 	}
 }

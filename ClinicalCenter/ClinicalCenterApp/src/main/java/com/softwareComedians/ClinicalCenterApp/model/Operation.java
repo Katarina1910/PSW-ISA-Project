@@ -15,11 +15,11 @@ public class Operation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "room_id", referencedColumnName = "id")
+
+	@ManyToOne( fetch = FetchType.LAZY)
 	private Room room;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private MedicalRecord medicalRecord;
 
 	@OneToOne(mappedBy = "operation")
@@ -32,6 +32,14 @@ public class Operation {
 
 	public Room getRoom() {
 		return room;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setRoom(Room room) {
