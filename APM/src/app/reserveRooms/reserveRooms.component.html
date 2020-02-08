@@ -19,12 +19,12 @@
                     <td>{{d.type.name}}</td>
                     <td>{{d.dateAndTime}}</td>
                     <td> <form  (ngSubmit)="onSubmitDate(d.id)">
-                        <input type="date" name="hdsi" value="yyyy-mm-dd" [(ngModel)]='datee'> 
+                        <input type="date" name="hdsi" value="yyyy-mm-dd" [(ngModel)]='datee' id="inputDate"> 
                         <select class="form-control" id="tyoe"  [(ngModel)]="selRoom" name="type">
                             <option>soba</option>
                             <option *ngFor = 'let t of rooms' name="type">{{t.name}}</option>
                           </select>
-                        <button type="submit" class="btn btn-primary">Find</button>
+                        <button type="submit" id="findButton" class="btn btn-primary">Find</button>
                         </form>  </td>
 
                 </tr>
@@ -64,7 +64,7 @@
                         <select class="form-control" id="tyoe"  [(ngModel)]="selDoctor" name="type">
                             <option *ngFor = 'let s of docTerms' [ngValue]="s.doctorDTO.id" name="type">{{s.doctorDTO.name}}</option>
                           </select>
-                          <button type="submit"  class="btn btn-outline-primary">Reserve</button>
+                          <button type="submit" id="ReserveeBtn" class="btn btn-outline-primary"  >Reserve</button>
                         </form>  </td>
                 </tr>
         </tbody>
