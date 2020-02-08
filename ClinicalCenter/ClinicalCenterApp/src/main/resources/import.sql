@@ -20,9 +20,13 @@ INSERT INTO `user` (id, address, city, country, email, is_activated, name, passw
 INSERT INTO `user` (id, address, city, country, email, is_activated, name, password, phone, role, surname, ucidn, username, last_password_reset_date) VALUES (6, 'Simke Simica 10', 'Novi Sad', 'Srbija', 'doktor2@doktor.com', true, 'Simka', '$2a$10$iGnVynNJEax7VXDAAnl7eOn02lNDjQ.VXn4S8rqKiVOLhFnld8K3q', '06566000288', 'ROLE_DOCTOR', 'Simic', '0206985820121', 'dok3', '2019-12-31 00:00:00');
 INSERT INTO `user` (id, address, city, country, email, is_activated, name, password, phone, role, surname, ucidn, username, last_password_reset_date) VALUES (7, 'Skolska 10', 'Nis', 'Srbija', 'pswtim2+4@gmail.com', true, 'Cadmin', '$2a$10$iGnVynNJEax7VXDAAnl7eOn02lNDjQ.VXn4S8rqKiVOLhFnld8K3q', '06512000288', 'ROLE_CA', 'Cadminic', '0206123820121', 'cadmin1', '2019-12-31 00:00:00');
 
-INSERT INTO `clinic` (id, address, description, grade, name, price_list_id) VALUES (1, 'Adresa 1', 'Opis klinike1...', '4', 'klinika1', null);
-INSERT INTO `clinic` (id, address, description, grade, name, price_list_id) VALUES (2, 'Adresa 2', 'Opis klinike2...', '5', 'klinika2', null);
-INSERT INTO `clinic` (id, address, description, grade, name, price_list_id) VALUES (3, 'Adresa 3', 'Opis klinike3...', '4', 'klinika3', null);
+
+
+
+INSERT INTO `clinic` (id, address, description, grade, name, price_list_id, income) VALUES (1, 'Adresa 1', 'Opis klinike1...', '4', 'klinika1', null, 22222);
+INSERT INTO `clinic` (id, address, description, grade, name, price_list_id, income) VALUES (2, 'Adresa 2', 'Opis klinike2...', '5', 'klinika2', null, 34000);
+INSERT INTO `clinic` (id, address, description, grade, name, price_list_id, income) VALUES (3, 'Adresa 3', 'Opis klinike3...', '4', 'klinika3', null, 5600000);
+
 
 INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (5, 1, 4, '2020-02-15 00:00:00', '2020-02-17 00:00:00');
 INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (5, 1, 5, '2020-02-21 00:00:00', '2020-02-22 00:00:00');
