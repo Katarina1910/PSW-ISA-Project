@@ -14,7 +14,7 @@ import { DisplayMessage } from '../shared/models/display-message';
 })
 export class PatientProfileSettingsComponent implements OnInit {
 
-  user: User = new User("","","","","","","","","","","","");
+  user: User = new User("","","","","","","","","","","","","");
   form: FormGroup;
   notification: DisplayMessage;
 

@@ -13,7 +13,7 @@ import { PatientProfileDocService } from '../patientProfileDoc/patientProfileDoc
 
 export class MedicalRecord implements OnInit{
 
-    user: User = new User("","","","","","","","","","","","");
+    user: User = new User("","","","","","","","","","","","","");
 
 
     medicalRecord = new MedicalRecordd(null, '','','','','','');

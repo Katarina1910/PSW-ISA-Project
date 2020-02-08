@@ -14,7 +14,7 @@ import { MedicalRecordd } from '../medicalRecord/medicalRecord';
 })
 export class PatientProfileDocComponent  implements OnInit {
 
-  user: User = new User("","","","","","","","","","","","");
+  user: User = new User("","","","","","","","","","","","","");
   medicalRecord: MedicalRecordd;
   ngOnInit(): void {
    this.getProfile();

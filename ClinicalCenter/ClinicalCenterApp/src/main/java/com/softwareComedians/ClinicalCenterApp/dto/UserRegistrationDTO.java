@@ -24,6 +24,9 @@ public class UserRegistrationDTO {
     @Size(min = 3, message = "Password must be at least 3 characters long")
     private String password;
 
+    @NotNull(message = "Password repeat must be provided")
+    private String password2;
+
     @NotNull(message = "Email must be provided")
     @Email
     private String email;

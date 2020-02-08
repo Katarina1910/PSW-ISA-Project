@@ -31,7 +31,7 @@ export class ClinicSettingsComponent implements OnInit {
  google: any;
  public searchControl: FormControl;
   
-  user: User = new User("","","","","","","","","","","","");
+  user: User = new User("","","","","","","","","","","","","");
   clinic: Clinic = new Clinic(null,null,null,null,null, null);
   doctors: Doctor[];
 
