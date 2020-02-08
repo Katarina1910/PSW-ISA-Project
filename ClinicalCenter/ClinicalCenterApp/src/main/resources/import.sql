@@ -77,3 +77,19 @@ insert into nurse (id) values (8);
 INSERT INTO `personnel` (id, clinic_id, consult_term_id) VALUES (8, 1, 2);
 INSERT INTO `user_authority` (user_id, authority_id) VALUES (8, 5);
 
+insert into request_for_absence(froom, is_accepted, too, applicant_id, clinic_administrator_id) values ('2020-02-04', true, '2020-02-15', 5,7);
+insert into request_for_absence(froom, is_accepted, too, applicant_id, clinic_administrator_id) values ('2020-02-04', true, '2020-02-15', 8,7);
+insert into request_for_absence(froom, is_accepted, too, applicant_id, clinic_administrator_id) values ('2020-03-04', true, '2020-03-15', 5,7);
+
+insert into recipe (is_validated, doctor_id, medical_record_id , nurse_id) values (false, 4, 1, null);
+insert into recipe (is_validated, doctor_id, medical_record_id , nurse_id) values (false, 4, 1, null);
+insert into recipe (is_validated, doctor_id, medical_record_id , nurse_id) values (false, 4, 1, null);
+
+insert into recipe_medicament(recipe_id, medicament_id) values (1,1)
+insert into recipe_medicament(recipe_id, medicament_id) values (1,2)
+insert into recipe_medicament(recipe_id, medicament_id) values (1,3)
+
+insert into recipe_medicament(recipe_id, medicament_id) values (2,1)
+insert into recipe_medicament(recipe_id, medicament_id) values (2,2)
+
+insert into recipe_medicament(recipe_id, medicament_id) values (3,1)
