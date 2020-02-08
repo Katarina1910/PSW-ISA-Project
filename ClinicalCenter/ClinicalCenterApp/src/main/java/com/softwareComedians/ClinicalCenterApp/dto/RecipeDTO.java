@@ -17,4 +17,6 @@ public class RecipeDTO {
     private boolean isValidated;
     private DoctorDTO doctor;
     private MedicalRecordDTO medicalRecord;
+
+
 }

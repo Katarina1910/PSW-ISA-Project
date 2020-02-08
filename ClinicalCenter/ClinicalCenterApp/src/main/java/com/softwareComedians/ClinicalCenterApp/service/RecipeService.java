@@ -61,7 +61,7 @@ public class RecipeService {
 
     }
 
-    public ResponseEntity<Void> certify(Long id) {
+    public ResponseEntity<Void> certify(Long id, Long userid) {
         Recipe recipe = recipeRepository.findById(id).orElseGet(null);
 
         if(recipe == null)
@@ -70,11 +70,9 @@ public class RecipeService {
         if(recipe.isValidated() == true)
             return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        ///Nurse nurse = (Nurse)userRepository.findByEmail(username);
+        Nurse nurse = (Nurse)userRepository.findById(userid).orElseGet(null);
         recipe.setValidated(true);
-        //recipe.setNurse(nurse);
+        recipe.setNurse(nurse);
         recipeRepository.save(recipe);
 
         return  new ResponseEntity<>(HttpStatus.OK);
