@@ -50,7 +50,7 @@ public class ConsultTermController {
         ct.setPrice(consultTermDTO.getPrice());
         ct.setDate(consultTermDTO.getDate());
 
-        Doctor d = doctorService.findByName(consultTermDTO.getDoctor().getName());
+        Doctor d = doctorService.findOne(consultTermDTO.getDoctor().getId());
         //stampaj
        // System.out.println(d.getName()+"sdfgh IME"+consultTermDTO.getDoctor());
         ct.setDoctor(d);
