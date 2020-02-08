@@ -147,7 +147,13 @@ public class ConsultTerm {
 		this.type = type;
 	}
 
+	public String getReport() {
+		return report;
+	}
 
+	public void setReport(String report) {
+		this.report = report;
+	}
 
 	public RequestForConsult getRequestForConsult() {
 		return requestForConsult;
