@@ -37,3 +37,34 @@
     </div>
 
 </div>
+
+    <div class="user-info-container-row">
+        <label> Clinic income:  </label>
+        <mat-form-field class="input-field" appearance="outline" matTooltip="Name">
+            <mat-icon matPrefix class="icon">perm_identity</mat-icon>
+            <input disabled  matInput type="text"  [(ngModel)]="clinic.income" enable/>
+        </mat-form-field>
+        <label> Clinic's grade: </label>
+        <mat-form-field class="input-field" appearance="outline" matTooltip="Grade">
+            <mat-icon matPrefix class="icon">perm_identity</mat-icon>
+            <input matInput type="number" placeholder="Grade" disabled [(ngModel)]="clinic.grade" />
+        </mat-form-field>
+
+        <div class='table-responsive' class="d-flex p-2 justify-content-center">
+            <table class='table'>
+                <thead>
+                    <td>Name</td>
+                    <td>Surname</td>
+                    <td>Grade</td>
+                </thead>
+                <tbody>
+                    <tr  *ngFor = 'let ms of doctors'>
+                        <td>{{ms.name}}</td>
+                        <td>{{ms.surname}}</td>
+                        <td>{{ms.grade}}</td>
+                    </tr>
+                </tbody>
+                </table>
+
+        </div>
+</div>

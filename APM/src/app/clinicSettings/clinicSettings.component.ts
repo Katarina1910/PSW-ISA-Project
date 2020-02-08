@@ -4,6 +4,7 @@ import { UserService } from '../registration/user.service';
 import { Router } from '@angular/router';
 import { Clinic } from '../addNewClinic/clinic';
 import { ClinicSettingsService } from './clinicSettings.service';
+import { Doctor } from '../doctor/doctor';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class ClinicSettingsComponent implements OnInit {
 
   
   user: User = new User("","","","","","","","","","","","");
-  clinic: Clinic = new Clinic(null,null,null,null,null)  
+  clinic: Clinic = new Clinic(null,null,null,null,null, null);
+  doctors: Doctor[];
 
 
   password: string = '';
