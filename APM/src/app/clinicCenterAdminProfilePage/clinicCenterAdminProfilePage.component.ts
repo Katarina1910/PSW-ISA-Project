@@ -26,37 +26,33 @@ export class ClinicCenterAdminProfilePageComponent implements OnInit {
 
   ngOnInit() {
     this.getUserInfo();
-    this.form = this.formBuilder.group({
-      oldPassword: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(32)])],
-      newPassword: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(32)])]
-    });
   }
 
   onClickCancel(){
-    this.router.navigate(['/HomepageCCA']);
-  }
+    if(this.userService.isUserCA())
+      this.router.navigate(['/HomepageCA']);
+    else if(this.userService.isUserNurse()){
+      this.router.navigate(['/HomepageNurse']);
+    }
+    else if(this.userService.isUserCCA()){
+        this.router.navigate(['/HomepageCCA']);
+      }
+    }
 
   onClickSave(){
-    console.log('Print: ', this.user)
-    
-    this.authService.changePassowrd(this.form.value)
-    .subscribe(() => {
-      this.authService.logout()
-      this.router.navigate(['/login', {msgType: 'success', msgBody: 'Success! Please sign in with your new password.'}]);
-    }, error => {
-      this.notification = {msgType: 'error', msgBody: 'Invalid old password.'};
-    });
-    
     this.editUserService.editUsers(this.user)
     .subscribe(
       data=> {
         alert('Your data has been changed!')
-        this.router.navigate(['/HomepageCCA']);    
-          console.log('Updated!', JSON.stringify(data))
-        },
+        if(this.userService.isUserCA())
+          this.router.navigate(['/HomepageCA']);
+        else if(this.userService.isUserNurse())
+          this.router.navigate(['/HomepageNurse']);
+        else if(this.userService.isUserCCA())
+          this.router.navigate(['/HomepageCCA']);
+      },
         error=> console.error('Error updating!',error)
     )
-      
   }
 
   private getUserInfo(): void {

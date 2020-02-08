@@ -23,4 +23,24 @@ export class AppComponent {
   isUserLoggedIn(): boolean {
     return this._userService.isUserLoggedIn();
   }
+
+  isUserPatient(): boolean {
+    return this._userService.isUserPatient();
+  }
+
+  isUserDoctor(): boolean {
+  return this._userService.isUserDoctor();
+  }
+
+  isUserNurse(): boolean{
+  return this._userService.isUserNurse();
+  }
+
+  isUserAdminCA(): boolean {
+  return this._userService.isUserCA();
+  }
+
+  isUserAdminCCA(): boolean {
+  return this._userService.isUserCCA();
+  }
 }
