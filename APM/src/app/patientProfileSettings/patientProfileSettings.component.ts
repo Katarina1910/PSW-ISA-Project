@@ -28,7 +28,8 @@ export class PatientProfileSettingsComponent implements OnInit {
     this.getUserInfo();
     this.form = this.formBuilder.group({
       oldPassword: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(32)])],
-      newPassword: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(32)])]
+      newPassword: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(32)])],
+      email: String
     });
   }
 
@@ -51,6 +52,7 @@ export class PatientProfileSettingsComponent implements OnInit {
 
   onClickChangePassword() {
     console.log('Print: ', this.form.value);
+    this.form.value.email = this.user.email;
     this.authService.changePassowrd(this.form.value)
     .subscribe(() => {
       this.authService.logout()
