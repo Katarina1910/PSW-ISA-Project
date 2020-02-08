@@ -18,7 +18,9 @@
                     <td>{{ct.type.name}}</td>
                     <td>{{ct.room.name}}</td>
                     <td>{{ct.price}}$</td>
-                    <td><ngb-rating [(rate)]="currentRate" max="5" (click)="rateDoctor()"></ngb-rating></td>
+                    <td><ngb-rating [(rate)]="currentRate" max="5"></ngb-rating>
+                        <hr>
+                        <pre><button (click)="rateClinic(ct)">Rate</button></pre></td>
                 </tr>
             
             </tbody>

@@ -32,7 +32,7 @@ const colors: any = {
 export class DoctorWorkCalendar  implements OnInit{
 
 public consults: ConsultTerm[];
-public consultTerm = new ConsultTerm(null,null,null,null,null,null,null,null,null,null);
+public consultTerm = new ConsultTerm(null,null,null,null,null,null,null,null,null,null,null);
 public room: string;
 showModal: boolean;
 public patient: string;

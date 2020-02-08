@@ -56,7 +56,7 @@ export class ListOfPatClinics implements OnInit{
     public user: User;
 
     public consultTerms: ConsultTerm[];
-    consultTermModel = new ConsultTerm(null,null,null,null,null,null,null,null,null,null);
+    consultTermModel = new ConsultTerm(null,null,null,null,null,null,null,null,null,null,null);
 
     constructor(private _listOfClinicsService: listOfClinicsPatService, 
                 private _getConsultTypes: DeleteConsultTypeService,

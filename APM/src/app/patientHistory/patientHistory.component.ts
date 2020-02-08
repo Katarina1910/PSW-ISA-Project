@@ -7,6 +7,8 @@ import { RequestForConsult } from '../requestForConsult/requestForConsult';
 import { Sort } from '@angular/material';
 import { ConsultTermService } from '../consultTerm/consultTerm.service';
 import { AddDoctorService } from '../doctor/addDoctor.service';
+import { DeleteClinicsService } from '../addNewClinic/deleteClinics.service';
+import { Clinic } from '../addNewClinic/clinic';
 
 @Component({
     selector : 'cc-patientHistory',
@@ -19,10 +21,12 @@ export class patientHistory implements OnInit{
     private consultTerms: ConsultTerm[];
     private sortedTerms: ConsultTerm[];
     currentRate = 3;
+    public listOfClinics: Clinic[];
 
     constructor(private _consultTermService: ConsultTermService,
                 private userService: UserService,
-                private addDoctorService: AddDoctorService) {}
+                private addDoctorService: AddDoctorService,
+                private clinicService: DeleteClinicsService) {}
   
     ngOnInit(): void {
         this.getUserInfo();
@@ -35,7 +39,14 @@ export class patientHistory implements OnInit{
             }
         )
         
-        console.log(this.consultTerms);
+        this.clinicService.getClinics().subscribe(
+          data => {
+            this.listOfClinics = data;
+            console.log(this.listOfClinics);
+          },error => {
+            console.log("Error in getting clinics!")
+        }
+        )
         
     }
 
@@ -55,6 +66,18 @@ export class patientHistory implements OnInit{
         },
         error=> console.error('Error rating!',error))
       console.log("ocena doktora: ",rate);
+    }
+
+    rateClinic(ct: ConsultTerm): void {
+      for(let c of this.listOfClinics) {
+        if(c.id == ct.clinicId) {
+          this.clinicService.rateClinic(c, this.currentRate).subscribe(
+            date=> {
+              alert('Clinic grade is sent!');
+            }
+          )
+        }
+      }
     }
     
     //sortiranje

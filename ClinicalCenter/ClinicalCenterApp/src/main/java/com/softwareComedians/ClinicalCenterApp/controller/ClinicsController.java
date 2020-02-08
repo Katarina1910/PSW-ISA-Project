@@ -82,4 +82,14 @@ public class ClinicsController {
 
         return new ResponseEntity<>(new ClinicsDTO(clinic), HttpStatus.OK);
     }
+
+    @PutMapping(value = "/rateClinic/{rate}")
+    public ResponseEntity<ClinicsDTO> rateClinicGrade (@RequestBody ClinicsDTO clinicsDTO, @PathVariable Double rate) {
+        Clinic clinic = clinicsService.findOne(clinicsDTO.getId());
+        Double c = (clinic.getGrade()+rate)/2;
+        clinic.setGrade(c);
+        clinic = clinicsService.save(clinic);
+
+        return new ResponseEntity<>(new ClinicsDTO(clinic), HttpStatus.OK);
+    }
 }
