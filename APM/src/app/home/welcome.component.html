@@ -19,16 +19,14 @@
         <button><a [routerLink]="['/HomepagePatient']">Homepage for Patient</a></button>
       </ng-template>
 
-      <ng-template [ngIf]=" isUserAdminCCA()">
+      <ng-template [ngIf]=" isUserCCA()">
         <button><a [routerLink]="['/HomepageCCA']">Homepage for Clinical Center Administrator</a></button>
       </ng-template>
+
 
       <ng-template [ngIf]=" isUserAdminCA()">
         <button><a [routerLink]="['/HomepageCA']">Homepage for Clinic Administartor</a></button>
       </ng-template>
-
-      <button><a [routerLink]="['/HomepageDoctor/consultTermReport']">Click</a></button>
-
     </div>
 </div>
 

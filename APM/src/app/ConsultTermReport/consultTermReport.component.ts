@@ -22,12 +22,6 @@ import { Router } from '@angular/router';
 
   export class ConsultTermReportComponent implements OnInit {
 
-    dropdownList = [];
-    selectedItems = [];
-    dropdownSettings = {};
-
-
-
     public consult = new ConsultTerm(null,null,null,null,null,null,null,null, null,null); 
     public listDiag : [];
     public listMed : [];
@@ -67,19 +61,7 @@ import { Router } from '@angular/router';
             itemsShowLimit: 3,
             allowSearchFilter: true
           };
-    }
-
-    onItemSelect(item: any) {
-        console.log(item);
-      }
-      onSelectAll(items: any) {
-        console.log(items);
-
-      }
-}
-
-      
-
+          
           this.diagnosisSettings = {
             singleSelection: true,
             idField: 'id',
@@ -88,6 +70,14 @@ import { Router } from '@angular/router';
             allowSearchFilter: true
           };
     }
+
+    onItemSelect(item: any) {
+        console.log(item);
+      }
+      onSelectAll(items: any) {
+        console.log(items);
+
+      }      
 
     onAddReport(): void{
         if(this.selectedMedicaments == null || this.selectedDiagnosis == null){

@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
         public pomocnaId: any;
         public email:any;
         public reason:string;
+        
         constructor(private _arrivedRequestService: arrivedRequestService,  private router: Router) {}
 
         ngOnInit(){
@@ -24,7 +25,7 @@ import { Router } from '@angular/router';
                 error=>console.error('Error!',error)
             )
         }
-        
+
         onClick(id:any,email:any): void{
             this._arrivedRequestService.sendActivationEmail(id,email, this.arrReq).subscribe(
             data=> {

@@ -39,7 +39,6 @@ export class UserService{
     isUserPatient(): boolean {
         if(this.isUserLoggedIn()) {
             this.user = JSON.parse(sessionStorage.getItem("user"));
-            console.log(this.user.role);
             if(this.user.role==="ROLE_PATIENT"){
                 return true;
             }
@@ -51,7 +50,6 @@ export class UserService{
     isUserDoctor(): boolean {
         if(this.isUserLoggedIn()) {
             this.user = JSON.parse(sessionStorage.getItem("user"));
-            console.log(JSON.stringify(this.user));
             if(this.user.role==="ROLE_DOCTOR"){
                 return true;
             }
@@ -64,7 +62,6 @@ export class UserService{
     isUserNurse(): boolean {
         if(this.isUserLoggedIn()) {
             this.user = JSON.parse(sessionStorage.getItem("user"));
-            console.log(JSON.stringify(this.user));
             if(this.user.role==="ROLE_NURSE"){
                 return true;
             }
@@ -77,7 +74,6 @@ export class UserService{
     isUserCA(): boolean {
         if(this.isUserLoggedIn()) {
             this.user = JSON.parse(sessionStorage.getItem("user"));
-            console.log(JSON.stringify(this.user));
             if(this.user.role==="ROLE_CA"){
                 return true;
             }
@@ -90,7 +86,6 @@ export class UserService{
     isUserCCA(): boolean {
         if(this.isUserLoggedIn()) {
             this.user = JSON.parse(sessionStorage.getItem("user"));
-            console.log(JSON.stringify(this.user));
             if(this.user.role==="ROLE_CCA"){
                 return true;
             }
