@@ -29,7 +29,7 @@ public class DoctorTerms {
     @Column
     String date;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     Doctor doctor;
 
     public DoctorTerms() {

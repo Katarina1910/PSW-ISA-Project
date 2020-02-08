@@ -15,11 +15,11 @@ public class Consult{
 	private Long id;
 
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "consultTerm_id", referencedColumnName = "id")
 	private ConsultTerm consultTerm;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "recipe_id", referencedColumnName = "id")
 	public Recipe recipe;
 
@@ -34,7 +34,7 @@ public class Consult{
 	@Column
 	private String report;
 
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private MedicalRecord medicalRecord;
 
 	public Consult(String report) {
@@ -42,6 +42,61 @@ public class Consult{
 		this.report = report;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public ConsultTerm getConsultTerm() {
+		return consultTerm;
+	}
+
+	public void setConsultTerm(ConsultTerm consultTerm) {
+		this.consultTerm = consultTerm;
+	}
+
+	public Recipe getRecipe() {
+		return recipe;
+	}
+
+	public void setRecipe(Recipe recipe) {
+		this.recipe = recipe;
+	}
+
+	public Nurse getNurse() {
+		return nurse;
+	}
+
+	public void setNurse(Nurse nurse) {
+		this.nurse = nurse;
+	}
+
+	public Diagnosis getDiagnosis() {
+		return diagnosis;
+	}
+
+	public void setDiagnosis(Diagnosis diagnosis) {
+		this.diagnosis = diagnosis;
+	}
+
+	public String getReport() {
+		return report;
+	}
+
+	public void setReport(String report) {
+		this.report = report;
+	}
+
+	public MedicalRecord getMedicalRecord() {
+		return medicalRecord;
+	}
+
+	public void setMedicalRecord(MedicalRecord medicalRecord) {
+		this.medicalRecord = medicalRecord;
+	}
 
 	public Consult() {
 	}

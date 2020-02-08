@@ -5,8 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-import static javax.persistence.InheritanceType.JOINED;
-
 @Entity
 @Getter
 @Setter
@@ -15,7 +13,7 @@ public class RequestForPatientRegistration {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name = "userData_id", referencedColumnName = "id")
 	private User userData;
 

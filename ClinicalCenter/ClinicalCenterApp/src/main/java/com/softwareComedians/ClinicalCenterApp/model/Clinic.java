@@ -28,30 +28,34 @@ public class Clinic {
     @Column
     private double grade;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Column
+    private  double income;
+
+    @OneToOne( fetch = FetchType.LAZY)
     @JoinColumn(name = "priceList_id", referencedColumnName = "id")
      private PriceList priceList;
 
-    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<ConsultTerm> freeConsultTerms;
 
-    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<ConsultTerm> appointedConsultTerms;
 
-    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<Personnel> personnels;
 
-    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<Patient> patients;
 
-   @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<Room> rooms;
 
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "clinic")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "clinic")
     private Set<ClinicAdministrator> clinicAdministrators;
 
     public Clinic() {
+        this.income = 0;
 
     }
 
@@ -61,6 +65,15 @@ public class Clinic {
         this.address = c.getAddress();
         this.description = c.getDescription();
         this.grade = c.getGrade();
+        this.income = c.getIncome();
+    }
+
+    public double getIncome() {
+        return income;
+    }
+
+    public void setIncome(double income) {
+        this.income = income;
     }
 
     public Long getId(){return id;}

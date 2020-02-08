@@ -77,3 +77,16 @@ insert into nurse (id) values (8);
 INSERT INTO `personnel` (id, clinic_id, consult_term_id) VALUES (8, 1, 2);
 INSERT INTO `user_authority` (user_id, authority_id) VALUES (8, 5);
 
+insert into `requst_for_operation` (id, date_and_time, is_accepted, patient_id) value (1, '2020-02-07',false, 2);
+insert into `requst_for_operation` (id, date_and_time, is_accepted, patient_id) value (2, '2020-02-08',false, 3);
+insert into room_terms (date, room_id, term1, term2, term3, term4, term5, term6) values ('2020-02-07',2,true,true,true,true,true,true);
+insert into room_terms (date, room_id, term1, term2, term3, term4, term5, term6) values ('2020-02-07',1,true,true,true,true,true,true);
+
+insert into room_terms (date, room_id, term1, term2, term3, term4, term5, term6) values ('2020-02-08',2,true,true,true,true,true,true);
+insert into room_terms (date, room_id, term1, term2, term3, term4, term5, term6) values ('2020-02-08',1,true,true,true,true,true,true);
+insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-07',5,false ,true,true,true,true,true);
+insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-07',6,false ,true,true,true,true,true);
+insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-08',5,false ,true,true,true,true,true);
+insert into doctor_terms (date, doctor_id, term1, term2, term3, term4, term5, term6) values ('2020-02-08',6,false ,true,true,true,true,true);
+
+
