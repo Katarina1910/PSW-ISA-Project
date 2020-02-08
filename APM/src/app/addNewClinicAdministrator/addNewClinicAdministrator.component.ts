@@ -32,7 +32,7 @@ export class AddClinicAdminComponent implements OnInit{
            data=>{
             console.log('Success!', JSON.stringify(data))
             alert('Clinic Administrator added!');
-            this.router.navigate(['/HomepageCA']);
+            this.router.navigate(['/HomepageCCA']);
            } ,
             error=> console.error('Error!',error)
         )

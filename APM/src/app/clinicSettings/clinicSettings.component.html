@@ -22,11 +22,7 @@
                 <input matInput type="text" placeholder="Description" enable [(ngModel)]="clinic.description" />
             </mat-form-field>
 
-            <label> Clinic's grade: </label>
-            <mat-form-field class="input-field" appearance="outline" matTooltip="Grade">
-                <mat-icon matPrefix class="icon">perm_identity</mat-icon>
-                <input matInput type="number" placeholder="Grade" disabled [(ngModel)]="clinic.grade" />
-            </mat-form-field>
+           
         </div>
 
         <div class="user-info-container-row">
@@ -41,5 +37,35 @@
           </agm-map>
        
     </div>
+</div>
 
+    <div class="user-info-container-row">
+        <label> Clinic income:  </label>
+        <mat-form-field class="input-field" appearance="outline" matTooltip="Name">
+            <mat-icon matPrefix class="icon">perm_identity</mat-icon>
+            <input disabled  matInput type="text" value="500000" enable/>
+        </mat-form-field>
+        <label> Clinic's grade: </label>
+        <mat-form-field class="input-field" appearance="outline" matTooltip="Grade">
+            <mat-icon matPrefix class="icon">perm_identity</mat-icon>
+            <input matInput type="number" placeholder="Grade" disabled [(ngModel)]="clinic.grade" />
+        </mat-form-field>
+
+        <div class="d-flex flex-row flex-wrap">
+            <table>
+                <thead>
+                    <tr>Name</tr>
+                    <tr>Surname</tr>
+                    <tr>Grade</tr>
+                </thead>
+                <tbody>
+                    <tr  *ngFor = 'let ms of doctors'>
+                        <td>{{ms.name}}</td>
+                        <td>{{ms.surname}}</td>
+                        <td>{{ms.grade}}</td>
+                    </tr>
+                </tbody>
+                </table>
+
+        </div>
 </div>

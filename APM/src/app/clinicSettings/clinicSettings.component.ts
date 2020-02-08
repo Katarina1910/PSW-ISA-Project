@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { Clinic } from '../addNewClinic/clinic';
 import { ClinicSettingsService } from './clinicSettings.service';
 import { MapsAPILoader } from '@agm/core';
+import { Doctor } from '../doctor/doctor';
+import { DeleteDoctorService } from '../doctor/deleteDoctor.service';
+
 
 @Component({
   selector: 'app-profile-settings',
@@ -28,6 +31,7 @@ export class ClinicSettingsComponent implements OnInit {
   
   user: User = new User("","","","","","","","","","","","");
   clinic: Clinic = new Clinic(null,null,null,null,null)  
+  doctors: Doctor[];
 
 
   password: string = '';
@@ -38,11 +42,18 @@ export class ClinicSettingsComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router,
               private ccService: ClinicSettingsService,private mapsAPILoader: MapsAPILoader,
-              private ngZone: NgZone) { 
+              private ngZone: NgZone, private deleteDocSevice : DeleteDoctorService) { 
   }
 
   ngOnInit() {
     this.getUserInfo();
+
+    this.deleteDocSevice.getDoctors().subscribe(
+      data=>{
+        this.doctors = data;
+        console.log(this.doctors)
+      }
+    )
 
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {  
@@ -99,10 +110,12 @@ export class ClinicSettingsComponent implements OnInit {
       }
  
     });
+
   }
 
   onClickCancel(){
     this.router.navigate(['/HomepageCA']);
+    
   }
 
   onClickSave(){

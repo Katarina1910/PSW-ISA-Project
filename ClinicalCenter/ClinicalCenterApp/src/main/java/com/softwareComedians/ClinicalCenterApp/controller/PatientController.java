@@ -1,6 +1,5 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
-
 import com.softwareComedians.ClinicalCenterApp.common.consts.UserRoles;
 import com.softwareComedians.ClinicalCenterApp.dto.ConsultTermDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.PatientDTO;
@@ -15,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,6 +22,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -79,9 +81,8 @@ public class PatientController {
         return new ResponseEntity<>(patientsDTO, HttpStatus.OK);
     }
 
-    //u front endu ovo pozovi za accept(gadja ga link)
     @GetMapping(value = "add/{id}")
-    public ResponseEntity<Void> addPatient(@PathVariable Long id){
+    public ResponseEntity<Void> addPatient(@PathVariable Long id) throws URISyntaxException {
 
         RequestForPatientRegistration request = requestForPatientRegistrationService.findOne(id);
         requestForPatientRegistrationService.remove(id);
@@ -100,8 +101,12 @@ public class PatientController {
 
         patient = patientService.save(patient);
 
+        HttpHeaders headers;
+        headers = new HttpHeaders();
+        headers.setLocation(new URI("http://localhost:4200/#/login"));
+
         if(patient!=null)
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
         else
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

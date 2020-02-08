@@ -2,6 +2,7 @@ package com.softwareComedians.ClinicalCenterApp.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.softwareComedians.ClinicalCenterApp.dto.ConsultTermDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -54,8 +55,8 @@ public class ConsultTerm {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Patient patient;
 
-	@OneToOne(mappedBy = "consultTerm")
-	private Consult consult;
+	/*@OneToOne(mappedBy = "consultTerm")
+	private Consult consult;*/
 
 	
 	public ConsultTerm() {

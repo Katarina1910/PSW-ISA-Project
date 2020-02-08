@@ -63,10 +63,14 @@ import { DoctorWorkCalendar } from './doctorWorkingCalendar/doctorWorkCal.compon
 import { AddNurseComponent } from './nurse/addNurse.component';
 import { DeleteNurseComponent } from './nurse/deleteNurse.component';
 import { arrivedAbsenceReqComponent } from './arrivedAbcenseReq/arrivedAbcenseReq.component';
+import { ConsultTermReportComponent } from './ConsultTermReport/consultTermReport.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ReserveRoomsComponent } from './reserveRooms/reserveRooms.component';
 import { patientHistory } from './patientHistory/patientHistory.component';
 import { ReserveRoomsOPComponent } from './reserveRoomOP/reserveRoomOP.component';
 import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfilePage/clinicCenterAdminProfilePage.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 
@@ -118,12 +122,13 @@ import { AgmCoreModule } from '@agm/core';
     DoctorRequestForOperationComponent,
     ClinicSettingsComponent,
     arrivedAbsenceReqComponent,
+    ConsultTermReportComponent,
     ReserveRoomsComponent,
     DeleteNurseComponent,
     arrivedAbsenceReqComponent,
     patientHistory,
     ReserveRoomsOPComponent,
-    ClinicCenterAdminProfilePageComponent
+    ClinicCenterAdminProfilePageComponent,
     //ListOfDiagnosis
     ],
   imports: [
@@ -138,6 +143,11 @@ import { AgmCoreModule } from '@agm/core';
     MatNativeDateModule,
     MatSortModule,
     FullCalendarModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
     BrowserAnimationsModule,
     NgbModule,
     AgmCoreModule.forRoot({
@@ -193,6 +203,7 @@ import { AgmCoreModule } from '@agm/core';
       {path: 'HomepagePatient/requestExamination', component: RequestExamination},
       {path: 'HomepagePatient/History', component: patientHistory},
       {path: 'requestConsult', component: RequestForConsultComponent},
+      {path: 'HomepageDoctor/consultTermReport', component: ConsultTermReportComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'},
     ], {useHash: true})

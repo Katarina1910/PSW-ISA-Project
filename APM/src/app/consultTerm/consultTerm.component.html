@@ -14,7 +14,11 @@
           <label for="exampleSelect1">Type:</label>
         <select class="form-control" id="tyoe"  [(ngModel)]="consultTermModel.type" name="type">
           <option [ngValue]="null">Select Category</option>
+<<<<<<< HEAD
           <option *ngFor = 'let t of types' name="type" [ngValue]="t">{{t.name}}</option>
+=======
+          <option *ngFor = 'let t of types' [ngValue] = "t" name="type">{{t.name}}</option>
+>>>>>>> master
         </select>
       </div>
 
@@ -45,7 +49,7 @@
         <label for="exampleSelect1">Doctor:</label>
         <select class="form-control" id="doctor"  [(ngModel)]="consultTermModel.doctor" name="doctor">
           <option [ngValue]="null">Select Category</option>
-          <option  *ngFor = 'let o of doctors' name = "doc" [ngValue]="o">{{o.name}}</option>
+          <option  *ngFor = 'let o of doctors'  [ngValue] = "o" name = "doc" >{{o.name}}</option>
         </select>
       </div>
       
