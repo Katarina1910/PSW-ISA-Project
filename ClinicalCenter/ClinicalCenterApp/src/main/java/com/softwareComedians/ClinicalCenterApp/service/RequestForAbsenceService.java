@@ -37,4 +37,7 @@ public class RequestForAbsenceService {
         return rqAbsenceRepository.findById(id).orElseGet(null);
     }
 
+    public List<RequestForAbsence> findAllById(Long id) {
+        return  rqAbsenceRepository.findAllByUserId(id);
+    }
 }
