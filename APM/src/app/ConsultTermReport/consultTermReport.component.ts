@@ -92,7 +92,7 @@ import { Consult } from './Consult';
 
           this._consultTermReportService.addConsultTerm(this.consult).subscribe(
             data =>{
-              this.router.navigate(['HompageDoctor/DoctorWorkCalendar']);
+              this.router.navigate(['/HomepageDoctor']);
             },error => {
               alert("Consult report hasn't been sabed properly");
             }
