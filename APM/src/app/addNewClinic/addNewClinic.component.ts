@@ -11,7 +11,7 @@ import { AddNewClinicService } from './addNewClinic.service';
 
 export class AddNewClinic{
 
-    clinicModel = new Clinic('','','', 0.0, 0);
+    clinicModel = new Clinic('','','', 0.0, 0, null);
 
     constructor(private _addNewClinicService: AddNewClinicService, private router: Router){}
 
