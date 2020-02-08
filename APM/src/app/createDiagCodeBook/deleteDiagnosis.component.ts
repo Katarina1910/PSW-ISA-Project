@@ -33,7 +33,7 @@ export class DeleteDiagnosisComponent implements OnInit{
            this._deleteDiagnosisService.deleteDiagnosis(id).subscribe(
                 data=>{
                     alert('Diagnosis deleted!');
-                    this.router.navigate(['/HomepageCCA/allDiagnosis']);
+                    this.router.navigate(['/HomepageCCA']);
                 },
                 error => console.error('Error!',error)
             )

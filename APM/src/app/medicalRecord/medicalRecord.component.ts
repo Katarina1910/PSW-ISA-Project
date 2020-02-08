@@ -45,6 +45,7 @@ export class MedicalRecord implements OnInit{
    this.medicalRecordService.editMedicalRecord(this.medicalRecord).subscribe(
       data =>{
             alert('Medical record successufully edited');
+            this.router.navigate(['/HomepageDoctor/ListOfPatients/Profile']);
       },
       error =>{
         alert("Medical record has not been edited");
@@ -52,5 +53,4 @@ export class MedicalRecord implements OnInit{
    )
   
  }
-
 }

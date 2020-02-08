@@ -54,6 +54,7 @@ public class ConsultTermController {
         //stampaj
        // System.out.println(d.getName()+"sdfgh IME"+consultTermDTO.getDoctor());
         ct.setDoctor(d);
+        ct.setClinic(d.getClinic());
 
         Room r = roomService.findByName(consultTermDTO.getRoom().getName());
       //  System.out.println(r.getName());

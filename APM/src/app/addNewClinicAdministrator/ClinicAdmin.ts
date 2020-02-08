@@ -1,3 +1,5 @@
+import { Clinic } from '../addNewClinic/clinic';
+
 export class ClinicAdmin {
     constructor(
         private id: string,
@@ -9,7 +11,7 @@ export class ClinicAdmin {
         private  country: string,
         private  email: string,
         private  phone: string,
-        private  clinic: string,
+        public  clinic: Clinic,
         private  password: string
     ){}
 

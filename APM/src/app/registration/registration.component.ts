@@ -10,8 +10,10 @@ import { RequestForPatReg } from './requestForPatReg';
     templateUrl : './registration.component.html'
 })
 export class RegistrationComponent{
+
     userModel = new User(" "," "," "," "," "," "," "," "," "," "," ","");
     reqModel = new RequestForPatReg(this.userModel, null, false, "");
+    password1 : string = "";
     
     registerForm: FormGroup;
     submitted = false;
@@ -36,6 +38,7 @@ export class RegistrationComponent{
     get f() { return this.registerForm.controls; }
 
     onSubmit(){
+
         console.log('Print: ', this.reqModel)
         this._userService.enroll(this.reqModel)
         .subscribe(

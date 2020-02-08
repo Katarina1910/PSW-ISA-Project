@@ -1,5 +1,4 @@
 import { OnInit, Component } from '@angular/core';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 import { listOfDiagnosis } from '../listOfAllDiagnosis/listOfAllDiagnosis';
 import { listOfDiagnosisService } from '../listOfAllDiagnosis/listOfAllDiagnosis.service';
@@ -7,16 +6,10 @@ import { listOfMedicamentService } from '../listOfMedicaments/listOfMedicament.s
 import { listOfMedicaments } from '../listOfMedicaments/listOfMedicament';
 import { ConsultTermReportService } from './consultTermReport.service';
 import { ConsultTerm } from '../consultTerm/consultTerm';
-import { Medicament } from '../createMedicamentCodeBook/medicament';
-import { Diagnosis } from '../createDiagCodeBook/diagnosis';
-import { ListOfMedicament } from '../listOfMedicaments/listOfMedicament.component';
-import { ListOfDiagnosis } from '../listOfAllDiagnosis/listOfAllDiagnosis.component';
 import { Recipe } from './Recipe';
 import { Router } from '@angular/router';
 import { DoctorWorkCalService } from '../doctorWorkingCalendar/doctorWorkCal.service';
 import { Consult } from './Consult';
-
-
 
 @Component({
     selector: 'consu-term-report',
@@ -24,10 +17,6 @@ import { Consult } from './Consult';
   })
 
   export class ConsultTermReportComponent implements OnInit {
-
-    dropdownList = [];
-    selectedItems = [];
-    dropdownSettings = {};
 
     public consultTerm = new ConsultTerm(null,null,null,null,null,null,null,null, null,null); 
     public listDiag : [];
@@ -69,7 +58,7 @@ import { Consult } from './Consult';
             itemsShowLimit: 3,
             allowSearchFilter: true
           };
-
+          
           this.diagnosisSettings = {
             singleSelection: true,
             idField: 'id',
