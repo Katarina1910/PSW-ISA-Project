@@ -31,7 +31,8 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(Long id, String name, String surname, String ucidn, String address,String city, String country, String email, String phone, String username, String password, String role,boolean isActivated) {
+    public UserDTO(Long id, String name, String surname, String ucidn, String address,String city, String country,
+                   String email, String phone, String username, String password, String role,boolean isActivated, UserTokenState token) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -45,7 +46,7 @@ public class UserDTO {
         this.password = password;
         this.role = role;
         this.isActivated = isActivated;
-        this.token = null;
+        this.token = token;
     }
 
     public UserDTO(User u){
@@ -62,6 +63,7 @@ public class UserDTO {
         role = u.getRole();
         password=u.getPassword();
         isActivated=u.isActivated();
+        token = null;
         this.authorities = u.getAuthorities().stream()
                 .map(authority -> ((Authority) authority).getName()).collect(Collectors.toList());
     }

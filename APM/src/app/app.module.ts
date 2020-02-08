@@ -72,6 +72,7 @@ import { ClinicCenterAdminProfilePageComponent } from './clinicCenterAdminProfil
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -149,6 +150,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     }),
     BrowserAnimationsModule,
     NgbModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyASA1PH4V5-ZK3mRpFF5Yn2ZbtnMl7UnIc'
+    }),
     RouterModule.forRoot([
       {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},

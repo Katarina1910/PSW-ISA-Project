@@ -3,6 +3,7 @@ import { Recipe } from '../ConsultTermReport/Recipe';
 import { listOfDiagnosis } from '../listOfAllDiagnosis/listOfAllDiagnosis';
 import { ConsultType } from '../consultType/consultType';
 import { Doctor } from '../doctor/doctor';
+import { Room } from '../rooms/room';
 
 export class ConsultTerm{
     constructor(
@@ -13,7 +14,7 @@ export class ConsultTerm{
         public  duration: number,
         public  price: number,
         public  discount: number,
-        public room: string,
+        public room: Room,
         public doctor: Doctor,
         public patient: User
 
