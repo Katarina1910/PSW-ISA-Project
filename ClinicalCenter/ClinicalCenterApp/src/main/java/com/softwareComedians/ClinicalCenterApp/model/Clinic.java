@@ -65,7 +65,11 @@ public class Clinic {
         this.address = c.getAddress();
         this.description = c.getDescription();
         this.grade = c.getGrade();
-        this.income = c.getIncome();
+        if(c.getIncome()==null) {
+            this.income=0;
+        } else {
+            this.income = c.getIncome();
+        }
     }
 
     public double getIncome() {

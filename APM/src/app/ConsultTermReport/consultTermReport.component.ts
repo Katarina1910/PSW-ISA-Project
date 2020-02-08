@@ -18,7 +18,7 @@ import { Consult } from './Consult';
 
   export class ConsultTermReportComponent implements OnInit {
 
-    public consultTerm = new ConsultTerm(null,null,null,null,null,null,null,null, null,null); 
+    public consultTerm = new ConsultTerm(null,null,null,null,null,null,null,null, null,null,null); 
     public listDiag : [];
     public listMed : [];
     public report : string;

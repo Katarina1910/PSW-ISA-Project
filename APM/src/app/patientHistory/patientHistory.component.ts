@@ -7,6 +7,8 @@ import { RequestForConsult } from '../requestForConsult/requestForConsult';
 import { Sort } from '@angular/material';
 import { ConsultTermService } from '../consultTerm/consultTerm.service';
 import { AddDoctorService } from '../doctor/addDoctor.service';
+import { DeleteClinicsService } from '../addNewClinic/deleteClinics.service';
+import { Clinic } from '../addNewClinic/clinic';
 
 @Component({
     selector : 'cc-patientHistory',
@@ -15,18 +17,22 @@ import { AddDoctorService } from '../doctor/addDoctor.service';
 
 export class patientHistory implements OnInit{
 
-    user: User = new User("","","","","","","","","","","","");
+    user: User = new User("","","","","","","","","","","","","");
     private consultTerms: ConsultTerm[];
     private sortedTerms: ConsultTerm[];
     currentRate = 3;
+    public listOfClinics: Clinic[];
 
     constructor(private _consultTermService: ConsultTermService,
                 private userService: UserService,
-                private addDoctorService: AddDoctorService) {}
+                private addDoctorService: AddDoctorService,
+                private clinicService: DeleteClinicsService) {}
   
     ngOnInit(): void {
-        this.getUserInfo();
-        this._consultTermService.getConsultTerms(2).subscribe(
+        this.userService.getUserInfo().subscribe(data => {
+          this.user = data;
+
+          this._consultTermService.getConsultTerms(this.user.id).subscribe(
             data => {
                 this.consultTerms = data;
                 console.log(this.consultTerms);
@@ -34,8 +40,18 @@ export class patientHistory implements OnInit{
                 console.log("Error in getting request for consult term data!")
             }
         )
-        
-        console.log(this.consultTerms);
+        }, error => {
+          console.log("Error in getting user data!")
+        });
+  
+        this.clinicService.getClinics().subscribe(
+          data => {
+            this.listOfClinics = data;
+            console.log(this.listOfClinics);
+          },error => {
+            console.log("Error in getting clinics!")
+        }
+        )
         
     }
 
@@ -55,6 +71,18 @@ export class patientHistory implements OnInit{
         },
         error=> console.error('Error rating!',error))
       console.log("ocena doktora: ",rate);
+    }
+
+    rateClinic(ct: ConsultTerm): void {
+      for(let c of this.listOfClinics) {
+        if(c.id == ct.clinicId) {
+          this.clinicService.rateClinic(c, this.currentRate).subscribe(
+            date=> {
+              alert('Clinic grade is sent!');
+            }
+          )
+        }
+      }
     }
     
     //sortiranje

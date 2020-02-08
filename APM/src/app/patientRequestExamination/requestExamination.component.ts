@@ -15,8 +15,8 @@ import { User } from '../registration/user';
 export class RequestExamination implements OnInit{
 
     public consultTerms: ConsultTerm[];
-    consultTermModel = new ConsultTerm(null,null,null,null,null,null,null,null,null,null);
-    user: User = new User("","","","","","","","","","","","");
+    consultTermModel = new ConsultTerm(null,null,null,null,null,null,null,null,null,null,null);
+    user: User = new User("","","","","","","","","","","","","");
     private userId: number;
 
     constructor(private _consultTermService: ConsultTermService,

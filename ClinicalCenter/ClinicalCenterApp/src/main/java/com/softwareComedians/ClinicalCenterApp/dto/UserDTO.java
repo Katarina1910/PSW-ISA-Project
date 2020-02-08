@@ -24,6 +24,7 @@ public class UserDTO {
     private String username;
     private String role;
     private String password;
+    private String password2;
     private boolean isActivated;
     private UserTokenState token;
     private List<String> authorities;
@@ -32,7 +33,8 @@ public class UserDTO {
     }
 
     public UserDTO(Long id, String name, String surname, String ucidn, String address,String city, String country,
-                   String email, String phone, String username, String password, String role,boolean isActivated, UserTokenState token) {
+                   String email, String phone, String username, String password, String role,boolean isActivated,
+                   UserTokenState token) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -66,6 +68,14 @@ public class UserDTO {
         token = null;
         this.authorities = u.getAuthorities().stream()
                 .map(authority -> ((Authority) authority).getName()).collect(Collectors.toList());
+    }
+
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
     }
 
     public String getRole() {

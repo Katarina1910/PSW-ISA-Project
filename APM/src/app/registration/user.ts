@@ -11,6 +11,7 @@ export class User {
         public  phone: string,
         public  username: string,
         public  password: string,
+        public  password2: string,
         public role:string,
     ){}
 

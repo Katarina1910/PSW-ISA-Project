@@ -51,7 +51,7 @@ public class AuthenticationController {
 
     @PostMapping("/change-password")
     public ResponseEntity changePassword(@RequestBody PasswordChanger passwordChanger) {
-        userDetailsService.changePassword(passwordChanger.oldPassword, passwordChanger.newPassword);
+        userDetailsService.changePassword(passwordChanger.oldPassword, passwordChanger.newPassword, passwordChanger.email);
 
         Map<String, String> result = new HashMap<>();
         result.put("result", "success");
@@ -61,6 +61,7 @@ public class AuthenticationController {
     static class PasswordChanger {
         public String oldPassword;
         public String newPassword;
+        public String email;
     }
 
     @RequestMapping(value = "/refresh", method = RequestMethod.POST)

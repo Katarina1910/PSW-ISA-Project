@@ -36,7 +36,7 @@ export class DoctorWorkCalendar  implements OnInit{
   public consults: ConsultTerm[];
   public vacations: RequestForAbsence[];
   public operations: Operation[];
-  public consultTerm = new ConsultTerm(null,null,null,null,null,null,null,null,null,null);
+  public consultTerm = new ConsultTerm(null,null,null,null,null,null,null,null,null,null,null);
   public room: string;
   showModal: boolean;
   public patient: string;

@@ -40,6 +40,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private TokenUtils tokenUtils;
 
+    @Autowired
+    private UserServiceImpl userService;
+
 
     /* Return User from database */
     @Override
@@ -54,9 +57,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     /* Change User's password */
-    public void changePassword(String oldPassword, String newPassword) {
-        Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
-        String mail = currentUser.getName();
+    public void
+    changePassword(String oldPassword, String newPassword, String email) {
+        User user2 = userService.findByEmail(email);
+        String mail = user2.getEmail();
 
         if (authenticationManager != null) {
             LOGGER.debug("Re-authenticating user '" + mail + "' for password change request.");

@@ -16,7 +16,7 @@ export class ConsultTerm{
         public  discount: number,
         public room: Room,
         public doctor: Doctor,
-        public patient: User
-
+        public patient: User,
+        public clinicId: number
     ){}
 }

@@ -21,7 +21,7 @@ export class listOfPatientsDoctor implements OnInit{
     public _patientUCIDN: string;
     public _patientName: string;
     public _patientSurname: string;
-    public user: User = new User("","","","","","","","","","","","");
+    public user: User = new User("","","","","","","","","","","","","");
     public sortedPatients : listOfPatients[];
 
   
