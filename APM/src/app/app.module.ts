@@ -158,7 +158,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       {path: 'HomepageDoctor/ListOfPatients/Profile', component: PatientProfileDocComponent},
       {path: 'HomepageDoctor/ListOfPatients/Profile/MedicalRecord', component: MedicalRecord}, 
       {path: 'HomepageNurse', component: NurseComponent},
-      {path: 'HomepageNurse/listOfAllPat', component: listOfAllPat},
+      {path: 'HomepageNurse/ListOfPatients', component: listOfPatientsDoctor},
       {path: 'HomepageNurse/UserProfiles', component: UserProfiles},
       {path: 'HomepageNurse/nurseWorkCal', component: nurseWorkCal},
       {path: 'HomepageNurse/RequestForAbsence', component: RequestForAbsenceComponent},
