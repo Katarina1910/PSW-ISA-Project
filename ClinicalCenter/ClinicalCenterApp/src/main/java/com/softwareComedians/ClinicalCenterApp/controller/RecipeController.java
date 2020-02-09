@@ -30,9 +30,9 @@ public class RecipeController {
 
     }
 
-    @GetMapping(value = "certify/{id}")
-    public ResponseEntity<Void> certify(@PathVariable Long id){
-            return recipeService.certify(id);
+    @GetMapping(value = "certify/{id}/{userid}")
+    public ResponseEntity<Void> certify(@PathVariable Long id, @PathVariable Long userid){
+            return recipeService.certify(id,userid);
     }
 
 }
