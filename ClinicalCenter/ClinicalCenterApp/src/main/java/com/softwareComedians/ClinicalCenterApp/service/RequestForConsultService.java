@@ -114,7 +114,10 @@ public class RequestForConsultService {
         List<RequestForConsult> requestForConsults = this.findAll();
         List<RequestForConsultDTO> requestForConsultDTOS= new ArrayList<>();
         for (RequestForConsult d : requestForConsults) {
-            requestForConsultDTOS.add(new RequestForConsultDTO(d));
+            if(d.isAccepted()==false){
+                requestForConsultDTOS.add(new RequestForConsultDTO(d));
+            }
+
         }
         return requestForConsultDTOS;
     }

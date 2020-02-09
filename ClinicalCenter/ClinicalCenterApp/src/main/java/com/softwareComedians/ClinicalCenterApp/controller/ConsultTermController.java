@@ -26,7 +26,7 @@ public class ConsultTermController {
     private SmtpMailSender smtpMailSender;
 
     @PutMapping(value = "/editConsult")
-    public ResponseEntity<Void> editConsult(@RequestBody ConsultDTO consultDTO){
+    public ResponseEntity<Void> editConsult(@RequestBody ConsultDTO consultDTO) throws MessagingException {
         return this.consultTermService.editConsult(consultDTO);
     }
 

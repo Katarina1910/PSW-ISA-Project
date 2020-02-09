@@ -53,19 +53,18 @@ public class RequestForAbsenceController {
         List<RequestForAbsenceDTO> rqsDTO = requestForAbsenceService.getAll();
         return new ResponseEntity<>(rqsDTO, HttpStatus.OK);
     }
-/*
-    @GetMapping(value = "/getAll/{id}")
+
+    /*@GetMapping(value = "/getAll/{id}")
     public ResponseEntity<List<RequestForAbsenceDTO>> getAllDoctor(@PathVariable Long id) {
         List<RequestForAbsenceDTO> rqsDTO = requestForAbsenceService.getAllDoctor(id);
         return new ResponseEntity<>(rqsDTO, HttpStatus.OK);
-    }
-*/
+    }*/
 
     @GetMapping(value = "/getAll/{id}")
     public ResponseEntity<List<RequestForAbsenceDTO>> getAllDoctor(@PathVariable Long id) {
 
         List<RequestForAbsence> rqs = requestForAbsenceService.findAllById(id);
-        List<RequestForAbsenceDTO> rqsDTO = new ArrayList<>();
+        List<RequestForAbsenceDTO> rqsDTO = requestForAbsenceService.getAllDoctor(id);
         for (RequestForAbsence rq : rqs) {
             if(rq.isAccepted() == true) {
                 rqsDTO.add(new RequestForAbsenceDTO(rq));

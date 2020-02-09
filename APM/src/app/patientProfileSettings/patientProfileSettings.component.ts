@@ -34,16 +34,38 @@ export class PatientProfileSettingsComponent implements OnInit {
   }
 
   onClickCancel(){
-    this.router.navigate(['/HomepagePatient']);
+    if(this.userService.isUserCCA())
+      this.router.navigate(['/HomepageCCA']);
+    else if(this.userService.isUserCA())
+      this.router.navigate(['/HomepageCA']);
+    else if(this.userService.isUserDoctor())
+      this.router.navigate(['/HomepageDoctor']);
+    else if(this.userService.isUserNurse())
+      this.router.navigate(['/HomepageNurse']);
+    else if(this.userService.isUserPatient())
+      this.router.navigate(['/HomepagePatient()']);
+    else
+      this.router.navigate(['/welcome']);
   }
 
   onClickSave(){
     this.editUserService.editUsers(this.user)
     .subscribe(
       data=> {
-        alert('Request has been sent!')
-        this.router.navigate(['/HomepagePatient']);    
-          console.log('Updated!', JSON.stringify(data))
+        alert('Request has been sent!');
+        if(this.userService.isUserCCA())
+          this.router.navigate(['/HomepageCCA']);
+        else if(this.userService.isUserCA())
+          this.router.navigate(['/HomepageCA']);
+        else if(this.userService.isUserDoctor())
+          this.router.navigate(['/HomepageDoctor']);
+        else if(this.userService.isUserNurse())
+          this.router.navigate(['/HomepageNurse']);
+        else if(this.userService.isUserPatient())
+          this.router.navigate(['/HomepagePatient()']);
+        else
+          this.router.navigate(['/welcome']);
+          console.log('Updated!', JSON.stringify(data));
         },
         error=> console.error('Error updating!',error)
     )

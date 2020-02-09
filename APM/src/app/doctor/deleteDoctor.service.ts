@@ -13,8 +13,8 @@ export class DeleteDoctorService{
     
     constructor(private _http: HttpClient) { }
 
-    deleteDoctor(email: string): Observable<void> {
-       return  this._http.delete<void>(`${this._url}/${email}`);
+    deleteDoctor(id:number): Observable<void> {
+       return  this._http.delete<void>(`${this._url}/${id}`);
     }
 
     getDoctors():Observable<any> {

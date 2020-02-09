@@ -32,7 +32,7 @@ export class AddDoctorComponent implements OnInit{
            data=>{
             console.log('Success!', JSON.stringify(data))
             alert('Doctor added!');
-            this.router.navigate(['/welcome']);
+            this.router.navigate(['/HomepageCA']);
            } ,
             error=> console.error('Error!',error)
         )

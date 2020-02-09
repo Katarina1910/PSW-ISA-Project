@@ -67,7 +67,9 @@ public class RqForOperationService {
         List<RequstForOperation> requestForOP = this.findAll();
         List<RequestForOperationDTO> requestForOPDTOS= new ArrayList<>();
         for (RequstForOperation d : requestForOP) {
-            requestForOPDTOS.add(new RequestForOperationDTO(d));
+            if(d.isAccepted()==false){
+                requestForOPDTOS.add(new RequestForOperationDTO(d));
+            }
         }
         return requestForOPDTOS;
     }
@@ -152,6 +154,8 @@ public class RqForOperationService {
 
         Operation ct = new Operation();
         RequstForOperation rq = this.findOne(id);
+        rq.setAccepted(true);
+        this.save(rq);
         List<RoomTerms> rts= roomTermsServie.findByDate(date);
         List<DoctorTerms> dts = doctorTermsService.findByDate(date);
         DoctorTerms dt = null;
@@ -203,6 +207,7 @@ public class RqForOperationService {
                 " You have a new Operation : "+dt.getDate());
 
         this.remove(rq.getId());
+
 
         return ct;
     }
