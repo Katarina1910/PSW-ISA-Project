@@ -52,6 +52,12 @@ public class ConsultTermService {
     private  PatientService patientService;
 
     @Autowired
+    private DiagnosisRepository diagnosisRepository;
+
+    @Autowired
+    private RecipeRepository recipeRepository;
+
+    @Autowired
     private MedicalRecordRepository medicalRecordRepository;
 
     @Autowired
@@ -198,15 +204,36 @@ public class ConsultTermService {
             Doctor doctor = (Doctor) userRepository.findById(consultDTO.getConsultTerm().getDoctor().getId()).orElseGet(null);
             recipe.setDoctor(doctor);
             consult.setRecipe(recipe);
-            /*Optional<MedicalRecord> optionalMedicalRecord= medicalRecordRepository.findById(consultDTO.getConsultTerm().getPatient().getMedicalRecord().getId());
-            if(optionalMedicalRecord.isPresent()){
+            Patient patient = (Patient) userRepository.findById(consultDTO.getConsultTerm().getPatient().getId()).orElseGet(null);
+            Optional<MedicalRecord> optionalMedicalRecord= medicalRecordRepository.findById(patient.getMedicalRecord().getId());
+            if(optionalMedicalRecord.isPresent()) {
                 MedicalRecord medicalRecord = optionalMedicalRecord.get();
                 consult.setMedicalRecord(medicalRecord);
-            }*/ //ovo otkomentarisi kada svi pacijenti imadnu medical record u bazi
+                recipe.setMedicalRecord(medicalRecord);
+            }
+            Clinic clinic = clinicsService.findById(doctor.getClinic().getId());
+            clinic.setIncome(clinic.getIncome()+consultTerm.getPrice());
+            clinicsService.save(clinic);
 
+            recipeRepository.save(recipe);
             consultRepository.save(consult);
 
             return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    public ResponseEntity<Void> editConsult(ConsultDTO consultDTO) {
+        Consult consult = consultRepository.findById(consultDTO.getId()).orElseGet(null);
+        if(consult == null){
+            return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        Diagnosis diagnosis = diagnosisRepository.findById(consultDTO.getDiagnosis().getId()).orElseGet(null);
+        consult.setDiagnosis(diagnosis);
+        consult.setReport(consultDTO.getReport());
+
+        consultRepository.save(consult);
+
+        return  new ResponseEntity<>(HttpStatus.OK);
+
     }
 }
 
