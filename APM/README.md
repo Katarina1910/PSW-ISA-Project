@@ -15,6 +15,11 @@ Run `ng generate component component-name` to generate a new component. You can 
 npm install
 ```
 
+## Start project
+```
+npm start
+```
+
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
