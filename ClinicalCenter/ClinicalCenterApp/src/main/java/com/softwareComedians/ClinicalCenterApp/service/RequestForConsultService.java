@@ -104,7 +104,7 @@ public class RequestForConsultService {
                 " You have a request for consult: type: "+ct.getType().getName()+ "\r\n"+
                         "doctor's name: "+ct.getDoctor().getName()+ " "+ct.getDoctor().getSurname()+ "\r\n"+
                         "patient's name: "+u.getName()+" "+u.getSurname()+"\r\n"+
-                        " <a href='http://localhost:8080/api/patient/requestConsultTerm/"+rq.getId()+"'> Confirm </a>");
+                        "Date: "+rq.getConsultTerm().getDate());
 
         return rq;
     }

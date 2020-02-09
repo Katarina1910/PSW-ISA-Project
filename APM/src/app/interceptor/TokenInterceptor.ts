@@ -3,23 +3,27 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpClient
 } from '@angular/common/http';
-import { AuthService } from '../service/auth.service';
 import { Observable } from 'rxjs';
+import { USER_TOKEN_KEY } from '../config/local-storage-keys';
 
 @Injectable()
-export class TokenInterceptor implements HttpInterceptor {
-  constructor(public auth: AuthService) {}
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
-    if (this.auth.tokenIsPresent()) {
-        request = request.clone({
-        setHeaders: {
-            Authorization: `Bearer ${this.auth.getToken()}`
-        }
-        });
-    }
-    return next.handle(request);
+export class AddTokenInterceptor implements HttpInterceptor {
+  
+  constructor(private http: HttpClient){
   }
+  
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log(localStorage.getItem(USER_TOKEN_KEY))
+    let jsonReq: HttpRequest<any> = req.clone({
+      setHeaders:{
+        Authorization : `Bearer ${localStorage.getItem(USER_TOKEN_KEY)}`
+      }
+    });
+    
+    return next.handle(jsonReq);
+  }
+  
 }
