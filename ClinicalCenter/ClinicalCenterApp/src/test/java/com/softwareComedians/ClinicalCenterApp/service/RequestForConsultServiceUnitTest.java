@@ -3,7 +3,10 @@ package com.softwareComedians.ClinicalCenterApp.service;
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
 import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
-import com.softwareComedians.ClinicalCenterApp.model.*;
+import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
+import com.softwareComedians.ClinicalCenterApp.model.ConsultType;
+import com.softwareComedians.ClinicalCenterApp.model.RequestForConsult;
+import com.softwareComedians.ClinicalCenterApp.model.User;
 import com.softwareComedians.ClinicalCenterApp.repository.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,9 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import java.text.ParseException;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -84,10 +85,6 @@ public class RequestForConsultServiceUnitTest {
     @MockBean
     private  UserRepository userRepositoryMocked;
 
-
-    @MockBean
-    private  ClinicAdminRepository clinicAdminRepositoryMocked;
-
     @Autowired
     private UserService userService;
 
@@ -110,25 +107,13 @@ public class RequestForConsultServiceUnitTest {
         User user = new User(); user.setId(1L);
         requestForConsult.setPatient(user);
 
-        ClinicAdministrator clinicAdministrator = new ClinicAdministrator();
-        clinicAdministrator.setId(1L);
-        clinicAdministrator.setEmail("katarinaprodanovic97@gmail.com");
-
-        Clinic clinic = new Clinic();
-        clinic.setId(1L);
-
-        Set<ClinicAdministrator> clinicAdmin = new HashSet<>();
-        clinicAdmin.add(clinicAdministrator);
-        
-
         ConsultTerm ct = new ConsultTerm(); ct.setId(1L);
+
 
         Mockito.when(consultTypeRepositoryMocked.findById(type.getId())).thenReturn(Optional.of(type));
         Mockito.when(requestForConsultRepositoryMocked.findById(requestForConsult.getId())).thenReturn(Optional.of(requestForConsult));
         Mockito.when(userRepositoryMocked.findById(user.getId())).thenReturn(Optional.of(user));
         Mockito.when(consultTermRepositoryMocked.findById(ct.getId())).thenReturn(Optional.of(ct));
-        Mockito.when(clinicsRepositoryMocked.findById(ct.getId())).thenReturn(Optional.of(clinic));
-
     }
 
 
@@ -143,13 +128,13 @@ public class RequestForConsultServiceUnitTest {
         User patient = userService.findById(1L);
         UserDTO userDTO = new UserDTO(patient);
 
-
         Mockito.when(requestForConsultRepositoryMocked.findById(rq.getId())).thenReturn(Optional.of(rq));
         Mockito.when(requestForConsultRepositoryMocked.save(any(RequestForConsult.class))).thenReturn(rq);
 
         RequestForConsult  req = requestForConsultService.createReq(rqDto,1L);
 
         assertEquals(rq.getId(), req.getId());
+
     }
 
     @Test(expected = ApiRequestException.class)

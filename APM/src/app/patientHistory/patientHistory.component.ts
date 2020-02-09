@@ -17,7 +17,7 @@ import { Clinic } from '../addNewClinic/clinic';
 
 export class patientHistory implements OnInit{
 
-    user: User = new User("","","","","","","","","","","","","",false);
+    user: User = new User("","","","","","","","","","","","","");
     private consultTerms: ConsultTerm[];
     private sortedTerms: ConsultTerm[];
     currentRate = 3;

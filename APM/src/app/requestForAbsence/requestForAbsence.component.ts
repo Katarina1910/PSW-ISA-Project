@@ -13,7 +13,7 @@ import { Doctor } from '../doctor/doctor';
 
 export class RequestForAbsenceComponent implements OnInit{
     
-    user = new User(" "," "," "," "," "," "," "," "," "," "," ","","",false);
+    user = new User(" "," "," "," "," "," "," "," "," "," "," ","","");
     doctorModel = new Doctor(null,null,null,null,null);
     datee : any = new Date().toISOString;
     datee2 : any = new Date().toISOString;

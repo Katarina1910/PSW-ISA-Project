@@ -60,9 +60,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     public void
     changePassword(String oldPassword, String newPassword, String email) {
         User user2 = userService.findByEmail(email);
-        if(user2.isPasswordChanged()==false) {
-            user2.setPasswordChanged(true);
-        }
         String mail = user2.getEmail();
 
         if (authenticationManager != null) {

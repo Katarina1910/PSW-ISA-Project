@@ -15,7 +15,7 @@ import { Consult } from '../ConsultTermReport/Consult';
 })
 export class PatientProfileDocComponent  implements OnInit {
 
-  user: User = new User("","","","","","","","","","","","","",false);
+  user: User = new User("","","","","","","","","","","","","");
   medicalRecord: MedicalRecordd;
   
   ngOnInit(): void {
