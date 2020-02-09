@@ -2,8 +2,13 @@ package com.softwareComedians.ClinicalCenterApp.controller;
 
 
 import com.softwareComedians.ClinicalCenterApp.dto.RoomDTO;
+import com.softwareComedians.ClinicalCenterApp.dto.RoomTermsDTO;
+import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
 import com.softwareComedians.ClinicalCenterApp.model.Room;
+import com.softwareComedians.ClinicalCenterApp.model.RoomTerms;
+import com.softwareComedians.ClinicalCenterApp.model.Type;
 import com.softwareComedians.ClinicalCenterApp.service.RoomService;
+import com.softwareComedians.ClinicalCenterApp.service.RoomTermsServie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +26,9 @@ public class RoomController {
     public RoomController(RoomService roomService){
         this.roomService=roomService;
     }
+
+    @Autowired
+    private RoomTermsServie roomTermsServie;
 
     @GetMapping(value = "/getAll")
     public ResponseEntity<List<RoomDTO>> getAll() {
@@ -49,6 +57,14 @@ public class RoomController {
 
     @DeleteMapping(value = "/del/{id}")
     public ResponseEntity<Long> deleteRoom(@PathVariable Long id) {
+        List<RoomTerms> terms = roomTermsServie.findAll();
+
+        for(RoomTerms dt : terms) {
+            if(dt.getRoom().getId()== id) {
+                throw new ApiRequestException("Can not delete this room. Room is scheduled.");
+            }
+        }
+
         roomService.remove(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
