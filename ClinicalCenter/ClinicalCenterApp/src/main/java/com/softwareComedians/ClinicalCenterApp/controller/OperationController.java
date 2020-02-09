@@ -4,7 +4,6 @@ import com.softwareComedians.ClinicalCenterApp.dto.OperationDTO;
 import com.softwareComedians.ClinicalCenterApp.model.Operation;
 import com.softwareComedians.ClinicalCenterApp.service.DoctorService;
 import com.softwareComedians.ClinicalCenterApp.service.OperationService;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +26,17 @@ public class OperationController {
     @GetMapping(value="/getAll/{id}")
     public ResponseEntity<List<OperationDTO>> getAll(@PathVariable Long id) {
 
-        //List<Operation> operations = doctorService.findAllByUserId(id);
+        List<Operation> operations = operationService.finAll();
         List<OperationDTO> operationDTOS = new ArrayList<>();
-        //for (Operation o : operations) {
-          //  operationDTOS.add(new OperationDTO(o));
-        //}
+        for (Operation o : operations) {
+            System.out.println(o.getDoctor().getName()+"for");
+            System.out.println(id+"jebem ti sunce");
+            System.out.println(o.getDoctor().getId()+"govno");
+            if(o.getDoctor().getId()==id){
+                System.out.println(o.getDoctor().getName() + "if");
+                    operationDTOS.add(new OperationDTO(o.getId(), o.getRoom(), o.getDoctor()));
+            }
+        }
 
         return new ResponseEntity<>(operationDTOS, HttpStatus.OK);
     }

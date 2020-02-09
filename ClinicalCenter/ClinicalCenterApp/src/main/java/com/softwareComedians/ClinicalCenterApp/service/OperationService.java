@@ -16,4 +16,7 @@ public class OperationService {
     public Operation saveOperation(Operation o) { return  operationRepository.save(o); }
 
 
+    public List<Operation> finAll() {
+        return operationRepository.findAll();
+    }
 }

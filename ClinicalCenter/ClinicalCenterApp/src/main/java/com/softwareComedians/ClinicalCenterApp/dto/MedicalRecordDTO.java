@@ -26,8 +26,6 @@ public class MedicalRecordDTO {
          this.diopter=medicalRecord.getDiopter();
          this.height=medicalRecord.getHeight();
          this.weight=medicalRecord.getWeight();
-         System.out.println("napravio"+ medicalRecord.getId());
-
     }
 
     public Long getId() {

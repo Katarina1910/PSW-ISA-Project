@@ -41,6 +41,9 @@ public class Doctor extends Personnel {
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
     public Set<Recipe> recipes;
 
+    @OneToMany( fetch = FetchType.LAZY, mappedBy = "doctor")
+    private Set<Operation> operations;
+
     public Doctor() {
     }
 
@@ -108,6 +111,30 @@ public class Doctor extends Personnel {
 
     public void setDoctorTerms(Set<DoctorTerms> doctorTerms) {
         this.doctorTerms = doctorTerms;
+    }
+
+    public void setScheduledFrom(Date scheduledFrom) {
+        this.scheduledFrom = scheduledFrom;
+    }
+
+    public void setScheduledTo(Date scheduledTo) {
+        this.scheduledTo = scheduledTo;
+    }
+
+    public Set<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(Set<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
+    public Set<Operation> getOperations() {
+        return operations;
+    }
+
+    public void setOperations(Set<Operation> operations) {
+        this.operations = operations;
     }
 
     public Set<ConsultTerm> getConsultTerms() {
