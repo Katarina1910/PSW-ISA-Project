@@ -27,7 +27,7 @@ public class ClinicCenterAdministrator extends User {
 		this.setAddress(cca.getAddress());
 		this.setCity(cca.getCity());
 		this.setCountry(cca.getCountry());
-		this.setActivated(cca.isActivated());
+		this.setActivated(true);
 		this.setPasswordChanged(false);
 	}
 
