@@ -1,6 +1,7 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
 import com.softwareComedians.ClinicalCenterApp.common.consts.UserRoles;
+import com.softwareComedians.ClinicalCenterApp.dto.ConsultDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.ConsultTermDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.PatientDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
@@ -122,6 +123,17 @@ public class PatientController {
         }
 
         return new ResponseEntity<>(termsDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/getAll/{id}")
+    //@PreAuthorize("hasRole('ROLE_PATIENT')")
+    public ResponseEntity<List<ConsultDTO>> getAll(@PathVariable Long id) {
+        List<ConsultDTO> consults = patientService.findAllConsult(id);
+        if(consults == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else{
+            return  new ResponseEntity<>(consults, HttpStatus.OK);
+        }
     }
 
     @PreAuthorize("ROLE_PATIENT")
