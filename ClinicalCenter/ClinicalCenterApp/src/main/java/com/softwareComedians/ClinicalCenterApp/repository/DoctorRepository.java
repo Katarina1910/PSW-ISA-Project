@@ -15,5 +15,4 @@ public interface DoctorRepository extends JpaRepository<Doctor,Long> {
     Doctor findByName(String name);
 
     void deleteByEmail(String email);
-
 }

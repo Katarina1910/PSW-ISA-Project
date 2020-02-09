@@ -22,6 +22,9 @@ public class RoomTermsServie {
     private RoomService roomService;
 
     @Autowired
+    private DoctorTermsService doctorTermsService;
+
+    @Autowired
     private DoctorService doctorService;
 
     public List<RoomTerms> findAll() { return roomTermRepository.findAll(); }
@@ -58,13 +61,15 @@ public class RoomTermsServie {
                 rt.setRoom(r);
                 rt.setDate(date);
                 this.save(rt);
+
             }
 
             for(Doctor d : doctorService.findAll()){
                 DoctorTerms dt = new DoctorTerms();
                 dt.setDoctor(d);
                 dt.setDate(date);
-                doctorService.save(d);
+                doctorTermsService.save(dt);
+
             }
         }
         rooms = this.findByDate(date);
