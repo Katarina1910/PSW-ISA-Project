@@ -1,5 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.service;
 
+import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
 import com.softwareComedians.ClinicalCenterApp.model.Clinic;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,8 +29,14 @@ public class ClinicsServiceTest {
 
         assertEquals(clinic.getId() , 1L);
         assertEquals(clinic.getName(), "klinika1");
+        assertEquals(clinic.getAddress(), "Novi Sad");
+        assertEquals(clinic.getDescription(), "Opis klinike1...");
 
+    }
 
+    @Test(expected = ApiRequestException.class)
+    public void findById_WhenIdNotValid() {
+        Clinic clinic = clinicsService.findById(1000L);
     }
 }
 

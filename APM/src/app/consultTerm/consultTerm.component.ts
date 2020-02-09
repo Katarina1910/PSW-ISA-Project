@@ -37,7 +37,7 @@ export class ConsultTermComponent implements OnInit {
             error=> console.error('Error!', error)
         )
     }
-    consultTermModel = new ConsultTerm(null,null,null,null,null,null,null,null, null,null);
+    consultTermModel = new ConsultTerm(null,null,null,null,null,null,null,null, null,null,null);
     
     constructor(private _consultTermService: ConsultTermService, private router:Router,
         private _deleteRoomService: DeleteRoomService, private _delDOoctorService: DeleteDoctorService, 

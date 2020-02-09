@@ -19,7 +19,7 @@
         <button><a [routerLink]="['/HomepagePatient']">Homepage for Patient</a></button>
       </ng-template>
 
-      <ng-template [ngIf]=" isUserCCA()">
+      <ng-template [ngIf]=" isUserAdminCCA()">
         <button><a [routerLink]="['/HomepageCCA']">Homepage for Clinical Center Administrator</a></button>
       </ng-template>
 

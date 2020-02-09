@@ -5,7 +5,16 @@ export class AppPage {
     return browser.get(browser.baseUrl) as Promise<any>;
   }
 
-  getTitleText() {
-    return element(by.css('pm-root h1')).getText() as Promise<string>;
+  getfindButton() {
+    return element(by.id('findButton')).getText();
   }
+
+  getInputDateButton() {
+    return element(by.id('inputDate')).getText();
+  }
+
+  getReserveeButton() {
+    return element(by.id('ReserveeBtn')).getText();
+  }
+
 }

@@ -36,26 +36,19 @@ public class DiagnosisController {
     public  ResponseEntity<DiagnosisDTO> addDiagnosis(@RequestBody DiagnosisDTO diagnosisDTO){
         Diagnosis diagnosis = new Diagnosis(diagnosisDTO);
         diagnosis = diagnosisService.save(diagnosis);
-
         return new ResponseEntity<>(new DiagnosisDTO(diagnosis), HttpStatus.OK);
     }
 
 
     @DeleteMapping(value = "/del/{id}")
     public ResponseEntity<Long> deletePost(@PathVariable Long id){
-
         diagnosisService.remove(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     @PutMapping(value = "/edit")
     public ResponseEntity<DiagnosisDTO> editDiagnosis (@RequestBody DiagnosisDTO diagnosisDTO) {
-        Diagnosis d = diagnosisService.findOne(diagnosisDTO.getId());
-        d.setName(diagnosisDTO.getName());
-        d.setCode(diagnosisDTO.getCode());
-        d.setDescription((diagnosisDTO.getDescription()));
-        d = diagnosisService.save(d);
-
+        Diagnosis d = diagnosisService.editDiagnosis(diagnosisDTO);
         return new ResponseEntity<>(new DiagnosisDTO(d), HttpStatus.OK);
     }
 }

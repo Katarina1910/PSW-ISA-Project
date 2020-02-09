@@ -9,7 +9,7 @@ import { Clinic } from '../addNewClinic/clinic';
 })
 
 export class ClinicSettingsService{
-    user: User = new User("","","","","","","","","","","","");
+    user: User = new User("","","","","","","","","","","","","");
     id: string = this.user.id;
 
     _url = 'http://localhost:8080/api/clinics/edit';

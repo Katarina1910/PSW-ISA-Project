@@ -16,12 +16,12 @@ import { listOfDiagnosis } from '../listOfAllDiagnosis/listOfAllDiagnosis';
 
 export class MedicalRecord implements OnInit{
 
-    user: User = new User("","","","","","","","","","","","");
     private view : string = "VIEW";
     public selectedDiagnosis :{};
     public listDiag : [];
     public report: string;
     public diagnosisSettings : {};
+    user: User = new User("","","","","","","","","","","","","");
     medicalRecord = new MedicalRecordd(null, '','','','','','');
     public consults: Consult[];
     id: string;

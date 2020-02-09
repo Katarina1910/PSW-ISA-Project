@@ -2,14 +2,15 @@ package com.softwareComedians.ClinicalCenterApp.controller;
 
 import com.softwareComedians.ClinicalCenterApp.dto.ConsultDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.ConsultTermDTO;
-import com.softwareComedians.ClinicalCenterApp.model.*;
+import com.softwareComedians.ClinicalCenterApp.mail.SmtpMailSender;
+import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
 import com.softwareComedians.ClinicalCenterApp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.mail.MessagingException;
 import java.util.List;
 
 @RestController
@@ -20,15 +21,9 @@ public class ConsultTermController {
     @Autowired
     private ConsultTermService consultTermService;
 
-    @Autowired
-    private DoctorService doctorService;
-
 
     @Autowired
-    private RoomService roomService;
-
-    @Autowired
-    private ConsultTypeService consultTypeService;
+    private SmtpMailSender smtpMailSender;
 
     @PutMapping(value = "/editConsult")
     public ResponseEntity<Void> editConsult(@RequestBody ConsultDTO consultDTO){
@@ -43,50 +38,25 @@ public class ConsultTermController {
 
     @PostMapping()
     public ResponseEntity<ConsultTermDTO> createConsultTerm(@RequestBody ConsultTermDTO consultTermDTO) {
-
-        ConsultTerm ct = new ConsultTerm();
-        //System.out.println("Dodaj");
-
-        ct.setType(consultTypeService.findOne(consultTermDTO.getType().getId()));
-        ct.setDuration(consultTermDTO.getDuration());
-        ct.setDiscount(consultTermDTO.getDiscount());
-        ct.setPrice(consultTermDTO.getPrice());
-        ct.setDate(consultTermDTO.getDate());
-
-        Doctor d = doctorService.findByName(consultTermDTO.getDoctor().getName());
-        //stampaj
-       // System.out.println(d.getName()+"sdfgh IME"+consultTermDTO.getDoctor());
-        ct.setDoctor(d);
-        ct.setClinic(d.getClinic());
-
-        Room r = roomService.findByName(consultTermDTO.getRoom().getName());
-      //  System.out.println(r.getName());
-        ct.setRoom(r);
-
-        ct.setPatient(new Patient());
-
-
-        ct = consultTermService.save(ct);
+        ConsultTerm ct = consultTermService.createConsultTerm(consultTermDTO);
         return new ResponseEntity<>(new ConsultTermDTO(ct), HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/getTermsByTypeId/{id}")
     public ResponseEntity<List<ConsultTermDTO>> getDoctorsByTypeId(@PathVariable String typeName) {
-
-        List<ConsultTerm> term = consultTermService.findByTypeName(typeName);
-        List<ConsultTermDTO> termsDTO = new ArrayList<>();
-        for (ConsultTerm ct : term) {
-            termsDTO.add(new ConsultTermDTO(ct));
-        }
-
+        List<ConsultTermDTO> termsDTO = consultTermService.getDoctorsByTypeId(typeName);
         return new ResponseEntity<>(termsDTO, HttpStatus.OK);
     }
 
     @PostMapping(value = "res/{date}/{term}/{room}/{doctor}/{id}")
-    public ResponseEntity<ConsultTermDTO> addConsultTerm(@PathVariable String date, @PathVariable String term,
-                                                         @PathVariable String room, @PathVariable Long doctor, @PathVariable Long id) {
+    public ResponseEntity<ConsultTermDTO> reserveRoomForConsultTerm(@PathVariable String date, @PathVariable String term,
+                                                         @PathVariable String room, @PathVariable Long doctor, @PathVariable Long id) throws MessagingException {
 
        ConsultTerm ct = consultTermService.reserveRoom(date, term, room, doctor, id);
+        smtpMailSender.send(ct.getPatient().getEmail(),"Consult term",
+                " You have a new consult term : "+ct.getDate());
+        smtpMailSender.send(ct.getDoctor().getEmail(),"Consult term",
+                " You have a new consult term : "+ct.getDate());
         return new ResponseEntity<>(new ConsultTermDTO(ct), HttpStatus.CREATED);
     }
 
@@ -104,15 +74,8 @@ public class ConsultTermController {
     }
 
     @GetMapping(value = "/getConsultTerms/{userId}")
-    public ResponseEntity<List<ConsultTermDTO>> getAllConsultTerms(@PathVariable Long userId) {
-
-        List<ConsultTerm> cts = consultTermService.findAll();
-        List<ConsultTermDTO> ctDTO = new ArrayList<>();
-        for (ConsultTerm ct : cts) {
-            if(ct.getPatient().getId() == userId)
-                ctDTO.add(new ConsultTermDTO(ct));
-        }
-
+    public ResponseEntity<List<ConsultTermDTO>> getAllConsultTermsUserID(@PathVariable Long userId) {
+        List<ConsultTermDTO> ctDTO = consultTermService.getAllConsultTermsUserID(userId);
         return new ResponseEntity<>(ctDTO, HttpStatus.OK);
     }
 
@@ -126,6 +89,7 @@ public class ConsultTermController {
                 return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
     }
+
 
 
 }

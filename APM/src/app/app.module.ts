@@ -73,6 +73,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
+import { PatientMC } from './patientMedicalRecord/patientMC.component';
 
 @NgModule({
   declarations: [
@@ -129,6 +130,8 @@ import { AgmCoreModule } from '@agm/core';
     patientHistory,
     ReserveRoomsOPComponent,
     ClinicCenterAdminProfilePageComponent,
+    PatientMC,
+    PatientComponent,
     //ListOfDiagnosis
     ],
   imports: [
@@ -201,6 +204,7 @@ import { AgmCoreModule } from '@agm/core';
       {path: 'HomepagePatient/PatientProfileSettings', component: PatientProfileSettingsComponent},
       {path: 'HomepagePatient/requestExamination', component: RequestExamination},
       {path: 'HomepagePatient/History', component: patientHistory},
+      {path: 'HomepagePatient/PatientMC', component: PatientMC},
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: 'HomepageDoctor/consultTermReport', component: ConsultTermReportComponent},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},

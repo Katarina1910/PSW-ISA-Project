@@ -18,12 +18,14 @@ public class ConsultTermDTO {
     private PatientDTO patient;
     private  DoctorDTO doctor;
     private  RoomDTO room;
+    private Long clinicId;
     private  Long typeId;
 
     public ConsultTermDTO() {
     }
 
-    public ConsultTermDTO(ConsultTypeDTO type, Long id, String date, Double duration, Double price, Double discount, DoctorDTO doctor, RoomDTO room) {
+    public ConsultTermDTO(ConsultTypeDTO type, Long id, String date, Double duration, Double price, Double discount,
+                          DoctorDTO doctor, RoomDTO room, Long clinicId) {
         this.type = type;
         this.id = id;
         this.date = date;
@@ -32,7 +34,7 @@ public class ConsultTermDTO {
         this.discount = discount;
         this.doctor = doctor;
         this.room = room;
-
+        this.clinicId = clinicId;
     }
    
     public ConsultTermDTO(ConsultTerm c){
@@ -46,6 +48,15 @@ public class ConsultTermDTO {
         doctor = new DoctorDTO(c.getDoctor());
         room = new RoomDTO(c.getRoom());
         patient = new PatientDTO(c.getPatient());
+        clinicId = c.getClinic().getId();
+    }
+
+    public Long getClinicId() {
+        return clinicId;
+    }
+
+    public void setClinicId(Long clinicId) {
+        this.clinicId = clinicId;
     }
 
     public ConsultTypeDTO getType() {
@@ -112,4 +123,27 @@ public class ConsultTermDTO {
         this.discount = discount;
     }
 
+    public String getReport() {
+        return report;
+    }
+
+    public void setReport(String report) {
+        this.report = report;
+    }
+
+    public PatientDTO getPatient() {
+        return patient;
+    }
+
+    public void setPatient(PatientDTO patient) {
+        this.patient = patient;
+    }
+
+    public Long getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
+    }
 }

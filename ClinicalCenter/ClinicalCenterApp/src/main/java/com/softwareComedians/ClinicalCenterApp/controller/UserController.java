@@ -5,10 +5,12 @@ import com.softwareComedians.ClinicalCenterApp.common.consts.UserRoles;
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForPatientRegistrationDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.UserDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.UserRegistrationDTO;
+import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
 import com.softwareComedians.ClinicalCenterApp.mappers.UserMapper;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForPatientRegistration;
 import com.softwareComedians.ClinicalCenterApp.model.User;
 import com.softwareComedians.ClinicalCenterApp.repository.AuthorityRepository;
+import com.softwareComedians.ClinicalCenterApp.repository.UserRepository;
 import com.softwareComedians.ClinicalCenterApp.service.RequestForPatientRegistrationService;
 import com.softwareComedians.ClinicalCenterApp.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,9 @@ public class UserController {
 	@Autowired
 	private TimeProvider timeProvider;
 
+	@Autowired
+	private UserRepository userRepository;
+
 	@GetMapping("/public/{id}")
 	//@PreAuthorize("hasRole('ROLE_CA')")
 	public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
@@ -57,6 +62,12 @@ public class UserController {
 
 	@PostMapping("/public/add-user")
     public ResponseEntity<RequestForPatientRegistrationDTO> createRqForPatientReg(@RequestBody RequestForPatientRegistrationDTO rqDTO) {
+		if (userRepository.findByEmail(rqDTO.getUserData().getEmail()) != null) {
+			throw new ApiRequestException("Email '" + rqDTO.getUserData().getEmail() + "' already exists.");
+		}
+		if (!rqDTO.getUserData().getPassword().equals(rqDTO.getUserData().getPassword2())) {
+			throw new ApiRequestException("Provided passwords must be the same.");
+		}
 		User user = new User();
 		user.setId(rqDTO.getUserData().getId());
 		user.setName(rqDTO.getUserData().getName());
@@ -82,7 +93,6 @@ public class UserController {
 	}
 
 	@PutMapping(value = "/edit")
-	//@PreAuthorize("hasRole('ROLE_PATIENT')")
 	public ResponseEntity<UserDTO> editUser(@RequestBody UserDTO userDTO) {
 		//User newUserInfo = userService.editUser(user);
 		//newUserInfo = userService.save(newUserInfo);

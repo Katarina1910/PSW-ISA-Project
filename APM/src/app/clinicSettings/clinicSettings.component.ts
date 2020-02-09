@@ -7,6 +7,7 @@ import { ClinicSettingsService } from './clinicSettings.service';
 import { MapsAPILoader } from '@agm/core';
 import { Doctor } from '../doctor/doctor';
 import { DeleteDoctorService } from '../doctor/deleteDoctor.service';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -23,13 +24,14 @@ import { DeleteDoctorService } from '../doctor/deleteDoctor.service';
 export class ClinicSettingsComponent implements OnInit {
 
   latitude: number = 45.267136;
-  longitude: number = 29.833549;
+  longitude: number = 19.833549;
   zoom:number = 15;
   address: string;
   private geoCoder;
  google: any;
-  
-  user: User = new User("","","","","","","","","","","","");
+ public searchControl: FormControl;
+
+  user: User = new User("","","","","","","","","","","","","");
   clinic: Clinic = new Clinic(null,null,null,null,null, null);
   doctors: Doctor[];
 
@@ -54,63 +56,37 @@ export class ClinicSettingsComponent implements OnInit {
         console.log(this.doctors)
       }
     )
-
-    //load Places Autocomplete
-    this.mapsAPILoader.load().then(() => {  
-      this.setCurrentLocation();
-      this.geoCoder = new google.maps.Geocoder;
- 
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ["address"]
-      });
-      autocomplete.addListener("place_changed", () => {
-        this.ngZone.run(() => {
-          //get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
- 
-          //verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
- 
-          //set latitude, longitude and zoom
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
-        });
-      });
-    });
+    
+    this.setCurrentLocation();
   }
   
   // Get Current Location Coordinates
   private setCurrentLocation() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.zoom = 8;
-        this.getAddress(this.latitude, this.longitude);
-      });
-    }
-  }
-  
-  getAddress(latitude, longitude) {
-    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      console.log(results);
-      console.log(status);
-      if (status === 'OK') {
-        if (results[0]) {
+        this.ccService.getClinic().subscribe( data => {
+          this.clinic = data;
+          console.log(this.clinic.id)
+        if(this.clinic.id == 1) {
+          this.latitude = 44;
+          this.longitude = 19;
           this.zoom = 12;
-          this.address = results[0].formatted_address;
+        } else if (this.clinic.id == 2) {
+          this.latitude = 45;
+          this.longitude = 20;
+          this.zoom = 12;
         } else {
-          window.alert('No results found');
+          this.latitude = position.coords.latitude;
+          this.longitude = position.coords.longitude;
+          this.zoom = 12;
         }
-      } else {
-        window.alert('Geocoder failed due to: ' + status);
-      }
- 
-    });
-
+          }
+            )
+        }, error => {
+          console.log("Error in getting user data!")
+        });
+        
+    }
   }
 
   onClickCancel(){

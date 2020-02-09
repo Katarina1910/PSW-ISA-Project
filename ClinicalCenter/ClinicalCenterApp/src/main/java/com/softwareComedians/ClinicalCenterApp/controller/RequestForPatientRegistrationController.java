@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -35,25 +34,13 @@ public class RequestForPatientRegistrationController {
     @PostMapping()
     public ResponseEntity<RequestForPatientRegistrationDTO> createRqForPatientReg(@RequestBody RequestForPatientRegistrationDTO rqDTO) {
 
-        RequestForPatientRegistration rq = new RequestForPatientRegistration();
-        rq.setId(rqDTO.getId());
-        rq.setAccepted(rqDTO.isAccepted());
-        rq.setReasonOfRejection(rqDTO.getReasonOfRejection());
-        rq.setUserData(rq.getUserData());
-
-        rq = requestForPatientRegistrationService.save(rq);
+        RequestForPatientRegistration rq = requestForPatientRegistrationService.createRqForPatientReg(rqDTO);
         return new ResponseEntity<>(new RequestForPatientRegistrationDTO(rq), HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/getAll")
     public ResponseEntity<List<RequestForPatientRegistrationDTO>> getAll() {
-
-        List<RequestForPatientRegistration> rqs = requestForPatientRegistrationService.findAll();
-        List<RequestForPatientRegistrationDTO> rqsDTO = new ArrayList<>();
-        for (RequestForPatientRegistration rq : rqs) {
-            rqsDTO.add(new RequestForPatientRegistrationDTO(rq));
-        }
-
+        List<RequestForPatientRegistrationDTO> rqsDTO = requestForPatientRegistrationService.getAll();
         return new ResponseEntity<>(rqsDTO, HttpStatus.OK);
     }
 
