@@ -20,5 +20,5 @@ Run `npm test` to execute the unit tests.
 
 ## Running end-to-end tests
 
-Run `npm e2e` to execute the end-to-end tests.
+Run `npm run e2e` to execute the end-to-end tests.
 
