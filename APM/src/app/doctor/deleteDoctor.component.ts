@@ -29,8 +29,8 @@ export class DeleteDoctorComponent implements OnInit {
         error=> console.error('Error!', error)
     ) }
 
-    deleteDoctor(email:string): void{
-        this._deleteDoctorService.deleteDoctor(email).subscribe(
+    deleteDoctor(id:number): void{
+        this._deleteDoctorService.deleteDoctor(id).subscribe(
             data=>{
                 alert('Doctor deleted!');
                 this.router.navigate(['/HomepageCA']);
