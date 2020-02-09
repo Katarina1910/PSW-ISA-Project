@@ -9,16 +9,12 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
 
-        <li class="nav-item active">
+        <li class="nav-item active" *ngIf="!isUserLoggedIn()">
           <a class="nav-link" [routerLink]="['/registration']">Register<span class="sr-only">(current)</span></a>
         </li>
 
-        <li class="nav-item active">
+        <li class="nav-item active" *ngIf="!isUserLoggedIn()">
             <a class="nav-link" [routerLink]="['/login']">Login<span class="sr-only">(current)</span></a>
-        </li>
-
-        <li *ngIf="isUserLoggedIn()" class="nav-item active">
-          <a class="nav-link" [routerLink]="['/welcome']" (click)="onClickLogout()">Logout<span class="sr-only">(current)</span></a>
         </li>
 
         <li *ngIf="isUserAdminCCA()" class="nav-item active">
@@ -39,6 +35,10 @@
 
         <li *ngIf="isUserPatient()" class="nav-item active">
           <a class="nav-link" [routerLink]="['/HomepagePatient']">Homepage<span class="sr-only">(current)</span></a>
+        </li>
+        
+        <li *ngIf="isUserLoggedIn()" class="nav-item active">
+          <a class="nav-link" [routerLink]="['/welcome']" (click)="onClickLogout()">Logout<span class="sr-only">(current)</span></a>
         </li>
       </ul>
     </div>
