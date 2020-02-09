@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../registration/user';
 import { MedicalRecordd } from './medicalRecord';
+import { Consult } from '../ConsultTermReport/Consult';
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +14,8 @@ export class MedicalRecordService{
     _url1 = 'http://localhost:8080/api/users/public';
     _url2 = 'http://localhost:8080/api/medicalRecord/get';
     _url3 = 'http://localhost:8080/api/medicalRecord/update';
+    _url4 = 'http://localhost:8080/api/patient/getAll';
+    _url5 = 'http://localhost:8080/api/ConsultTerm/editConsult';
     id: string;
 
 
@@ -28,5 +31,13 @@ export class MedicalRecordService{
 
     editMedicalRecord(m:MedicalRecordd):Observable<any>{
         return this._http.put<void>(this._url3, m);
+    }
+
+    getConsults():Observable<any>{
+        return this._http.get<Consult[]>(`${this._url4}/${this.id}`);
+    }
+
+    editConsults(consult: Consult):Observable<any>{
+        return this._http.put<void>(this._url5, consult);
     }
 }
