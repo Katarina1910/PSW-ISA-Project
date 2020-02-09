@@ -1,8 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.model;
 
 import com.softwareComedians.ClinicalCenterApp.dto.DoctorDTO;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -12,8 +10,6 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
 public class Doctor extends Personnel {
 
     @Autowired
@@ -111,14 +107,6 @@ public class Doctor extends Personnel {
 
     public void setDoctorTerms(Set<DoctorTerms> doctorTerms) {
         this.doctorTerms = doctorTerms;
-    }
-
-    public void setScheduledFrom(Date scheduledFrom) {
-        this.scheduledFrom = scheduledFrom;
-    }
-
-    public void setScheduledTo(Date scheduledTo) {
-        this.scheduledTo = scheduledTo;
     }
 
     public Set<Recipe> getRecipes() {
