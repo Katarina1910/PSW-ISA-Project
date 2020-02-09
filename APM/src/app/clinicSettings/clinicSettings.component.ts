@@ -30,7 +30,7 @@ export class ClinicSettingsComponent implements OnInit {
  google: any;
   
   user: User = new User("","","","","","","","","","","","");
-  clinic: Clinic = new Clinic(null,null,null,null,null)  
+  clinic: Clinic = new Clinic(null,null,null,null,null, null);
   doctors: Doctor[];
 
 
