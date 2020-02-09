@@ -26,6 +26,7 @@ INSERT INTO `clinic` (id, address, description, grade, income, name) VALUES (1, 
 INSERT INTO `clinic` (id, address, description, grade, income, name) VALUES (2, 'Beograd', 'Opis klinike2...', '5', '1500', 'klinika2');
 INSERT INTO `clinic` (id, address, description, grade, income, name) VALUES (3, 'Banja Luka', 'Opis klinike3...', '4', '500', 'klinika3');
 
+
 INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (5, 1, 4, '2020-02-15 00:00:00', '2020-02-17 00:00:00');
 INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (5, 1, 5, '2020-02-21 00:00:00', '2020-02-22 00:00:00');
 INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (4, 2, 6, '2020-02-25 00:00:00', '2020-02-28 00:00:00');

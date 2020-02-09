@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../registration/user';
 import { MedicalRecordd } from '../medicalRecord/medicalRecord';
+import { Consult } from '../ConsultTermReport/Consult';
 
 @Injectable({
     providedIn: 'root'
@@ -12,6 +13,7 @@ export class PatientProfileDocService{
     id: string;
     _url = 'http://localhost:8080/api/users/public';
     _url2 = 'http://localhost:8080/api/medicalRecord/get';
+    
 
     constructor(private _http: HttpClient) { }
 
@@ -22,4 +24,6 @@ export class PatientProfileDocService{
     getUserProfile(id: number):Observable<any>{
         return this._http.get<User>(`${this._url}/${id}`);
     }
+
+   
 }

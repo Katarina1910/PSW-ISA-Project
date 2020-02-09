@@ -25,7 +25,10 @@ public class ConsultTermController {
     @Autowired
     private SmtpMailSender smtpMailSender;
 
-
+    @PutMapping(value = "/editConsult")
+    public ResponseEntity<Void> editConsult(@RequestBody ConsultDTO consultDTO){
+        return this.consultTermService.editConsult(consultDTO);
+    }
 
 
     @PostMapping(value = "/addConsultReport")

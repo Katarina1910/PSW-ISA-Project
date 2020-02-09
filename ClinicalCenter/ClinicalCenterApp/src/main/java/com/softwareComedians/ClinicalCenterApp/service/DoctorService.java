@@ -6,6 +6,7 @@ import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
 import com.softwareComedians.ClinicalCenterApp.model.Authority;
 import com.softwareComedians.ClinicalCenterApp.model.ClinicAdministrator;
 import com.softwareComedians.ClinicalCenterApp.model.Doctor;
+import com.softwareComedians.ClinicalCenterApp.model.Operation;
 import com.softwareComedians.ClinicalCenterApp.repository.AuthorityRepository;
 import com.softwareComedians.ClinicalCenterApp.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;

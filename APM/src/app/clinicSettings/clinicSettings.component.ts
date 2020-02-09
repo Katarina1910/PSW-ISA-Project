@@ -30,7 +30,7 @@ export class ClinicSettingsComponent implements OnInit {
   private geoCoder;
  google: any;
  public searchControl: FormControl;
-  
+
   user: User = new User("","","","","","","","","","","","","");
   clinic: Clinic = new Clinic(null,null,null,null,null, null);
   doctors: Doctor[];

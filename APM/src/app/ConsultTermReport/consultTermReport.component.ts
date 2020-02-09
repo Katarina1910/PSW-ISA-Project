@@ -28,6 +28,7 @@ import { Consult } from './Consult';
     public medicamentsSettings : {};
     public selectedDiagnosis : {}; 
     public diagnosisSettings : {};
+    
 
     constructor(private _listOfDiagnosisService: listOfDiagnosisService,private _listOfMedicametService: listOfMedicamentService,
       private router: Router,

@@ -1,5 +1,9 @@
 package com.softwareComedians.ClinicalCenterApp.service;
 
+import com.softwareComedians.ClinicalCenterApp.dto.ConsultDTO;
+import com.softwareComedians.ClinicalCenterApp.model.Consult;
+import com.softwareComedians.ClinicalCenterApp.model.Patient;
+import com.softwareComedians.ClinicalCenterApp.repository.ConsultRepository;
 import com.softwareComedians.ClinicalCenterApp.dto.PatientDTO;
 import com.softwareComedians.ClinicalCenterApp.model.Patient;
 import com.softwareComedians.ClinicalCenterApp.model.User;
@@ -15,6 +19,7 @@ import java.util.List;
 public class PatientService {
 
     private PatientRepository patientRepository;
+    private ConsultRepository consultRepository;
 
 
     @Autowired
@@ -22,8 +27,9 @@ public class PatientService {
 
 
     @Autowired
-    public PatientService(PatientRepository patientRepository) {
+    public PatientService(PatientRepository patientRepository,ConsultRepository consultRepository) {
         this.patientRepository = patientRepository;
+        this.consultRepository = consultRepository;
     }
 
 
@@ -37,6 +43,21 @@ public class PatientService {
 
     public List<Patient> findAll() { return patientRepository.findAll(); }
 
+    public List<ConsultDTO> findAllConsult(Long id) {
+        List<Consult> consults = consultRepository.findConsults(id);
+
+        if(consults == null){
+            return null;
+        }
+
+        List<ConsultDTO> consultDTOS = new ArrayList<>();
+        for(Consult c: consults){
+            consultDTOS.add(new ConsultDTO(c));
+        }
+
+        return consultDTOS;
+
+    }
     public List<PatientDTO> getAll() {
 
         List<Patient> patients = this.findAll();
