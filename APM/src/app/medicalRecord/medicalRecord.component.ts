@@ -56,7 +56,6 @@ export class MedicalRecord implements OnInit{
          data => {
             console.log('Success!', JSON.stringify(data))
             this.medicalRecord = data;
-            //this.router.navigate(['/HomepageDoctor/ListOfPatients/Profile/MedicalRecord']);
          },
          error => console.error('Error!',error)
      );

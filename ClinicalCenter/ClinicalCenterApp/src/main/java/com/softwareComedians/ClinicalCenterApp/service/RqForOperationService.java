@@ -154,6 +154,9 @@ public class RqForOperationService {
 
         Operation ct = new Operation();
         RequstForOperation rq = this.findOne(id);
+        ct.setRequstForOperation(rq);
+        Doctor doc = doctorService.findOne(doctor);
+        ct.setDoctor(doc);
         rq.setAccepted(true);
         this.save(rq);
         List<RoomTerms> rts= roomTermsServie.findByDate(date);
