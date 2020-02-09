@@ -29,12 +29,12 @@ public class Patient extends User {
 
 	public Patient(User u){
 		super(u.getId(),u.getName(),u.getSurname(),u.getUcidn(),u.getAddress(), u.getCity(),
-				u.getCountry(), u.getEmail(), u.getPhone(), u.getUsername(), u.getPassword(), u.isActivated());
+				u.getCountry(), u.getEmail(), u.getPhone(), u.getUsername(), u.getPassword(), u.isActivated(), u.isPasswordChanged());
 	}
 
 	public  Patient(PatientDTO p){
 		super(p.getId(),p.getName(),p.getSurname(),p.getUcidn(),p.getAddress(), p.getCity(),
-				p.getCountry(), p.getEmail(), p.getPhone(), p.getUsername(), p.getPassword(), p.isActivated());
+				p.getCountry(), p.getEmail(), p.getPhone(), p.getUsername(), p.getPassword(), p.isActivated(), p.isPasswordChanged());
 	}
 
 	public Clinic getClinic() {

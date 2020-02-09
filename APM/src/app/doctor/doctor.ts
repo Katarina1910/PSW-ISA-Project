@@ -10,7 +10,7 @@ export class Doctor extends User{
         public scheduledTo: Date
      
     ) {
-        super(null,null,null,null,null,null,null,null,null,null,null,null,null);
+        super(null,null,null,null,null,null,null,null,null,null,null,null,null,false);
     }
 
 }

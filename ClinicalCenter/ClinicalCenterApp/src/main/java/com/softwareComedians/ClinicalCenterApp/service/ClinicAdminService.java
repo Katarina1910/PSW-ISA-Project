@@ -76,6 +76,8 @@ public class ClinicAdminService {
 
         Clinic c = clinicsService.findById(clinicAdminDTO.getClinic().getId());
         clinicAdministrator.setClinic(c);
+
+        clinicAdministrator.setPasswordChanged(false);
         clinicAdministrator = this.save(clinicAdministrator);
         return  clinicAdministrator;
     }

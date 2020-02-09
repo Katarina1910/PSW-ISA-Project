@@ -11,7 +11,7 @@ import { AddNurseService } from './addNurse.service';
 
 export class AddNurseComponent{
     
-    nurseModel = new User('','','','','','','','','','','','',"");
+    nurseModel = new User('','','','','','','','','','','','',"",false);
     password1 : string = "";
     
     constructor(private _addNurseService: AddNurseService,  private router: Router) {}

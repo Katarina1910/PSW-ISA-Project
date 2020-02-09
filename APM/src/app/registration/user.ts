@@ -13,6 +13,7 @@ export class User {
         public  password: string,
         public  password2: string,
         public role:string,
+        public passwordChanged: boolean
     ){}
 
     public getId(){

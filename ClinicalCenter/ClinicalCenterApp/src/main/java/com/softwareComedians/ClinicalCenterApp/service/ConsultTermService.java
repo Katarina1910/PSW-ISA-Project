@@ -229,8 +229,8 @@ public class ConsultTermService {
 
     public ResponseEntity<Void> editConsult(ConsultDTO consultDTO) {
         Consult consult = consultRepository.findById(consultDTO.getId()).orElseGet(null);
-        if(consult == null){
-            return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (consult == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         Diagnosis diagnosis = diagnosisRepository.findById(consultDTO.getDiagnosis().getId()).orElseGet(null);
         consult.setDiagnosis(diagnosis);
@@ -238,8 +238,8 @@ public class ConsultTermService {
 
         consultRepository.save(consult);
 
-        return  new ResponseEntity<>(HttpStatus.OK);
-
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @Scheduled(cron = "00 00 * * * *")
     public void reservingRooms() throws MessagingException {

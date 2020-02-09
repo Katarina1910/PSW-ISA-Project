@@ -10,8 +10,8 @@ public class NurseDTO extends UserDTO {
     }
 
     public NurseDTO(Long id, String name, String surname, String ucidn, String address, String city, String country,
-                    String email, String phone, String username, String password, String role, boolean isActivated, UserTokenState token) {
-        super(id, name, surname, ucidn, address, city, country, email, phone, username, password, role, isActivated, token);
+                    String email, String phone, String username, String password, String role, boolean isActivated, UserTokenState token, boolean passwordChanged) {
+        super(id, name, surname, ucidn, address, city, country, email, phone, username, password, role, isActivated, token, passwordChanged);
     }
 
     public NurseDTO(User u) {
@@ -20,7 +20,7 @@ public class NurseDTO extends UserDTO {
 
     public NurseDTO(Nurse d){
         super(d.getId(),d.getName(),d.getSurname(), d.getUcidn(),d.getAddress(),d.getCity(),d.getCountry(),d.getEmail(),
-                d.getPhone(),d.getUsername(),d.getPassword(),d.getRole(),d.isActivated(), null);
+                d.getPhone(),d.getUsername(),d.getPassword(),d.getRole(),d.isActivated(), null, d.isPasswordChanged());
     }
 }
 

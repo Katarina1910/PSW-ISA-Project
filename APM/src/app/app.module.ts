@@ -74,6 +74,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 import { PatientMC } from './patientMedicalRecord/patientMC.component';
+import { ChangePassword } from './login/chagePassword.component';
 
 @NgModule({
   declarations: [
@@ -132,6 +133,7 @@ import { PatientMC } from './patientMedicalRecord/patientMC.component';
     ClinicCenterAdminProfilePageComponent,
     PatientMC,
     PatientComponent,
+    ChangePassword,
     //ListOfDiagnosis
     ],
   imports: [
@@ -207,6 +209,7 @@ import { PatientMC } from './patientMedicalRecord/patientMC.component';
       {path: 'HomepagePatient/PatientMC', component: PatientMC},
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: 'HomepageDoctor/consultTermReport', component: ConsultTermReportComponent},
+      {path: 'ChangePassword', component: ChangePassword},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'},
     ], {useHash: true})
