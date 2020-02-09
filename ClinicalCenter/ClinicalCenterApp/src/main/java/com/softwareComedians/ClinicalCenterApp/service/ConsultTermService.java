@@ -124,6 +124,7 @@ public class ConsultTermService {
     public ConsultTerm reserveRoom(String date, String term,String room, Long doctor, Long id){
         ConsultTerm ct = new ConsultTerm();
         RequestForConsult rq = requestForConsultService.findById(id);
+        rq.setAccepted(true);
 
         List<RoomTerms> rts= roomTermsServie.findByDate(date);
         List<DoctorTerms> dts = doctorTermsService.findByDate(date);
@@ -227,10 +228,10 @@ public class ConsultTermService {
     }
 
 
-    public ResponseEntity<Void> editConsult(ConsultDTO consultDTO) {
+    public ResponseEntity<Void> editConsult(ConsultDTO consultDTO) throws MessagingException {
         Consult consult = consultRepository.findById(consultDTO.getId()).orElseGet(null);
-        if(consult == null){
-            return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (consult == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         Diagnosis diagnosis = diagnosisRepository.findById(consultDTO.getDiagnosis().getId()).orElseGet(null);
         consult.setDiagnosis(diagnosis);
@@ -238,7 +239,8 @@ public class ConsultTermService {
 
         consultRepository.save(consult);
 
-        return  new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
     @Scheduled(cron = "00 00 * * * *")
