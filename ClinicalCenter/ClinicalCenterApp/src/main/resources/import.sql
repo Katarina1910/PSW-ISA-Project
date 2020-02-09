@@ -22,9 +22,9 @@ INSERT INTO `user_authority` (user_id, authority_id) VALUES (5, 3);
 INSERT INTO `user_authority` (user_id, authority_id) VALUES (6, 3);
 INSERT INTO `user_authority` (user_id, authority_id) VALUES (7, 2);
 
-INSERT INTO `clinic` (id, address, description, grade, income, name, price_list_id) VALUES (1, 'Novi Sad', 'Opis klinike1...', '4', '1000', 'klinika1', null);
-INSERT INTO `clinic` (id, address, description, grade, income, name, price_list_id) VALUES (2, 'Beograd', 'Opis klinike2...', '5', '1500', 'klinika2', null);
-INSERT INTO `clinic` (id, address, description, grade, income, name, price_list_id) VALUES (3, 'Banja Luka', 'Opis klinike3...', '4', '500', 'klinika3', null);
+INSERT INTO `clinic` (id, address, description, grade, income, name) VALUES (1, 'Novi Sad', 'Opis klinike1...', '4', '1000', 'klinika1');
+INSERT INTO `clinic` (id, address, description, grade, income, name) VALUES (2, 'Beograd', 'Opis klinike2...', '5', '1500', 'klinika2');
+INSERT INTO `clinic` (id, address, description, grade, income, name) VALUES (3, 'Banja Luka', 'Opis klinike3...', '4', '500', 'klinika3');
 
 INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (5, 1, 4, '2020-02-15 00:00:00', '2020-02-17 00:00:00');
 INSERT INTO `doctor` (grade, type_id, id, scheduled_from, scheduled_to) VALUES (5, 1, 5, '2020-02-21 00:00:00', '2020-02-22 00:00:00');
@@ -69,8 +69,8 @@ insert into medical_record (id, alergies, blood_type, diopter, height, weight) v
 insert into medical_record (id, alergies, blood_type, diopter, height, weight) values  (2,'nema', 'A','0','190','100');
 
 
-INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (2, null, 1);
-INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (3, null, 2);
+INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (2, 1, 1);
+INSERT INTO `patient` (id, clinic_id, medical_record) VALUES (3, 1, 2);
 
 INSERT INTO `user` (id, address, city, country, email, is_activated, name, password, phone, role, surname, ucidn, username, last_password_reset_date) VALUES (8, 'Skolska 10', 'Nis', 'Srbija', 'nurse@gmail.com', true, 'Nurse', '$2a$10$iGnVynNJEax7VXDAAnl7eOn02lNDjQ.VXn4S8rqKiVOLhFnld8K3q', '06512000000', 'ROLE_NURSE', 'Nurse', '0206123800000', 'nurse', '2019-12-31 00:00:00');
 insert into nurse (id) values (8);

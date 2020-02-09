@@ -107,11 +107,12 @@ public class ConsultTermServiceTest {
                 dt = d;
             }
         }
+
         String term = "09:00-11:00";
         r.setTerm2(false);
         dt.setTerm2(false);
 
-       RoomTerms roomTerms =  roomTermsServie.save(r);
+        RoomTerms roomTerms =  roomTermsServie.save(r);
         DoctorTerms doctorTerms = doctorTermsService.save(dt);
 
         ct.setType(rq.getType());
@@ -144,8 +145,5 @@ public class ConsultTermServiceTest {
         assertEquals(testCT.getDate(),"2020-02-04");
         assertEquals(doctorTerms.isTerm2(), false);
         assertEquals(roomTerms.isTerm2(), false);
-
     }
-
-
 }

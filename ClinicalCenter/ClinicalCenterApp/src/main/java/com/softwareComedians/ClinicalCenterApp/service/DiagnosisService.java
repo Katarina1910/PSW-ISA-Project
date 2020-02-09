@@ -1,5 +1,6 @@
 package com.softwareComedians.ClinicalCenterApp.service;
 
+import com.softwareComedians.ClinicalCenterApp.dto.DiagnosisDTO;
 import com.softwareComedians.ClinicalCenterApp.model.Diagnosis;
 import com.softwareComedians.ClinicalCenterApp.repository.DiagnosisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,14 @@ public class DiagnosisService {
         if(d!=null){
             diagnosisRepository.delete(d);
         }
+    }
+
+    public Diagnosis editDiagnosis (DiagnosisDTO diagnosisDTO) {
+        Diagnosis d = this.findOne(diagnosisDTO.getId());
+        d.setName(diagnosisDTO.getName());
+        d.setCode(diagnosisDTO.getCode());
+        d.setDescription((diagnosisDTO.getDescription()));
+        d = this.save(d);
+        return d;
     }
 }

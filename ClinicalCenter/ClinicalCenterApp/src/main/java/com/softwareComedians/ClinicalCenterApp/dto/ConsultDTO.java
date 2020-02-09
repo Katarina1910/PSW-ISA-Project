@@ -64,4 +64,6 @@ public class ConsultDTO {
     public MedicalRecordDTO getMedicalRecord() {
         return medicalRecord;
     }
+
+
 }

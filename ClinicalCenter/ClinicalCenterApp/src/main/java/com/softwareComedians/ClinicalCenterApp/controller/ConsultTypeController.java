@@ -34,6 +34,7 @@ public class ConsultTypeController {
 
         return new ResponseEntity<>(consultTypeDTOS, HttpStatus.OK);
     }
+
     @PostMapping()
     public ResponseEntity<ConsultTypeDTO> addConsultType(@RequestBody ConsultTypeDTO consultTypeDTO) {
         ConsultType ct = new ConsultType(consultTypeDTO);
@@ -50,11 +51,7 @@ public class ConsultTypeController {
 
     @PutMapping(value = "/edit")
     public ResponseEntity<ConsultTypeDTO> editConsultType (@RequestBody ConsultTypeDTO consultTypeDTO) {
-        ConsultType ct = consultTypeService.findOne(consultTypeDTO.getId());
-        ct.setName(consultTypeDTO.getName());
-        ct.setDescription(consultTypeDTO.getDescription());
-        ct = consultTypeService.save(ct);
-
+        ConsultType ct = consultTypeService.editConsultType(consultTypeDTO);
         return new ResponseEntity<>(new ConsultTypeDTO(ct), HttpStatus.OK);
     }
 
