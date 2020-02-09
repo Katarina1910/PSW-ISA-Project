@@ -48,7 +48,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { ApiService, AuthService, ConfigService } from './service';
 import { LoginGuard, GuestGuard, AdminGuard } from 'src/guard';
 import { UserService } from './registration/user.service';
-import { AddTokenInterceptor } from './interceptor/TokenInterceptor';
 import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicCenterAdmin.component';
 import { AppointedExaminationsService } from './patientHomePage/patientExaminations.service';
 import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDoc.component';
@@ -75,6 +74,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 import { PatientMC } from './patientMedicalRecord/patientMC.component';
 import { ChangePassword } from './login/chagePassword.component';
+import { AddTokenInterceptor } from './config/http-interceptor';
 
 @NgModule({
   declarations: [
