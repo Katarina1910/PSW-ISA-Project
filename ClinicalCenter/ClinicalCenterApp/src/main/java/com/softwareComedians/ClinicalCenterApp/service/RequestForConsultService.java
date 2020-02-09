@@ -1,4 +1,4 @@
-package com.softwareComedians.ClinicalCenterApp.service;
+spackage com.softwareComedians.ClinicalCenterApp.service;
 
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
 import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
@@ -88,24 +88,31 @@ public class RequestForConsultService {
         //TODO: preko pacijenotovog ID-a pronaci u kojoj je klinici i poslati mejl odgovarajucem administratoru te klinike
 
         String adminEmail="";
+        if(ct.getClinic()!=null) {
         Long clinicId = ct.getClinic().getId();
-        List<ClinicAdministrator> admins = clinicAdminService.findAll();
-        for(ClinicAdministrator ca : admins) {
-            if(ca.getClinic().getId() == clinicId) {
-                adminEmail = ca.getEmail();
+
+            List<ClinicAdministrator> admins = clinicAdminService.findAll();
+            for (ClinicAdministrator ca : admins) {
+                if (ca.getClinic().getId() == clinicId) {
+                    adminEmail = ca.getEmail();
+                }
             }
-        }
 
-        if(adminEmail=="") {
-            adminEmail = clinicAdminService.findById(1L).getEmail();
-        }
-
+            if (adminEmail == "") {
+                adminEmail = clinicAdminService.findById(1L).getEmail();
+            }
         smtpMailSender.send(adminEmail,"Request for consult",
                 " You have a request for consult: type: "+ct.getType().getName()+ "\r\n"+
                         "doctor's name: "+ct.getDoctor().getName()+ " "+ct.getDoctor().getSurname()+ "\r\n"+
                         "patient's name: "+u.getName()+" "+u.getSurname()+"\r\n"+
                         "Date: "+rq.getConsultTerm().getDate());
 
+            smtpMailSender.send(adminEmail, "Request for consult",
+                    " You have a request for consult: type: " + ct.getType().getName() + "\r\n" +
+                            "doctor's name: " + ct.getDoctor().getName() + " " + ct.getDoctor().getSurname() + "\r\n" +
+                            "patient's name: " + u.getName() + " " + u.getSurname() + "\r\n" +
+                            " <a href='http://localhost:8080/api/patient/requestConsultTerm/" + rq.getId() + "'> Confirm </a>");
+        }
         return rq;
     }
 

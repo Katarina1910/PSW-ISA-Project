@@ -102,6 +102,4 @@ public class RequestForConsultServiceTest {
         assertEquals(dbReq.getType().getName(), "tip1");
 
     }
-
-
 }

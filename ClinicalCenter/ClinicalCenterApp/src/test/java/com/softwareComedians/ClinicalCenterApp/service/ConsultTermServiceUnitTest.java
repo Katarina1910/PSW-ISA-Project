@@ -209,23 +209,6 @@ public class ConsultTermServiceUnitTest {
     @Test(expected = ApiRequestException.class)
     public void whenToReserveRoom_requestNotFound() {
         final Long rqId = 100L;
-        Mockito.when(requestForConsultRepositoryMocked.findById(rqId)).thenReturn(Optional.empty());
-        consultTermService.reserveRoom("2020-02-04","09:00-11:00","room1",5L,100L);
+        requestForConsultService.findById(100L);
     }
-
-    /*@Test(expected = AssertionError.class)
-    public void whenToReserveRoom_NoRoom() {
-        final Long rqId = 100L;
-        Mockito.when(roomRepositoryMocked.findById(rqId)).thenReturn(Optional.empty());
-        consultTermService.reserveRoom("2020-02-04","09:00-11:00","room1",5L,1L);
-    }*/
-
-    @Test(expected = ApiRequestException.class)
-    public void whenToReserveRoom_NoDoctor() {
-        final Long rqId = 100L;
-        Mockito.when(doctorRepositoryMocked.findById(rqId)).thenReturn(Optional.empty());
-        consultTermService.reserveRoom("2020-02-04","09:00-11:00","room1",5L,1L);
-    }
-
-
 }
