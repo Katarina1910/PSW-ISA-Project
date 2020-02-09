@@ -3,16 +3,14 @@ package com.softwareComedians.ClinicalCenterApp.service;
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
 import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
 import com.softwareComedians.ClinicalCenterApp.mail.SmtpMailSender;
-import com.softwareComedians.ClinicalCenterApp.model.ClinicAdministrator;
-import com.softwareComedians.ClinicalCenterApp.model.ConsultTerm;
-import com.softwareComedians.ClinicalCenterApp.model.RequestForConsult;
-import com.softwareComedians.ClinicalCenterApp.model.User;
+import com.softwareComedians.ClinicalCenterApp.model.*;
 import com.softwareComedians.ClinicalCenterApp.repository.RequestForConsultRepository;
 import com.softwareComedians.ClinicalCenterApp.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -30,14 +28,28 @@ public class RequestForConsultService {
     @Autowired
     private ConsultTypeService consultTypeService;
 
-    @Autowired
-    private RequestForConsultService requestForConsultService;
 
     @Autowired
     private SmtpMailSender smtpMailSender;
 
     @Autowired
     private ClinicAdminService clinicAdminService;
+
+    @Autowired
+    private DoctorService doctorService;
+
+    @Autowired
+    private RoomService roomService;
+
+    @Autowired
+    private PatientService patientService;
+
+
+    @Autowired
+    private  RoomTermsServie roomTermsServie;
+
+    @Autowired
+    private  DoctorTermsService doctorTermsService;
 
     public RequestForConsult save(RequestForConsult requestForConsult) {
         return requestForConsultRepository.save(requestForConsult);
@@ -70,7 +82,7 @@ public class RequestForConsultService {
         rq.setAccepted(false);
         rq.setConsultTerm(ct);
 
-        rq = requestForConsultService.save(rq);
+        rq = this.save(rq);
 
         //salje mejl adminu klinike
         //TODO: preko pacijenotovog ID-a pronaci u kojoj je klinici i poslati mejl odgovarajucem administratoru te klinike
@@ -96,4 +108,93 @@ public class RequestForConsultService {
 
         return rq;
     }
+
+    public List<RequestForConsultDTO> getAll() {
+
+        List<RequestForConsult> requestForConsults = this.findAll();
+        List<RequestForConsultDTO> requestForConsultDTOS= new ArrayList<>();
+        for (RequestForConsult d : requestForConsults) {
+            requestForConsultDTOS.add(new RequestForConsultDTO(d));
+        }
+        return requestForConsultDTOS;
+    }
+
+    public RequestForConsult createRequest( RequestForConsultDTO requestForConsultDTO) {
+
+        RequestForConsult rq = new RequestForConsult();
+        rq.setId(requestForConsultDTO.getId());
+        rq.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
+        rq = this.save(rq);
+        return rq;
+    }
+
+    public RequestForConsult createRequestDoctor( RequestForConsultDTO requestForConsultDTO) throws MessagingException {
+        boolean cT = true;
+        boolean dT = true;
+
+        RequestForConsult rq = new RequestForConsult();
+        rq.setAccepted(true);
+        rq.setId(requestForConsultDTO.getId());
+        rq.setDateAndTime(requestForConsultDTO.getDateAndTime());
+        rq.setType(consultTypeService.findOne(requestForConsultDTO.getType().getId()));
+        rq.setPatient(userService.findById(requestForConsultDTO.getPatient().getId()));
+
+        for(RoomTerms rr : roomTermsServie.findAll()){
+            if (rr.getDate().equals(rq.getDateAndTime())){
+                cT = false;
+            }
+        }
+
+        for(DoctorTerms dt : doctorTermsService.findAll()){
+            if (dt.getDate().equals(rq.getDateAndTime())){
+                dT = false;
+            }
+        }
+        if(cT){
+            System.out.println("ctt");
+            for (Room r: roomService.findAll()){
+                System.out.println(r.getName());
+                RoomTerms roomTerms = new RoomTerms();
+                roomTerms.setDate(requestForConsultDTO.getDateAndTime());
+                roomTerms.setRoom(r);
+                roomTermsServie.save(roomTerms);
+            }
+        }
+
+        if(dT){
+            System.out.println("dtt");
+            for (Doctor d: doctorService.findAll()){
+                System.out.println(d.getName());
+                DoctorTerms dTerms = new DoctorTerms();
+                dTerms.setDate(requestForConsultDTO.getDateAndTime());
+                dTerms.setDoctor(d);
+                doctorTermsService.save(dTerms);
+            }
+        }
+
+        String adminEmail="";
+        Patient patient = patientService.findById(rq.getPatient().getId());
+        Long clinicId = patient.getClinic().getId();
+        List<ClinicAdministrator> admins = clinicAdminService.findAll();
+        for(ClinicAdministrator ca : admins) {
+            if(ca.getClinic().getId() == clinicId) {
+                adminEmail = ca.getEmail();
+            }
+        }
+
+        if(adminEmail=="") {
+            adminEmail = clinicAdminService.findById(1L).getEmail();
+        }
+
+        smtpMailSender.send(adminEmail,"Request for consult",
+                " You have a request for consult: type: "+rq.getType().getName()+ "\r\n"+
+                        "patient's name: "+patient.getName()+" "+patient.getSurname());
+
+        rq = this.save(rq);
+
+        return rq;
+    }
+
+
+
 }

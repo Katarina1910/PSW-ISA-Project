@@ -71,13 +71,7 @@ public class PatientController {
 
     @GetMapping(value = "/getAll")
     public ResponseEntity<List<PatientDTO>> getAll() {
-
-        List<Patient> patients = patientService.findAll();
-        List<PatientDTO> patientsDTO = new ArrayList<>();
-        for (Patient p : patients) {
-            patientsDTO.add(new PatientDTO(p));
-        }
-
+        List<PatientDTO> patientsDTO = patientService.getAll();
         return new ResponseEntity<>(patientsDTO, HttpStatus.OK);
     }
 
@@ -124,24 +118,9 @@ public class PatientController {
         return new ResponseEntity<>(termsDTO, HttpStatus.OK);
     }
 
-    @PreAuthorize("ROLE_PATIENT")
     @PostMapping(value = "/edit")
     public ResponseEntity<UserDTO> editPatient(@RequestBody PatientDTO patientDTO) {
-
-        User userInfo = userService.findById(patientDTO.getId());
-        userInfo.setName(patientDTO.getName());
-        userInfo.setSurname(patientDTO.getSurname());
-        userInfo.setPhone(patientDTO.getPhone());
-        userInfo.setUsername(patientDTO.getUsername());
-        userInfo.setPassword(patientDTO.getPassword());
-        userInfo.setActivated(patientDTO.isActivated());
-        userInfo.setCountry(patientDTO.getCountry());
-        userInfo.setCity(patientDTO.getCity());
-        userInfo.setAddress(patientDTO.getAddress());
-        userInfo.setUcidn(patientDTO.getUcidn());
-
-        userInfo = userService.save(userInfo);
-
+        User userInfo = patientService.editPatient(patientDTO);
         return new ResponseEntity<>(UserMapper.toDto(userInfo), HttpStatus.OK);
     }
 
@@ -159,6 +138,7 @@ public class PatientController {
         else
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
 
     @GetMapping(value = "acceptConsultTerm/{id}")
     public ResponseEntity<Void> acceptConsultTerm(@PathVariable Long id) {

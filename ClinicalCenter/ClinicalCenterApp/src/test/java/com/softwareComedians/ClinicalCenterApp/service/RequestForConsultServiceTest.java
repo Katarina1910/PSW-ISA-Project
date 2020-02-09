@@ -2,8 +2,8 @@ package com.softwareComedians.ClinicalCenterApp.service;
 
 import com.softwareComedians.ClinicalCenterApp.dto.ConsultTypeDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
+import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
 import com.softwareComedians.ClinicalCenterApp.model.ConsultType;
-import com.softwareComedians.ClinicalCenterApp.model.Patient;
 import com.softwareComedians.ClinicalCenterApp.model.RequestForConsult;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,6 +50,25 @@ public class RequestForConsultServiceTest {
     }
 
     @Test
+    public void findById_ConsultType() {
+        ConsultType ct = consultTypeService.findOne(1L);
+
+        assertEquals(ct.getName(),"tip1");
+        assertEquals(ct.getDescription(),"Opis tipa1...");
+
+    }
+
+    @Test(expected = ApiRequestException.class)
+    public void findById_WhenIdNotValid() {
+        RequestForConsult req = requestForConsultService.findById(1000L);;
+    }
+
+    @Test(expected = ApiRequestException.class)
+    public void findById_WhenIdNotValidConsultType() {
+        ConsultType ct = consultTypeService.findOne(1000L);
+    }
+
+    @Test
     @Transactional
     @Rollback(true)
     public void create() {
@@ -83,4 +102,6 @@ public class RequestForConsultServiceTest {
         assertEquals(dbReq.getType().getName(), "tip1");
 
     }
+
+
 }

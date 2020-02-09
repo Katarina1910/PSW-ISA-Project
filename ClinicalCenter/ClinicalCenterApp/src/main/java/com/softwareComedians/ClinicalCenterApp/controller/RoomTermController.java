@@ -1,14 +1,12 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
 import com.softwareComedians.ClinicalCenterApp.dto.RoomTermsDTO;
-import com.softwareComedians.ClinicalCenterApp.model.RoomTerms;
 import com.softwareComedians.ClinicalCenterApp.service.RoomTermsServie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,36 +15,23 @@ import java.util.List;
 public class RoomTermController {
     RoomTermsServie roomTermsServie;
 
+
+
     @Autowired
     public RoomTermController(RoomTermsServie roomTermsServie){
         this.roomTermsServie=roomTermsServie;
     }
 
     @GetMapping(value = "/getAllDate/{date}")
-    public ResponseEntity<List<RoomTermsDTO>> getAll(@PathVariable String date) {
-
-        List<RoomTerms> rooms = roomTermsServie.findByDate(date);
-        List<RoomTermsDTO> roomsTermsDTO = new ArrayList<>();
-        for (RoomTerms d : rooms) {
-            roomsTermsDTO.add(new RoomTermsDTO(d));
-        }
-
+    public ResponseEntity<List<RoomTermsDTO>> getAllDate(@PathVariable String date) {
+        List<RoomTermsDTO> roomsTermsDTO = roomTermsServie.getAllDate(date);
         return new ResponseEntity<>(roomsTermsDTO, HttpStatus.OK);
     }
 
 
     @GetMapping(value = "/getAllDate/{date}/{room}")
-    public ResponseEntity<List<RoomTermsDTO>> getAllP(@PathVariable String date, @PathVariable String room) {
-
-        List<RoomTerms> rooms = roomTermsServie.findByDate(date);
-        List<RoomTermsDTO> roomsTermsDTO = new ArrayList<>();
-        for (RoomTerms d : rooms) {
-            if(d.getRoom().getName().equals(room)){
-                roomsTermsDTO.add(new RoomTermsDTO(d));
-            }
-
-        }
-
+    public ResponseEntity<List<RoomTermsDTO>> getAllDateRoom(@PathVariable String date, @PathVariable String room) {
+        List<RoomTermsDTO> roomsTermsDTO = roomTermsServie.getAllDateRoom(date,room);
         return new ResponseEntity<>(roomsTermsDTO, HttpStatus.OK);
     }
 
