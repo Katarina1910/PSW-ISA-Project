@@ -1,4 +1,4 @@
-spackage com.softwareComedians.ClinicalCenterApp.service;
+package com.softwareComedians.ClinicalCenterApp.service;
 
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
 import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
