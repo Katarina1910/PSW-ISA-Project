@@ -9,7 +9,9 @@ import { recipeValService } from './recipeVal.service';
 })
 
 export class RecipeValidation implements OnInit{
+    
 
+    public recipes : Recipe[];
 
     constructor(private _recipeValService: recipeValService){}
 
@@ -23,14 +25,22 @@ export class RecipeValidation implements OnInit{
         );
     }
 
-    
+    refresh():void{
+        this._recipeValService.getAll(localStorage.getItem("user-id")).subscribe(
+            data=>{
+                    this.recipes = data;
+            },error=>{
 
-    public recipes : Recipe[];
+            }
+        );
+    }
 
-    private certify(id: number){
-        this._recipeValService.certify(id).subscribe(
+   
+     certify(id: number){
+        this._recipeValService.certify(id, localStorage.getItem("user-id")).subscribe(
             data=>{
                     alert("Succesfully certified");
+                    this.refresh();
                    
             },error=>{
                     alert("Already certified or gone");

@@ -6,6 +6,7 @@ import { listOfPatientsDoctor } from '../doctorHomePage/listOfPatients.component
 import { listOfPatientsService } from '../doctorHomePage/listOfPatients.service';
 import { MedicalRecordService } from '../medicalRecord/medicalRecord.service';
 import { MedicalRecordd } from '../medicalRecord/medicalRecord';
+import { Consult } from '../ConsultTermReport/Consult';
 
 
 @Component({
@@ -16,8 +17,9 @@ export class PatientProfileDocComponent  implements OnInit {
 
   user: User = new User("","","","","","","","","","","","");
   medicalRecord: MedicalRecordd;
+  
   ngOnInit(): void {
-   this.getProfile();
+      this.getProfile();
   }   
 
   constructor(private patientProfileDoc: listOfPatientsService, private patientProfileService: PatientProfileDocService, 
