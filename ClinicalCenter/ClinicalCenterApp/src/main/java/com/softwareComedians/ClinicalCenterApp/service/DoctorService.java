@@ -123,6 +123,7 @@ public class DoctorService {
         }
         Authority doctorAutority = authorityRepository.findByName(UserRoles.ROLE_DOCTOR);
         doctor.getUsersAuthorities().add(doctorAutority);
+        doctor.setPasswordChanged(false);
         doctor = this.save(doctor);
         return doctor;
     }

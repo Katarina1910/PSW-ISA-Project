@@ -48,7 +48,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { ApiService, AuthService, ConfigService } from './service';
 import { LoginGuard, GuestGuard, AdminGuard } from 'src/guard';
 import { UserService } from './registration/user.service';
-import { TokenInterceptor } from './interceptor/TokenInterceptor';
+import { AddTokenInterceptor } from './interceptor/TokenInterceptor';
 import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicCenterAdmin.component';
 import { AppointedExaminationsService } from './patientHomePage/patientExaminations.service';
 import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDoc.component';
@@ -74,6 +74,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 import { PatientMC } from './patientMedicalRecord/patientMC.component';
+import { ChangePassword } from './login/chagePassword.component';
 
 @NgModule({
   declarations: [
@@ -132,6 +133,7 @@ import { PatientMC } from './patientMedicalRecord/patientMC.component';
     ClinicCenterAdminProfilePageComponent,
     PatientMC,
     PatientComponent,
+    ChangePassword,
     //ListOfDiagnosis
     ],
   imports: [
@@ -207,6 +209,7 @@ import { PatientMC } from './patientMedicalRecord/patientMC.component';
       {path: 'HomepagePatient/PatientMC', component: PatientMC},
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: 'HomepageDoctor/consultTermReport', component: ConsultTermReportComponent},
+      {path: 'ChangePassword', component: ChangePassword},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'},
     ], {useHash: true})
@@ -214,7 +217,7 @@ import { PatientMC } from './patientMedicalRecord/patientMC.component';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
+      useClass: AddTokenInterceptor,
       multi: true
     },
     LoginGuard,

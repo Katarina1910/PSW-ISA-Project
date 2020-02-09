@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -58,7 +59,6 @@ public class RequestForAbsenceController {
         List<RequestForAbsenceDTO> rqsDTO = requestForAbsenceService.getAllDoctor(id);
         return new ResponseEntity<>(rqsDTO, HttpStatus.OK);
     }*/
-
 
     @GetMapping(value = "/getAll/{id}")
     public ResponseEntity<List<RequestForAbsenceDTO>> getAllDoctor(@PathVariable Long id) {

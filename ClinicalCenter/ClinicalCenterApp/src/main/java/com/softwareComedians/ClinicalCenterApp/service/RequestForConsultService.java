@@ -1,4 +1,4 @@
-package com.softwareComedians.ClinicalCenterApp.service;
+spackage com.softwareComedians.ClinicalCenterApp.service;
 
 import com.softwareComedians.ClinicalCenterApp.dto.RequestForConsultDTO;
 import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
@@ -101,6 +101,11 @@ public class RequestForConsultService {
             if (adminEmail == "") {
                 adminEmail = clinicAdminService.findById(1L).getEmail();
             }
+        smtpMailSender.send(adminEmail,"Request for consult",
+                " You have a request for consult: type: "+ct.getType().getName()+ "\r\n"+
+                        "doctor's name: "+ct.getDoctor().getName()+ " "+ct.getDoctor().getSurname()+ "\r\n"+
+                        "patient's name: "+u.getName()+" "+u.getSurname()+"\r\n"+
+                        "Date: "+rq.getConsultTerm().getDate());
 
             smtpMailSender.send(adminEmail, "Request for consult",
                     " You have a request for consult: type: " + ct.getType().getName() + "\r\n" +

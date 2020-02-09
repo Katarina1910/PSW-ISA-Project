@@ -241,8 +241,7 @@ public class ConsultTermService {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
+    
     @Scheduled(cron = "00 00 * * * *")
     public void reservingRooms() throws MessagingException {
 

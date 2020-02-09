@@ -57,7 +57,10 @@ public class User implements UserDetails {
     @Column
     private boolean isActivated;
 
-	@Column
+    @Column
+    private boolean passwordChanged;
+
+    @Column
     private  String role;
 
     @Column(name = "last_password_reset_date")
@@ -85,7 +88,8 @@ public class User implements UserDetails {
 
 	}
 
-    public User(Long id, String name, String surname, String ucidn, String address, String city, String country, String email, String phone, String username, String password, boolean isActivated) {
+    public User(Long id, String name, String surname, String ucidn, String address, String city, String country,
+                String email, String phone, String username, String password, boolean isActivated, boolean passwordChanged) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -98,6 +102,7 @@ public class User implements UserDetails {
         this.username = username;
         this.password = password;
         this.isActivated = isActivated;
+        this.passwordChanged = passwordChanged;
     }
 
     public User(UserDTO u){
@@ -113,6 +118,15 @@ public class User implements UserDetails {
         this.username = u.getUsername();
         this.password = u.getPassword();
         this.isActivated = u.isActivated();
+        this.passwordChanged = u.isPasswordChanged();
+    }
+
+    public boolean isPasswordChanged() {
+        return passwordChanged;
+    }
+
+    public void setPasswordChanged(boolean passwordChanged) {
+        this.passwordChanged = passwordChanged;
     }
 
     public void setRole(String role) {

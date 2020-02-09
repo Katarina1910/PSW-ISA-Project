@@ -16,7 +16,7 @@ export class RequestExamination implements OnInit{
 
     public consultTerms: ConsultTerm[];
     consultTermModel = new ConsultTerm(null,null,null,null,null,null,null,null,null,null,null);
-    user: User = new User("","","","","","","","","","","","","");
+    user: User = new User("","","","","","","","","","","","","",false);
     private userId: number;
 
     constructor(private _consultTermService: ConsultTermService,
