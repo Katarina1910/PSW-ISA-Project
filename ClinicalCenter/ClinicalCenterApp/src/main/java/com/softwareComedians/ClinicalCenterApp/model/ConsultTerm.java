@@ -155,6 +155,8 @@ public class ConsultTerm {
 		this.report = report;
 	}
 
+
+
 	public RequestForConsult getRequestForConsult() {
 		return requestForConsult;
 	}

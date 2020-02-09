@@ -1,3 +1,5 @@
+<div class="d-flex p-2 justify-content-left flex-row"> 
+<div style="min-width: 400px">
 <form class="d-flex p-2 justify-content-left">
     <fieldset>
       <legend>Medical record</legend>
@@ -30,3 +32,48 @@
       <button  type="button" class="btn btn-outline-primary" (click)='Edit()'>Edit</button>
     </fieldset>
   </form>
+</div>
+
+ 
+<div  class="d-flex p-2 justify-content-left flex-column">
+<div style="min-width: 400px">
+  <label>Select diagnosis:</label>
+  <ng-multiselect-dropdown
+        [placeholder]="'Select diagnosis'"
+        [data]="listDiag"
+        [(ngModel)]="selectedDiagnosis"
+        [settings]="diagnosisSettings"
+        (onSelect)="onItemSelect($event)">
+  </ng-multiselect-dropdown>
+  <br>
+  <label>Add report:</label>
+  <br>
+  <textarea style="width: 580px; height:150px" [(ngModel)]="report" placeholder="Add report"></textarea>
+  <br>
+  <button *ngIf="view == 'EDIT'" class="btn btn-primary" (click)="editConsult()">Edit</button>
+</div>
+
+<div style="min-width: 1000px">
+  <table class='table' matSort (matSortChange)="sortData($event)">
+    <thead>
+            <tr>
+            <th mat-sort-header="doctor">Doctor</th>
+            <th mat-sort-header="diagnosis">Diagnosis</th>
+            <th mat-sort-header="report">Report</th>
+            <th></th>
+            </tr>
+    </thead>
+    <tbody>
+            <tr *ngFor = 'let c of consults'>
+            <td>{{c.consultTerm.doctor.name}} {{c.consultTerm.doctor.surname}}</td>
+            <td>{{c.diagnosis.name}}</td>
+            <td>{{c.report}}</td>
+            <td><button  type="button" *ngIf="c.consultTerm.doctor.id== id" class="btn btn-outline-primary" (click)=' change(c)'>Change</button></td>
+
+            </tr>
+    </tbody>                 
+    </table>
+  </div>
+</div>
+
+</div>

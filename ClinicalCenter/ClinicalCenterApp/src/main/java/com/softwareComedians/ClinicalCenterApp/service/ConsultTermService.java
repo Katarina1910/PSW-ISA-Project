@@ -4,14 +4,16 @@ import com.softwareComedians.ClinicalCenterApp.dto.ConsultDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.ConsultTermDTO;
 import com.softwareComedians.ClinicalCenterApp.dto.MedicamentDTO;
 import com.softwareComedians.ClinicalCenterApp.exception.ApiRequestException;
+import com.softwareComedians.ClinicalCenterApp.mail.SmtpMailSender;
 import com.softwareComedians.ClinicalCenterApp.model.*;
 import com.softwareComedians.ClinicalCenterApp.repository.*;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.*;
 
 @Service
@@ -19,6 +21,9 @@ public class ConsultTermService {
 
     @Autowired
     ConsultRepository consultRepository;
+
+    @Autowired
+    private SmtpMailSender smtpMailSender;
 
     @Autowired
     private ConsultTermRepository consultTermRepository;
@@ -46,10 +51,16 @@ public class ConsultTermService {
     private DoctorService doctorService;
 
     @Autowired
+    private  ConsultTypeService consultTypeService;
+
+    @Autowired
     private ClinicsService clinicsService;
 
     @Autowired
     private  PatientService patientService;
+
+    @Autowired
+    private DiagnosisRepository diagnosisRepository;
 
     @Autowired
     private RecipeRepository recipeRepository;
@@ -169,9 +180,6 @@ public class ConsultTermService {
         ct.setDoctor(doc);
         ct.setClinic(clinicsService.findOne(doc.getClinic().getId()));
 
-        /*System.out.println(ct.getDate()+ ct.getType().getName()+ ct.getDoctor().getName()+ ct.getPatient().getName()+ct.getRoom().getName()+
-                ct.getClinic().getName()+ct.getRequestForConsult().getId());*/
-
         ct = consultTermService.save(ct);
         return ct;
     }
@@ -216,6 +224,227 @@ public class ConsultTermService {
             consultRepository.save(consult);
 
             return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    public ResponseEntity<Void> editConsult(ConsultDTO consultDTO) {
+        Consult consult = consultRepository.findById(consultDTO.getId()).orElseGet(null);
+        if(consult == null){
+            return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        Diagnosis diagnosis = diagnosisRepository.findById(consultDTO.getDiagnosis().getId()).orElseGet(null);
+        consult.setDiagnosis(diagnosis);
+        consult.setReport(consultDTO.getReport());
+
+        consultRepository.save(consult);
+
+        return  new ResponseEntity<>(HttpStatus.OK);
+
+
+    @Scheduled(cron = "00 00 * * * *")
+    public void reservingRooms() throws MessagingException {
+
+        long now = System.currentTimeMillis() / 1000;
+        System.out.println(
+                "reserve rooms automatically - " + now);
+
+        String date = null;
+        DoctorTerms dt = null;
+        RoomTerms r = null;
+        List<RoomTerms> rts = null;
+        List<DoctorTerms> dts = null;
+        Room room = null;
+        Doctor doctor = null;
+
+        List<RequestForConsult> requestForConsults = requestForConsultService.findAll();
+        for (RequestForConsult rq : requestForConsults) {
+            ConsultTerm ct = new ConsultTerm();
+            date = rq.getDateAndTime();
+            dts = doctorTermsService.findByDate(date);
+
+
+            for (DoctorTerms dd : dts) {
+                if (dd.getDate().equals(date)) {
+                    dt = dd;
+                    if (dt.isTerm1()) {
+                        doctor = dt.getDoctor();
+                        dt.setTerm1(false);
+                        doctorTermsService.save(dt);
+                        break;
+                    } else if (dt.isTerm2()) {
+                        doctor = dt.getDoctor();
+                        dt.setTerm2(false);
+                        doctorTermsService.save(dt);
+                        break;
+                    } else if (dt.isTerm3()) {
+                        doctor = dt.getDoctor();
+                        dt.setTerm3(false);
+                        doctorTermsService.save(dt);
+                        break;
+                    } else if (dt.isTerm4()) {
+                        doctor = dt.getDoctor();
+                        dt.setTerm4(false);
+                        doctorTermsService.save(dt);
+                        break;
+                    } else if (dt.isTerm5()) {
+                        doctor = dt.getDoctor();
+                        dt.setTerm5(false);
+                        doctorTermsService.save(dt);
+                        break;
+                    } else if (dt.isTerm6()) {
+                        doctor = dt.getDoctor();
+                        dt.setTerm6(false);
+                        doctorTermsService.save(dt);
+                        break;
+                    }
+
+                }
+            }
+
+            if (doctor == null) {
+                for (DoctorTerms dd : dts) {
+                    dt = dd;
+                    if (dt.isTerm1()) {
+                        doctor = dt.getDoctor();
+                        dt.setTerm1(false);
+                        doctorTermsService.save(dt);
+                        date = dt.getDate();
+                        break;
+
+                    } else if (dt.isTerm2()) {
+                        doctor = dt.getDoctor();
+                        dt.setTerm2(false);
+                        doctorTermsService.save(dt);
+                        date = dt.getDate();
+                        break;
+                    } else if (dt.isTerm3()) {
+                        doctor = dt.getDoctor();
+                        dt.setTerm3(false);
+                        doctorTermsService.save(dt);
+                        date = dt.getDate();
+                        break;
+                    } else if (dt.isTerm4()) {
+                        doctor = dt.getDoctor();
+                        dt.setTerm4(false);
+                        doctorTermsService.save(dt);
+                        date = dt.getDate();
+                        break;
+                    } else if (dt.isTerm5()) {
+                        doctor = dt.getDoctor();
+                        dt.setTerm5(false);
+                        doctorTermsService.save(dt);
+                        date = dt.getDate();
+                        break;
+                    } else if (dt.isTerm6()) {
+                        doctor = dt.getDoctor();
+                        dt.setTerm6(false);
+                        doctorTermsService.save(dt);
+                        date = dt.getDate();
+                        break;
+                    }
+                }
+
+            }
+
+            rts = roomTermsServie.findByDate(date);
+
+            for (RoomTerms rr : rts) {
+                if (rr.isTerm1()) {
+                    rr.setTerm1(false);
+                    room = rr.getRoom();
+                    roomTermsServie.save(rr);
+                    break;
+                } else if (rr.isTerm2()) {
+                    rr.setTerm2(false);
+                    room = rr.getRoom();
+                    roomTermsServie.save(rr);
+                    break;
+                } else if (rr.isTerm3()) {
+                    rr.setTerm3(false);
+                    room = rr.getRoom();
+                    roomTermsServie.save(rr);
+                    break;
+                } else if (rr.isTerm4()) {
+                    rr.setTerm4(false);
+                    room = rr.getRoom();
+                    roomTermsServie.save(rr);
+                    break;
+                } else if (rr.isTerm5()) {
+                    rr.setTerm5(false);
+                    room = rr.getRoom();
+                    roomTermsServie.save(rr);
+                    break;
+                } else if (rr.isTerm6()) {
+                    rr.setTerm6(false);
+                    room = rr.getRoom();
+                    roomTermsServie.save(rr);
+                    break;
+                }
+
+
+            }
+
+            ct.setType(rq.getType());
+            ct.setRoom(room);
+            ct.setRequestForConsult(rq);
+            Patient p = patientService.findById(rq.getPatient().getId());
+            ct.setPatient(p);
+            ct.setDate(date);
+            ct.setPrice((double) 0);
+            ct.setDuration((double) 2);
+            ct.setDiscount((double) 0);
+
+            ct.setDoctor(doctor);
+            ct.setClinic(clinicsService.findOne(doctor.getClinic().getId()));
+            ct = consultTermService.save(ct);
+
+            smtpMailSender.send(ct.getPatient().getEmail(),"Consult term",
+                    " You have a new consult term : "+ct.getDate());
+            smtpMailSender.send(ct.getDoctor().getEmail(),"Consult term",
+                    " You have a new consult term : "+ct.getDate());
+
+        }
+
+    }
+
+    public ConsultTerm createConsultTerm(ConsultTermDTO consultTermDTO){
+        ConsultTerm ct = new ConsultTerm();
+
+        ct.setType(consultTypeService.findOne(consultTermDTO.getType().getId()));
+        ct.setDuration(consultTermDTO.getDuration());
+        ct.setDiscount(consultTermDTO.getDiscount());
+        ct.setPrice(consultTermDTO.getPrice());
+        ct.setDate(consultTermDTO.getDate());
+        Doctor d = doctorService.findByName(consultTermDTO.getDoctor().getName());
+        ct.setDoctor(d);
+        ct.setClinic(d.getClinic());
+        Room r = roomService.findByName(consultTermDTO.getRoom().getName());
+        ct.setRoom(r);
+        ct.setPatient(new Patient());
+        ct = this.save(ct);
+
+        return  ct;
+    }
+
+    public List<ConsultTermDTO> getDoctorsByTypeId(String typeName) {
+
+        List<ConsultTerm> term = this.findByTypeName(typeName);
+        List<ConsultTermDTO> termsDTO = new ArrayList<>();
+        for (ConsultTerm ct : term) {
+            termsDTO.add(new ConsultTermDTO(ct));
+        }
+        return termsDTO;
+    }
+
+    public List<ConsultTermDTO> getAllConsultTermsUserID(Long userId) {
+
+        List<ConsultTerm> cts = this.findAll();
+        List<ConsultTermDTO> ctDTO = new ArrayList<>();
+        for (ConsultTerm ct : cts) {
+            if(ct.getPatient().getId() == userId)
+                ctDTO.add(new ConsultTermDTO(ct));
+        }
+        return ctDTO;
     }
 }
 

@@ -1,5 +1,7 @@
 package com.softwareComedians.ClinicalCenterApp.dto;
 
+import com.softwareComedians.ClinicalCenterApp.model.Consult;
+
 public class ConsultDTO {
     private Long id;
     private ConsultTermDTO consultTerm;
@@ -8,6 +10,16 @@ public class ConsultDTO {
     private DiagnosisDTO diagnosis;
     private String report;
     private MedicalRecordDTO medicalRecord;
+
+    public ConsultDTO(Consult c){
+        this.id = c.getId();
+        this.diagnosis = new DiagnosisDTO(c.getDiagnosis());
+        this.report = c.getReport();
+        this.consultTerm =  new ConsultTermDTO(c.getConsultTerm());
+    }
+
+    public ConsultDTO() {
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -64,4 +76,6 @@ public class ConsultDTO {
     public MedicalRecordDTO getMedicalRecord() {
         return medicalRecord;
     }
+
+
 }

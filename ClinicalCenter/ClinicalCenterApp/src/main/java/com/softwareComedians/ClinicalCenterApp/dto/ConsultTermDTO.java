@@ -123,4 +123,27 @@ public class ConsultTermDTO {
         this.discount = discount;
     }
 
+    public String getReport() {
+        return report;
+    }
+
+    public void setReport(String report) {
+        this.report = report;
+    }
+
+    public PatientDTO getPatient() {
+        return patient;
+    }
+
+    public void setPatient(PatientDTO patient) {
+        this.patient = patient;
+    }
+
+    public Long getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
+    }
 }

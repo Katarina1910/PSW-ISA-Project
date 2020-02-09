@@ -1,13 +1,9 @@
 package com.softwareComedians.ClinicalCenterApp.controller;
 
-import com.softwareComedians.ClinicalCenterApp.common.consts.UserRoles;
 import com.softwareComedians.ClinicalCenterApp.dto.DoctorDTO;
-import com.softwareComedians.ClinicalCenterApp.model.Authority;
-import com.softwareComedians.ClinicalCenterApp.model.ClinicAdministrator;
 import com.softwareComedians.ClinicalCenterApp.model.Doctor;
 import com.softwareComedians.ClinicalCenterApp.repository.AuthorityRepository;
 import com.softwareComedians.ClinicalCenterApp.service.ClinicAdminService;
-import com.softwareComedians.ClinicalCenterApp.service.ClinicsService;
 import com.softwareComedians.ClinicalCenterApp.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,8 +23,6 @@ public class DoctorController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private ClinicsService clinicsService;
 
     @Autowired
     private AuthorityRepository authorityRepository;
@@ -43,61 +36,25 @@ public class DoctorController {
     }
 
     @GetMapping(value = "/getAll")
-    public ResponseEntity<List<DoctorDTO>> getAll() {
-
-        List<Doctor> doctors = doctorService.findAll();
-        List<DoctorDTO> doctorsDTO = new ArrayList<>();
-        for (Doctor d : doctors) {
-            doctorsDTO.add(new DoctorDTO(d));
-        }
-
+    public ResponseEntity<List<DoctorDTO>> getAllDoctors() {
+        List<DoctorDTO> doctorsDTO = doctorService.getAllDoctors();
         return new ResponseEntity<>(doctorsDTO, HttpStatus.OK);
     }
 
     @PostMapping(value = "/{id}")
     public ResponseEntity<DoctorDTO> addDoctor(@PathVariable Long id,@RequestBody DoctorDTO doctorDTO) {
-        Doctor doctor = new Doctor();
-        doctor.setId(doctorDTO.getId());
-        doctor.setName(doctorDTO.getName());
-        doctor.setSurname(doctorDTO.getSurname());
-        doctor.setUcidn(doctorDTO.getUcidn());
-        doctor.setAddress(doctorDTO.getAddress());
-        doctor.setCity(doctorDTO.getCity());
-        doctor.setCountry(doctorDTO.getCountry());
-        doctor.setEmail(doctorDTO.getEmail());
-        doctor.setPhone(doctorDTO.getPhone());
-        doctor.setUsername(doctorDTO.getUsername());
-        doctor.setPassword(passwordEncoder.encode(doctorDTO.getPassword()));
-        doctor.setGrade((double) 0);
-        doctor.setTypeId(null);
-        doctor.setRole("DOCTOR");
-        doctor.setActivated(true);
-        ClinicAdministrator ca = clinicAdminService.findById(id);
-        if (ca!=null){
-            doctor.setClinic(ca.getClinic());
-        }
-
-        Authority doctorAutority = authorityRepository.findByName(UserRoles.ROLE_DOCTOR);
-        doctor.getUsersAuthorities().add(doctorAutority);
-        doctor = doctorService.save(doctor);
-
-
+        Doctor doctor = doctorService.addDoctor(id,doctorDTO);
         return new ResponseEntity<>(new DoctorDTO(doctor), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/rateDoctor/{rate}")
     public ResponseEntity<DoctorDTO> rateDoctorGrade (@RequestBody DoctorDTO doctorDTO, @PathVariable Double rate) {
-        Doctor doc = doctorService.findOne(doctorDTO.getId());
-        Double r = (doc.getGrade()+rate)/2;
-        doc.setGrade(r);
-        doc = doctorService.save(doc);
-
+        Doctor doc = doctorService.rateDoctorGrade(doctorDTO, rate);
         return new ResponseEntity<>(new DoctorDTO(doc), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/del/{email}")
     public ResponseEntity<String> deletePost(@PathVariable String email) {
-
         doctorService.remove(email);
         return new ResponseEntity<>(email, HttpStatus.OK);
     }

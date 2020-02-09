@@ -93,7 +93,6 @@ public class UserController {
 	}
 
 	@PutMapping(value = "/edit")
-	//@PreAuthorize("hasRole('ROLE_PATIENT')")
 	public ResponseEntity<UserDTO> editUser(@RequestBody UserDTO userDTO) {
 		//User newUserInfo = userService.editUser(user);
 		//newUserInfo = userService.save(newUserInfo);

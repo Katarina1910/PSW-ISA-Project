@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,56 +32,26 @@ public class RoomController {
 
     @GetMapping(value = "/getAll")
     public ResponseEntity<List<RoomDTO>> getAll() {
-
-        List<Room> rooms = roomService.findAll();
-        List<RoomDTO> roomsDTO = new ArrayList<>();
-        for (Room d : rooms) {
-            roomsDTO.add(new RoomDTO(d));
-        }
-
+        List<RoomDTO> roomsDTO =roomService.getAll();
         return new ResponseEntity<>(roomsDTO, HttpStatus.OK);
     }
 
     @GetMapping(value = "/getEx")
     public ResponseEntity<List<RoomDTO>> getEx() {
-
-        List<Room> rooms = roomService.findAll();
-        List<RoomDTO> roomsDTO = new ArrayList<>();
-        for (Room d : rooms) {
-            if(d.getType().equals(Type.examination)){
-                roomsDTO.add(new RoomDTO(d));
-            }
-
-        }
-
+        List<RoomDTO> roomsDTO = roomService.getEx();
         return new ResponseEntity<>(roomsDTO, HttpStatus.OK);
     }
 
     @GetMapping(value = "/getOp")
     public ResponseEntity<List<RoomDTO>> getOp() {
-
-        List<Room> rooms = roomService.findAll();
-        List<RoomDTO> roomsDTO = new ArrayList<>();
-        for (Room d : rooms) {
-            if(d.getType().equals(Type.operation)){
-                roomsDTO.add(new RoomDTO(d));
-            }
-
-        }
-
+        List<RoomDTO> roomsDTO = roomService.getEx();
         return new ResponseEntity<>(roomsDTO, HttpStatus.OK);
     }
 
 
     @PostMapping()
     public ResponseEntity<RoomDTO> addRooms(@RequestBody RoomDTO roomDTO) {
-        Room room = new Room();
-        room.setId(roomDTO.getId());
-        room.setName(roomDTO.getName());
-        room.setType(roomDTO.getType());
-        room = roomService.save(room);
-
-
+        Room room = roomService.addRooms(roomDTO);
         return new ResponseEntity<>(new RoomDTO(room), HttpStatus.CREATED);
     }
 
@@ -102,11 +71,7 @@ public class RoomController {
 
     @PutMapping(value = "/edit")
     public ResponseEntity<RoomDTO> editRoom (@RequestBody RoomDTO roomDTO) {
-        Room room = roomService.findOne(roomDTO.getId());
-        room.setName(roomDTO.getName());
-        room.setType(roomDTO.getType());
-        room = roomService.save(room);
-
+        Room room = roomService.editRoom(roomDTO);
         return new ResponseEntity<>(new RoomDTO(room), HttpStatus.OK);
     }
 }

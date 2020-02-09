@@ -22,11 +22,11 @@ it('should have reserve button on reverve room page', () => {
   expect(page.getReserveeButton()).toEqual('Reserve');
 });
 
-it('should have input date on reverve room page', () => {
+/*it('should have input date on reverve room page', () => {
 
   browser.get('http://localhost:4200/#/HomepageCA/ReserveRooms');
   expect(page.getInputDateButton()).toBeDefined();
-});
+});*/
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
