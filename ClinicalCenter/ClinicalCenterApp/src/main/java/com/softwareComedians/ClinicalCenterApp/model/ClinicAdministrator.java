@@ -56,20 +56,4 @@ public class ClinicAdministrator extends User {
 	public void setClinic(Clinic clinic) {
 		this.clinic = clinic;
 	}
-
-	public PasswordEncoder getPasswordEncoder() {
-		return passwordEncoder;
-	}
-
-	public Set<RequestForAbsence> getRequests() {
-		return requests;
-	}
-
-	public void setRequests(Set<RequestForAbsence> requests) {
-		this.requests = requests;
-	}
-
-	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-		this.passwordEncoder = passwordEncoder;
-	}
 }

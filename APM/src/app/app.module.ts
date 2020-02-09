@@ -48,6 +48,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { ApiService, AuthService, ConfigService } from './service';
 import { LoginGuard, GuestGuard, AdminGuard } from 'src/guard';
 import { UserService } from './registration/user.service';
+import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { addNewClinicCenterAdmin } from './addNewClinicCenterAdmin/addNewClinicCenterAdmin.component';
 import { AppointedExaminationsService } from './patientHomePage/patientExaminations.service';
 import { PatientProfileDocComponent } from './patientProfileDoc/patientProfileDoc.component';
@@ -73,8 +74,6 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 import { PatientMC } from './patientMedicalRecord/patientMC.component';
-import { ChangePassword } from './login/chagePassword.component';
-import { AddTokenInterceptor } from './config/http-interceptor';
 
 @NgModule({
   declarations: [
@@ -133,7 +132,6 @@ import { AddTokenInterceptor } from './config/http-interceptor';
     ClinicCenterAdminProfilePageComponent,
     PatientMC,
     PatientComponent,
-    ChangePassword,
     //ListOfDiagnosis
     ],
   imports: [
@@ -209,7 +207,6 @@ import { AddTokenInterceptor } from './config/http-interceptor';
       {path: 'HomepagePatient/PatientMC', component: PatientMC},
       {path: 'requestConsult', component: RequestForConsultComponent},
       {path: 'HomepageDoctor/consultTermReport', component: ConsultTermReportComponent},
-      {path: 'ChangePassword', component: ChangePassword},
       {path: '', component: WelcomeComponent, pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'},
     ], {useHash: true})
@@ -217,7 +214,7 @@ import { AddTokenInterceptor } from './config/http-interceptor';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AddTokenInterceptor,
+      useClass: TokenInterceptor,
       multi: true
     },
     LoginGuard,

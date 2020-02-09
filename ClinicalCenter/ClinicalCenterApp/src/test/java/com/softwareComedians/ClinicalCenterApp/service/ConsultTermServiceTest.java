@@ -58,7 +58,7 @@ public class ConsultTermServiceTest {
     @Test
     public void findAll() {
         List<ConsultTerm> consultTerms = (List<ConsultTerm>) consultTermService.findAll();
-        assertEquals(consultTerms.size(), 8);
+        assertEquals(consultTerms.size(), 4);
     }
 
     @Test

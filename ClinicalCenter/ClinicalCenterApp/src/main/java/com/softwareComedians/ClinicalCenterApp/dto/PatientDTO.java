@@ -25,7 +25,6 @@ public class PatientDTO {
     private String username;
     private String password;
     private boolean isActivated;
-    private boolean passwordChanged;
     private UserTokenState token;
     private List<String> authorities;
     private MedicalRecord medicalRecord;
@@ -37,7 +36,7 @@ public class PatientDTO {
 
     public PatientDTO(Long id, String name, String surname, String ucidn, String address,String city, String country,
                       String email, String phone, String username, String password, boolean isActivated,
-                      List<String> authorities, MedicalRecord medicalRecord, Set<ConsultTerm> appointedTerms, boolean passwordChanged) {
+                      List<String> authorities, MedicalRecord medicalRecord, Set<ConsultTerm> appointedTerms) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -50,7 +49,6 @@ public class PatientDTO {
         this.username = username;
         this.password = password;
         this.isActivated = isActivated;
-        this.passwordChanged = passwordChanged;
         this.token = null;
         this.authorities = authorities;
         this.medicalRecord = medicalRecord;
@@ -70,19 +68,10 @@ public class PatientDTO {
         username=p.getUsername();
         password=p.getPassword();
         isActivated=p.isActivated();
-        passwordChanged = p.isPasswordChanged();
         authorities = p.getAuthorities().stream()
                 .map(authority -> ((Authority) authority).getName()).collect(Collectors.toList());
        // medicalRecord = p.getMedicalRecord();
        // appointedTerms = p.getAppointedTerms();
-    }
-
-    public boolean isPasswordChanged() {
-        return passwordChanged;
-    }
-
-    public void setPasswordChanged(boolean passwordChanged) {
-        this.passwordChanged = passwordChanged;
     }
 
     public Long getId() {

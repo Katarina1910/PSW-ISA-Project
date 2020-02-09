@@ -14,7 +14,7 @@ import { ClinicCenterAdminProfilePageService } from './clinicCenterAdminProfileP
 
 export class ClinicCenterAdminProfilePageComponent implements OnInit {
 
-  user: User = new User("","","","","","","","","","","","","",false);
+  user: User = new User("","","","","","","","","","","","","");
   form: FormGroup;
   notification: DisplayMessage;
 

@@ -66,15 +66,6 @@ export class LoginComponent{
         this._loginService.login(this.loginModel)
        .subscribe(
         data => {
-            console.log(data.passwordChanged);
-            if(data.passwordChanged == false) {
-                localStorage.setItem(USER_ID_KEY, data.id);
-                localStorage.setItem(USER_ROLE_KEY, data.authorities[0]);
-                localStorage.setItem(USERNAME_KEY, data.email);
-                localStorage.setItem(USER_TOKEN_KEY, data.token.accessToken);
-                localStorage.setItem(USER_ROLE_KEY, data.role);
-                this.router.navigate(['/ChangePassword']);
-            } else {
             this.u = data as User;
             sessionStorage.setItem("user",JSON.stringify(this.u));
             data = data as User;        
@@ -105,7 +96,7 @@ export class LoginComponent{
                 }
             }
             
-        }
+             
         },
         error=> { 
             alert("Wrong password or username")

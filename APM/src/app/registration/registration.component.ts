@@ -11,7 +11,7 @@ import { RequestForPatReg } from './requestForPatReg';
 })
 export class RegistrationComponent{
 
-    userModel = new User(" "," "," "," "," "," "," "," "," "," "," ","","",false);
+    userModel = new User(" "," "," "," "," "," "," "," "," "," "," ","","");
     reqModel = new RequestForPatReg(this.userModel, null, false, "");
     password1 : string = "";
     

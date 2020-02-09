@@ -94,8 +94,6 @@ public class PatientController {
         patient.setActivated(true);
         patient.setRole(UserRoles.ROLE_PATIENT);
 
-        patient.setPasswordChanged(true);
-
         patient = patientService.save(patient);
 
         HttpHeaders headers;

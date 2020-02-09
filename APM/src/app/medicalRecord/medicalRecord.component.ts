@@ -21,7 +21,7 @@ export class MedicalRecord implements OnInit{
     public listDiag : [];
     public report: string;
     public diagnosisSettings : {};
-    user: User = new User("","","","","","","","","","","","","",false);
+    user: User = new User("","","","","","","","","","","","","");
     medicalRecord = new MedicalRecordd(null, '','','','','','');
     public consults: Consult[];
     id: string;
